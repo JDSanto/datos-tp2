@@ -6,6 +6,11 @@ Links:
 - Resultados deben tener [este formato](https://metadata.fundacionsadosky.org.ar/media/navent/ejemploRespuesta.csv).
 - [Tutorial de Navent](https://metadata.fundacionsadosky.org.ar/media/navent/metaDataNavent.ipynb)
 
+## Informe:
+```bash
+$ make generarInforme
+```
+
 ## Requerimientos:
 ```bash
 $ pip install -r requirements.txt
