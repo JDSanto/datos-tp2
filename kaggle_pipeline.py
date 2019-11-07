@@ -49,7 +49,7 @@ def kaggle_upload(csv_path, description):
     #     return
     csv_dir, csv_file = _get_dir_filename(csv_path)
     _firebase_upload(csv_file, csv_dir + '/' + csv_file, description)
-    os.system('kaggle competitions submit -c Inmuebles24 -f ' + csv_dir + '/' + csv_file + ' -m \"Message\"')
+    os.system('kaggle competitions submit -c Inmuebles24 -f ' + csv_dir + '/' + csv_file + ' -m ' + description)
     print('Subido a Kaggle')
 
 if __name__== "__main__":
