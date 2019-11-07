@@ -155,3 +155,7 @@ test.csv
 *.mtc1
 *.out
 *.synctex.gz
+
+
+# Credenciales Firebase
+serviceAccountKey.json
