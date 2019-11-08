@@ -13141,7 +13141,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <span class="n">MLPRegressor</span>
@@ -13152,7 +13152,10 @@ div#notebook {
                                <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
                                <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">df_nn</span> <span class="o">=</span> <span class="n">df_nn</span>
+<span class="n">df_nn</span> <span class="o">=</span> <span class="n">df_nn</span><span class="p">[[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">]]</span>
 
 <span class="n">df_nn_test</span><span class="p">,</span> <span class="n">df_nn_train</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_nn</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -13161,7 +13164,7 @@ div#notebook {
 <span class="n">x_test</span> <span class="o">=</span> <span class="n">df_nn_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x_train</span> <span class="o">=</span> <span class="n">df_nn_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">mlpr_rmsle_train</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">))</span>
@@ -13184,94 +13187,111 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Iteration 1, loss = 1188951620156.67285156
-Iteration 2, loss = 1048615927692.77355957
-Iteration 3, loss = 1049346973713.01477051
-Iteration 4, loss = 1047711480503.58972168
-Iteration 5, loss = 1054650397454.03149414
-Iteration 6, loss = 1049987161003.58410645
-Iteration 7, loss = 1045345552526.09814453
-Iteration 8, loss = 1046690773430.28381348
-Iteration 9, loss = 1047746500249.24475098
-Iteration 10, loss = 1045041636071.42968750
-Iteration 11, loss = 1045859739170.29858398
-Iteration 12, loss = 1044652713465.47009277
-Iteration 13, loss = 1045979201350.86291504
-Iteration 14, loss = 1044721701273.66284180
-Iteration 15, loss = 1045992478841.58276367
-Iteration 16, loss = 1042409270639.68310547
-Iteration 17, loss = 1042253195948.07250977
-Iteration 18, loss = 1040890062745.46447754
-Iteration 19, loss = 1042117016128.13647461
-Iteration 20, loss = 1043290229029.99108887
-Iteration 21, loss = 1044072917983.40368652
-Iteration 22, loss = 1044911899226.28808594
-Iteration 23, loss = 1042091236392.14392090
-Iteration 24, loss = 1040253521100.33068848
-Iteration 25, loss = 1044880754916.95373535
-Iteration 26, loss = 1039798879259.86315918
-Iteration 27, loss = 1040628269051.57885742
-Iteration 28, loss = 1038070818070.52172852
-Iteration 29, loss = 1037287990302.63903809
-Iteration 30, loss = 1038869956049.45629883
-Iteration 31, loss = 1040736996191.85754395
-Iteration 32, loss = 1034601079664.20568848
-Iteration 33, loss = 1036336685780.20629883
-Iteration 34, loss = 1032302716153.50402832
-Iteration 35, loss = 1030776129303.11230469
-Iteration 36, loss = 1027726038516.38671875
-Iteration 37, loss = 1027258358419.69885254
-Iteration 38, loss = 1023487388624.88122559
-Iteration 39, loss = 1016560735901.69946289
-Iteration 40, loss = 1012930026321.53820801
-Iteration 41, loss = 998061949047.80053711
-Iteration 42, loss = 983081355150.97521973
-Iteration 43, loss = 960974273485.30310059
-Iteration 44, loss = 943506357483.23889160
-Iteration 45, loss = 931012983057.15490723
-Iteration 46, loss = 931190375435.29992676
-Iteration 47, loss = 932817091036.63818359
-Iteration 48, loss = 926280546598.78454590
-Iteration 49, loss = 923327737616.83007812
-Iteration 50, loss = 922962206859.57226562
-Iteration 51, loss = 919350918918.12829590
-Iteration 52, loss = 899075378583.82019043
-Iteration 53, loss = 916937426850.65515137
-Iteration 54, loss = 921632609706.70080566
-Iteration 55, loss = 920167583297.86877441
-Iteration 56, loss = 914368534502.30664062
-Iteration 57, loss = 913409658881.35876465
-Iteration 58, loss = 910263568932.03527832
-Iteration 59, loss = 915196209377.26428223
-Iteration 60, loss = 897856112678.54345703
-Iteration 61, loss = 897408408944.82775879
-Iteration 62, loss = 892929686210.22741699
-Iteration 63, loss = 890340033931.77832031
-Iteration 64, loss = 896022466286.87597656
-Iteration 65, loss = 891718404135.07177734
-Iteration 66, loss = 893743708333.54577637
-Iteration 67, loss = 895478195423.27087402
-Iteration 68, loss = 896325916316.59692383
-Iteration 69, loss = 895774094724.09020996
-Iteration 70, loss = 887656863362.50622559
-Iteration 71, loss = 891073737727.12426758
-Iteration 72, loss = 885284556876.59680176
-Iteration 73, loss = 892638487991.35241699
-Iteration 74, loss = 871061394255.40893555
-Iteration 75, loss = 893632837478.25988770
-Iteration 76, loss = 888903859826.01635742
-Iteration 77, loss = 889255212042.34509277
-Iteration 78, loss = 878577259003.43188477
-Iteration 79, loss = 884290713655.45349121
-Iteration 80, loss = 881075731280.54187012
-Iteration 81, loss = 874715776314.56335449
-Iteration 82, loss = 894559249294.52978516
-Iteration 83, loss = 899262086566.18029785
-Iteration 84, loss = 903996287727.43029785
-Iteration 85, loss = 880726080323.60168457
+<pre>Iteration 1, loss = 1394787890012.46240234
+Iteration 2, loss = 1042875947973.60559082
+Iteration 3, loss = 1043218417521.38354492
+Iteration 4, loss = 1043653177685.19995117
+Iteration 5, loss = 1044120924909.98864746
+Iteration 6, loss = 1044132027680.98254395
+Iteration 7, loss = 1045604746821.99597168
+Iteration 8, loss = 1044935254940.94201660
+Iteration 9, loss = 1043172127122.99963379
+Iteration 10, loss = 1043150523005.39855957
+Iteration 11, loss = 1041603234745.77294922
+Iteration 12, loss = 1042833573637.39331055
+Iteration 13, loss = 1042835949078.56176758
+Iteration 14, loss = 1043155947869.90747070
+Iteration 15, loss = 1043366285511.87841797
+Iteration 16, loss = 1043294644818.34509277
+Iteration 17, loss = 1041606988886.75573730
+Iteration 18, loss = 1042265198263.03088379
+Iteration 19, loss = 1042474952868.70849609
+Iteration 20, loss = 1043533114578.13525391
+Iteration 21, loss = 1042577328338.64892578
+Iteration 22, loss = 1041352084930.19775391
+Iteration 23, loss = 1042111037285.38598633
+Iteration 24, loss = 1041281221913.51635742
+Iteration 25, loss = 1041065273013.18737793
+Iteration 26, loss = 1039601880523.51147461
+Iteration 27, loss = 1040674749781.37329102
+Iteration 28, loss = 1039991206213.62390137
+Iteration 29, loss = 1038956325688.28601074
+Iteration 30, loss = 1039954087893.73852539
+Iteration 31, loss = 1039589640363.99304199
+Iteration 32, loss = 1040001948312.71386719
+Iteration 33, loss = 1038261507778.55895996
+Iteration 34, loss = 1037625953641.75903320
+Iteration 35, loss = 1038384778559.68237305
+Iteration 36, loss = 1040691856736.53356934
+Iteration 37, loss = 1038546270090.84167480
+Iteration 38, loss = 1036068597853.57336426
+Iteration 39, loss = 1038157070469.06933594
+Iteration 40, loss = 1036280855523.74462891
+Iteration 41, loss = 1035890364913.67773438
+Iteration 42, loss = 1034269065849.02392578
+Iteration 43, loss = 1036752036753.11755371
+Iteration 44, loss = 1035647529462.94079590
+Iteration 45, loss = 1035282366524.47045898
+Iteration 46, loss = 1033857135162.69458008
+Iteration 47, loss = 1033438668643.94262695
+Iteration 48, loss = 1030317690655.45349121
+Iteration 49, loss = 1030635147155.69897461
+Iteration 50, loss = 1029112487372.59143066
+Iteration 51, loss = 1027358987404.62316895
+Iteration 52, loss = 1026754793075.22155762
+Iteration 53, loss = 1025376082870.30432129
+Iteration 54, loss = 1021578127980.68041992
+Iteration 55, loss = 1016519053254.94445801
+Iteration 56, loss = 1014485879947.07226562
+Iteration 57, loss = 1005903126076.26025391
+Iteration 58, loss = 1000795138981.91101074
+Iteration 59, loss = 988355090458.38049316
+Iteration 60, loss = 971451603463.78637695
+Iteration 61, loss = 965453823097.36157227
+Iteration 62, loss = 949360517974.14831543
+Iteration 63, loss = 933581735625.02502441
+Iteration 64, loss = 926108885286.95214844
+Iteration 65, loss = 918608709759.60559082
+Iteration 66, loss = 917972255035.00000000
+Iteration 67, loss = 903837376923.99157715
+Iteration 68, loss = 904268190191.27844238
+Iteration 69, loss = 909746022310.87121582
+Iteration 70, loss = 900913356443.08264160
+Iteration 71, loss = 906025765338.77038574
+Iteration 72, loss = 901098326621.39111328
+Iteration 73, loss = 895761286266.32019043
+Iteration 74, loss = 887199810026.41503906
+Iteration 75, loss = 902223995672.79833984
+Iteration 76, loss = 898783029429.09814453
+Iteration 77, loss = 888686439685.17443848
+Iteration 78, loss = 880154902946.49548340
+Iteration 79, loss = 884835657576.18444824
+Iteration 80, loss = 892981561384.40307617
+Iteration 81, loss = 889852131502.21740723
+Iteration 82, loss = 880634637173.48803711
+Iteration 83, loss = 900724408517.14660645
+Iteration 84, loss = 882264739381.39709473
+Iteration 85, loss = 905350041213.35693359
+Iteration 86, loss = 880206028602.64501953
+Iteration 87, loss = 909643493697.08605957
+Iteration 88, loss = 880015295342.98937988
+Iteration 89, loss = 889162747010.04882812
+Iteration 90, loss = 878291707279.68054199
+Iteration 91, loss = 871034308989.51525879
+Iteration 92, loss = 884021661257.55297852
+Iteration 93, loss = 880474625725.49621582
+Iteration 94, loss = 883331118946.44067383
+Iteration 95, loss = 877552053319.50134277
+Iteration 96, loss = 874428863615.07568359
+Iteration 97, loss = 878706826310.52722168
+Iteration 98, loss = 878532118444.14685059
+Iteration 99, loss = 873409452526.25903320
+Iteration 100, loss = 876008273400.26354980
+Iteration 101, loss = 875164212945.17041016
+Iteration 102, loss = 885962185903.43066406
 Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
-RMSLE MLPRegressor (train): 0.48541
-RMSLE MLPRegressor: 0.48735
+RMSLE MLPRegressor (train): 0.49458
+RMSLE MLPRegressor: 0.49645
 </pre>
 </div>
 </div>
