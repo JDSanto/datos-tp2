@@ -130,6 +130,7 @@ dmypy.json
 # Data - .csv pesado
 train.csv
 test.csv
+respuesta*.csv
 
 # LaTex ------------------------------------------
 *.aux

@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>utils</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13081,16 +13081,8 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">Imputer</span>
-<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="k">import</span> <span class="n">SimpleImputer</span>
-<span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span>
-
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># Para usarse con el submit a Kaggle</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_absolute_error</span>
 </pre></div>
 
     </div>
@@ -13098,16 +13090,75 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="M&#233;trica-de-evaluaci&#243;n">M&#233;trica de evaluaci&#243;n<a class="anchor-link" href="#M&#233;trica-de-evaluaci&#243;n">&#182;</a></h2>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">filtrar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un dataframe, un label y un arreglo de features, devuelve una copia del mismo</span>
+<span class="sd">    con el label y los features especificados.&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="n">label</span><span class="p">])]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dividir_dataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un dataframe df y su label, filtra el mismo por el arreglo de features</span>
+<span class="sd">    y divide el mismo en dos segun test_size para entrenar y testear un modelo. </span>
+<span class="sd">    Si features es None, entonces los dataframes resultantes tendran todas las features.</span>
+<span class="sd">    Devuelve (df_train, df_test, label_train, label_test)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">filtrar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">y_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">x_train</span> <span class="o">=</span> <span class="n">df_train</span>
+    <span class="n">x_test</span> <span class="o">=</span> <span class="n">df_test</span>
+    
+    <span class="k">return</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dividir_df_testeo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un dataframe df devuelve dos dataframes, uno para entrenar/validar y el otro para testear</span>
+<span class="sd">    (df_train, df_eval, df_test, label_train, label_eval, label_test)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">RMSLE</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
@@ -13119,175 +13170,75 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-de-datos-precio/metroscubiertos">Set de datos precio/metroscubiertos<a class="anchor-link" href="#Set-de-datos-precio/metroscubiertos">&#182;</a></h2>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
-
-<span class="c1"># Dividir el DF de entrenamiento</span>
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># Para evitar SettingWithCopyWarning</span>
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">x_test</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">y_train</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">y_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Train shapes: x=</span><span class="si">{x_train.shape}</span><span class="s2"> y=</span><span class="si">{y_train.shape}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Test  shapes: x=</span><span class="si">{x_test.shape}</span><span class="s2">  y=</span><span class="si">{y_test.shape}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Rellenar </span>
-<span class="n">imp</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">()</span>
-<span class="n">x_train</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]])</span>
-<span class="n">x_test</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MAE</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train shapes: x=(180000, 1) y=(180000,)
-Test  shapes: x=(60000, 1)  y=(60000,)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Regresi&#243;n-lineal">Regresi&#243;n lineal<a class="anchor-link" href="#Regresi&#243;n-lineal">&#182;</a></h2>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linear_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
-
-<span class="c1"># El modelo de regresion lineal con una variable obtiene RMSLE=0.65</span>
-<span class="n">linear_rmsle_train</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">))</span>
-<span class="n">linear_rmsle</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression (train): </span><span class="si">{linear_rmsle_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression: </span><span class="si">{linear_rmsle:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dolarizar_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_precio_in</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">col_precio_out</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un df con columnas para la fecha, id y el precio, pasa el precio</span>
+<span class="sd">    de los mismos a dolares, devolviendo el df.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_dolares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/cambio_dolar.csv&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
+    <span class="n">df_dolares</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_dolares</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_dolares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;fecha&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_merge</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">df_merge</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_in</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_merge</span><span class="p">[</span><span class="s1">&#39;peso_a_dolar&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+    
+<span class="k">def</span> <span class="nf">pesificar_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_precio_in</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">col_precio_out</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un df con columnas para la fecha, id y el precio, pasa el precio</span>
+<span class="sd">    de los mismos a dolares, devolviendo el df.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_dolares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/cambio_dolar.csv&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
+    <span class="n">df_dolares</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_dolares</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_dolares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;fecha&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_merge</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">df_merge</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_in</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merge</span><span class="p">[</span><span class="s1">&#39;peso_a_dolar&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merge</span><span class="p">[</span><span class="n">col_precio_out</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>RMSLE LinearRegression (train): 0.65673
-RMSLE LinearRegression: 0.65657
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Poly-K">Poly K<a class="anchor-link" href="#Poly-K">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-
-<span class="c1"># Para filtrar RankWarning en numpy</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-
-<span class="n">x_train_arr</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">x_test_arr</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y_train_arr</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y_test_arr</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span>
-
-<span class="n">k</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_train_arr</span><span class="p">)),</span> 
-                     <span class="n">space</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">200</span><span class="p">)[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
-
-<span class="n">poly_k_rmsle_train</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_train_arr</span><span class="p">))</span>
-<span class="n">poly_k_rmsle</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_test_arr</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression (train): </span><span class="si">{poly_k_rmsle_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression: </span><span class="si">{poly_k_rmsle:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>100%|██████████| 200/200 [00:20&lt;00:00,  9.67it/s, best loss: 0.6496065747766164]
-RMSLE LinearRegression (train): 0.64961
-RMSLE LinearRegression: 0.65024
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Nearest-Neighbours">Nearest Neighbours<a class="anchor-link" href="#Nearest-Neighbours">&#182;</a></h2>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> 
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
