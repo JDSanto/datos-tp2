@@ -13273,6 +13273,7 @@ div#notebook {
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;trimestre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">%</span><span class="k">3</span>+1
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     
     <span class="c1"># Propiedades booleanas</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cercanos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13366,6 +13367,7 @@ div#notebook {
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
@@ -13411,7 +13413,26 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_de_csvs</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span><span class="p">):</span>
+    <span class="n">df_train_similares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/train_similares.csv&#39;</span><span class="p">)</span>
+    <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_similares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_test_similares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/test_similares.csv&#39;</span><span class="p">)</span>
+    <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_similares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_booleanas</span> <span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -13429,7 +13450,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Garages</span>
@@ -13461,7 +13482,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">provincias1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;Nueva León&#39;</span><span class="p">,</span> <span class="s1">&#39;Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;Puebla&#39;</span><span class="p">]</span>
@@ -13540,7 +13561,182 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from sklearn.neighbors import KDTree</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import numpy as np</span>
+
+<span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = pd.get_dummies(df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]])</span>
+
+<span class="c1"># df_ohe.head(10)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tree = KDTree(df_ohe, leaf_size=200)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test = pd.read_csv(&#39;data/test.csv&#39;)</span>
+<span class="c1"># df_test_f = df_test[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]]</span>
+<span class="c1"># df_train_f = df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]]</span>
+
+<span class="c1"># df_full = pd.concat([df_test_f, df_train_f], ignore_index=True)</span>
+
+
+<span class="c1"># df_ohe_test = pd.get_dummies(df_full).iloc[0:60000]</span>
+<span class="c1"># df_ohe_test = df_ohe_test.fillna(0)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># KDTree.valid_metrics</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display(df_ohe_test.shape)</span>
+<span class="c1"># display(df_ohe.shape)</span>
+<span class="c1"># dists = tree.query_radius(df_ohe_test.values[:60000], r=0, count_only=True)</span>
+<span class="c1"># dists</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test[&#39;similares_count&#39;] = dists</span>
+<span class="c1"># df_test[[&#39;id&#39;, &#39;similares_count&#39;]].to_csv(&#39;data/test_similares.csv&#39;, index=False)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = df_ohe.fillna(0)</span>
+<span class="c1"># display(df_ohe_test.shape)</span>
+<span class="c1"># display(df_ohe.shape)</span>
+<span class="c1"># dists = tree.query_radius(df_ohe.values, r=0, count_only=True)</span>
+<span class="c1"># dists</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[&#39;similares_count&#39;] = dists</span>
+<span class="c1"># df_train[[&#39;id&#39;, &#39;similares_count&#39;]].to_csv(&#39;data/train_similares.csv&#39;, index=False)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test.iloc[1]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[(df_train[&#39;gimnasio&#39;] == 0) &amp; (df_train[&#39;usosmultiples&#39;] == 0) &amp; (df_train[&#39;piscina&#39;] == 0)</span>
+<span class="c1">#         &amp; (df_train[&#39;escuelascercanas&#39;] == 0) &amp; (df_train[&#39;centroscomercialescercanos&#39;] == 0)</span>
+<span class="c1">#         &amp; (df_train[&#39;provincia&#39;] == &#39;Yucatán&#39;) &amp; (df_train[&#39;tipodepropiedad&#39;] == &#39;Apartamento&#39;)</span>
+<span class="c1">#         &amp; (df_train[&#39;habitaciones&#39;] == 1) &amp; (df_train[&#39;banos&#39;] == 1) &amp; (df_train[&#39;garages&#39;] == 1)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind = features_independientes_precio(df_train)</span>
@@ -13553,7 +13749,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind[[&#39;escomercial&#39;,</span>
@@ -13573,7 +13769,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test = features_independientes_precio(df_test)</span>
@@ -13586,7 +13782,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test[[&#39;escomercial&#39;,</span>
@@ -13606,7 +13802,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # Verifico que no haya nans en los features</span>
@@ -13620,7 +13816,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -13636,7 +13832,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_train, df_train)</span>
@@ -13662,7 +13858,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep[[&#39;precio&#39;,&#39;promedio_precio_ciudad&#39;,</span>
@@ -13680,7 +13876,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test =  features_dependientes_precio(df_test, df_train)</span>
@@ -13693,7 +13889,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test[[&#39;promedio_precio_ciudad&#39;,</span>
@@ -13711,7 +13907,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -13727,7 +13923,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
@@ -13744,7 +13940,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_f.head(10)</span>
@@ -13757,7 +13953,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_f[&#39;promedio_precio_tipo_propiedad&#39;].head(10).value_counts()</span>
