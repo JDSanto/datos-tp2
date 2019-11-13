@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13209,13 +13209,13 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zona_metros</span> <span class="o">=</span> <span class="n">zona</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-<span class="n">zona_metros_cub</span> <span class="o">=</span> <span class="n">zona</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zona_metros</span> <span class="o">=</span> <span class="n">zona</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">zona_metros_cub</span> <span class="o">=</span> <span class="n">zona</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-<span class="n">zona_metros</span><span class="p">[</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">totales2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">totales2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">totales4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">totales6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">))),</span> <span class="n">zona_metros</span><span class="p">[</span><span class="s2">&quot;metrostotales&quot;</span><span class="p">]))</span>
+<span class="n">zona_metros</span><span class="p">[</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">totales2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">totales2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">totales4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">totales6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">))),</span> <span class="n">zona_metros</span><span class="p">[</span><span class="s2">&quot;metrostotales&quot;</span><span class="p">]))</span>
 <span class="n">zona_metros_un</span> <span class="o">=</span> <span class="n">zona_metros</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
 
-<span class="n">zona_metros_cub</span><span class="p">[</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">cubiertos2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">cubiertos2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">cubiertos4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">cubiertos6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">))),</span> <span class="n">zona_metros_cub</span><span class="p">[</span><span class="s2">&quot;metroscubiertos&quot;</span><span class="p">]))</span>
+<span class="n">zona_metros_cub</span><span class="p">[</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">cubiertos2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">cubiertos2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">cubiertos4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">cubiertos6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">))),</span> <span class="n">zona_metros_cub</span><span class="p">[</span><span class="s2">&quot;metroscubiertos&quot;</span><span class="p">]))</span>
 <span class="n">zona_metros_cub_un</span> <span class="o">=</span> <span class="n">zona_metros_cub</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
 </pre></div>
 
@@ -13226,7 +13226,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">map_values</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -13273,6 +13273,7 @@ div#notebook {
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;trimestre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">%</span><span class="k">3</span>+1
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     
     <span class="c1"># Propiedades booleanas</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cercanos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13296,96 +13297,126 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_dependientes_precio</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f_nombre</span><span class="p">,</span> <span class="n">f_reemplazante</span><span class="p">,</span> <span class="n">f_count</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un dataframe `df`, el nombre de los features `f_nombre`, `f_reemplazante` y `f_count`,</span>
+<span class="sd">    y una cantidad N, sobreescribe la columna de `f_nombre` por los valores en `f_reemplazante`</span>
+<span class="sd">    a todas las filas cuya cuenta de `f_count` sea menor a N.&#39;&#39;&#39;</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">f_count</span><span class="p">)[</span><span class="n">f_count</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span> <span class="n">f_nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">f_reemplazante</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">f_label</span><span class="p">,</span> <span class="n">f_target</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dados dos datafarmes `df`, `df_train`, una lista de `features`, dos features</span>
+<span class="sd">    `f_label` y `f_target`, y una funcion de groupby `function`, agrupa el `df_train` por</span>
+<span class="sd">    los `features`, transformando por `function` a f_target y traslada estos valores a `df`&#39;&#39;&#39;</span>
+
+    <span class="n">len_df</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">df_train</span><span class="p">[</span><span class="n">f_target</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">features</span><span class="p">)[</span><span class="n">f_label</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+    <span class="n">df_promedio</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="n">f_label</span><span class="p">:</span><span class="n">function</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="n">f_label</span><span class="p">:</span> <span class="n">f_target</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_promedio</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    
+    
+<span class="k">def</span> <span class="nf">features_dependientes_precio</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Devuelve una copia del dataframe df con nuevas columnas dependientes del precio,</span>
 <span class="sd">    usando el dataframe df_train con los precios para generar los datos.</span>
 <span class="sd">    El dataframe df puede ser el mismo que df_train.&#39;&#39;&#39;</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
+    <span class="c1"># Por provincia</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
     <span class="c1"># Por ciudad</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_promedios</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_promedios</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;std&#39;</span><span class="p">)</span>
-    <span class="n">df_varianzas</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;std&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_varianzas</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">]</span>
+    <span class="n">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ciudad&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-    <span class="n">df_count</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ciudad&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_count</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
        
     
     <span class="c1"># Por id_zona</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;idzona&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_promedio</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;idzona&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_promedio</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">])</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">]</span>
+    <span class="n">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;idzona&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;std&#39;</span><span class="p">)</span>
-    <span class="n">df_varianza</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;idzona&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;std&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_varianza</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">])</span>
     
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;idzona&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-    <span class="n">df_count</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;idzona&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;count_idzona&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_count</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_idzona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_id_zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_id_zona&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">])</span>
+
 
     <span class="c1"># Por tipo de propiedad</span>
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;otro&#39;</span><span class="p">)</span> <span class="c1"># Otra forma de llenar los nans para el tipo de prop?</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;otro&#39;</span><span class="p">)</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_propiedad</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_propiedad</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">]</span>
+    <span class="n">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;count_ciudad&#39;</span><span class="p">])</span>
        
     <span class="c1"># Por fecha</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
     <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
     
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_prom_mes</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_prom_mes</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;std&#39;</span><span class="p">)</span>
-    <span class="n">df_var_mes</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;std&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_var_mes</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;mes&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">]</span><span class="c1">#.fillna(df_train[&#39;varianza_por_mes&#39;].std())</span>
     
     <span class="c1"># Por cantidad de habitaciones, banos y garages</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_habitaciones</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_habitaciones</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">],</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">],</span> 
+        <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">],</span> 
+        <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">])</span>
+    <span class="n">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    
+    
+
         
     <span class="c1"># Por propiedades booleanas</span>
-    <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">])[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-    <span class="n">df_booleano</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_booleano</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trasladar_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">],</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
         
-    
     <span class="c1"># Insight    </span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;puntaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_puntajes</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     
@@ -13400,6 +13431,25 @@ div#notebook {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_de_csvs</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span><span class="p">):</span>
+    <span class="n">df_train_similares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/train_similares.csv&#39;</span><span class="p">)</span>
+    <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_similares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_test_similares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/test_similares.csv&#39;</span><span class="p">)</span>
+    <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_similares</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_booleanas</span> <span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -13417,7 +13467,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Garages</span>
@@ -13449,7 +13499,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">provincias1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;Nueva León&#39;</span><span class="p">,</span> <span class="s1">&#39;Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;Puebla&#39;</span><span class="p">]</span>
@@ -13481,25 +13531,31 @@ div#notebook {
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">5</span>
         <span class="k">elif</span> <span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">)]</span> <span class="o">&gt;</span> <span class="mf">3.0</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">zona_metros</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="p">:</span>
+            
+        <span class="n">x</span> <span class="o">=</span> <span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)]</span>
+        <span class="n">grupo_metros_totales</span> <span class="o">=</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">totales2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">totales2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">totales4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">totales6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">totales8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">grupo_metros_totales</span> <span class="o">==</span> <span class="s1">&#39;Grupo 1&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">0</span>
-        <span class="k">elif</span> <span class="n">zona_metros_un</span><span class="p">[(</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 2&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_totales</span> <span class="o">==</span> <span class="s1">&#39;Grupo 2&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">4</span>
-        <span class="k">elif</span> <span class="n">zona_metros_un</span><span class="p">[(</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 3&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_totales</span> <span class="o">==</span> <span class="s1">&#39;Grupo 3&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="k">elif</span> <span class="n">zona_metros_un</span><span class="p">[(</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 4&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_totales</span> <span class="o">==</span> <span class="s1">&#39;Grupo 4&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">8</span>
-        <span class="k">elif</span> <span class="n">zona_metros_un</span><span class="p">[(</span><span class="s1">&#39;grupoMetros&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_totales</span> <span class="o">==</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">10</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">zona_metros_cub</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)]</span>
+        <span class="n">grupo_metros_cubiertos</span> <span class="o">=</span> <span class="s1">&#39;Grupo 1&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">cubiertos2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 2&#39;</span> <span class="k">if</span> <span class="n">cubiertos2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 3&#39;</span> <span class="k">if</span> <span class="n">cubiertos4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos6</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo 4&#39;</span> <span class="k">if</span> <span class="n">cubiertos6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">cubiertos8</span> <span class="k">else</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">grupo_metros_cubiertos</span> <span class="o">==</span> <span class="s1">&#39;Grupo 1&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span><span class="mi">0</span>
-        <span class="k">elif</span> <span class="n">zona_metros_cub_un</span><span class="p">[(</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 2&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_cubiertos</span> <span class="o">==</span> <span class="s1">&#39;Grupo 2&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">4</span>
-        <span class="k">elif</span> <span class="n">zona_metros_cub_un</span><span class="p">[(</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 3&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_cubiertos</span> <span class="o">==</span> <span class="s1">&#39;Grupo 3&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">6</span>
-        <span class="k">elif</span> <span class="n">zona_metros_cub_un</span><span class="p">[(</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 4&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_cubiertos</span> <span class="o">==</span> <span class="s1">&#39;Grupo 4&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">8</span>
-        <span class="k">elif</span> <span class="n">zona_metros_cub_un</span><span class="p">[(</span><span class="s1">&#39;grupoCubiertos&#39;</span><span class="p">,</span><span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)])]</span> <span class="o">==</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">grupo_metros_cubiertos</span> <span class="o">==</span> <span class="s1">&#39;Grupo 5&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">10</span>
         <span class="k">if</span> <span class="n">prop</span><span class="p">[</span><span class="n">attrs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;provincia&#39;</span><span class="p">)]</span> <span class="o">==</span> <span class="s1">&#39;Distrito Federal&#39;</span><span class="p">:</span>
             <span class="n">puntaje</span> <span class="o">+=</span> <span class="mi">8</span>
@@ -13522,7 +13578,182 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from sklearn.neighbors import KDTree</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import numpy as np</span>
+
+<span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = pd.get_dummies(df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]])</span>
+
+<span class="c1"># df_ohe.head(10)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tree = KDTree(df_ohe, leaf_size=200)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test = pd.read_csv(&#39;data/test.csv&#39;)</span>
+<span class="c1"># df_test_f = df_test[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]]</span>
+<span class="c1"># df_train_f = df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]]</span>
+
+<span class="c1"># df_full = pd.concat([df_test_f, df_train_f], ignore_index=True)</span>
+
+
+<span class="c1"># df_ohe_test = pd.get_dummies(df_full).iloc[0:60000]</span>
+<span class="c1"># df_ohe_test = df_ohe_test.fillna(0)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># KDTree.valid_metrics</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display(df_ohe_test.shape)</span>
+<span class="c1"># display(df_ohe.shape)</span>
+<span class="c1"># dists = tree.query_radius(df_ohe_test.values[:60000], r=0, count_only=True)</span>
+<span class="c1"># dists</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test[&#39;similares_count&#39;] = dists</span>
+<span class="c1"># df_test[[&#39;id&#39;, &#39;similares_count&#39;]].to_csv(&#39;data/test_similares.csv&#39;, index=False)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = df_ohe.fillna(0)</span>
+<span class="c1"># display(df_ohe_test.shape)</span>
+<span class="c1"># display(df_ohe.shape)</span>
+<span class="c1"># dists = tree.query_radius(df_ohe.values, r=0, count_only=True)</span>
+<span class="c1"># dists</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[&#39;similares_count&#39;] = dists</span>
+<span class="c1"># df_train[[&#39;id&#39;, &#39;similares_count&#39;]].to_csv(&#39;data/train_similares.csv&#39;, index=False)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test.iloc[1]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[(df_train[&#39;gimnasio&#39;] == 0) &amp; (df_train[&#39;usosmultiples&#39;] == 0) &amp; (df_train[&#39;piscina&#39;] == 0)</span>
+<span class="c1">#         &amp; (df_train[&#39;escuelascercanas&#39;] == 0) &amp; (df_train[&#39;centroscomercialescercanos&#39;] == 0)</span>
+<span class="c1">#         &amp; (df_train[&#39;provincia&#39;] == &#39;Yucatán&#39;) &amp; (df_train[&#39;tipodepropiedad&#39;] == &#39;Apartamento&#39;)</span>
+<span class="c1">#         &amp; (df_train[&#39;habitaciones&#39;] == 1) &amp; (df_train[&#39;banos&#39;] == 1) &amp; (df_train[&#39;garages&#39;] == 1)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind = features_independientes_precio(df_train)</span>
@@ -13532,105 +13763,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>ERROR:root:Internal Python error in the inspect module.
-Below is the traceback from this internal error.
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Traceback (most recent call last):
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/IPython/core/interactiveshell.py&#34;, line 3326, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-  File &#34;&lt;ipython-input-10-09ac2a6a0aca&gt;&#34;, line 1, in &lt;module&gt;
-    ind = features_independientes_precio(df_train)
-  File &#34;&lt;ipython-input-5-f5d41c81d90b&gt;&#34;, line 46, in features_independientes_precio
-    df[&#39;cantidad_inquilinos&#39;] = df[[&#39;habitaciones&#39;, &#39;banos&#39;]].apply(calculo_inquilinos,axis=1)
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/pandas/core/frame.py&#34;, line 6913, in apply
-    return op.get_result()
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/pandas/core/apply.py&#34;, line 186, in get_result
-    return self.apply_standard()
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/pandas/core/apply.py&#34;, line 285, in apply_standard
-    values, self.f, axis=self.axis, dummy=dummy, labels=labels
-  File &#34;pandas/_libs/reduction.pyx&#34;, line 651, in pandas._libs.reduction.reduce
-  File &#34;pandas/_libs/reduction.pyx&#34;, line 153, in pandas._libs.reduction.Reducer.get_result
-  File &#34;&lt;ipython-input-2-051cd9123481&gt;&#34;, line 67, in calculo_inquilinos
-    if (x[&#39;habitaciones&#39;] == 5):
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/pandas/core/series.py&#34;, line 1068, in __getitem__
-    result = self.index.get_value(self, key)
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/pandas/core/indexes/base.py&#34;, line 4725, in get_value
-    s = com.values_from_object(series)
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/IPython/core/interactiveshell.py&#34;, line 2040, in showtraceback
-    stb = value._render_traceback_()
-AttributeError: &#39;KeyboardInterrupt&#39; object has no attribute &#39;_render_traceback_&#39;
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/IPython/core/ultratb.py&#34;, line 1101, in get_records
-    return _fixed_getinnerframes(etb, number_of_lines_of_context, tb_offset)
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/IPython/core/ultratb.py&#34;, line 319, in wrapped
-    return f(*args, **kwargs)
-  File &#34;/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/IPython/core/ultratb.py&#34;, line 353, in _fixed_getinnerframes
-    records = fix_frame_records_filenames(inspect.getinnerframes(etb, context))
-  File &#34;/usr/lib/python3.7/inspect.py&#34;, line 1502, in getinnerframes
-    frameinfo = (tb.tb_frame,) + getframeinfo(tb, context)
-  File &#34;/usr/lib/python3.7/inspect.py&#34;, line 1460, in getframeinfo
-    filename = getsourcefile(frame) or getfile(frame)
-  File &#34;/usr/lib/python3.7/inspect.py&#34;, line 696, in getsourcefile
-    if getattr(getmodule(object, filename), &#39;__loader__&#39;, None) is not None:
-  File &#34;/usr/lib/python3.7/inspect.py&#34;, line 742, in getmodule
-    os.path.realpath(f)] = module.__name__
-  File &#34;/usr/lib/python3.7/posixpath.py&#34;, line 396, in realpath
-    return abspath(path)
-  File &#34;/usr/lib/python3.7/posixpath.py&#34;, line 385, in abspath
-    return normpath(path)
-  File &#34;/usr/lib/python3.7/posixpath.py&#34;, line 362, in normpath
-    if comp in (empty, dot):
-KeyboardInterrupt
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span></pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind[[&#39;escomercial&#39;,</span>
@@ -13650,7 +13786,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test = features_independientes_precio(df_test)</span>
@@ -13663,7 +13799,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test[[&#39;escomercial&#39;,</span>
@@ -13683,7 +13819,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # Verifico que no haya nans en los features</span>
@@ -13697,7 +13833,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -13713,7 +13849,20 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_test, df_train)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_train, df_train)</span>
@@ -13726,20 +13875,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_train, df_train)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep[[&#39;precio&#39;,&#39;promedio_precio_ciudad&#39;,</span>
@@ -13757,7 +13893,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test =  features_dependientes_precio(df_test, df_train)</span>
@@ -13770,7 +13906,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test[[&#39;promedio_precio_ciudad&#39;,</span>
@@ -13788,7 +13924,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -13804,7 +13940,7 @@ KeyboardInterrupt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
@@ -13818,225 +13954,10 @@ KeyboardInterrupt
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_ciudad - 372&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;varianza_precio_ciudad - 634&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_id_zona - 28621&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_tipo_propiedad - 46&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_por_mes - 0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;varianza_por_mes - 0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_habitaciones - 59365&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_booleanos - 0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_ciudad - 135&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;varianza_precio_ciudad - 206&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_id_zona - 8929&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_tipo_propiedad - 7&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_por_mes - 0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;varianza_por_mes - 0&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_habitaciones - 14803&#39;</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;promedio_precio_booleanos - 0&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_f.head(10)</span>
@@ -14046,342 +13967,16 @@ KeyboardInterrupt
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[29]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>descripcion</th>
-      <th>tipodepropiedad</th>
-      <th>direccion</th>
-      <th>ciudad</th>
-      <th>provincia</th>
-      <th>antiguedad</th>
-      <th>habitaciones</th>
-      <th>garages</th>
-      <th>...</th>
-      <th>anio</th>
-      <th>mes</th>
-      <th>dia</th>
-      <th>promedio_por_mes</th>
-      <th>varianza_por_mes</th>
-      <th>promedio_precio_habitaciones</th>
-      <th>promedio_precio_habitaciones_banos_garages</th>
-      <th>promedio_precio_banos_garages</th>
-      <th>promedio_precio_booleanos</th>
-      <th>puntaje</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>depto. interior de 80.15m2, consta de sala com...</td>
-      <td>Apartamento</td>
-      <td>Avenida Division del Norte 2005</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2015</td>
-      <td>8</td>
-      <td>23</td>
-      <td>2.654494e+06</td>
-      <td>2.195410e+06</td>
-      <td>2.299896e+06</td>
-      <td>1.943985e+06</td>
-      <td>1.742841e+06</td>
-      <td>2.398349e+06</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
-      <td>Casa en condominio</td>
-      <td>AV. MEXICO</td>
-      <td>La Magdalena Contreras</td>
-      <td>Distrito Federal</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>2013</td>
-      <td>6</td>
-      <td>28</td>
-      <td>2.058968e+06</td>
-      <td>1.813118e+06</td>
-      <td>2.127411e+06</td>
-      <td>2.196152e+06</td>
-      <td>2.399207e+06</td>
-      <td>2.398349e+06</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>descripcion \nla mejor ubicacion residencial e...</td>
-      <td>Casa</td>
-      <td>Urbi Tonala</td>
-      <td>Tonalá</td>
-      <td>Jalisco</td>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>2015</td>
-      <td>10</td>
-      <td>17</td>
-      <td>2.712010e+06</td>
-      <td>2.200963e+06</td>
-      <td>1.939120e+06</td>
-      <td>2.196152e+06</td>
-      <td>2.399207e+06</td>
-      <td>2.398349e+06</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>casa en privada con caseta de vigilancia casas...</td>
-      <td>Casa</td>
-      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2012</td>
-      <td>3</td>
-      <td>9</td>
-      <td>1.966355e+06</td>
-      <td>1.842065e+06</td>
-      <td>5.953501e+05</td>
-      <td>8.013918e+05</td>
-      <td>9.232625e+05</td>
-      <td>2.398349e+06</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>bonito departamento en excelentes condiciones ...</td>
-      <td>Apartamento</td>
-      <td>PASEOS DEL SOL</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2016</td>
-      <td>6</td>
-      <td>7</td>
-      <td>2.744906e+06</td>
-      <td>2.252515e+06</td>
-      <td>1.026163e+06</td>
-      <td>8.013918e+05</td>
-      <td>9.232625e+05</td>
-      <td>2.398349e+06</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>126147</td>
-      <td>departamento en venta taxqueña</td>
-      <td>amplio departamento, estancia de sala y comedo...</td>
-      <td>Apartamento</td>
-      <td>Condominio Tlalpan 2B</td>
-      <td>Coyoacán</td>
-      <td>Distrito Federal</td>
-      <td>5.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2014</td>
-      <td>3</td>
-      <td>18</td>
-      <td>2.268509e+06</td>
-      <td>1.892367e+06</td>
-      <td>1.026163e+06</td>
-      <td>8.013918e+05</td>
-      <td>9.232625e+05</td>
-      <td>2.398349e+06</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>139233</td>
-      <td>de oportunidad casa en san lorenzo</td>
-      <td>ubicada en esquina, pertenece san lorenzo agen...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Oaxaca de Juárez</td>
-      <td>Oaxaca</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2016</td>
-      <td>2</td>
-      <td>23</td>
-      <td>2.695540e+06</td>
-      <td>2.285987e+06</td>
-      <td>1.379105e+06</td>
-      <td>1.612232e+06</td>
-      <td>1.742841e+06</td>
-      <td>2.398349e+06</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>5013</td>
-      <td>casa emilia en venta en selvamar playa del carmen</td>
-      <td>casa emilia en venta playa del carmenfracciona...</td>
-      <td>Casa</td>
-      <td>condominio el trebol</td>
-      <td>Playa del Carmen</td>
-      <td>Quintana Roo</td>
-      <td>2.0</td>
-      <td>4.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>2016</td>
-      <td>10</td>
-      <td>20</td>
-      <td>2.825196e+06</td>
-      <td>2.315079e+06</td>
-      <td>2.939324e+06</td>
-      <td>3.055612e+06</td>
-      <td>3.261308e+06</td>
-      <td>2.398349e+06</td>
-      <td>34</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>44962</td>
-      <td>pre- venta preciosos depas 2 recamaras con sub...</td>
-      <td>&lt;p&gt;pre-venta de preciosos departamento ecologi...</td>
-      <td>Apartamento</td>
-      <td>BUENAVISTA DEPTOS CON SUBSIDIO</td>
-      <td>Villa de Alvarez</td>
-      <td>Colima</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>6</td>
-      <td>2.194887e+06</td>
-      <td>1.882606e+06</td>
-      <td>1.026163e+06</td>
-      <td>8.013918e+05</td>
-      <td>9.232625e+05</td>
-      <td>2.398349e+06</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>134537</td>
-      <td>terreno</td>
-      <td>terreno de 5.500m2 bardeado, uso de suelo h-20...</td>
-      <td>Terreno</td>
-      <td>Av. Morelos</td>
-      <td>Ixtapaluca</td>
-      <td>Edo. de México</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>2016</td>
-      <td>12</td>
-      <td>22</td>
-      <td>2.792977e+06</td>
-      <td>2.354765e+06</td>
-      <td>2.544955e+06</td>
-      <td>2.544955e+06</td>
-      <td>2.544955e+06</td>
-      <td>2.398349e+06</td>
-      <td>15</td>
-    </tr>
-  </tbody>
-</table>
-<p>10 rows × 38 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_f[&#39;promedio_precio_tipo_propiedad&#39;].head(10).value_counts()</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[26]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>2.398158e+06    7
-2.763769e+06    3
-Name: promedio_precio_tipo_propiedad, dtype: int64</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
