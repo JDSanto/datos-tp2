@@ -19,3 +19,5 @@ hyperopt
 firebase-admin
 kaggle
 lightgbm
+xgboost
+
