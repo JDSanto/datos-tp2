@@ -16,6 +16,7 @@ requests
 plotly
 sklearn
 hyperopt
+shap
 firebase-admin
 kaggle
 lightgbm
