@@ -20,3 +20,5 @@ shap
 firebase-admin
 kaggle
 lightgbm
+keras
+tensorflow
