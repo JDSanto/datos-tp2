@@ -13297,7 +13297,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f_nombre</span><span class="p">,</span> <span class="n">f_reemplazante</span><span class="p">,</span> <span class="n">f_count</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
@@ -13974,6 +13974,512 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_f[&#39;promedio_precio_tipo_propiedad&#39;].head(10).value_counts()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tipo_de_propiedad_one_hot_encoding</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Devuelve una copia del dataframe con nuevas columnas, </span>
+<span class="sd">    las nuevas columnas provienen de hacer OneHotEncondign respecto</span>
+<span class="sd">    de la columna tipo de propiedad. Se retorna el dataframe recibido,</span>
+<span class="sd">    con las nuevas columnas, y en segundo lugar, se retorna un array </span>
+<span class="sd">    de las nuevas columnas&#39;&#39;&#39;</span>
+    <span class="c1"># Fusion</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Otros&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Garage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Hospedaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Lote&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Huerta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Terreno industrial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Nave industrial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Departamento Compartido&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Local en centro comercial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Rancho&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Otros&#39;</span>
+    <span class="c1"># Espacios por guion bajo</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Casa en condominio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Casa_en_condominio&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Local Comercial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Local_Comercial&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Oficina comercial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Oficina_comercial&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Bodega comercial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Bodega_comercial&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Terreno comercial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Terreno_comercial&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Casa uso de suelo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Casa_uso_de_suelo&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Quinta Vacacional&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Quinta_Vacacional&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Inmuebles productivos urbanos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Inmuebles_productivos_urbanos&#39;</span>
+    
+    <span class="n">posibles_categorias</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;Casa_en_condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;Local_Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Oficina_comercial&#39;</span><span class="p">,</span> 
+                          <span class="s1">&#39;Bodega_comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Terreno_comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Casa_uso_de_suelo&#39;</span><span class="p">,</span> <span class="s1">&#39;Quinta_Vacacional&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;Inmuebles_productivos_urbanos&#39;</span><span class="p">]</span>
+        
+    <span class="n">encoded_tipo_propiedad</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">])</span>
+    
+    <span class="n">new_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">encoded_tipo_propiedad</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;tipodepropiedad_&quot;</span> <span class="ow">in</span> <span class="n">column</span><span class="p">:</span>
+            <span class="n">new_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">new_colum</span> <span class="ow">in</span> <span class="n">posibles_categorias</span><span class="p">:</span>
+        <span class="n">encoded_tipo_propiedad</span> <span class="o">=</span> <span class="n">encoded_tipo_propiedad</span><span class="p">[</span><span class="n">encoded_tipo_propiedad</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">new_colum</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">encoded_tipo_propiedad</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="n">new_columns</span>
+<span class="c1">#     return encoded_tipo_propiedad, new_columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = pd.read_csv(&#39;./data/train.csv&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df, arr = tipo_de_propiedad_one_hot_encoding(df_train)</span>
+<span class="c1"># display(df)</span>
+<span class="c1"># display(df.columns)</span>
+<span class="c1"># df[&#39;titulo&#39;].value_counts()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">columna_a_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Dado un dataframe df, aplica One Hot Encoding a la columna del mismo.</span>
+<span class="sd">       Para todas las categorias con menos de N elementos, las agrupa bajo </span>
+<span class="sd">    una nueva categoria llamdo &#39;otro&#39;.</span>
+<span class="sd">       Si df_aux no es nulo, se llenaran tambien columnas de las categorias que no</span>
+<span class="sd">    se encuentren en el dataframe original, asi ambos tienen las mismas dimensiones.</span>
+<span class="sd">       Si devolver_cols es True, ademas de devolver el dataframe, devolvera las</span>
+<span class="sd">    nuevas columnas creadas por OHE.&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">df_aux</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_aux</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">[[</span><span class="n">col</span><span class="p">]],</span> <span class="n">df_aux</span><span class="p">[[</span><span class="n">col</span><span class="p">]]])</span>
+    <span class="n">df_full</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_full</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">col</span><span class="p">)[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;otro&#39;</span>
+    
+    <span class="n">df_full_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="c1"># Eliminar caracteres utf-8</span>
+    <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+    <span class="n">df_ohe</span> <span class="o">=</span> <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_ohe</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">devolver_cols</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_full_ohe</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="c1"># df_train = pd.read_csv(&#39;./data/train.csv&#39;)</span>
+<span class="c1"># df_test = pd.read_csv(&#39;./data/test.csv&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_ohe, new_cols_train = columna_a_ohe(df_train, &#39;tipodepropiedad&#39;, 100, df_test, True)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_ohe, new_cols = columna_a_ohe(df_test, &#39;tipodepropiedad&#39;, 2000, df_train, True)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_ohe[[&#39;tipodepropiedad&#39;] + new_cols_train]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tipodepropiedad</th>
+      <th>tipodepropiedad_Apartamento</th>
+      <th>tipodepropiedad_Bodega comercial</th>
+      <th>tipodepropiedad_Casa</th>
+      <th>tipodepropiedad_Casa en condominio</th>
+      <th>tipodepropiedad_Casa uso de suelo</th>
+      <th>tipodepropiedad_Departamento Compartido</th>
+      <th>tipodepropiedad_Duplex</th>
+      <th>tipodepropiedad_Edificio</th>
+      <th>tipodepropiedad_Inmuebles productivos urbanos</th>
+      <th>tipodepropiedad_Local Comercial</th>
+      <th>tipodepropiedad_Local en centro comercial</th>
+      <th>tipodepropiedad_Oficina comercial</th>
+      <th>tipodepropiedad_Otros</th>
+      <th>tipodepropiedad_Quinta Vacacional</th>
+      <th>tipodepropiedad_Rancho</th>
+      <th>tipodepropiedad_Terreno</th>
+      <th>tipodepropiedad_Terreno comercial</th>
+      <th>tipodepropiedad_Villa</th>
+      <th>tipodepropiedad_otro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Apartamento</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Casa en condominio</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Casa</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Casa</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Apartamento</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>239995</td>
+      <td>Casa</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>239996</td>
+      <td>Casa</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>239997</td>
+      <td>Apartamento</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>239998</td>
+      <td>Casa</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>239999</td>
+      <td>Apartamento</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>240000 rows × 20 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
