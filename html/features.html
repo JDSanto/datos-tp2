@@ -13226,7 +13226,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">map_values</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -13286,6 +13286,11 @@ div#notebook {
 
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># Titulo y Descripciones</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion_sanitario&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">separador_de_textos</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">])</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion_palabras_claves&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buscador_de_palabra</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion_sanitario&#39;</span><span class="p">])</span> 
     
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
@@ -13537,7 +13542,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">provincias1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;Nueva León&#39;</span><span class="p">,</span> <span class="s1">&#39;Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;Puebla&#39;</span><span class="p">]</span>
@@ -13791,39 +13796,6 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind = features_independientes_precio(df_train)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind[[&#39;escomercial&#39;,</span>
-<span class="c1">#        &#39;promedio_metros_tipo_propiedad&#39;, &#39;tipo_propiedad_compartida&#39;,</span>
-<span class="c1">#        &#39;prop_frecuente&#39;, &#39;zona&#39;,&#39;top_provincia&#39;, &#39;es_ciudad_centrica&#39;,</span>
-<span class="c1">#        &#39;promedio_metros_totales_provincia&#39;,</span>
-<span class="c1">#        &#39;promedio_metros_cubiertos_provincia&#39;, &#39;porcentaje_metros&#39;,</span>
-<span class="c1">#        &#39;diferencia_metros&#39;, &#39;intervalo_metros_totales&#39;,</span>
-<span class="c1">#        &#39;intervalo_metros_cubiertos&#39;, &#39;anio&#39;, &#39;mes&#39;, &#39;dia&#39;, &#39;trimestre&#39;,</span>
-<span class="c1">#        &#39;escualas_centros_cercanos&#39;, &#39;delincuencia&#39;, &#39;turismo&#39;, &#39;es_antigua&#39;, &#39;cantidad_inquilinos&#39;]].head()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
@@ -13887,23 +13859,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_test, df_train)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep = features_dependientes_precio(df_train, df_train)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#dep = features_dependientes_precio(df_train, df_train)</span>
 </pre></div>
 
     </div>
