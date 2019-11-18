@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13116,7 +13116,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13132,7 +13132,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_no_queridas</span><span class="p">(</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13157,7 +13157,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13187,7 +13187,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13206,10 +13206,13 @@ div#notebook {
     <span class="k">def</span> <span class="nf">contador_mas_frecuentes</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
         <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">palabras_del_df</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+        <span class="n">cantidad_palabras_texto</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">palabras_del_df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cantidad_palabras_texto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras_del_df</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">set_mas_frecuentes</span><span class="p">:</span>
                 <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">contador</span>
+        <span class="k">return</span> <span class="n">contador</span> <span class="o">/</span> <span class="n">cantidad_palabras_texto</span>
     
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_mas_frecuentes</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -13224,7 +13227,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Ejemplo de uso de las palabras mas frecuentes</span>
@@ -13255,70 +13258,44 @@ La cantidad total de publicaciones es: 240000
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt"></div>
 
 
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-17-02eb67b4b8cc&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Ejemplo de uso de las palabras mas frecuentes</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>df_palabras <span class="ansi-blue-fg">=</span> feature_cantidad_mas_frecuentes<span class="ansi-blue-fg">(</span>df_train<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;titulo&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">200</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> df_palabras<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;id&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;titulo&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;cant_palabras_mas_frecuentes_titulo&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>head<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<span class="ansi-green-fg">&lt;ipython-input-16-7e30b1346d2c&gt;</span> in <span class="ansi-cyan-fg">feature_cantidad_mas_frecuentes</span><span class="ansi-blue-fg">(df, col, n)</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span>         <span class="ansi-green-fg">return</span> contador <span class="ansi-blue-fg">/</span> cantidad_palabras_texto
+<span class="ansi-green-intense-fg ansi-bold">     22</span> 
+<span class="ansi-green-fg">---&gt; 23</span><span class="ansi-red-fg">     </span>df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="ansi-blue-fg">+</span> col<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">~</span>df<span class="ansi-blue-fg">[</span>col<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>isnull<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span>col<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>apply<span class="ansi-blue-fg">(</span>contador_mas_frecuentes<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span>     df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="ansi-blue-fg">+</span> col<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="ansi-blue-fg">+</span> col<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>fillna<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     25</span> 
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="ansi-green-fg">~/Escritorio/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/series.py</span> in <span class="ansi-cyan-fg">apply</span><span class="ansi-blue-fg">(self, func, convert_dtype, args, **kwds)</span>
+<span class="ansi-green-intense-fg ansi-bold">   4043</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   4044</span>                 values <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>astype<span class="ansi-blue-fg">(</span>object<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>values
+<span class="ansi-green-fg">-&gt; 4045</span><span class="ansi-red-fg">                 </span>mapped <span class="ansi-blue-fg">=</span> lib<span class="ansi-blue-fg">.</span>map_infer<span class="ansi-blue-fg">(</span>values<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> convert<span class="ansi-blue-fg">=</span>convert_dtype<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   4046</span> 
+<span class="ansi-green-intense-fg ansi-bold">   4047</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>mapped<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">and</span> isinstance<span class="ansi-blue-fg">(</span>mapped<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> Series<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>cant_palabras_mas_frecuentes_titulo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>2.0</td>
-    </tr>
-  </tbody>
-</table>
+<span class="ansi-green-fg">pandas/_libs/lib.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.lib.map_infer</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-16-7e30b1346d2c&gt;</span> in <span class="ansi-cyan-fg">contador_mas_frecuentes</span><span class="ansi-blue-fg">(texto)</span>
+<span class="ansi-green-intense-fg ansi-bold">     19</span>             <span class="ansi-green-fg">if</span> palabra <span class="ansi-green-fg">in</span> set_mas_frecuentes<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span>                 contador <span class="ansi-blue-fg">=</span> contador <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-fg">---&gt; 21</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> contador <span class="ansi-blue-fg">/</span> cantidad_palabras_texto
+<span class="ansi-green-intense-fg ansi-bold">     22</span> 
+<span class="ansi-green-intense-fg ansi-bold">     23</span>     df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="ansi-blue-fg">+</span> col<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> df<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">~</span>df<span class="ansi-blue-fg">[</span>col<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>isnull<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span>col<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>apply<span class="ansi-blue-fg">(</span>contador_mas_frecuentes<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ZeroDivisionError</span>: division by zero</pre>
 </div>
-</div>
-
 </div>
 
 </div>
@@ -13327,7 +13304,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13357,7 +13334,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13376,10 +13353,13 @@ La cantidad total de publicaciones es: 240000
     <span class="k">def</span> <span class="nf">contador_menos_frecuentes</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
         <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">palabras_del_df</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+        <span class="n">cantidad_palabras_texto</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">palabras_del_df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cantidad_palabras_texto</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras_del_df</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">set_menos_frecuentes</span><span class="p">:</span>
                 <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">contador</span>
+        <span class="k">return</span> <span class="n">contador</span> <span class="o">/</span> <span class="n">cantidad_palabras_texto</span>
     
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_menos_frecuentes</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -13394,7 +13374,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Ejemplo de uso de las palabras menos frecuentes</span>
@@ -13404,93 +13384,6 @@ La cantidad total de publicaciones es: 240000
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>La cantidad de publicaciones con titulo no nulo es: 234613
-La cantidad total de publicaciones es: 240000
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[9]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>cant_palabras_menos_frecuentes_titulo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
