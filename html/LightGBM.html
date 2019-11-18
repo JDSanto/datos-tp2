@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13114,20 +13114,24 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
 
 <span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
 <span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_zona_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_f</span><span class="p">)</span>
 
 
 <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -13161,12 +13165,14 @@ div#notebook {
 <span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">]</span>
 
 <span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
 
 
 <span class="k">def</span> <span class="nf">eval_lightgbm</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -13866,15 +13872,26 @@ Did not meet early stopping. Best iteration is:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
        <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
-<span class="c1">#             &#39;lat&#39;, &#39;lng&#39;,</span>
+            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
        <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
-<span class="n">features_test</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">]]</span>
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;promedio_id_zona + log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;varianza_id_zona + prom&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;varianza_id_zona + prom + log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;tam_ambientes&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;count_id_zona&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">],</span>
+                 <span class="p">[</span><span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte&#39;</span><span class="p">]]</span>
 
 <span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.806451877022587</span><span class="p">,</span>
  <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">62.0</span><span class="p">,</span>
@@ -13956,6 +13973,137 @@ Did not meet early stopping. Best iteration is:
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[370]	valid_0&#39;s l1: 647247
+MAE LightGBM (train): 562150.81883
+MAE LightGBM (test): 647247.10057
+MAE LightGBM (eval): 644638.00905
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[306]	valid_0&#39;s l1: 579654
+MAE LightGBM (train): 501513.06621
+MAE LightGBM (test): 579653.58965
+MAE LightGBM (eval): 604313.16574
+Overfitting (base_eval - base_test) - (eval - test) - promedio_id_zona: -27268.66761489166
+Diff evaluation (base_eval - eval)                  - promedio_id_zona: 40324.84330820909
+Diff train (base_train - train)                     - promedio_id_zona: 60637.75261725142
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[306]	valid_0&#39;s l1: 579654
+MAE LightGBM (train): 501513.06621
+MAE LightGBM (test): 579653.58965
+MAE LightGBM (eval): 604313.16574
+Overfitting (base_eval - base_test) - (eval - test) - promedio_id_zona_log: -27268.66761489166
+Diff evaluation (base_eval - eval)                  - promedio_id_zona_log: 40324.84330820909
+Diff train (base_train - train)                     - promedio_id_zona_log: 60637.75261725142
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[647]	valid_0&#39;s l1: 571030
+MAE LightGBM (train): 440195.53663
+MAE LightGBM (test): 571030.29689
+MAE LightGBM (eval): 600158.72303
+Overfitting (base_eval - base_test) - (eval - test) - promedio_id_zona + log: -31737.517660296406
+Diff evaluation (base_eval - eval)                  - promedio_id_zona + log: 44479.28602169035
+Diff train (base_train - train)                     - promedio_id_zona + log: 121955.28219251655
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[623]	valid_0&#39;s l1: 599826
+MAE LightGBM (train): 465180.92586
+MAE LightGBM (test): 599826.13898
+MAE LightGBM (eval): 607626.31118
+Overfitting (base_eval - base_test) - (eval - test) - varianza_id_zona: -10409.263723387267
+Diff evaluation (base_eval - eval)                  - varianza_id_zona: 37011.69787000085
+Diff train (base_train - train)                     - varianza_id_zona: 96969.89296060544
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[306]	valid_0&#39;s l1: 579654
+MAE LightGBM (train): 501513.06621
+MAE LightGBM (test): 579653.58965
+MAE LightGBM (eval): 604313.16574
+Overfitting (base_eval - base_test) - (eval - test) - varianza_id_zona + prom: -27268.66761489166
+Diff evaluation (base_eval - eval)                  - varianza_id_zona + prom: 40324.84330820909
+Diff train (base_train - train)                     - varianza_id_zona + prom: 60637.75261725142
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[647]	valid_0&#39;s l1: 571030
+MAE LightGBM (train): 440195.53663
+MAE LightGBM (test): 571030.29689
+MAE LightGBM (eval): 600158.72303
+Overfitting (base_eval - base_test) - (eval - test) - varianza_id_zona + prom + log: -31737.517660296406
+Diff evaluation (base_eval - eval)                  - varianza_id_zona + prom + log: 44479.28602169035
+Diff train (base_train - train)                     - varianza_id_zona + prom + log: 121955.28219251655
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[387]	valid_0&#39;s l1: 648045
+MAE LightGBM (train): 546502.82382
+MAE LightGBM (test): 648045.42304
+MAE LightGBM (eval): 644709.01903
+Overfitting (base_eval - base_test) - (eval - test) - tam_ambientes: 727.3124815803021
+Diff evaluation (base_eval - eval)                  - tam_ambientes: -71.00998275692109
+Diff train (base_train - train)                     - tam_ambientes: 15647.995003598277
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[487]	valid_0&#39;s l1: 640189
+MAE LightGBM (train): 529923.62984
+MAE LightGBM (test): 640188.72547
+MAE LightGBM (eval): 636359.42808
+Overfitting (base_eval - base_test) - (eval - test) - metros_cubiertos_normalizados: 1220.205876295804
+Diff evaluation (base_eval - eval)                  - metros_cubiertos_normalizados: 8278.580974674085
+Diff train (base_train - train)                     - metros_cubiertos_normalizados: 32227.188989322633
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[628]	valid_0&#39;s l1: 603757
+MAE LightGBM (train): 467973.78411
+MAE LightGBM (test): 603757.18192
+MAE LightGBM (eval): 599595.24742
+Overfitting (base_eval - base_test) - (eval - test) - dias_desde_datos: 1552.8429792963434
+Diff evaluation (base_eval - eval)                  - dias_desde_datos: 45042.76162880112
+Diff train (base_train - train)                     - dias_desde_datos: 94177.03471434198
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[440]	valid_0&#39;s l1: 628111
+MAE LightGBM (train): 522097.56656
+MAE LightGBM (test): 628110.88729
+MAE LightGBM (eval): 623802.24173
+Overfitting (base_eval - base_test) - (eval - test) - count_id_zona: 1699.5540396261495
+Diff evaluation (base_eval - eval)                  - count_id_zona: 20835.767319677514
+Diff train (base_train - train)                     - count_id_zona: 40053.25226313458
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[441]	valid_0&#39;s l1: 606622
+MAE LightGBM (train): 503285.82591
+MAE LightGBM (test): 606622.43312
+MAE LightGBM (eval): 604296.40566
+Overfitting (base_eval - base_test) - (eval - test) - meses_desde_datos: -283.0640611964045
+Diff evaluation (base_eval - eval)                  - meses_desde_datos: 40341.603391364915
+Diff train (base_train - train)                     - meses_desde_datos: 58864.99291449983
+Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:
+[497]	valid_0&#39;s l1: 637984
+MAE LightGBM (train): 534215.85119
+MAE LightGBM (test): 637983.79886
+MAE LightGBM (eval): 636955.33803
+Overfitting (base_eval - base_test) - (eval - test) - zona_Centro: -1580.6306953866733
+Diff evaluation (base_eval - eval)                  - zona_Centro: 7682.671017098939
+Diff train (base_train - train)                     - zona_Centro: 27934.96763060917
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -14021,7 +14169,7 @@ Did not meet early stopping. Best iteration is:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
@@ -14033,11 +14181,13 @@ Did not meet early stopping. Best iteration is:
                  <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">]</span>
 
 <span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
 
 <span class="c1"># hps = {&#39;bagging_fraction&#39;: 0.7740520226030885,</span>
 <span class="c1">#  &#39;bagging_freq&#39;: 7.0,</span>
@@ -14120,372 +14270,501 @@ Did not meet early stopping. Best iteration is:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1]	valid_0&#39;s l1: 1.40168e+06
+<pre>[1]	valid_0&#39;s l1: 1.39347e+06
 Training until validation scores don&#39;t improve for 25 rounds
-[2]	valid_0&#39;s l1: 1.23161e+06
-[3]	valid_0&#39;s l1: 1.0914e+06
-[4]	valid_0&#39;s l1: 986642
-[5]	valid_0&#39;s l1: 898274
-[6]	valid_0&#39;s l1: 824375
-[7]	valid_0&#39;s l1: 766746
-[8]	valid_0&#39;s l1: 723348
-[9]	valid_0&#39;s l1: 689436
-[10]	valid_0&#39;s l1: 660112
-[11]	valid_0&#39;s l1: 635778
-[12]	valid_0&#39;s l1: 618015
-[13]	valid_0&#39;s l1: 601837
-[14]	valid_0&#39;s l1: 591411
-[15]	valid_0&#39;s l1: 580810
-[16]	valid_0&#39;s l1: 572112
-[17]	valid_0&#39;s l1: 565898
-[18]	valid_0&#39;s l1: 559817
-[19]	valid_0&#39;s l1: 554751
-[20]	valid_0&#39;s l1: 550118
-[21]	valid_0&#39;s l1: 546954
-[22]	valid_0&#39;s l1: 544194
-[23]	valid_0&#39;s l1: 541769
-[24]	valid_0&#39;s l1: 539668
-[25]	valid_0&#39;s l1: 537269
-[26]	valid_0&#39;s l1: 535468
-[27]	valid_0&#39;s l1: 533549
-[28]	valid_0&#39;s l1: 532314
-[29]	valid_0&#39;s l1: 530503
-[30]	valid_0&#39;s l1: 529067
-[31]	valid_0&#39;s l1: 527655
-[32]	valid_0&#39;s l1: 526799
-[33]	valid_0&#39;s l1: 525477
-[34]	valid_0&#39;s l1: 524517
-[35]	valid_0&#39;s l1: 523666
-[36]	valid_0&#39;s l1: 522860
-[37]	valid_0&#39;s l1: 522415
-[38]	valid_0&#39;s l1: 521733
-[39]	valid_0&#39;s l1: 521320
-[40]	valid_0&#39;s l1: 520532
-[41]	valid_0&#39;s l1: 519713
-[42]	valid_0&#39;s l1: 518999
-[43]	valid_0&#39;s l1: 518411
-[44]	valid_0&#39;s l1: 517889
-[45]	valid_0&#39;s l1: 517462
-[46]	valid_0&#39;s l1: 516930
-[47]	valid_0&#39;s l1: 516503
-[48]	valid_0&#39;s l1: 515913
-[49]	valid_0&#39;s l1: 515536
-[50]	valid_0&#39;s l1: 515307
-[51]	valid_0&#39;s l1: 514897
-[52]	valid_0&#39;s l1: 514397
-[53]	valid_0&#39;s l1: 514229
-[54]	valid_0&#39;s l1: 513875
-[55]	valid_0&#39;s l1: 513589
-[56]	valid_0&#39;s l1: 513249
-[57]	valid_0&#39;s l1: 512751
-[58]	valid_0&#39;s l1: 512419
-[59]	valid_0&#39;s l1: 512175
-[60]	valid_0&#39;s l1: 512022
-[61]	valid_0&#39;s l1: 511681
-[62]	valid_0&#39;s l1: 511098
-[63]	valid_0&#39;s l1: 510896
-[64]	valid_0&#39;s l1: 510601
-[65]	valid_0&#39;s l1: 510488
-[66]	valid_0&#39;s l1: 510194
-[67]	valid_0&#39;s l1: 509892
-[68]	valid_0&#39;s l1: 509697
-[69]	valid_0&#39;s l1: 509677
-[70]	valid_0&#39;s l1: 509686
-[71]	valid_0&#39;s l1: 509474
-[72]	valid_0&#39;s l1: 509457
-[73]	valid_0&#39;s l1: 509312
-[74]	valid_0&#39;s l1: 509053
-[75]	valid_0&#39;s l1: 508850
-[76]	valid_0&#39;s l1: 508515
-[77]	valid_0&#39;s l1: 508348
-[78]	valid_0&#39;s l1: 508168
-[79]	valid_0&#39;s l1: 507990
-[80]	valid_0&#39;s l1: 507795
-[81]	valid_0&#39;s l1: 507789
-[82]	valid_0&#39;s l1: 507563
-[83]	valid_0&#39;s l1: 507305
-[84]	valid_0&#39;s l1: 507309
-[85]	valid_0&#39;s l1: 507287
-[86]	valid_0&#39;s l1: 507140
-[87]	valid_0&#39;s l1: 507151
-[88]	valid_0&#39;s l1: 507225
-[89]	valid_0&#39;s l1: 507182
-[90]	valid_0&#39;s l1: 507203
-[91]	valid_0&#39;s l1: 507039
-[92]	valid_0&#39;s l1: 507066
-[93]	valid_0&#39;s l1: 506987
-[94]	valid_0&#39;s l1: 506979
-[95]	valid_0&#39;s l1: 506831
-[96]	valid_0&#39;s l1: 506447
-[97]	valid_0&#39;s l1: 506486
-[98]	valid_0&#39;s l1: 506375
-[99]	valid_0&#39;s l1: 506306
-[100]	valid_0&#39;s l1: 506263
-[101]	valid_0&#39;s l1: 506155
-[102]	valid_0&#39;s l1: 506067
-[103]	valid_0&#39;s l1: 505705
-[104]	valid_0&#39;s l1: 505593
-[105]	valid_0&#39;s l1: 505409
-[106]	valid_0&#39;s l1: 505324
-[107]	valid_0&#39;s l1: 505381
-[108]	valid_0&#39;s l1: 505131
-[109]	valid_0&#39;s l1: 504987
-[110]	valid_0&#39;s l1: 504928
-[111]	valid_0&#39;s l1: 504807
-[112]	valid_0&#39;s l1: 504871
-[113]	valid_0&#39;s l1: 504702
-[114]	valid_0&#39;s l1: 504628
-[115]	valid_0&#39;s l1: 504633
-[116]	valid_0&#39;s l1: 504603
-[117]	valid_0&#39;s l1: 504595
-[118]	valid_0&#39;s l1: 504634
-[119]	valid_0&#39;s l1: 504523
-[120]	valid_0&#39;s l1: 504456
-[121]	valid_0&#39;s l1: 504383
-[122]	valid_0&#39;s l1: 504468
-[123]	valid_0&#39;s l1: 504262
-[124]	valid_0&#39;s l1: 504262
-[125]	valid_0&#39;s l1: 504095
-[126]	valid_0&#39;s l1: 503864
-[127]	valid_0&#39;s l1: 503743
-[128]	valid_0&#39;s l1: 503660
-[129]	valid_0&#39;s l1: 503373
-[130]	valid_0&#39;s l1: 503171
-[131]	valid_0&#39;s l1: 503091
-[132]	valid_0&#39;s l1: 503019
-[133]	valid_0&#39;s l1: 502993
-[134]	valid_0&#39;s l1: 502870
-[135]	valid_0&#39;s l1: 502732
-[136]	valid_0&#39;s l1: 502632
-[137]	valid_0&#39;s l1: 502500
-[138]	valid_0&#39;s l1: 502419
-[139]	valid_0&#39;s l1: 502344
-[140]	valid_0&#39;s l1: 502336
-[141]	valid_0&#39;s l1: 502253
-[142]	valid_0&#39;s l1: 502164
-[143]	valid_0&#39;s l1: 502168
-[144]	valid_0&#39;s l1: 502157
-[145]	valid_0&#39;s l1: 501949
-[146]	valid_0&#39;s l1: 501801
-[147]	valid_0&#39;s l1: 501873
-[148]	valid_0&#39;s l1: 501753
-[149]	valid_0&#39;s l1: 501803
-[150]	valid_0&#39;s l1: 501772
-[151]	valid_0&#39;s l1: 501763
-[152]	valid_0&#39;s l1: 501762
-[153]	valid_0&#39;s l1: 501711
-[154]	valid_0&#39;s l1: 501595
-[155]	valid_0&#39;s l1: 501572
-[156]	valid_0&#39;s l1: 501516
-[157]	valid_0&#39;s l1: 501406
-[158]	valid_0&#39;s l1: 501526
-[159]	valid_0&#39;s l1: 501366
-[160]	valid_0&#39;s l1: 501409
-[161]	valid_0&#39;s l1: 501403
-[162]	valid_0&#39;s l1: 501474
-[163]	valid_0&#39;s l1: 501559
-[164]	valid_0&#39;s l1: 501397
-[165]	valid_0&#39;s l1: 501394
-[166]	valid_0&#39;s l1: 501470
-[167]	valid_0&#39;s l1: 501437
-[168]	valid_0&#39;s l1: 501431
-[169]	valid_0&#39;s l1: 501351
-[170]	valid_0&#39;s l1: 501324
-[171]	valid_0&#39;s l1: 501295
-[172]	valid_0&#39;s l1: 501213
-[173]	valid_0&#39;s l1: 501153
-[174]	valid_0&#39;s l1: 501107
-[175]	valid_0&#39;s l1: 501116
-[176]	valid_0&#39;s l1: 501129
-[177]	valid_0&#39;s l1: 501135
-[178]	valid_0&#39;s l1: 501060
-[179]	valid_0&#39;s l1: 500966
-[180]	valid_0&#39;s l1: 500918
-[181]	valid_0&#39;s l1: 500909
-[182]	valid_0&#39;s l1: 500869
-[183]	valid_0&#39;s l1: 500822
-[184]	valid_0&#39;s l1: 500742
-[185]	valid_0&#39;s l1: 500698
-[186]	valid_0&#39;s l1: 500714
-[187]	valid_0&#39;s l1: 500692
-[188]	valid_0&#39;s l1: 500664
-[189]	valid_0&#39;s l1: 500692
-[190]	valid_0&#39;s l1: 500610
-[191]	valid_0&#39;s l1: 500621
-[192]	valid_0&#39;s l1: 500619
-[193]	valid_0&#39;s l1: 500498
-[194]	valid_0&#39;s l1: 500423
-[195]	valid_0&#39;s l1: 500341
-[196]	valid_0&#39;s l1: 500318
-[197]	valid_0&#39;s l1: 500253
-[198]	valid_0&#39;s l1: 500161
-[199]	valid_0&#39;s l1: 500179
-[200]	valid_0&#39;s l1: 500127
-[201]	valid_0&#39;s l1: 500108
-[202]	valid_0&#39;s l1: 500089
-[203]	valid_0&#39;s l1: 500136
-[204]	valid_0&#39;s l1: 500157
-[205]	valid_0&#39;s l1: 499981
-[206]	valid_0&#39;s l1: 499871
-[207]	valid_0&#39;s l1: 499852
-[208]	valid_0&#39;s l1: 499788
-[209]	valid_0&#39;s l1: 499823
-[210]	valid_0&#39;s l1: 499677
-[211]	valid_0&#39;s l1: 499640
-[212]	valid_0&#39;s l1: 499613
-[213]	valid_0&#39;s l1: 499536
-[214]	valid_0&#39;s l1: 499537
-[215]	valid_0&#39;s l1: 499567
-[216]	valid_0&#39;s l1: 499461
-[217]	valid_0&#39;s l1: 499453
-[218]	valid_0&#39;s l1: 499430
-[219]	valid_0&#39;s l1: 499334
-[220]	valid_0&#39;s l1: 499329
-[221]	valid_0&#39;s l1: 499250
-[222]	valid_0&#39;s l1: 499220
-[223]	valid_0&#39;s l1: 499167
-[224]	valid_0&#39;s l1: 499195
-[225]	valid_0&#39;s l1: 499128
-[226]	valid_0&#39;s l1: 499127
-[227]	valid_0&#39;s l1: 498941
-[228]	valid_0&#39;s l1: 498846
-[229]	valid_0&#39;s l1: 498859
-[230]	valid_0&#39;s l1: 498936
-[231]	valid_0&#39;s l1: 498956
-[232]	valid_0&#39;s l1: 498879
-[233]	valid_0&#39;s l1: 498863
-[234]	valid_0&#39;s l1: 498861
-[235]	valid_0&#39;s l1: 498857
-[236]	valid_0&#39;s l1: 498878
-[237]	valid_0&#39;s l1: 498863
-[238]	valid_0&#39;s l1: 498793
-[239]	valid_0&#39;s l1: 498740
-[240]	valid_0&#39;s l1: 498705
-[241]	valid_0&#39;s l1: 498696
-[242]	valid_0&#39;s l1: 498716
-[243]	valid_0&#39;s l1: 498649
-[244]	valid_0&#39;s l1: 498666
-[245]	valid_0&#39;s l1: 498707
-[246]	valid_0&#39;s l1: 498710
-[247]	valid_0&#39;s l1: 498720
-[248]	valid_0&#39;s l1: 498694
-[249]	valid_0&#39;s l1: 498597
-[250]	valid_0&#39;s l1: 498587
-[251]	valid_0&#39;s l1: 498598
-[252]	valid_0&#39;s l1: 498690
-[253]	valid_0&#39;s l1: 498682
-[254]	valid_0&#39;s l1: 498576
-[255]	valid_0&#39;s l1: 498539
-[256]	valid_0&#39;s l1: 498616
-[257]	valid_0&#39;s l1: 498605
-[258]	valid_0&#39;s l1: 498570
-[259]	valid_0&#39;s l1: 498510
-[260]	valid_0&#39;s l1: 498488
-[261]	valid_0&#39;s l1: 498492
-[262]	valid_0&#39;s l1: 498469
-[263]	valid_0&#39;s l1: 498463
-[264]	valid_0&#39;s l1: 498356
-[265]	valid_0&#39;s l1: 498354
-[266]	valid_0&#39;s l1: 498273
-[267]	valid_0&#39;s l1: 498255
-[268]	valid_0&#39;s l1: 498170
-[269]	valid_0&#39;s l1: 498172
-[270]	valid_0&#39;s l1: 498156
-[271]	valid_0&#39;s l1: 498149
-[272]	valid_0&#39;s l1: 498161
-[273]	valid_0&#39;s l1: 498110
-[274]	valid_0&#39;s l1: 498152
-[275]	valid_0&#39;s l1: 498121
-[276]	valid_0&#39;s l1: 498156
-[277]	valid_0&#39;s l1: 498062
-[278]	valid_0&#39;s l1: 497928
-[279]	valid_0&#39;s l1: 497895
-[280]	valid_0&#39;s l1: 497929
-[281]	valid_0&#39;s l1: 497854
-[282]	valid_0&#39;s l1: 497728
-[283]	valid_0&#39;s l1: 497676
-[284]	valid_0&#39;s l1: 497622
-[285]	valid_0&#39;s l1: 497534
-[286]	valid_0&#39;s l1: 497475
-[287]	valid_0&#39;s l1: 497520
-[288]	valid_0&#39;s l1: 497454
-[289]	valid_0&#39;s l1: 497479
-[290]	valid_0&#39;s l1: 497404
-[291]	valid_0&#39;s l1: 497394
-[292]	valid_0&#39;s l1: 497281
-[293]	valid_0&#39;s l1: 497200
-[294]	valid_0&#39;s l1: 497203
-[295]	valid_0&#39;s l1: 497100
-[296]	valid_0&#39;s l1: 497073
-[297]	valid_0&#39;s l1: 497060
-[298]	valid_0&#39;s l1: 497111
-[299]	valid_0&#39;s l1: 497087
-[300]	valid_0&#39;s l1: 497077
-[301]	valid_0&#39;s l1: 497071
-[302]	valid_0&#39;s l1: 497065
-[303]	valid_0&#39;s l1: 496973
-[304]	valid_0&#39;s l1: 496937
-[305]	valid_0&#39;s l1: 496827
-[306]	valid_0&#39;s l1: 496703
-[307]	valid_0&#39;s l1: 496666
-[308]	valid_0&#39;s l1: 496672
-[309]	valid_0&#39;s l1: 496644
-[310]	valid_0&#39;s l1: 496610
-[311]	valid_0&#39;s l1: 496615
-[312]	valid_0&#39;s l1: 496667
-[313]	valid_0&#39;s l1: 496667
-[314]	valid_0&#39;s l1: 496733
-[315]	valid_0&#39;s l1: 496632
-[316]	valid_0&#39;s l1: 496632
-[317]	valid_0&#39;s l1: 496602
-[318]	valid_0&#39;s l1: 496624
-[319]	valid_0&#39;s l1: 496609
-[320]	valid_0&#39;s l1: 496630
-[321]	valid_0&#39;s l1: 496528
-[322]	valid_0&#39;s l1: 496478
-[323]	valid_0&#39;s l1: 496533
-[324]	valid_0&#39;s l1: 496517
-[325]	valid_0&#39;s l1: 496532
-[326]	valid_0&#39;s l1: 496558
-[327]	valid_0&#39;s l1: 496576
-[328]	valid_0&#39;s l1: 496569
-[329]	valid_0&#39;s l1: 496597
-[330]	valid_0&#39;s l1: 496566
-[331]	valid_0&#39;s l1: 496545
-[332]	valid_0&#39;s l1: 496491
-[333]	valid_0&#39;s l1: 496516
-[334]	valid_0&#39;s l1: 496389
-[335]	valid_0&#39;s l1: 496358
-[336]	valid_0&#39;s l1: 496384
-[337]	valid_0&#39;s l1: 496365
-[338]	valid_0&#39;s l1: 496369
-[339]	valid_0&#39;s l1: 496427
-[340]	valid_0&#39;s l1: 496408
-[341]	valid_0&#39;s l1: 496423
-[342]	valid_0&#39;s l1: 496465
-[343]	valid_0&#39;s l1: 496486
-[344]	valid_0&#39;s l1: 496491
-[345]	valid_0&#39;s l1: 496534
-[346]	valid_0&#39;s l1: 496430
-[347]	valid_0&#39;s l1: 496378
-[348]	valid_0&#39;s l1: 496402
-[349]	valid_0&#39;s l1: 496443
-[350]	valid_0&#39;s l1: 496392
-[351]	valid_0&#39;s l1: 496379
-[352]	valid_0&#39;s l1: 496358
-[353]	valid_0&#39;s l1: 496412
-[354]	valid_0&#39;s l1: 496451
-[355]	valid_0&#39;s l1: 496446
-[356]	valid_0&#39;s l1: 496475
-[357]	valid_0&#39;s l1: 496497
-[358]	valid_0&#39;s l1: 496529
-[359]	valid_0&#39;s l1: 496487
-[360]	valid_0&#39;s l1: 496432
+[2]	valid_0&#39;s l1: 1.22344e+06
+[3]	valid_0&#39;s l1: 1.08602e+06
+[4]	valid_0&#39;s l1: 971459
+[5]	valid_0&#39;s l1: 882961
+[6]	valid_0&#39;s l1: 814676
+[7]	valid_0&#39;s l1: 755485
+[8]	valid_0&#39;s l1: 708685
+[9]	valid_0&#39;s l1: 673145
+[10]	valid_0&#39;s l1: 643938
+[11]	valid_0&#39;s l1: 620240
+[12]	valid_0&#39;s l1: 601345
+[13]	valid_0&#39;s l1: 586981
+[14]	valid_0&#39;s l1: 575785
+[15]	valid_0&#39;s l1: 566614
+[16]	valid_0&#39;s l1: 558636
+[17]	valid_0&#39;s l1: 551921
+[18]	valid_0&#39;s l1: 546000
+[19]	valid_0&#39;s l1: 541341
+[20]	valid_0&#39;s l1: 538069
+[21]	valid_0&#39;s l1: 535025
+[22]	valid_0&#39;s l1: 531615
+[23]	valid_0&#39;s l1: 529365
+[24]	valid_0&#39;s l1: 526947
+[25]	valid_0&#39;s l1: 524487
+[26]	valid_0&#39;s l1: 522466
+[27]	valid_0&#39;s l1: 520211
+[28]	valid_0&#39;s l1: 518714
+[29]	valid_0&#39;s l1: 517198
+[30]	valid_0&#39;s l1: 516057
+[31]	valid_0&#39;s l1: 515095
+[32]	valid_0&#39;s l1: 513995
+[33]	valid_0&#39;s l1: 513188
+[34]	valid_0&#39;s l1: 511996
+[35]	valid_0&#39;s l1: 511135
+[36]	valid_0&#39;s l1: 510413
+[37]	valid_0&#39;s l1: 509347
+[38]	valid_0&#39;s l1: 508379
+[39]	valid_0&#39;s l1: 507568
+[40]	valid_0&#39;s l1: 506677
+[41]	valid_0&#39;s l1: 505991
+[42]	valid_0&#39;s l1: 505497
+[43]	valid_0&#39;s l1: 504646
+[44]	valid_0&#39;s l1: 504170
+[45]	valid_0&#39;s l1: 503914
+[46]	valid_0&#39;s l1: 503562
+[47]	valid_0&#39;s l1: 503284
+[48]	valid_0&#39;s l1: 502476
+[49]	valid_0&#39;s l1: 501904
+[50]	valid_0&#39;s l1: 501529
+[51]	valid_0&#39;s l1: 501176
+[52]	valid_0&#39;s l1: 500605
+[53]	valid_0&#39;s l1: 499762
+[54]	valid_0&#39;s l1: 499644
+[55]	valid_0&#39;s l1: 499272
+[56]	valid_0&#39;s l1: 498689
+[57]	valid_0&#39;s l1: 498614
+[58]	valid_0&#39;s l1: 498267
+[59]	valid_0&#39;s l1: 497849
+[60]	valid_0&#39;s l1: 497679
+[61]	valid_0&#39;s l1: 497267
+[62]	valid_0&#39;s l1: 496966
+[63]	valid_0&#39;s l1: 496641
+[64]	valid_0&#39;s l1: 496408
+[65]	valid_0&#39;s l1: 496295
+[66]	valid_0&#39;s l1: 496131
+[67]	valid_0&#39;s l1: 496078
+[68]	valid_0&#39;s l1: 496021
+[69]	valid_0&#39;s l1: 495787
+[70]	valid_0&#39;s l1: 495644
+[71]	valid_0&#39;s l1: 495391
+[72]	valid_0&#39;s l1: 495375
+[73]	valid_0&#39;s l1: 494864
+[74]	valid_0&#39;s l1: 494671
+[75]	valid_0&#39;s l1: 494446
+[76]	valid_0&#39;s l1: 493955
+[77]	valid_0&#39;s l1: 493902
+[78]	valid_0&#39;s l1: 493732
+[79]	valid_0&#39;s l1: 493204
+[80]	valid_0&#39;s l1: 493119
+[81]	valid_0&#39;s l1: 493104
+[82]	valid_0&#39;s l1: 492805
+[83]	valid_0&#39;s l1: 492541
+[84]	valid_0&#39;s l1: 492284
+[85]	valid_0&#39;s l1: 492329
+[86]	valid_0&#39;s l1: 492306
+[87]	valid_0&#39;s l1: 492065
+[88]	valid_0&#39;s l1: 491989
+[89]	valid_0&#39;s l1: 492015
+[90]	valid_0&#39;s l1: 491831
+[91]	valid_0&#39;s l1: 491734
+[92]	valid_0&#39;s l1: 491736
+[93]	valid_0&#39;s l1: 491667
+[94]	valid_0&#39;s l1: 491681
+[95]	valid_0&#39;s l1: 491529
+[96]	valid_0&#39;s l1: 491204
+[97]	valid_0&#39;s l1: 490734
+[98]	valid_0&#39;s l1: 490541
+[99]	valid_0&#39;s l1: 490297
+[100]	valid_0&#39;s l1: 490152
+[101]	valid_0&#39;s l1: 489884
+[102]	valid_0&#39;s l1: 489949
+[103]	valid_0&#39;s l1: 489780
+[104]	valid_0&#39;s l1: 489660
+[105]	valid_0&#39;s l1: 489676
+[106]	valid_0&#39;s l1: 489509
+[107]	valid_0&#39;s l1: 489249
+[108]	valid_0&#39;s l1: 489136
+[109]	valid_0&#39;s l1: 489048
+[110]	valid_0&#39;s l1: 488880
+[111]	valid_0&#39;s l1: 488831
+[112]	valid_0&#39;s l1: 488843
+[113]	valid_0&#39;s l1: 488734
+[114]	valid_0&#39;s l1: 488643
+[115]	valid_0&#39;s l1: 488622
+[116]	valid_0&#39;s l1: 488460
+[117]	valid_0&#39;s l1: 488299
+[118]	valid_0&#39;s l1: 488365
+[119]	valid_0&#39;s l1: 488263
+[120]	valid_0&#39;s l1: 488063
+[121]	valid_0&#39;s l1: 487931
+[122]	valid_0&#39;s l1: 487725
+[123]	valid_0&#39;s l1: 487706
+[124]	valid_0&#39;s l1: 487599
+[125]	valid_0&#39;s l1: 487511
+[126]	valid_0&#39;s l1: 487267
+[127]	valid_0&#39;s l1: 487098
+[128]	valid_0&#39;s l1: 487103
+[129]	valid_0&#39;s l1: 487158
+[130]	valid_0&#39;s l1: 487067
+[131]	valid_0&#39;s l1: 486970
+[132]	valid_0&#39;s l1: 487013
+[133]	valid_0&#39;s l1: 486988
+[134]	valid_0&#39;s l1: 486855
+[135]	valid_0&#39;s l1: 486826
+[136]	valid_0&#39;s l1: 486682
+[137]	valid_0&#39;s l1: 486441
+[138]	valid_0&#39;s l1: 486367
+[139]	valid_0&#39;s l1: 486312
+[140]	valid_0&#39;s l1: 486313
+[141]	valid_0&#39;s l1: 486159
+[142]	valid_0&#39;s l1: 486142
+[143]	valid_0&#39;s l1: 486098
+[144]	valid_0&#39;s l1: 486009
+[145]	valid_0&#39;s l1: 485891
+[146]	valid_0&#39;s l1: 485939
+[147]	valid_0&#39;s l1: 485841
+[148]	valid_0&#39;s l1: 485767
+[149]	valid_0&#39;s l1: 485640
+[150]	valid_0&#39;s l1: 485445
+[151]	valid_0&#39;s l1: 485334
+[152]	valid_0&#39;s l1: 485299
+[153]	valid_0&#39;s l1: 485268
+[154]	valid_0&#39;s l1: 485330
+[155]	valid_0&#39;s l1: 485300
+[156]	valid_0&#39;s l1: 485267
+[157]	valid_0&#39;s l1: 485309
+[158]	valid_0&#39;s l1: 485369
+[159]	valid_0&#39;s l1: 485255
+[160]	valid_0&#39;s l1: 485247
+[161]	valid_0&#39;s l1: 485250
+[162]	valid_0&#39;s l1: 485293
+[163]	valid_0&#39;s l1: 485191
+[164]	valid_0&#39;s l1: 485087
+[165]	valid_0&#39;s l1: 485070
+[166]	valid_0&#39;s l1: 485085
+[167]	valid_0&#39;s l1: 484918
+[168]	valid_0&#39;s l1: 484899
+[169]	valid_0&#39;s l1: 484893
+[170]	valid_0&#39;s l1: 484833
+[171]	valid_0&#39;s l1: 484770
+[172]	valid_0&#39;s l1: 484692
+[173]	valid_0&#39;s l1: 484793
+[174]	valid_0&#39;s l1: 484756
+[175]	valid_0&#39;s l1: 484649
+[176]	valid_0&#39;s l1: 484562
+[177]	valid_0&#39;s l1: 484596
+[178]	valid_0&#39;s l1: 484545
+[179]	valid_0&#39;s l1: 484566
+[180]	valid_0&#39;s l1: 484441
+[181]	valid_0&#39;s l1: 484332
+[182]	valid_0&#39;s l1: 484333
+[183]	valid_0&#39;s l1: 484270
+[184]	valid_0&#39;s l1: 484319
+[185]	valid_0&#39;s l1: 484293
+[186]	valid_0&#39;s l1: 484266
+[187]	valid_0&#39;s l1: 484240
+[188]	valid_0&#39;s l1: 484147
+[189]	valid_0&#39;s l1: 484093
+[190]	valid_0&#39;s l1: 484070
+[191]	valid_0&#39;s l1: 484183
+[192]	valid_0&#39;s l1: 484085
+[193]	valid_0&#39;s l1: 484107
+[194]	valid_0&#39;s l1: 484005
+[195]	valid_0&#39;s l1: 484094
+[196]	valid_0&#39;s l1: 484071
+[197]	valid_0&#39;s l1: 484052
+[198]	valid_0&#39;s l1: 484057
+[199]	valid_0&#39;s l1: 483982
+[200]	valid_0&#39;s l1: 483986
+[201]	valid_0&#39;s l1: 483883
+[202]	valid_0&#39;s l1: 483862
+[203]	valid_0&#39;s l1: 483840
+[204]	valid_0&#39;s l1: 483768
+[205]	valid_0&#39;s l1: 483773
+[206]	valid_0&#39;s l1: 483748
+[207]	valid_0&#39;s l1: 483698
+[208]	valid_0&#39;s l1: 483617
+[209]	valid_0&#39;s l1: 483669
+[210]	valid_0&#39;s l1: 483590
+[211]	valid_0&#39;s l1: 483515
+[212]	valid_0&#39;s l1: 483549
+[213]	valid_0&#39;s l1: 483454
+[214]	valid_0&#39;s l1: 483432
+[215]	valid_0&#39;s l1: 483460
+[216]	valid_0&#39;s l1: 483451
+[217]	valid_0&#39;s l1: 483372
+[218]	valid_0&#39;s l1: 483369
+[219]	valid_0&#39;s l1: 483280
+[220]	valid_0&#39;s l1: 483132
+[221]	valid_0&#39;s l1: 483121
+[222]	valid_0&#39;s l1: 483098
+[223]	valid_0&#39;s l1: 483084
+[224]	valid_0&#39;s l1: 483128
+[225]	valid_0&#39;s l1: 483038
+[226]	valid_0&#39;s l1: 483060
+[227]	valid_0&#39;s l1: 482974
+[228]	valid_0&#39;s l1: 482945
+[229]	valid_0&#39;s l1: 482840
+[230]	valid_0&#39;s l1: 482799
+[231]	valid_0&#39;s l1: 482819
+[232]	valid_0&#39;s l1: 482797
+[233]	valid_0&#39;s l1: 482716
+[234]	valid_0&#39;s l1: 482751
+[235]	valid_0&#39;s l1: 482731
+[236]	valid_0&#39;s l1: 482755
+[237]	valid_0&#39;s l1: 482771
+[238]	valid_0&#39;s l1: 482669
+[239]	valid_0&#39;s l1: 482675
+[240]	valid_0&#39;s l1: 482704
+[241]	valid_0&#39;s l1: 482648
+[242]	valid_0&#39;s l1: 482584
+[243]	valid_0&#39;s l1: 482643
+[244]	valid_0&#39;s l1: 482662
+[245]	valid_0&#39;s l1: 482676
+[246]	valid_0&#39;s l1: 482700
+[247]	valid_0&#39;s l1: 482702
+[248]	valid_0&#39;s l1: 482690
+[249]	valid_0&#39;s l1: 482699
+[250]	valid_0&#39;s l1: 482732
+[251]	valid_0&#39;s l1: 482656
+[252]	valid_0&#39;s l1: 482670
+[253]	valid_0&#39;s l1: 482611
+[254]	valid_0&#39;s l1: 482668
+[255]	valid_0&#39;s l1: 482615
+[256]	valid_0&#39;s l1: 482489
+[257]	valid_0&#39;s l1: 482487
+[258]	valid_0&#39;s l1: 482472
+[259]	valid_0&#39;s l1: 482516
+[260]	valid_0&#39;s l1: 482487
+[261]	valid_0&#39;s l1: 482488
+[262]	valid_0&#39;s l1: 482446
+[263]	valid_0&#39;s l1: 482468
+[264]	valid_0&#39;s l1: 482404
+[265]	valid_0&#39;s l1: 482465
+[266]	valid_0&#39;s l1: 482462
+[267]	valid_0&#39;s l1: 482379
+[268]	valid_0&#39;s l1: 482362
+[269]	valid_0&#39;s l1: 482354
+[270]	valid_0&#39;s l1: 482345
+[271]	valid_0&#39;s l1: 482247
+[272]	valid_0&#39;s l1: 482217
+[273]	valid_0&#39;s l1: 482278
+[274]	valid_0&#39;s l1: 482270
+[275]	valid_0&#39;s l1: 482164
+[276]	valid_0&#39;s l1: 482150
+[277]	valid_0&#39;s l1: 482111
+[278]	valid_0&#39;s l1: 482071
+[279]	valid_0&#39;s l1: 482097
+[280]	valid_0&#39;s l1: 482124
+[281]	valid_0&#39;s l1: 482099
+[282]	valid_0&#39;s l1: 482103
+[283]	valid_0&#39;s l1: 482201
+[284]	valid_0&#39;s l1: 482183
+[285]	valid_0&#39;s l1: 482248
+[286]	valid_0&#39;s l1: 482237
+[287]	valid_0&#39;s l1: 482193
+[288]	valid_0&#39;s l1: 482138
+[289]	valid_0&#39;s l1: 482157
+[290]	valid_0&#39;s l1: 482069
+[291]	valid_0&#39;s l1: 482044
+[292]	valid_0&#39;s l1: 482033
+[293]	valid_0&#39;s l1: 482052
+[294]	valid_0&#39;s l1: 482050
+[295]	valid_0&#39;s l1: 482048
+[296]	valid_0&#39;s l1: 482072
+[297]	valid_0&#39;s l1: 482052
+[298]	valid_0&#39;s l1: 482004
+[299]	valid_0&#39;s l1: 481928
+[300]	valid_0&#39;s l1: 481867
+[301]	valid_0&#39;s l1: 481840
+[302]	valid_0&#39;s l1: 481778
+[303]	valid_0&#39;s l1: 481794
+[304]	valid_0&#39;s l1: 481871
+[305]	valid_0&#39;s l1: 481949
+[306]	valid_0&#39;s l1: 481782
+[307]	valid_0&#39;s l1: 481760
+[308]	valid_0&#39;s l1: 481654
+[309]	valid_0&#39;s l1: 481672
+[310]	valid_0&#39;s l1: 481704
+[311]	valid_0&#39;s l1: 481655
+[312]	valid_0&#39;s l1: 481660
+[313]	valid_0&#39;s l1: 481648
+[314]	valid_0&#39;s l1: 481590
+[315]	valid_0&#39;s l1: 481628
+[316]	valid_0&#39;s l1: 481625
+[317]	valid_0&#39;s l1: 481638
+[318]	valid_0&#39;s l1: 481605
+[319]	valid_0&#39;s l1: 481605
+[320]	valid_0&#39;s l1: 481626
+[321]	valid_0&#39;s l1: 481614
+[322]	valid_0&#39;s l1: 481593
+[323]	valid_0&#39;s l1: 481616
+[324]	valid_0&#39;s l1: 481593
+[325]	valid_0&#39;s l1: 481565
+[326]	valid_0&#39;s l1: 481658
+[327]	valid_0&#39;s l1: 481604
+[328]	valid_0&#39;s l1: 481544
+[329]	valid_0&#39;s l1: 481542
+[330]	valid_0&#39;s l1: 481520
+[331]	valid_0&#39;s l1: 481528
+[332]	valid_0&#39;s l1: 481504
+[333]	valid_0&#39;s l1: 481484
+[334]	valid_0&#39;s l1: 481451
+[335]	valid_0&#39;s l1: 481373
+[336]	valid_0&#39;s l1: 481349
+[337]	valid_0&#39;s l1: 481387
+[338]	valid_0&#39;s l1: 481384
+[339]	valid_0&#39;s l1: 481366
+[340]	valid_0&#39;s l1: 481341
+[341]	valid_0&#39;s l1: 481276
+[342]	valid_0&#39;s l1: 481258
+[343]	valid_0&#39;s l1: 481266
+[344]	valid_0&#39;s l1: 481381
+[345]	valid_0&#39;s l1: 481354
+[346]	valid_0&#39;s l1: 481310
+[347]	valid_0&#39;s l1: 481310
+[348]	valid_0&#39;s l1: 481296
+[349]	valid_0&#39;s l1: 481265
+[350]	valid_0&#39;s l1: 481299
+[351]	valid_0&#39;s l1: 481307
+[352]	valid_0&#39;s l1: 481334
+[353]	valid_0&#39;s l1: 481326
+[354]	valid_0&#39;s l1: 481375
+[355]	valid_0&#39;s l1: 481391
+[356]	valid_0&#39;s l1: 481353
+[357]	valid_0&#39;s l1: 481283
+[358]	valid_0&#39;s l1: 481247
+[359]	valid_0&#39;s l1: 481245
+[360]	valid_0&#39;s l1: 481201
+[361]	valid_0&#39;s l1: 481175
+[362]	valid_0&#39;s l1: 481191
+[363]	valid_0&#39;s l1: 481157
+[364]	valid_0&#39;s l1: 481114
+[365]	valid_0&#39;s l1: 481171
+[366]	valid_0&#39;s l1: 481137
+[367]	valid_0&#39;s l1: 481040
+[368]	valid_0&#39;s l1: 481061
+[369]	valid_0&#39;s l1: 481060
+[370]	valid_0&#39;s l1: 481001
+[371]	valid_0&#39;s l1: 480999
+[372]	valid_0&#39;s l1: 480965
+[373]	valid_0&#39;s l1: 480968
+[374]	valid_0&#39;s l1: 480937
+[375]	valid_0&#39;s l1: 480917
+[376]	valid_0&#39;s l1: 480854
+[377]	valid_0&#39;s l1: 480848
+[378]	valid_0&#39;s l1: 480838
+[379]	valid_0&#39;s l1: 480785
+[380]	valid_0&#39;s l1: 480753
+[381]	valid_0&#39;s l1: 480746
+[382]	valid_0&#39;s l1: 480742
+[383]	valid_0&#39;s l1: 480797
+[384]	valid_0&#39;s l1: 480752
+[385]	valid_0&#39;s l1: 480767
+[386]	valid_0&#39;s l1: 480753
+[387]	valid_0&#39;s l1: 480765
+[388]	valid_0&#39;s l1: 480718
+[389]	valid_0&#39;s l1: 480614
+[390]	valid_0&#39;s l1: 480560
+[391]	valid_0&#39;s l1: 480546
+[392]	valid_0&#39;s l1: 480546
+[393]	valid_0&#39;s l1: 480471
+[394]	valid_0&#39;s l1: 480386
+[395]	valid_0&#39;s l1: 480304
+[396]	valid_0&#39;s l1: 480266
+[397]	valid_0&#39;s l1: 480294
+[398]	valid_0&#39;s l1: 480292
+[399]	valid_0&#39;s l1: 480299
+[400]	valid_0&#39;s l1: 480319
+[401]	valid_0&#39;s l1: 480280
+[402]	valid_0&#39;s l1: 480270
+[403]	valid_0&#39;s l1: 480232
+[404]	valid_0&#39;s l1: 480233
+[405]	valid_0&#39;s l1: 480267
+[406]	valid_0&#39;s l1: 480235
+[407]	valid_0&#39;s l1: 480217
+[408]	valid_0&#39;s l1: 480199
+[409]	valid_0&#39;s l1: 480203
+[410]	valid_0&#39;s l1: 480096
+[411]	valid_0&#39;s l1: 480093
+[412]	valid_0&#39;s l1: 480064
+[413]	valid_0&#39;s l1: 480061
+[414]	valid_0&#39;s l1: 480014
+[415]	valid_0&#39;s l1: 480033
+[416]	valid_0&#39;s l1: 480011
+[417]	valid_0&#39;s l1: 479958
+[418]	valid_0&#39;s l1: 479948
+[419]	valid_0&#39;s l1: 479957
+[420]	valid_0&#39;s l1: 479993
+[421]	valid_0&#39;s l1: 479958
+[422]	valid_0&#39;s l1: 479979
+[423]	valid_0&#39;s l1: 480041
+[424]	valid_0&#39;s l1: 479965
+[425]	valid_0&#39;s l1: 479984
+[426]	valid_0&#39;s l1: 479940
+[427]	valid_0&#39;s l1: 479966
+[428]	valid_0&#39;s l1: 479971
+[429]	valid_0&#39;s l1: 479908
+[430]	valid_0&#39;s l1: 479908
+[431]	valid_0&#39;s l1: 479892
+[432]	valid_0&#39;s l1: 479893
+[433]	valid_0&#39;s l1: 479859
+[434]	valid_0&#39;s l1: 479797
+[435]	valid_0&#39;s l1: 479835
+[436]	valid_0&#39;s l1: 479796
+[437]	valid_0&#39;s l1: 479751
+[438]	valid_0&#39;s l1: 479733
+[439]	valid_0&#39;s l1: 479673
+[440]	valid_0&#39;s l1: 479706
+[441]	valid_0&#39;s l1: 479758
+[442]	valid_0&#39;s l1: 479813
+[443]	valid_0&#39;s l1: 479798
+[444]	valid_0&#39;s l1: 479765
+[445]	valid_0&#39;s l1: 479777
+[446]	valid_0&#39;s l1: 479819
+[447]	valid_0&#39;s l1: 479821
+[448]	valid_0&#39;s l1: 479817
+[449]	valid_0&#39;s l1: 479869
+[450]	valid_0&#39;s l1: 479843
+[451]	valid_0&#39;s l1: 479849
+[452]	valid_0&#39;s l1: 479846
+[453]	valid_0&#39;s l1: 479781
+[454]	valid_0&#39;s l1: 479708
+[455]	valid_0&#39;s l1: 479676
+[456]	valid_0&#39;s l1: 479700
+[457]	valid_0&#39;s l1: 479677
+[458]	valid_0&#39;s l1: 479678
+[459]	valid_0&#39;s l1: 479635
+[460]	valid_0&#39;s l1: 479602
+[461]	valid_0&#39;s l1: 479637
+[462]	valid_0&#39;s l1: 479524
+[463]	valid_0&#39;s l1: 479512
+[464]	valid_0&#39;s l1: 479501
+[465]	valid_0&#39;s l1: 479524
+[466]	valid_0&#39;s l1: 479522
+[467]	valid_0&#39;s l1: 479571
+[468]	valid_0&#39;s l1: 479607
+[469]	valid_0&#39;s l1: 479583
+[470]	valid_0&#39;s l1: 479639
+[471]	valid_0&#39;s l1: 479650
+[472]	valid_0&#39;s l1: 479670
+[473]	valid_0&#39;s l1: 479692
+[474]	valid_0&#39;s l1: 479706
+[475]	valid_0&#39;s l1: 479668
+[476]	valid_0&#39;s l1: 479654
+[477]	valid_0&#39;s l1: 479629
+[478]	valid_0&#39;s l1: 479662
+[479]	valid_0&#39;s l1: 479711
+[480]	valid_0&#39;s l1: 479739
+[481]	valid_0&#39;s l1: 479704
+[482]	valid_0&#39;s l1: 479657
+[483]	valid_0&#39;s l1: 479705
+[484]	valid_0&#39;s l1: 479700
+[485]	valid_0&#39;s l1: 479727
+[486]	valid_0&#39;s l1: 479712
+[487]	valid_0&#39;s l1: 479748
+[488]	valid_0&#39;s l1: 479740
+[489]	valid_0&#39;s l1: 479738
 Early stopping, best iteration is:
-[335]	valid_0&#39;s l1: 496358
-MAE LightGBM (train): 309799.96552
-MAE LightGBM (test): 496358.24009
-MAE LightGBM (eval): 545529.57305
+[464]	valid_0&#39;s l1: 479501
+MAE LightGBM (train): 251663.28807
+MAE LightGBM (test): 479500.86277
+MAE LightGBM (eval): 536163.75109
 </pre>
 </div>
 </div>
@@ -14724,25 +15003,30 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_stack_01.csv&#39;</span><span class="p">,)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">,)</span>
 
 <span class="c1"># Para usarse con el submit a Kaggle</span>
-<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_stack_01.csv&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
 
-<span class="c1"># df_train, df_test = features_de_csvs(df_train, df_test)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># df_test_f = features_independientes_precio(df_test)</span>
-<span class="c1"># df_test_f = features_dependientes_precio(df_test_f, df_train)</span>
-<span class="c1"># df_test_f, cols_tipodepropiedad_ohe = columna_a_ohe(df_test_f, &#39;tipodepropiedad&#39;, N=250, df_aux=df_train, devolver_cols=True)</span>
-<span class="c1"># df_test_f, cols_provincia_ohe = columna_a_ohe(df_test_f, &#39;provincia&#39;, N=250, df_aux=df_train, devolver_cols=True)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
 
-<span class="c1"># df_train_f = features_independientes_precio(df_train)</span>
-<span class="c1"># df_train_f = features_dependientes_precio(df_train_f, df_train)</span>
-<span class="c1"># df_train_f = columna_a_ohe(df_train_f, &#39;tipodepropiedad&#39;, N=250, df_aux=df_test)</span>
-<span class="c1"># df_train_f = columna_a_ohe(df_train_f, &#39;provincia&#39;, N=250, df_aux=df_test)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_zona_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_f</span><span class="p">)</span>
 
 
 <span class="c1"># df_train_f[&#39;fecha&#39;] = pd.to_datetime(df_train_f[&#39;fecha&#39;]).astype(int)</span>
@@ -14751,78 +15035,20 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
 
 <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
        <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
-<span class="c1">#             &#39;lat&#39;, &#39;lng&#39;,</span>
+            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
        <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
 <span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">]</span>
 
 <span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">]</span>
-
-<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
-
-<span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span>
- <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">]</span>
-
-<span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Edo. de Mxico&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Michoacn&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Nuevo Len&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Quertaro&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_San luis Potos&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Yucatn&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_Zacatecas&#39;</span><span class="p">,</span>
- <span class="s1">&#39;provincia_otro&#39;</span><span class="p">]</span>
-
-<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span>
-
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
 
 <span class="c1"># hps = {&#39;bagging_fraction&#39;: 0.806451877022587,</span>
 <span class="c1">#  &#39;bagging_freq&#39;: 62.0,</span>
@@ -14832,13 +15058,14 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
 <span class="c1">#  &#39;num_leaves&#39;: 113.0,</span>
 <span class="c1">#  &#39;test_size&#39;: 0.09575190901892519}</span>
 
-<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.7740520226030885</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">7.0</span><span class="p">,</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8422472893793045</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.1508386725397851</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">12.0</span><span class="p">,</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">110.0</span><span class="p">,</span>
- <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.091125830817493979</span><span class="p">}</span>
+
+<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8988911725316586</span><span class="p">,</span>
+ <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.6622442122619671</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.16422725363286422</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">180.0</span><span class="p">,</span>
+ <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.20892455926004772</span><span class="p">}</span>
 
 
 <span class="n">bagging_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">]</span>
@@ -14863,8 +15090,6 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
 <span class="p">}</span>
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">)</span>
-
-<span class="n">display</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 
 <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">lgb_eval</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">lgb_train</span><span class="p">)</span>
@@ -14901,31 +15126,9 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
     <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea ">
-<pre>[&#39;stack01&#39;, &#39;stack02&#39;, &#39;stack03&#39;]</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1]	valid_0&#39;s l1: 1.3551e+06
-[2]	valid_0&#39;s l1: 1.16589e+06
-[3]	valid_0&#39;s l1: 1.00739e+06
-[4]	valid_0&#39;s l1: 875172
-[5]	valid_0&#39;s l1: 764817
-[6]	valid_0&#39;s l1: 673555
-[7]	valid_0&#39;s l1: 597997
-[8]	valid_0&#39;s l1: 649709
-[9]	valid_0&#39;s l1: 578324
-[10]	valid_0&#39;s l1: 519846
-[11]	valid_0&#39;s l1: 472191
+<pre>[1]	valid_0&#39;s l1: 1.3864e+06
+[2]	valid_0&#39;s l1: 1.21777e+06
 </pre>
 </div>
 </div>
@@ -14948,997 +15151,1006 @@ function r(t,e){if(!o.canUseDOM||e&&!("addEventListener"in document))return!1;va
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[12]	valid_0&#39;s l1: 499033
-[13]	valid_0&#39;s l1: 455390
-[14]	valid_0&#39;s l1: 420271
-[15]	valid_0&#39;s l1: 391922
-[16]	valid_0&#39;s l1: 369383
-[17]	valid_0&#39;s l1: 351368
-[18]	valid_0&#39;s l1: 337225
-[19]	valid_0&#39;s l1: 326262
-[20]	valid_0&#39;s l1: 317905
-[21]	valid_0&#39;s l1: 328724
-[22]	valid_0&#39;s l1: 319730
-[23]	valid_0&#39;s l1: 312794
-[24]	valid_0&#39;s l1: 307473
-[25]	valid_0&#39;s l1: 303347
-[26]	valid_0&#39;s l1: 300210
-[27]	valid_0&#39;s l1: 297858
-[28]	valid_0&#39;s l1: 301083
-[29]	valid_0&#39;s l1: 298631
-[30]	valid_0&#39;s l1: 296716
-[31]	valid_0&#39;s l1: 299696
-[32]	valid_0&#39;s l1: 297592
-[33]	valid_0&#39;s l1: 295961
-[34]	valid_0&#39;s l1: 294681
-[35]	valid_0&#39;s l1: 296828
-[36]	valid_0&#39;s l1: 306688
-[37]	valid_0&#39;s l1: 302690
-[38]	valid_0&#39;s l1: 299730
-[39]	valid_0&#39;s l1: 297543
-[40]	valid_0&#39;s l1: 301357
-[41]	valid_0&#39;s l1: 307072
-[42]	valid_0&#39;s l1: 303172
-[43]	valid_0&#39;s l1: 306237
-[44]	valid_0&#39;s l1: 302564
-[45]	valid_0&#39;s l1: 299741
-[46]	valid_0&#39;s l1: 383286
-[47]	valid_0&#39;s l1: 359720
-[48]	valid_0&#39;s l1: 349381
-[49]	valid_0&#39;s l1: 345258
-[50]	valid_0&#39;s l1: 345599
-[51]	valid_0&#39;s l1: 331001
-[52]	valid_0&#39;s l1: 320194
-[53]	valid_0&#39;s l1: 323302
-[54]	valid_0&#39;s l1: 314477
-[55]	valid_0&#39;s l1: 308123
-[56]	valid_0&#39;s l1: 311436
-[57]	valid_0&#39;s l1: 305870
-[58]	valid_0&#39;s l1: 446948
-[59]	valid_0&#39;s l1: 440752
-[60]	valid_0&#39;s l1: 404082
-[61]	valid_0&#39;s l1: 579600
-[62]	valid_0&#39;s l1: 515089
-[63]	valid_0&#39;s l1: 463447
-[64]	valid_0&#39;s l1: 451941
-[65]	valid_0&#39;s l1: 453389
-[66]	valid_0&#39;s l1: 414128
-[67]	valid_0&#39;s l1: 383569
-[68]	valid_0&#39;s l1: 359966
-[69]	valid_0&#39;s l1: 358958
-[70]	valid_0&#39;s l1: 356720
-[71]	valid_0&#39;s l1: 351371
-[72]	valid_0&#39;s l1: 335345
-[73]	valid_0&#39;s l1: 323418
-[74]	valid_0&#39;s l1: 324858
-[75]	valid_0&#39;s l1: 315730
-[76]	valid_0&#39;s l1: 316602
-[77]	valid_0&#39;s l1: 318208
-[78]	valid_0&#39;s l1: 322874
-[79]	valid_0&#39;s l1: 314110
-[80]	valid_0&#39;s l1: 307721
-[81]	valid_0&#39;s l1: 311808
-[82]	valid_0&#39;s l1: 306097
-[83]	valid_0&#39;s l1: 309407
-[84]	valid_0&#39;s l1: 310750
-[85]	valid_0&#39;s l1: 315492
-[86]	valid_0&#39;s l1: 308661
-[87]	valid_0&#39;s l1: 303712
-[88]	valid_0&#39;s l1: 307286
-[89]	valid_0&#39;s l1: 311253
-[90]	valid_0&#39;s l1: 314010
-[91]	valid_0&#39;s l1: 400042
-[92]	valid_0&#39;s l1: 372446
-[93]	valid_0&#39;s l1: 351216
-[94]	valid_0&#39;s l1: 359123
-[95]	valid_0&#39;s l1: 359658
-[96]	valid_0&#39;s l1: 363297
-[97]	valid_0&#39;s l1: 344254
-[98]	valid_0&#39;s l1: 346565
-[99]	valid_0&#39;s l1: 331654
-[100]	valid_0&#39;s l1: 320642
-[101]	valid_0&#39;s l1: 365649
-[102]	valid_0&#39;s l1: 370995
-[103]	valid_0&#39;s l1: 376780
-[104]	valid_0&#39;s l1: 354629
-[105]	valid_0&#39;s l1: 404721
-[106]	valid_0&#39;s l1: 405780
-[107]	valid_0&#39;s l1: 412307
-[108]	valid_0&#39;s l1: 381835
-[109]	valid_0&#39;s l1: 385948
-[110]	valid_0&#39;s l1: 389660
-[111]	valid_0&#39;s l1: 364414
-[112]	valid_0&#39;s l1: 345100
-[113]	valid_0&#39;s l1: 330539
-[114]	valid_0&#39;s l1: 319787
-[115]	valid_0&#39;s l1: 311719
-[116]	valid_0&#39;s l1: 305877
-[117]	valid_0&#39;s l1: 308266
-[118]	valid_0&#39;s l1: 303418
-[119]	valid_0&#39;s l1: 305573
-[120]	valid_0&#39;s l1: 308515
-[121]	valid_0&#39;s l1: 311356
-[122]	valid_0&#39;s l1: 315915
-[123]	valid_0&#39;s l1: 308916
-[124]	valid_0&#39;s l1: 303897
-[125]	valid_0&#39;s l1: 307437
-[126]	valid_0&#39;s l1: 309818
-[127]	valid_0&#39;s l1: 304630
-[128]	valid_0&#39;s l1: 308528
-[129]	valid_0&#39;s l1: 303605
-[130]	valid_0&#39;s l1: 300176
-[131]	valid_0&#39;s l1: 302812
-[132]	valid_0&#39;s l1: 299528
-[133]	valid_0&#39;s l1: 297187
-[134]	valid_0&#39;s l1: 317107
-[135]	valid_0&#39;s l1: 309884
-[136]	valid_0&#39;s l1: 352223
-[137]	valid_0&#39;s l1: 356053
-[138]	valid_0&#39;s l1: 338972
-[139]	valid_0&#39;s l1: 326221
-[140]	valid_0&#39;s l1: 329952
-[141]	valid_0&#39;s l1: 333420
-[142]	valid_0&#39;s l1: 336979
-[143]	valid_0&#39;s l1: 324674
-[144]	valid_0&#39;s l1: 327328
-[145]	valid_0&#39;s l1: 317573
-[146]	valid_0&#39;s l1: 322110
-[147]	valid_0&#39;s l1: 326961
-[148]	valid_0&#39;s l1: 331171
-[149]	valid_0&#39;s l1: 320324
-[150]	valid_0&#39;s l1: 312360
-[151]	valid_0&#39;s l1: 332240
-[152]	valid_0&#39;s l1: 359627
-[153]	valid_0&#39;s l1: 341680
-[154]	valid_0&#39;s l1: 344995
-[155]	valid_0&#39;s l1: 330766
-[156]	valid_0&#39;s l1: 335816
-[157]	valid_0&#39;s l1: 338744
-[158]	valid_0&#39;s l1: 343903
-[159]	valid_0&#39;s l1: 348697
-[160]	valid_0&#39;s l1: 352924
-[161]	valid_0&#39;s l1: 336640
-[162]	valid_0&#39;s l1: 339556
-[163]	valid_0&#39;s l1: 326555
-[164]	valid_0&#39;s l1: 316937
-[165]	valid_0&#39;s l1: 309861
-[166]	valid_0&#39;s l1: 304694
-[167]	valid_0&#39;s l1: 300952
-[168]	valid_0&#39;s l1: 298220
-[169]	valid_0&#39;s l1: 296332
-[170]	valid_0&#39;s l1: 307195
-[171]	valid_0&#39;s l1: 302789
-[172]	valid_0&#39;s l1: 317568
-[173]	valid_0&#39;s l1: 310396
-[174]	valid_0&#39;s l1: 305126
-[175]	valid_0&#39;s l1: 301277
-[176]	valid_0&#39;s l1: 303830
-[177]	valid_0&#39;s l1: 306259
-[178]	valid_0&#39;s l1: 308313
-[179]	valid_0&#39;s l1: 303620
-[180]	valid_0&#39;s l1: 306164
-[181]	valid_0&#39;s l1: 302045
-[182]	valid_0&#39;s l1: 299093
-[183]	valid_0&#39;s l1: 296927
-[184]	valid_0&#39;s l1: 295398
-[185]	valid_0&#39;s l1: 297277
-[186]	valid_0&#39;s l1: 295576
-[187]	valid_0&#39;s l1: 294417
-[188]	valid_0&#39;s l1: 293543
-[189]	valid_0&#39;s l1: 294516
-[190]	valid_0&#39;s l1: 295878
-[191]	valid_0&#39;s l1: 294543
-[192]	valid_0&#39;s l1: 293637
-[193]	valid_0&#39;s l1: 293003
-[194]	valid_0&#39;s l1: 293863
-[195]	valid_0&#39;s l1: 294905
-[196]	valid_0&#39;s l1: 293885
-[197]	valid_0&#39;s l1: 294690
-[198]	valid_0&#39;s l1: 295907
-[199]	valid_0&#39;s l1: 294633
-[200]	valid_0&#39;s l1: 296397
-[201]	valid_0&#39;s l1: 298271
-[202]	valid_0&#39;s l1: 300316
-[203]	valid_0&#39;s l1: 297881
-[204]	valid_0&#39;s l1: 299328
-[205]	valid_0&#39;s l1: 310646
-[206]	valid_0&#39;s l1: 305329
-[207]	valid_0&#39;s l1: 307241
-[208]	valid_0&#39;s l1: 302795
-[209]	valid_0&#39;s l1: 304667
-[210]	valid_0&#39;s l1: 306502
-[211]	valid_0&#39;s l1: 309055
-[212]	valid_0&#39;s l1: 304205
-[213]	valid_0&#39;s l1: 300634
-[214]	valid_0&#39;s l1: 298025
-[215]	valid_0&#39;s l1: 296173
-[216]	valid_0&#39;s l1: 297425
-[217]	valid_0&#39;s l1: 295780
-[218]	valid_0&#39;s l1: 294760
-[219]	valid_0&#39;s l1: 301143
-[220]	valid_0&#39;s l1: 298526
-[221]	valid_0&#39;s l1: 300412
-[222]	valid_0&#39;s l1: 297986
-[223]	valid_0&#39;s l1: 296321
-[224]	valid_0&#39;s l1: 297552
-[225]	valid_0&#39;s l1: 299302
-[226]	valid_0&#39;s l1: 300824
-[227]	valid_0&#39;s l1: 302103
-[228]	valid_0&#39;s l1: 299130
-[229]	valid_0&#39;s l1: 300689
-[230]	valid_0&#39;s l1: 298108
-[231]	valid_0&#39;s l1: 296319
-[232]	valid_0&#39;s l1: 295090
-[233]	valid_0&#39;s l1: 296295
-[234]	valid_0&#39;s l1: 295016
-[235]	valid_0&#39;s l1: 296318
-[236]	valid_0&#39;s l1: 295089
-[237]	valid_0&#39;s l1: 294208
-[238]	valid_0&#39;s l1: 293557
-[239]	valid_0&#39;s l1: 293159
-[240]	valid_0&#39;s l1: 292901
-[241]	valid_0&#39;s l1: 293563
-[242]	valid_0&#39;s l1: 293110
-[243]	valid_0&#39;s l1: 293746
-[244]	valid_0&#39;s l1: 298032
-[245]	valid_0&#39;s l1: 296307
-[246]	valid_0&#39;s l1: 295085
-[247]	valid_0&#39;s l1: 294206
-[248]	valid_0&#39;s l1: 295166
-[249]	valid_0&#39;s l1: 295993
-[250]	valid_0&#39;s l1: 294897
-[251]	valid_0&#39;s l1: 296180
-[252]	valid_0&#39;s l1: 297262
-[253]	valid_0&#39;s l1: 295773
-[254]	valid_0&#39;s l1: 294713
-[255]	valid_0&#39;s l1: 293920
-[256]	valid_0&#39;s l1: 293430
-[257]	valid_0&#39;s l1: 293092
-[258]	valid_0&#39;s l1: 292860
-[259]	valid_0&#39;s l1: 293378
-[260]	valid_0&#39;s l1: 294097
-[261]	valid_0&#39;s l1: 294846
-[262]	valid_0&#39;s l1: 294163
-[263]	valid_0&#39;s l1: 293664
-[264]	valid_0&#39;s l1: 293315
-[265]	valid_0&#39;s l1: 293066
-[266]	valid_0&#39;s l1: 292912
-[267]	valid_0&#39;s l1: 293290
-[268]	valid_0&#39;s l1: 293037
-[269]	valid_0&#39;s l1: 293624
-[270]	valid_0&#39;s l1: 293374
-[271]	valid_0&#39;s l1: 293903
-[272]	valid_0&#39;s l1: 293522
-[273]	valid_0&#39;s l1: 293271
-[274]	valid_0&#39;s l1: 293680
-[275]	valid_0&#39;s l1: 293393
-[276]	valid_0&#39;s l1: 293886
-[277]	valid_0&#39;s l1: 293480
-[278]	valid_0&#39;s l1: 293934
-[279]	valid_0&#39;s l1: 293539
-[280]	valid_0&#39;s l1: 294135
-[281]	valid_0&#39;s l1: 297528
-[282]	valid_0&#39;s l1: 296150
-[283]	valid_0&#39;s l1: 296960
-[284]	valid_0&#39;s l1: 295732
-[285]	valid_0&#39;s l1: 294831
-[286]	valid_0&#39;s l1: 294175
-[287]	valid_0&#39;s l1: 293751
-[288]	valid_0&#39;s l1: 294409
-[289]	valid_0&#39;s l1: 293956
-[290]	valid_0&#39;s l1: 293590
-[291]	valid_0&#39;s l1: 293361
-[292]	valid_0&#39;s l1: 293822
-[293]	valid_0&#39;s l1: 294253
-[294]	valid_0&#39;s l1: 293895
-[295]	valid_0&#39;s l1: 294319
-[296]	valid_0&#39;s l1: 294874
-[297]	valid_0&#39;s l1: 294313
-[298]	valid_0&#39;s l1: 294900
-[299]	valid_0&#39;s l1: 294334
-[300]	valid_0&#39;s l1: 294879
-[301]	valid_0&#39;s l1: 297360
-[302]	valid_0&#39;s l1: 296027
-[303]	valid_0&#39;s l1: 297052
-[304]	valid_0&#39;s l1: 298119
-[305]	valid_0&#39;s l1: 299173
-[306]	valid_0&#39;s l1: 300258
-[307]	valid_0&#39;s l1: 301391
-[308]	valid_0&#39;s l1: 298961
-[309]	valid_0&#39;s l1: 300053
-[310]	valid_0&#39;s l1: 297970
-[311]	valid_0&#39;s l1: 296496
-[312]	valid_0&#39;s l1: 295418
-[313]	valid_0&#39;s l1: 294723
-[314]	valid_0&#39;s l1: 297566
-[315]	valid_0&#39;s l1: 298584
-[316]	valid_0&#39;s l1: 296952
-[317]	valid_0&#39;s l1: 295759
-[318]	valid_0&#39;s l1: 294963
-[319]	valid_0&#39;s l1: 295746
-[320]	valid_0&#39;s l1: 294851
-[321]	valid_0&#39;s l1: 295313
-[322]	valid_0&#39;s l1: 294604
-[323]	valid_0&#39;s l1: 294105
-[324]	valid_0&#39;s l1: 294585
-[325]	valid_0&#39;s l1: 294078
-[326]	valid_0&#39;s l1: 294581
-[327]	valid_0&#39;s l1: 294061
-[328]	valid_0&#39;s l1: 294598
-[329]	valid_0&#39;s l1: 294079
-[330]	valid_0&#39;s l1: 294608
-[331]	valid_0&#39;s l1: 295218
-[332]	valid_0&#39;s l1: 298279
-[333]	valid_0&#39;s l1: 299266
-[334]	valid_0&#39;s l1: 300296
-[335]	valid_0&#39;s l1: 298068
-[336]	valid_0&#39;s l1: 298879
-[337]	valid_0&#39;s l1: 297145
-[338]	valid_0&#39;s l1: 295892
-[339]	valid_0&#39;s l1: 296804
-[340]	valid_0&#39;s l1: 297601
-[341]	valid_0&#39;s l1: 296170
-[342]	valid_0&#39;s l1: 295235
-[343]	valid_0&#39;s l1: 294539
-[344]	valid_0&#39;s l1: 295070
-[345]	valid_0&#39;s l1: 294397
-[346]	valid_0&#39;s l1: 293948
-[347]	valid_0&#39;s l1: 294431
-[348]	valid_0&#39;s l1: 293994
-[349]	valid_0&#39;s l1: 293603
-[350]	valid_0&#39;s l1: 293950
-[351]	valid_0&#39;s l1: 293601
-[352]	valid_0&#39;s l1: 293349
-[353]	valid_0&#39;s l1: 293217
-[354]	valid_0&#39;s l1: 293487
-[355]	valid_0&#39;s l1: 293828
-[356]	valid_0&#39;s l1: 293549
-[357]	valid_0&#39;s l1: 293838
-[358]	valid_0&#39;s l1: 293587
-[359]	valid_0&#39;s l1: 295334
-[360]	valid_0&#39;s l1: 294622
-[361]	valid_0&#39;s l1: 294137
-[362]	valid_0&#39;s l1: 293873
-[363]	valid_0&#39;s l1: 294216
-[364]	valid_0&#39;s l1: 294575
-[365]	valid_0&#39;s l1: 294065
-[366]	valid_0&#39;s l1: 294502
-[367]	valid_0&#39;s l1: 294946
-[368]	valid_0&#39;s l1: 294316
-[369]	valid_0&#39;s l1: 294751
-[370]	valid_0&#39;s l1: 294210
-[371]	valid_0&#39;s l1: 294685
-[372]	valid_0&#39;s l1: 294142
-[373]	valid_0&#39;s l1: 293771
-[374]	valid_0&#39;s l1: 293521
-[375]	valid_0&#39;s l1: 293309
-[376]	valid_0&#39;s l1: 293586
-[377]	valid_0&#39;s l1: 293354
-[378]	valid_0&#39;s l1: 293670
-[379]	valid_0&#39;s l1: 294005
-[380]	valid_0&#39;s l1: 293669
-[381]	valid_0&#39;s l1: 294001
-[382]	valid_0&#39;s l1: 294358
-[383]	valid_0&#39;s l1: 293938
-[384]	valid_0&#39;s l1: 293630
-[385]	valid_0&#39;s l1: 294000
-[386]	valid_0&#39;s l1: 293647
-[387]	valid_0&#39;s l1: 293419
-[388]	valid_0&#39;s l1: 293349
-[389]	valid_0&#39;s l1: 293209
-[390]	valid_0&#39;s l1: 293105
-[391]	valid_0&#39;s l1: 293226
-[392]	valid_0&#39;s l1: 293178
-[393]	valid_0&#39;s l1: 293197
-[394]	valid_0&#39;s l1: 293107
-[395]	valid_0&#39;s l1: 293093
-[396]	valid_0&#39;s l1: 293174
-[397]	valid_0&#39;s l1: 293171
-[398]	valid_0&#39;s l1: 293198
-[399]	valid_0&#39;s l1: 293186
-[400]	valid_0&#39;s l1: 293190
-[401]	valid_0&#39;s l1: 293260
-[402]	valid_0&#39;s l1: 293251
-[403]	valid_0&#39;s l1: 293348
-[404]	valid_0&#39;s l1: 293282
-[405]	valid_0&#39;s l1: 293271
-[406]	valid_0&#39;s l1: 294043
-[407]	valid_0&#39;s l1: 293838
-[408]	valid_0&#39;s l1: 294060
-[409]	valid_0&#39;s l1: 293817
-[410]	valid_0&#39;s l1: 293661
-[411]	valid_0&#39;s l1: 293552
-[412]	valid_0&#39;s l1: 293694
-[413]	valid_0&#39;s l1: 293924
-[414]	valid_0&#39;s l1: 293818
-[415]	valid_0&#39;s l1: 293732
-[416]	valid_0&#39;s l1: 293679
-[417]	valid_0&#39;s l1: 293796
-[418]	valid_0&#39;s l1: 294013
-[419]	valid_0&#39;s l1: 293870
-[420]	valid_0&#39;s l1: 294082
-[421]	valid_0&#39;s l1: 293855
-[422]	valid_0&#39;s l1: 293721
-[423]	valid_0&#39;s l1: 293696
-[424]	valid_0&#39;s l1: 293682
-[425]	valid_0&#39;s l1: 293788
-[426]	valid_0&#39;s l1: 293708
-[427]	valid_0&#39;s l1: 293686
-[428]	valid_0&#39;s l1: 293786
-[429]	valid_0&#39;s l1: 293701
-[430]	valid_0&#39;s l1: 294409
-[431]	valid_0&#39;s l1: 294190
-[432]	valid_0&#39;s l1: 294018
-[433]	valid_0&#39;s l1: 293935
-[434]	valid_0&#39;s l1: 294077
-[435]	valid_0&#39;s l1: 294300
-[436]	valid_0&#39;s l1: 294135
-[437]	valid_0&#39;s l1: 294004
-[438]	valid_0&#39;s l1: 294161
-[439]	valid_0&#39;s l1: 295225
-[440]	valid_0&#39;s l1: 294791
-[441]	valid_0&#39;s l1: 294448
-[442]	valid_0&#39;s l1: 294230
-[443]	valid_0&#39;s l1: 294382
-[444]	valid_0&#39;s l1: 294185
-[445]	valid_0&#39;s l1: 294067
-[446]	valid_0&#39;s l1: 294241
-[447]	valid_0&#39;s l1: 294066
-[448]	valid_0&#39;s l1: 294013
-[449]	valid_0&#39;s l1: 293891
-[450]	valid_0&#39;s l1: 293884
-[451]	valid_0&#39;s l1: 293851
-[452]	valid_0&#39;s l1: 293923
-[453]	valid_0&#39;s l1: 294015
-[454]	valid_0&#39;s l1: 294823
-[455]	valid_0&#39;s l1: 294442
-[456]	valid_0&#39;s l1: 294722
-[457]	valid_0&#39;s l1: 294950
-[458]	valid_0&#39;s l1: 294612
-[459]	valid_0&#39;s l1: 294384
-[460]	valid_0&#39;s l1: 294646
-[461]	valid_0&#39;s l1: 294411
-[462]	valid_0&#39;s l1: 294610
-[463]	valid_0&#39;s l1: 294863
-[464]	valid_0&#39;s l1: 294500
-[465]	valid_0&#39;s l1: 294278
-[466]	valid_0&#39;s l1: 294482
-[467]	valid_0&#39;s l1: 294255
-[468]	valid_0&#39;s l1: 294523
-[469]	valid_0&#39;s l1: 294242
-[470]	valid_0&#39;s l1: 295351
-[471]	valid_0&#39;s l1: 294839
-[472]	valid_0&#39;s l1: 295207
-[473]	valid_0&#39;s l1: 294781
-[474]	valid_0&#39;s l1: 294493
-[475]	valid_0&#39;s l1: 294278
-[476]	valid_0&#39;s l1: 294512
-[477]	valid_0&#39;s l1: 294280
-[478]	valid_0&#39;s l1: 294458
-[479]	valid_0&#39;s l1: 294717
-[480]	valid_0&#39;s l1: 294424
-[481]	valid_0&#39;s l1: 294290
-[482]	valid_0&#39;s l1: 294106
-[483]	valid_0&#39;s l1: 294046
-[484]	valid_0&#39;s l1: 293993
-[485]	valid_0&#39;s l1: 294123
-[486]	valid_0&#39;s l1: 294096
-[487]	valid_0&#39;s l1: 294047
-[488]	valid_0&#39;s l1: 293997
-[489]	valid_0&#39;s l1: 294008
-[490]	valid_0&#39;s l1: 294055
-[491]	valid_0&#39;s l1: 294160
-[492]	valid_0&#39;s l1: 294287
-[493]	valid_0&#39;s l1: 294465
-[494]	valid_0&#39;s l1: 294272
-[495]	valid_0&#39;s l1: 294180
-[496]	valid_0&#39;s l1: 294098
-[497]	valid_0&#39;s l1: 294083
-[498]	valid_0&#39;s l1: 294086
-[499]	valid_0&#39;s l1: 294141
-[500]	valid_0&#39;s l1: 294086
-[501]	valid_0&#39;s l1: 294146
-[502]	valid_0&#39;s l1: 294136
-[503]	valid_0&#39;s l1: 294129
-[504]	valid_0&#39;s l1: 294201
-[505]	valid_0&#39;s l1: 294315
-[506]	valid_0&#39;s l1: 294210
-[507]	valid_0&#39;s l1: 294236
-[508]	valid_0&#39;s l1: 294187
-[509]	valid_0&#39;s l1: 294194
-[510]	valid_0&#39;s l1: 294217
-[511]	valid_0&#39;s l1: 294251
-[512]	valid_0&#39;s l1: 294250
-[513]	valid_0&#39;s l1: 294241
-[514]	valid_0&#39;s l1: 294277
-[515]	valid_0&#39;s l1: 294296
-[516]	valid_0&#39;s l1: 294324
-[517]	valid_0&#39;s l1: 294402
-[518]	valid_0&#39;s l1: 294523
-[519]	valid_0&#39;s l1: 294656
-[520]	valid_0&#39;s l1: 294524
-[521]	valid_0&#39;s l1: 294416
-[522]	valid_0&#39;s l1: 294482
-[523]	valid_0&#39;s l1: 294598
-[524]	valid_0&#39;s l1: 294759
-[525]	valid_0&#39;s l1: 294966
-[526]	valid_0&#39;s l1: 294681
-[527]	valid_0&#39;s l1: 295588
-[528]	valid_0&#39;s l1: 295108
-[529]	valid_0&#39;s l1: 294790
-[530]	valid_0&#39;s l1: 294617
-[531]	valid_0&#39;s l1: 294785
-[532]	valid_0&#39;s l1: 294591
-[533]	valid_0&#39;s l1: 294755
-[534]	valid_0&#39;s l1: 294577
-[535]	valid_0&#39;s l1: 294445
-[536]	valid_0&#39;s l1: 294553
-[537]	valid_0&#39;s l1: 294499
-[538]	valid_0&#39;s l1: 294446
-[539]	valid_0&#39;s l1: 294532
-[540]	valid_0&#39;s l1: 294653
-[541]	valid_0&#39;s l1: 294827
-[542]	valid_0&#39;s l1: 294646
-[543]	valid_0&#39;s l1: 294765
-[544]	valid_0&#39;s l1: 294944
-[545]	valid_0&#39;s l1: 294752
-[546]	valid_0&#39;s l1: 294620
-[547]	valid_0&#39;s l1: 294574
-[548]	valid_0&#39;s l1: 294547
-[549]	valid_0&#39;s l1: 294621
-[550]	valid_0&#39;s l1: 294530
-[551]	valid_0&#39;s l1: 294492
-[552]	valid_0&#39;s l1: 294466
-[553]	valid_0&#39;s l1: 294498
-[554]	valid_0&#39;s l1: 294578
-[555]	valid_0&#39;s l1: 294544
-[556]	valid_0&#39;s l1: 294631
-[557]	valid_0&#39;s l1: 294735
-[558]	valid_0&#39;s l1: 294583
-[559]	valid_0&#39;s l1: 294465
-[560]	valid_0&#39;s l1: 294453
-[561]	valid_0&#39;s l1: 294504
-[562]	valid_0&#39;s l1: 294605
-[563]	valid_0&#39;s l1: 294723
-[564]	valid_0&#39;s l1: 294884
-[565]	valid_0&#39;s l1: 294675
-[566]	valid_0&#39;s l1: 294605
-[567]	valid_0&#39;s l1: 294534
-[568]	valid_0&#39;s l1: 294643
-[569]	valid_0&#39;s l1: 294764
-[570]	valid_0&#39;s l1: 294944
-[571]	valid_0&#39;s l1: 294754
-[572]	valid_0&#39;s l1: 294588
-[573]	valid_0&#39;s l1: 294744
-[574]	valid_0&#39;s l1: 294904
-[575]	valid_0&#39;s l1: 294723
-[576]	valid_0&#39;s l1: 294845
-[577]	valid_0&#39;s l1: 295053
-[578]	valid_0&#39;s l1: 295189
-[579]	valid_0&#39;s l1: 295464
-[580]	valid_0&#39;s l1: 295741
-[581]	valid_0&#39;s l1: 295331
-[582]	valid_0&#39;s l1: 295559
-[583]	valid_0&#39;s l1: 295104
-[584]	valid_0&#39;s l1: 295315
-[585]	valid_0&#39;s l1: 295015
-[586]	valid_0&#39;s l1: 295248
-[587]	valid_0&#39;s l1: 294947
-[588]	valid_0&#39;s l1: 295117
-[589]	valid_0&#39;s l1: 295316
-[590]	valid_0&#39;s l1: 295614
-[591]	valid_0&#39;s l1: 295838
-[592]	valid_0&#39;s l1: 296129
-[593]	valid_0&#39;s l1: 295594
-[594]	valid_0&#39;s l1: 295903
-[595]	valid_0&#39;s l1: 296181
-[596]	valid_0&#39;s l1: 295632
-[597]	valid_0&#39;s l1: 295883
-[598]	valid_0&#39;s l1: 296122
-[599]	valid_0&#39;s l1: 295531
-[600]	valid_0&#39;s l1: 295113
-[601]	valid_0&#39;s l1: 294857
-[602]	valid_0&#39;s l1: 295055
-[603]	valid_0&#39;s l1: 294815
-[604]	valid_0&#39;s l1: 294997
-[605]	valid_0&#39;s l1: 295204
-[606]	valid_0&#39;s l1: 295443
-[607]	valid_0&#39;s l1: 295710
-[608]	valid_0&#39;s l1: 295249
-[609]	valid_0&#39;s l1: 294948
-[610]	valid_0&#39;s l1: 294798
-[611]	valid_0&#39;s l1: 294657
-[612]	valid_0&#39;s l1: 294566
-[613]	valid_0&#39;s l1: 294636
-[614]	valid_0&#39;s l1: 294565
-[615]	valid_0&#39;s l1: 294531
-[616]	valid_0&#39;s l1: 294492
-[617]	valid_0&#39;s l1: 294542
-[618]	valid_0&#39;s l1: 294507
-[619]	valid_0&#39;s l1: 294476
-[620]	valid_0&#39;s l1: 294500
-[621]	valid_0&#39;s l1: 294544
-[622]	valid_0&#39;s l1: 295021
-[623]	valid_0&#39;s l1: 294795
-[624]	valid_0&#39;s l1: 294903
-[625]	valid_0&#39;s l1: 294734
-[626]	valid_0&#39;s l1: 294654
-[627]	valid_0&#39;s l1: 294575
-[628]	valid_0&#39;s l1: 294519
-[629]	valid_0&#39;s l1: 294572
-[630]	valid_0&#39;s l1: 294654
-[631]	valid_0&#39;s l1: 294601
-[632]	valid_0&#39;s l1: 294637
-[633]	valid_0&#39;s l1: 294698
-[634]	valid_0&#39;s l1: 294766
-[635]	valid_0&#39;s l1: 294757
-[636]	valid_0&#39;s l1: 294768
-[637]	valid_0&#39;s l1: 294793
-[638]	valid_0&#39;s l1: 294820
-[639]	valid_0&#39;s l1: 294896
-[640]	valid_0&#39;s l1: 294847
-[641]	valid_0&#39;s l1: 294904
-[642]	valid_0&#39;s l1: 295016
-[643]	valid_0&#39;s l1: 294934
-[644]	valid_0&#39;s l1: 295027
-[645]	valid_0&#39;s l1: 294965
-[646]	valid_0&#39;s l1: 294933
-[647]	valid_0&#39;s l1: 294871
-[648]	valid_0&#39;s l1: 294877
-[649]	valid_0&#39;s l1: 295230
-[650]	valid_0&#39;s l1: 295339
-[651]	valid_0&#39;s l1: 295192
-[652]	valid_0&#39;s l1: 295368
-[653]	valid_0&#39;s l1: 295541
-[654]	valid_0&#39;s l1: 295733
-[655]	valid_0&#39;s l1: 295521
-[656]	valid_0&#39;s l1: 295339
-[657]	valid_0&#39;s l1: 295440
-[658]	valid_0&#39;s l1: 295238
-[659]	valid_0&#39;s l1: 295362
-[660]	valid_0&#39;s l1: 295181
-[661]	valid_0&#39;s l1: 295315
-[662]	valid_0&#39;s l1: 295205
-[663]	valid_0&#39;s l1: 295339
-[664]	valid_0&#39;s l1: 296085
-[665]	valid_0&#39;s l1: 296388
-[666]	valid_0&#39;s l1: 296662
-[667]	valid_0&#39;s l1: 296848
-[668]	valid_0&#39;s l1: 297102
-[669]	valid_0&#39;s l1: 296426
-[670]	valid_0&#39;s l1: 295929
-[671]	valid_0&#39;s l1: 296128
-[672]	valid_0&#39;s l1: 295740
-[673]	valid_0&#39;s l1: 296670
-[674]	valid_0&#39;s l1: 296115
-[675]	valid_0&#39;s l1: 295666
-[676]	valid_0&#39;s l1: 295415
-[677]	valid_0&#39;s l1: 295250
-[678]	valid_0&#39;s l1: 295401
-[679]	valid_0&#39;s l1: 295245
-[680]	valid_0&#39;s l1: 295095
-[681]	valid_0&#39;s l1: 295748
-[682]	valid_0&#39;s l1: 295876
-[683]	valid_0&#39;s l1: 295572
-[684]	valid_0&#39;s l1: 295312
-[685]	valid_0&#39;s l1: 295460
-[686]	valid_0&#39;s l1: 295288
-[687]	valid_0&#39;s l1: 295470
-[688]	valid_0&#39;s l1: 295621
-[689]	valid_0&#39;s l1: 295402
-[690]	valid_0&#39;s l1: 295264
-[691]	valid_0&#39;s l1: 295372
-[692]	valid_0&#39;s l1: 295468
-[693]	valid_0&#39;s l1: 295350
-[694]	valid_0&#39;s l1: 295192
-[695]	valid_0&#39;s l1: 295292
-[696]	valid_0&#39;s l1: 295209
-[697]	valid_0&#39;s l1: 295117
-[698]	valid_0&#39;s l1: 295069
-[699]	valid_0&#39;s l1: 295128
-[700]	valid_0&#39;s l1: 295052
-[701]	valid_0&#39;s l1: 295087
-[702]	valid_0&#39;s l1: 295046
-[703]	valid_0&#39;s l1: 295082
-[704]	valid_0&#39;s l1: 295136
-[705]	valid_0&#39;s l1: 295218
-[706]	valid_0&#39;s l1: 295290
-[707]	valid_0&#39;s l1: 295421
-[708]	valid_0&#39;s l1: 295244
-[709]	valid_0&#39;s l1: 295139
-[710]	valid_0&#39;s l1: 295106
-[711]	valid_0&#39;s l1: 295196
-[712]	valid_0&#39;s l1: 295312
-[713]	valid_0&#39;s l1: 295210
-[714]	valid_0&#39;s l1: 295161
-[715]	valid_0&#39;s l1: 295228
-[716]	valid_0&#39;s l1: 295196
-[717]	valid_0&#39;s l1: 295661
-[718]	valid_0&#39;s l1: 295826
-[719]	valid_0&#39;s l1: 296020
-[720]	valid_0&#39;s l1: 296157
-[721]	valid_0&#39;s l1: 295803
-[722]	valid_0&#39;s l1: 295940
-[723]	valid_0&#39;s l1: 295666
-[724]	valid_0&#39;s l1: 295505
-[725]	valid_0&#39;s l1: 296246
-[726]	valid_0&#39;s l1: 295889
-[727]	valid_0&#39;s l1: 295658
-[728]	valid_0&#39;s l1: 295544
-[729]	valid_0&#39;s l1: 295637
-[730]	valid_0&#39;s l1: 295510
-[731]	valid_0&#39;s l1: 295604
-[732]	valid_0&#39;s l1: 295698
-[733]	valid_0&#39;s l1: 295544
-[734]	valid_0&#39;s l1: 295662
-[735]	valid_0&#39;s l1: 295537
-[736]	valid_0&#39;s l1: 295636
-[737]	valid_0&#39;s l1: 295744
-[738]	valid_0&#39;s l1: 295621
-[739]	valid_0&#39;s l1: 295562
-[740]	valid_0&#39;s l1: 295494
-[741]	valid_0&#39;s l1: 295571
-[742]	valid_0&#39;s l1: 295510
-[743]	valid_0&#39;s l1: 295568
-[744]	valid_0&#39;s l1: 295550
-[745]	valid_0&#39;s l1: 295585
-[746]	valid_0&#39;s l1: 295998
-[747]	valid_0&#39;s l1: 295874
-[748]	valid_0&#39;s l1: 295794
-[749]	valid_0&#39;s l1: 295899
-[750]	valid_0&#39;s l1: 295793
-[751]	valid_0&#39;s l1: 295691
-[752]	valid_0&#39;s l1: 295749
-[753]	valid_0&#39;s l1: 295636
-[754]	valid_0&#39;s l1: 295689
-[755]	valid_0&#39;s l1: 295599
-[756]	valid_0&#39;s l1: 295658
-[757]	valid_0&#39;s l1: 295763
-[758]	valid_0&#39;s l1: 295670
-[759]	valid_0&#39;s l1: 295612
-[760]	valid_0&#39;s l1: 295689
-[761]	valid_0&#39;s l1: 295609
-[762]	valid_0&#39;s l1: 295568
-[763]	valid_0&#39;s l1: 295924
-[764]	valid_0&#39;s l1: 295818
-[765]	valid_0&#39;s l1: 295918
-[766]	valid_0&#39;s l1: 295823
-[767]	valid_0&#39;s l1: 295904
-[768]	valid_0&#39;s l1: 296005
-[769]	valid_0&#39;s l1: 295816
-[770]	valid_0&#39;s l1: 295899
-[771]	valid_0&#39;s l1: 296009
-[772]	valid_0&#39;s l1: 296116
-[773]	valid_0&#39;s l1: 296229
-[774]	valid_0&#39;s l1: 296395
-[775]	valid_0&#39;s l1: 296084
-[776]	valid_0&#39;s l1: 295933
-[777]	valid_0&#39;s l1: 295794
-[778]	valid_0&#39;s l1: 295770
-[779]	valid_0&#39;s l1: 295852
-[780]	valid_0&#39;s l1: 295922
-[781]	valid_0&#39;s l1: 295801
-[782]	valid_0&#39;s l1: 295782
-[783]	valid_0&#39;s l1: 295851
-[784]	valid_0&#39;s l1: 295936
-[785]	valid_0&#39;s l1: 295864
-[786]	valid_0&#39;s l1: 295948
-[787]	valid_0&#39;s l1: 296028
-[788]	valid_0&#39;s l1: 296133
-[789]	valid_0&#39;s l1: 296032
-[790]	valid_0&#39;s l1: 295982
-[791]	valid_0&#39;s l1: 295964
-[792]	valid_0&#39;s l1: 296024
-[793]	valid_0&#39;s l1: 295984
-[794]	valid_0&#39;s l1: 296040
-[795]	valid_0&#39;s l1: 296046
-[796]	valid_0&#39;s l1: 296115
-[797]	valid_0&#39;s l1: 296194
-[798]	valid_0&#39;s l1: 296298
-[799]	valid_0&#39;s l1: 296151
-[800]	valid_0&#39;s l1: 296243
-[801]	valid_0&#39;s l1: 296148
-[802]	valid_0&#39;s l1: 296247
-[803]	valid_0&#39;s l1: 296334
-[804]	valid_0&#39;s l1: 296474
-[805]	valid_0&#39;s l1: 296573
-[806]	valid_0&#39;s l1: 296731
-[807]	valid_0&#39;s l1: 296425
-[808]	valid_0&#39;s l1: 296257
-[809]	valid_0&#39;s l1: 296358
-[810]	valid_0&#39;s l1: 296159
-[811]	valid_0&#39;s l1: 296028
-[812]	valid_0&#39;s l1: 296097
-[813]	valid_0&#39;s l1: 295976
-[814]	valid_0&#39;s l1: 296062
-[815]	valid_0&#39;s l1: 295976
-[816]	valid_0&#39;s l1: 295922
-[817]	valid_0&#39;s l1: 295974
-[818]	valid_0&#39;s l1: 295925
-[819]	valid_0&#39;s l1: 295976
-[820]	valid_0&#39;s l1: 296038
-[821]	valid_0&#39;s l1: 295968
-[822]	valid_0&#39;s l1: 296051
-[823]	valid_0&#39;s l1: 295972
-[824]	valid_0&#39;s l1: 295889
-[825]	valid_0&#39;s l1: 295892
-[826]	valid_0&#39;s l1: 295930
-[827]	valid_0&#39;s l1: 295977
-[828]	valid_0&#39;s l1: 295918
-[829]	valid_0&#39;s l1: 295943
-[830]	valid_0&#39;s l1: 296007
-[831]	valid_0&#39;s l1: 296007
-[832]	valid_0&#39;s l1: 295991
-[833]	valid_0&#39;s l1: 296005
-[834]	valid_0&#39;s l1: 296018
-[835]	valid_0&#39;s l1: 296042
-[836]	valid_0&#39;s l1: 295980
-[837]	valid_0&#39;s l1: 296012
-[838]	valid_0&#39;s l1: 296024
-[839]	valid_0&#39;s l1: 296018
-[840]	valid_0&#39;s l1: 296031
-[841]	valid_0&#39;s l1: 296015
-[842]	valid_0&#39;s l1: 295979
-[843]	valid_0&#39;s l1: 295982
-[844]	valid_0&#39;s l1: 295971
-[845]	valid_0&#39;s l1: 295976
-[846]	valid_0&#39;s l1: 295989
-[847]	valid_0&#39;s l1: 295990
-[848]	valid_0&#39;s l1: 296012
-[849]	valid_0&#39;s l1: 296052
-[850]	valid_0&#39;s l1: 296069
-[851]	valid_0&#39;s l1: 296114
-[852]	valid_0&#39;s l1: 296105
-[853]	valid_0&#39;s l1: 296097
-[854]	valid_0&#39;s l1: 296149
-[855]	valid_0&#39;s l1: 296117
-[856]	valid_0&#39;s l1: 296097
-[857]	valid_0&#39;s l1: 296137
-[858]	valid_0&#39;s l1: 296187
-[859]	valid_0&#39;s l1: 296241
-[860]	valid_0&#39;s l1: 296144
-[861]	valid_0&#39;s l1: 296089
-[862]	valid_0&#39;s l1: 296073
-[863]	valid_0&#39;s l1: 296101
-[864]	valid_0&#39;s l1: 296144
-[865]	valid_0&#39;s l1: 296110
-[866]	valid_0&#39;s l1: 296112
-[867]	valid_0&#39;s l1: 296101
-[868]	valid_0&#39;s l1: 296120
-[869]	valid_0&#39;s l1: 296151
-[870]	valid_0&#39;s l1: 296174
-[871]	valid_0&#39;s l1: 296211
-[872]	valid_0&#39;s l1: 296168
-[873]	valid_0&#39;s l1: 296202
-[874]	valid_0&#39;s l1: 296572
-[875]	valid_0&#39;s l1: 296663
-[876]	valid_0&#39;s l1: 296414
-[877]	valid_0&#39;s l1: 296524
-[878]	valid_0&#39;s l1: 296383
-[879]	valid_0&#39;s l1: 296475
-[880]	valid_0&#39;s l1: 296568
-[881]	valid_0&#39;s l1: 296708
-[882]	valid_0&#39;s l1: 296517
-[883]	valid_0&#39;s l1: 296618
-[884]	valid_0&#39;s l1: 296396
-[885]	valid_0&#39;s l1: 296272
-[886]	valid_0&#39;s l1: 296206
-[887]	valid_0&#39;s l1: 296194
-[888]	valid_0&#39;s l1: 296203
-[889]	valid_0&#39;s l1: 296238
-[890]	valid_0&#39;s l1: 296226
-[891]	valid_0&#39;s l1: 296240
-[892]	valid_0&#39;s l1: 296304
-[893]	valid_0&#39;s l1: 296590
-[894]	valid_0&#39;s l1: 296544
-[895]	valid_0&#39;s l1: 296593
-[896]	valid_0&#39;s l1: 296660
-[897]	valid_0&#39;s l1: 296735
-[898]	valid_0&#39;s l1: 296812
-[899]	valid_0&#39;s l1: 296651
-[900]	valid_0&#39;s l1: 296578
-[901]	valid_0&#39;s l1: 296548
-[902]	valid_0&#39;s l1: 296611
-[903]	valid_0&#39;s l1: 296536
-[904]	valid_0&#39;s l1: 296531
-[905]	valid_0&#39;s l1: 296578
-[906]	valid_0&#39;s l1: 296627
-[907]	valid_0&#39;s l1: 296607
-[908]	valid_0&#39;s l1: 296662
-[909]	valid_0&#39;s l1: 296722
-[910]	valid_0&#39;s l1: 296805
-[911]	valid_0&#39;s l1: 296702
-[912]	valid_0&#39;s l1: 296776
-[913]	valid_0&#39;s l1: 296861
-[914]	valid_0&#39;s l1: 296721
-[915]	valid_0&#39;s l1: 296672
-[916]	valid_0&#39;s l1: 296747
-[917]	valid_0&#39;s l1: 296808
-[918]	valid_0&#39;s l1: 296895
-[919]	valid_0&#39;s l1: 296979
-[920]	valid_0&#39;s l1: 297060
-[921]	valid_0&#39;s l1: 297158
-[922]	valid_0&#39;s l1: 297301
-[923]	valid_0&#39;s l1: 297429
-[924]	valid_0&#39;s l1: 297107
-[925]	valid_0&#39;s l1: 296904
-[926]	valid_0&#39;s l1: 296787
-[927]	valid_0&#39;s l1: 296866
-[928]	valid_0&#39;s l1: 296936
-[929]	valid_0&#39;s l1: 296761
-[930]	valid_0&#39;s l1: 296644
-[931]	valid_0&#39;s l1: 296708
-[932]	valid_0&#39;s l1: 296792
-[933]	valid_0&#39;s l1: 296663
-[934]	valid_0&#39;s l1: 296596
-[935]	valid_0&#39;s l1: 296555
-[936]	valid_0&#39;s l1: 296593
-[937]	valid_0&#39;s l1: 296639
-[938]	valid_0&#39;s l1: 296678
-[939]	valid_0&#39;s l1: 296718
-[940]	valid_0&#39;s l1: 296622
-[941]	valid_0&#39;s l1: 296934
-[942]	valid_0&#39;s l1: 296793
-[943]	valid_0&#39;s l1: 296870
-[944]	valid_0&#39;s l1: 296794
-[945]	valid_0&#39;s l1: 296878
-[946]	valid_0&#39;s l1: 296964
-[947]	valid_0&#39;s l1: 296864
-[948]	valid_0&#39;s l1: 296798
-[949]	valid_0&#39;s l1: 296783
-[950]	valid_0&#39;s l1: 296834
-[951]	valid_0&#39;s l1: 296847
-[952]	valid_0&#39;s l1: 296867
-[953]	valid_0&#39;s l1: 297160
-[954]	valid_0&#39;s l1: 297222
-[955]	valid_0&#39;s l1: 297099
-[956]	valid_0&#39;s l1: 297033
-[957]	valid_0&#39;s l1: 296955
-[958]	valid_0&#39;s l1: 296996
-[959]	valid_0&#39;s l1: 296960
-[960]	valid_0&#39;s l1: 296941
-[961]	valid_0&#39;s l1: 296960
-[962]	valid_0&#39;s l1: 296963
-[963]	valid_0&#39;s l1: 297005
-[964]	valid_0&#39;s l1: 297011
-[965]	valid_0&#39;s l1: 297062
-[966]	valid_0&#39;s l1: 297072
-[967]	valid_0&#39;s l1: 297092
-[968]	valid_0&#39;s l1: 297111
-[969]	valid_0&#39;s l1: 297154
-[970]	valid_0&#39;s l1: 297099
-[971]	valid_0&#39;s l1: 297040
-[972]	valid_0&#39;s l1: 296984
-[973]	valid_0&#39;s l1: 296992
-[974]	valid_0&#39;s l1: 297029
-[975]	valid_0&#39;s l1: 297071
-[976]	valid_0&#39;s l1: 296978
-[977]	valid_0&#39;s l1: 297030
-[978]	valid_0&#39;s l1: 296953
-[979]	valid_0&#39;s l1: 297006
-[980]	valid_0&#39;s l1: 296948
-[981]	valid_0&#39;s l1: 296998
-[982]	valid_0&#39;s l1: 297062
-[983]	valid_0&#39;s l1: 297010
-[984]	valid_0&#39;s l1: 296997
-[985]	valid_0&#39;s l1: 297031
-[986]	valid_0&#39;s l1: 297097
-[987]	valid_0&#39;s l1: 297138
-[988]	valid_0&#39;s l1: 297050
-[989]	valid_0&#39;s l1: 297101
-[990]	valid_0&#39;s l1: 297165
-[991]	valid_0&#39;s l1: 297047
-[992]	valid_0&#39;s l1: 296995
-[993]	valid_0&#39;s l1: 297019
-[994]	valid_0&#39;s l1: 296950
-[995]	valid_0&#39;s l1: 296985
-[996]	valid_0&#39;s l1: 296918
-[997]	valid_0&#39;s l1: 296871
-[998]	valid_0&#39;s l1: 296888
-[999]	valid_0&#39;s l1: 296867
-[1000]	valid_0&#39;s l1: 296883
-MAE LightGBM (train): 280573.56597
-MAE LightGBM (test): 296882.52107
+<pre>[3]	valid_0&#39;s l1: 1.07673e+06
+[4]	valid_0&#39;s l1: 967107
+[5]	valid_0&#39;s l1: 876015
+[6]	valid_0&#39;s l1: 804505
+[7]	valid_0&#39;s l1: 747949
+[8]	valid_0&#39;s l1: 786151
+[9]	valid_0&#39;s l1: 731809
+[10]	valid_0&#39;s l1: 688630
+[11]	valid_0&#39;s l1: 654390
+[12]	valid_0&#39;s l1: 673110
+[13]	valid_0&#39;s l1: 643407
+[14]	valid_0&#39;s l1: 617908
+[15]	valid_0&#39;s l1: 597731
+[16]	valid_0&#39;s l1: 581354
+[17]	valid_0&#39;s l1: 568028
+[18]	valid_0&#39;s l1: 557716
+[19]	valid_0&#39;s l1: 549057
+[20]	valid_0&#39;s l1: 541367
+[21]	valid_0&#39;s l1: 547891
+[22]	valid_0&#39;s l1: 540966
+[23]	valid_0&#39;s l1: 534697
+[24]	valid_0&#39;s l1: 529569
+[25]	valid_0&#39;s l1: 525315
+[26]	valid_0&#39;s l1: 521518
+[27]	valid_0&#39;s l1: 518239
+[28]	valid_0&#39;s l1: 520651
+[29]	valid_0&#39;s l1: 517362
+[30]	valid_0&#39;s l1: 514732
+[31]	valid_0&#39;s l1: 516570
+[32]	valid_0&#39;s l1: 513738
+[33]	valid_0&#39;s l1: 511419
+[34]	valid_0&#39;s l1: 509437
+[35]	valid_0&#39;s l1: 511275
+[36]	valid_0&#39;s l1: 517698
+[37]	valid_0&#39;s l1: 514144
+[38]	valid_0&#39;s l1: 511330
+[39]	valid_0&#39;s l1: 508804
+[40]	valid_0&#39;s l1: 510819
+[41]	valid_0&#39;s l1: 514841
+[42]	valid_0&#39;s l1: 511188
+[43]	valid_0&#39;s l1: 513660
+[44]	valid_0&#39;s l1: 510116
+[45]	valid_0&#39;s l1: 507102
+[46]	valid_0&#39;s l1: 538433
+[47]	valid_0&#39;s l1: 523968
+[48]	valid_0&#39;s l1: 518433
+[49]	valid_0&#39;s l1: 517034
+[50]	valid_0&#39;s l1: 517924
+[51]	valid_0&#39;s l1: 510857
+[52]	valid_0&#39;s l1: 505625
+[53]	valid_0&#39;s l1: 507944
+[54]	valid_0&#39;s l1: 503739
+[55]	valid_0&#39;s l1: 500579
+[56]	valid_0&#39;s l1: 503643
+[57]	valid_0&#39;s l1: 500692
+[58]	valid_0&#39;s l1: 570590
+[59]	valid_0&#39;s l1: 565115
+[60]	valid_0&#39;s l1: 541896
+[61]	valid_0&#39;s l1: 661147
+[62]	valid_0&#39;s l1: 610877
+[63]	valid_0&#39;s l1: 574396
+[64]	valid_0&#39;s l1: 565702
+[65]	valid_0&#39;s l1: 566757
+[66]	valid_0&#39;s l1: 542702
+[67]	valid_0&#39;s l1: 525659
+[68]	valid_0&#39;s l1: 513938
+[69]	valid_0&#39;s l1: 513974
+[70]	valid_0&#39;s l1: 513395
+[71]	valid_0&#39;s l1: 512156
+[72]	valid_0&#39;s l1: 505073
+[73]	valid_0&#39;s l1: 500313
+[74]	valid_0&#39;s l1: 501410
+[75]	valid_0&#39;s l1: 497653
+[76]	valid_0&#39;s l1: 497954
+[77]	valid_0&#39;s l1: 499204
+[78]	valid_0&#39;s l1: 502338
+[79]	valid_0&#39;s l1: 498583
+[80]	valid_0&#39;s l1: 495940
+[81]	valid_0&#39;s l1: 497839
+[82]	valid_0&#39;s l1: 495217
+[83]	valid_0&#39;s l1: 497067
+[84]	valid_0&#39;s l1: 498357
+[85]	valid_0&#39;s l1: 500809
+[86]	valid_0&#39;s l1: 497645
+[87]	valid_0&#39;s l1: 495430
+[88]	valid_0&#39;s l1: 497680
+[89]	valid_0&#39;s l1: 500851
+[90]	valid_0&#39;s l1: 502298
+[91]	valid_0&#39;s l1: 536477
+[92]	valid_0&#39;s l1: 520792
+[93]	valid_0&#39;s l1: 509836
+[94]	valid_0&#39;s l1: 513741
+[95]	valid_0&#39;s l1: 514361
+[96]	valid_0&#39;s l1: 516558
+[97]	valid_0&#39;s l1: 506994
+[98]	valid_0&#39;s l1: 508845
+[99]	valid_0&#39;s l1: 502245
+[100]	valid_0&#39;s l1: 497122
+[101]	valid_0&#39;s l1: 515462
+[102]	valid_0&#39;s l1: 518381
+[103]	valid_0&#39;s l1: 521776
+[104]	valid_0&#39;s l1: 510406
+[105]	valid_0&#39;s l1: 535922
+[106]	valid_0&#39;s l1: 536605
+[107]	valid_0&#39;s l1: 540622
+[108]	valid_0&#39;s l1: 523458
+[109]	valid_0&#39;s l1: 525954
+[110]	valid_0&#39;s l1: 528433
+[111]	valid_0&#39;s l1: 515008
+[112]	valid_0&#39;s l1: 506108
+[113]	valid_0&#39;s l1: 499668
+[114]	valid_0&#39;s l1: 495060
+[115]	valid_0&#39;s l1: 491979
+[116]	valid_0&#39;s l1: 489822
+[117]	valid_0&#39;s l1: 491209
+[118]	valid_0&#39;s l1: 488781
+[119]	valid_0&#39;s l1: 490035
+[120]	valid_0&#39;s l1: 491487
+[121]	valid_0&#39;s l1: 492809
+[122]	valid_0&#39;s l1: 495031
+[123]	valid_0&#39;s l1: 491995
+[124]	valid_0&#39;s l1: 489950
+[125]	valid_0&#39;s l1: 492095
+[126]	valid_0&#39;s l1: 493251
+[127]	valid_0&#39;s l1: 490926
+[128]	valid_0&#39;s l1: 492659
+[129]	valid_0&#39;s l1: 490426
+[130]	valid_0&#39;s l1: 488749
+[131]	valid_0&#39;s l1: 489404
+[132]	valid_0&#39;s l1: 487917
+[133]	valid_0&#39;s l1: 486514
+[134]	valid_0&#39;s l1: 490625
+[135]	valid_0&#39;s l1: 487680
+[136]	valid_0&#39;s l1: 505319
+[137]	valid_0&#39;s l1: 507229
+[138]	valid_0&#39;s l1: 498524
+[139]	valid_0&#39;s l1: 492596
+[140]	valid_0&#39;s l1: 494462
+[141]	valid_0&#39;s l1: 496231
+[142]	valid_0&#39;s l1: 498094
+[143]	valid_0&#39;s l1: 492282
+[144]	valid_0&#39;s l1: 493742
+[145]	valid_0&#39;s l1: 489597
+[146]	valid_0&#39;s l1: 491882
+[147]	valid_0&#39;s l1: 494067
+[148]	valid_0&#39;s l1: 496405
+[149]	valid_0&#39;s l1: 491490
+[150]	valid_0&#39;s l1: 488027
+[151]	valid_0&#39;s l1: 495083
+[152]	valid_0&#39;s l1: 507322
+[153]	valid_0&#39;s l1: 498349
+[154]	valid_0&#39;s l1: 500140
+[155]	valid_0&#39;s l1: 493473
+[156]	valid_0&#39;s l1: 495871
+[157]	valid_0&#39;s l1: 497274
+[158]	valid_0&#39;s l1: 499826
+[159]	valid_0&#39;s l1: 502212
+[160]	valid_0&#39;s l1: 504448
+[161]	valid_0&#39;s l1: 496832
+[162]	valid_0&#39;s l1: 498515
+[163]	valid_0&#39;s l1: 493102
+[164]	valid_0&#39;s l1: 489079
+[165]	valid_0&#39;s l1: 486489
+[166]	valid_0&#39;s l1: 484593
+[167]	valid_0&#39;s l1: 483011
+[168]	valid_0&#39;s l1: 481831
+[169]	valid_0&#39;s l1: 481061
+[170]	valid_0&#39;s l1: 482925
+[171]	valid_0&#39;s l1: 481224
+[172]	valid_0&#39;s l1: 485791
+[173]	valid_0&#39;s l1: 482716
+[174]	valid_0&#39;s l1: 480953
+[175]	valid_0&#39;s l1: 479463
+[176]	valid_0&#39;s l1: 480277
+[177]	valid_0&#39;s l1: 481215
+[178]	valid_0&#39;s l1: 482192
+[179]	valid_0&#39;s l1: 480164
+[180]	valid_0&#39;s l1: 481124
+[181]	valid_0&#39;s l1: 479585
+[182]	valid_0&#39;s l1: 478572
+[183]	valid_0&#39;s l1: 477982
+[184]	valid_0&#39;s l1: 477343
+[185]	valid_0&#39;s l1: 477781
+[186]	valid_0&#39;s l1: 477353
+[187]	valid_0&#39;s l1: 476986
+[188]	valid_0&#39;s l1: 476455
+[189]	valid_0&#39;s l1: 476849
+[190]	valid_0&#39;s l1: 477318
+[191]	valid_0&#39;s l1: 476895
+[192]	valid_0&#39;s l1: 476621
+[193]	valid_0&#39;s l1: 476012
+[194]	valid_0&#39;s l1: 476133
+[195]	valid_0&#39;s l1: 476372
+[196]	valid_0&#39;s l1: 475892
+[197]	valid_0&#39;s l1: 476091
+[198]	valid_0&#39;s l1: 476476
+[199]	valid_0&#39;s l1: 476009
+[200]	valid_0&#39;s l1: 476417
+[201]	valid_0&#39;s l1: 476911
+[202]	valid_0&#39;s l1: 477596
+[203]	valid_0&#39;s l1: 476720
+[204]	valid_0&#39;s l1: 477240
+[205]	valid_0&#39;s l1: 480136
+[206]	valid_0&#39;s l1: 477830
+[207]	valid_0&#39;s l1: 478699
+[208]	valid_0&#39;s l1: 476713
+[209]	valid_0&#39;s l1: 477561
+[210]	valid_0&#39;s l1: 478423
+[211]	valid_0&#39;s l1: 479465
+[212]	valid_0&#39;s l1: 477666
+[213]	valid_0&#39;s l1: 476437
+[214]	valid_0&#39;s l1: 475622
+[215]	valid_0&#39;s l1: 474871
+[216]	valid_0&#39;s l1: 475537
+[217]	valid_0&#39;s l1: 475040
+[218]	valid_0&#39;s l1: 474703
+[219]	valid_0&#39;s l1: 475341
+[220]	valid_0&#39;s l1: 474549
+[221]	valid_0&#39;s l1: 475106
+[222]	valid_0&#39;s l1: 474404
+[223]	valid_0&#39;s l1: 473873
+[224]	valid_0&#39;s l1: 474312
+[225]	valid_0&#39;s l1: 474867
+[226]	valid_0&#39;s l1: 475427
+[227]	valid_0&#39;s l1: 475923
+[228]	valid_0&#39;s l1: 474857
+[229]	valid_0&#39;s l1: 475502
+[230]	valid_0&#39;s l1: 474478
+[231]	valid_0&#39;s l1: 473801
+[232]	valid_0&#39;s l1: 473460
+[233]	valid_0&#39;s l1: 473765
+[234]	valid_0&#39;s l1: 473367
+[235]	valid_0&#39;s l1: 473768
+[236]	valid_0&#39;s l1: 473360
+[237]	valid_0&#39;s l1: 473241
+[238]	valid_0&#39;s l1: 472980
+[239]	valid_0&#39;s l1: 472821
+[240]	valid_0&#39;s l1: 472607
+[241]	valid_0&#39;s l1: 472653
+[242]	valid_0&#39;s l1: 472290
+[243]	valid_0&#39;s l1: 472502
+[244]	valid_0&#39;s l1: 472338
+[245]	valid_0&#39;s l1: 471663
+[246]	valid_0&#39;s l1: 471439
+[247]	valid_0&#39;s l1: 471347
+[248]	valid_0&#39;s l1: 471534
+[249]	valid_0&#39;s l1: 471858
+[250]	valid_0&#39;s l1: 471505
+[251]	valid_0&#39;s l1: 471714
+[252]	valid_0&#39;s l1: 472095
+[253]	valid_0&#39;s l1: 471615
+[254]	valid_0&#39;s l1: 471147
+[255]	valid_0&#39;s l1: 470915
+[256]	valid_0&#39;s l1: 470635
+[257]	valid_0&#39;s l1: 470321
+[258]	valid_0&#39;s l1: 470060
+[259]	valid_0&#39;s l1: 470087
+[260]	valid_0&#39;s l1: 470132
+[261]	valid_0&#39;s l1: 470431
+[262]	valid_0&#39;s l1: 470066
+[263]	valid_0&#39;s l1: 469775
+[264]	valid_0&#39;s l1: 469480
+[265]	valid_0&#39;s l1: 469367
+[266]	valid_0&#39;s l1: 469167
+[267]	valid_0&#39;s l1: 469184
+[268]	valid_0&#39;s l1: 468924
+[269]	valid_0&#39;s l1: 469049
+[270]	valid_0&#39;s l1: 468941
+[271]	valid_0&#39;s l1: 468919
+[272]	valid_0&#39;s l1: 468642
+[273]	valid_0&#39;s l1: 468548
+[274]	valid_0&#39;s l1: 468566
+[275]	valid_0&#39;s l1: 468291
+[276]	valid_0&#39;s l1: 468276
+[277]	valid_0&#39;s l1: 468196
+[278]	valid_0&#39;s l1: 468311
+[279]	valid_0&#39;s l1: 468310
+[280]	valid_0&#39;s l1: 468405
+[281]	valid_0&#39;s l1: 468291
+[282]	valid_0&#39;s l1: 467962
+[283]	valid_0&#39;s l1: 468208
+[284]	valid_0&#39;s l1: 467826
+[285]	valid_0&#39;s l1: 467534
+[286]	valid_0&#39;s l1: 467557
+[287]	valid_0&#39;s l1: 467448
+[288]	valid_0&#39;s l1: 467496
+[289]	valid_0&#39;s l1: 467336
+[290]	valid_0&#39;s l1: 467323
+[291]	valid_0&#39;s l1: 467185
+[292]	valid_0&#39;s l1: 467124
+[293]	valid_0&#39;s l1: 467212
+[294]	valid_0&#39;s l1: 466996
+[295]	valid_0&#39;s l1: 467113
+[296]	valid_0&#39;s l1: 467253
+[297]	valid_0&#39;s l1: 467219
+[298]	valid_0&#39;s l1: 467394
+[299]	valid_0&#39;s l1: 467217
+[300]	valid_0&#39;s l1: 467326
+[301]	valid_0&#39;s l1: 467235
+[302]	valid_0&#39;s l1: 467029
+[303]	valid_0&#39;s l1: 467211
+[304]	valid_0&#39;s l1: 467479
+[305]	valid_0&#39;s l1: 467843
+[306]	valid_0&#39;s l1: 468224
+[307]	valid_0&#39;s l1: 468814
+[308]	valid_0&#39;s l1: 467894
+[309]	valid_0&#39;s l1: 468439
+[310]	valid_0&#39;s l1: 467876
+[311]	valid_0&#39;s l1: 467393
+[312]	valid_0&#39;s l1: 467178
+[313]	valid_0&#39;s l1: 466876
+[314]	valid_0&#39;s l1: 466775
+[315]	valid_0&#39;s l1: 467081
+[316]	valid_0&#39;s l1: 466660
+[317]	valid_0&#39;s l1: 466387
+[318]	valid_0&#39;s l1: 466306
+[319]	valid_0&#39;s l1: 466398
+[320]	valid_0&#39;s l1: 466253
+[321]	valid_0&#39;s l1: 466346
+[322]	valid_0&#39;s l1: 466209
+[323]	valid_0&#39;s l1: 466089
+[324]	valid_0&#39;s l1: 466130
+[325]	valid_0&#39;s l1: 466011
+[326]	valid_0&#39;s l1: 466044
+[327]	valid_0&#39;s l1: 465911
+[328]	valid_0&#39;s l1: 465948
+[329]	valid_0&#39;s l1: 465916
+[330]	valid_0&#39;s l1: 465946
+[331]	valid_0&#39;s l1: 466027
+[332]	valid_0&#39;s l1: 466273
+[333]	valid_0&#39;s l1: 466591
+[334]	valid_0&#39;s l1: 467008
+[335]	valid_0&#39;s l1: 466296
+[336]	valid_0&#39;s l1: 466629
+[337]	valid_0&#39;s l1: 466168
+[338]	valid_0&#39;s l1: 465906
+[339]	valid_0&#39;s l1: 466073
+[340]	valid_0&#39;s l1: 466402
+[341]	valid_0&#39;s l1: 466100
+[342]	valid_0&#39;s l1: 465959
+[343]	valid_0&#39;s l1: 465754
+[344]	valid_0&#39;s l1: 465884
+[345]	valid_0&#39;s l1: 465747
+[346]	valid_0&#39;s l1: 465620
+[347]	valid_0&#39;s l1: 465720
+[348]	valid_0&#39;s l1: 465646
+[349]	valid_0&#39;s l1: 465575
+[350]	valid_0&#39;s l1: 465624
+[351]	valid_0&#39;s l1: 465550
+[352]	valid_0&#39;s l1: 465399
+[353]	valid_0&#39;s l1: 465311
+[354]	valid_0&#39;s l1: 465312
+[355]	valid_0&#39;s l1: 465292
+[356]	valid_0&#39;s l1: 465195
+[357]	valid_0&#39;s l1: 465313
+[358]	valid_0&#39;s l1: 465265
+[359]	valid_0&#39;s l1: 464762
+[360]	valid_0&#39;s l1: 464455
+[361]	valid_0&#39;s l1: 464215
+[362]	valid_0&#39;s l1: 463985
+[363]	valid_0&#39;s l1: 464010
+[364]	valid_0&#39;s l1: 464065
+[365]	valid_0&#39;s l1: 464118
+[366]	valid_0&#39;s l1: 464130
+[367]	valid_0&#39;s l1: 464268
+[368]	valid_0&#39;s l1: 464089
+[369]	valid_0&#39;s l1: 464250
+[370]	valid_0&#39;s l1: 464114
+[371]	valid_0&#39;s l1: 464268
+[372]	valid_0&#39;s l1: 464184
+[373]	valid_0&#39;s l1: 464109
+[374]	valid_0&#39;s l1: 464026
+[375]	valid_0&#39;s l1: 463825
+[376]	valid_0&#39;s l1: 463805
+[377]	valid_0&#39;s l1: 463843
+[378]	valid_0&#39;s l1: 463767
+[379]	valid_0&#39;s l1: 463814
+[380]	valid_0&#39;s l1: 463799
+[381]	valid_0&#39;s l1: 463824
+[382]	valid_0&#39;s l1: 463884
+[383]	valid_0&#39;s l1: 463732
+[384]	valid_0&#39;s l1: 463671
+[385]	valid_0&#39;s l1: 463636
+[386]	valid_0&#39;s l1: 463540
+[387]	valid_0&#39;s l1: 463558
+[388]	valid_0&#39;s l1: 463432
+[389]	valid_0&#39;s l1: 463379
+[390]	valid_0&#39;s l1: 463322
+[391]	valid_0&#39;s l1: 463261
+[392]	valid_0&#39;s l1: 463258
+[393]	valid_0&#39;s l1: 463152
+[394]	valid_0&#39;s l1: 462972
+[395]	valid_0&#39;s l1: 462756
+[396]	valid_0&#39;s l1: 462651
+[397]	valid_0&#39;s l1: 462728
+[398]	valid_0&#39;s l1: 462749
+[399]	valid_0&#39;s l1: 462592
+[400]	valid_0&#39;s l1: 462421
+[401]	valid_0&#39;s l1: 462266
+[402]	valid_0&#39;s l1: 462279
+[403]	valid_0&#39;s l1: 462188
+[404]	valid_0&#39;s l1: 462059
+[405]	valid_0&#39;s l1: 462062
+[406]	valid_0&#39;s l1: 461303
+[407]	valid_0&#39;s l1: 461375
+[408]	valid_0&#39;s l1: 461363
+[409]	valid_0&#39;s l1: 461215
+[410]	valid_0&#39;s l1: 461324
+[411]	valid_0&#39;s l1: 461391
+[412]	valid_0&#39;s l1: 461318
+[413]	valid_0&#39;s l1: 461263
+[414]	valid_0&#39;s l1: 461396
+[415]	valid_0&#39;s l1: 461359
+[416]	valid_0&#39;s l1: 461437
+[417]	valid_0&#39;s l1: 461351
+[418]	valid_0&#39;s l1: 461269
+[419]	valid_0&#39;s l1: 461175
+[420]	valid_0&#39;s l1: 461132
+[421]	valid_0&#39;s l1: 461080
+[422]	valid_0&#39;s l1: 461056
+[423]	valid_0&#39;s l1: 461125
+[424]	valid_0&#39;s l1: 461137
+[425]	valid_0&#39;s l1: 461130
+[426]	valid_0&#39;s l1: 461012
+[427]	valid_0&#39;s l1: 460949
+[428]	valid_0&#39;s l1: 460981
+[429]	valid_0&#39;s l1: 460906
+[430]	valid_0&#39;s l1: 460228
+[431]	valid_0&#39;s l1: 460197
+[432]	valid_0&#39;s l1: 460180
+[433]	valid_0&#39;s l1: 460231
+[434]	valid_0&#39;s l1: 460200
+[435]	valid_0&#39;s l1: 460154
+[436]	valid_0&#39;s l1: 460212
+[437]	valid_0&#39;s l1: 460197
+[438]	valid_0&#39;s l1: 460158
+[439]	valid_0&#39;s l1: 459814
+[440]	valid_0&#39;s l1: 459870
+[441]	valid_0&#39;s l1: 459916
+[442]	valid_0&#39;s l1: 460115
+[443]	valid_0&#39;s l1: 460111
+[444]	valid_0&#39;s l1: 460159
+[445]	valid_0&#39;s l1: 460230
+[446]	valid_0&#39;s l1: 460158
+[447]	valid_0&#39;s l1: 460132
+[448]	valid_0&#39;s l1: 460098
+[449]	valid_0&#39;s l1: 460189
+[450]	valid_0&#39;s l1: 460191
+[451]	valid_0&#39;s l1: 460127
+[452]	valid_0&#39;s l1: 460006
+[453]	valid_0&#39;s l1: 459936
+[454]	valid_0&#39;s l1: 459504
+[455]	valid_0&#39;s l1: 459559
+[456]	valid_0&#39;s l1: 459568
+[457]	valid_0&#39;s l1: 459611
+[458]	valid_0&#39;s l1: 459539
+[459]	valid_0&#39;s l1: 459558
+[460]	valid_0&#39;s l1: 459549
+[461]	valid_0&#39;s l1: 459624
+[462]	valid_0&#39;s l1: 459603
+[463]	valid_0&#39;s l1: 459647
+[464]	valid_0&#39;s l1: 459558
+[465]	valid_0&#39;s l1: 459649
+[466]	valid_0&#39;s l1: 459620
+[467]	valid_0&#39;s l1: 459616
+[468]	valid_0&#39;s l1: 459582
+[469]	valid_0&#39;s l1: 459653
+[470]	valid_0&#39;s l1: 459266
+[471]	valid_0&#39;s l1: 459311
+[472]	valid_0&#39;s l1: 459313
+[473]	valid_0&#39;s l1: 459230
+[474]	valid_0&#39;s l1: 459213
+[475]	valid_0&#39;s l1: 459238
+[476]	valid_0&#39;s l1: 459221
+[477]	valid_0&#39;s l1: 459317
+[478]	valid_0&#39;s l1: 459292
+[479]	valid_0&#39;s l1: 459300
+[480]	valid_0&#39;s l1: 459374
+[481]	valid_0&#39;s l1: 459460
+[482]	valid_0&#39;s l1: 459393
+[483]	valid_0&#39;s l1: 459256
+[484]	valid_0&#39;s l1: 459241
+[485]	valid_0&#39;s l1: 459112
+[486]	valid_0&#39;s l1: 459139
+[487]	valid_0&#39;s l1: 459161
+[488]	valid_0&#39;s l1: 459109
+[489]	valid_0&#39;s l1: 459081
+[490]	valid_0&#39;s l1: 459042
+[491]	valid_0&#39;s l1: 458993
+[492]	valid_0&#39;s l1: 458992
+[493]	valid_0&#39;s l1: 458910
+[494]	valid_0&#39;s l1: 458851
+[495]	valid_0&#39;s l1: 458858
+[496]	valid_0&#39;s l1: 458898
+[497]	valid_0&#39;s l1: 458801
+[498]	valid_0&#39;s l1: 458815
+[499]	valid_0&#39;s l1: 458756
+[500]	valid_0&#39;s l1: 458741
+[501]	valid_0&#39;s l1: 458656
+[502]	valid_0&#39;s l1: 458708
+[503]	valid_0&#39;s l1: 458734
+[504]	valid_0&#39;s l1: 458601
+[505]	valid_0&#39;s l1: 458527
+[506]	valid_0&#39;s l1: 458497
+[507]	valid_0&#39;s l1: 458439
+[508]	valid_0&#39;s l1: 458414
+[509]	valid_0&#39;s l1: 458402
+[510]	valid_0&#39;s l1: 458241
+[511]	valid_0&#39;s l1: 458186
+[512]	valid_0&#39;s l1: 458183
+[513]	valid_0&#39;s l1: 458197
+[514]	valid_0&#39;s l1: 458132
+[515]	valid_0&#39;s l1: 458142
+[516]	valid_0&#39;s l1: 457984
+[517]	valid_0&#39;s l1: 457850
+[518]	valid_0&#39;s l1: 457800
+[519]	valid_0&#39;s l1: 457796
+[520]	valid_0&#39;s l1: 457887
+[521]	valid_0&#39;s l1: 457921
+[522]	valid_0&#39;s l1: 457878
+[523]	valid_0&#39;s l1: 457843
+[524]	valid_0&#39;s l1: 457791
+[525]	valid_0&#39;s l1: 457807
+[526]	valid_0&#39;s l1: 457907
+[527]	valid_0&#39;s l1: 457567
+[528]	valid_0&#39;s l1: 457599
+[529]	valid_0&#39;s l1: 457578
+[530]	valid_0&#39;s l1: 457538
+[531]	valid_0&#39;s l1: 457524
+[532]	valid_0&#39;s l1: 457519
+[533]	valid_0&#39;s l1: 457487
+[534]	valid_0&#39;s l1: 457577
+[535]	valid_0&#39;s l1: 457648
+[536]	valid_0&#39;s l1: 457621
+[537]	valid_0&#39;s l1: 457661
+[538]	valid_0&#39;s l1: 457619
+[539]	valid_0&#39;s l1: 457545
+[540]	valid_0&#39;s l1: 457490
+[541]	valid_0&#39;s l1: 457446
+[542]	valid_0&#39;s l1: 457450
+[543]	valid_0&#39;s l1: 457421
+[544]	valid_0&#39;s l1: 457428
+[545]	valid_0&#39;s l1: 457453
+[546]	valid_0&#39;s l1: 457500
+[547]	valid_0&#39;s l1: 457553
+[548]	valid_0&#39;s l1: 457510
+[549]	valid_0&#39;s l1: 457479
+[550]	valid_0&#39;s l1: 457582
+[551]	valid_0&#39;s l1: 457626
+[552]	valid_0&#39;s l1: 457520
+[553]	valid_0&#39;s l1: 457461
+[554]	valid_0&#39;s l1: 457434
+[555]	valid_0&#39;s l1: 457389
+[556]	valid_0&#39;s l1: 457314
+[557]	valid_0&#39;s l1: 457286
+[558]	valid_0&#39;s l1: 457351
+[559]	valid_0&#39;s l1: 457370
+[560]	valid_0&#39;s l1: 457446
+[561]	valid_0&#39;s l1: 457409
+[562]	valid_0&#39;s l1: 457430
+[563]	valid_0&#39;s l1: 457387
+[564]	valid_0&#39;s l1: 457334
+[565]	valid_0&#39;s l1: 457313
+[566]	valid_0&#39;s l1: 457399
+[567]	valid_0&#39;s l1: 457498
+[568]	valid_0&#39;s l1: 457431
+[569]	valid_0&#39;s l1: 457443
+[570]	valid_0&#39;s l1: 457460
+[571]	valid_0&#39;s l1: 457419
+[572]	valid_0&#39;s l1: 457436
+[573]	valid_0&#39;s l1: 457399
+[574]	valid_0&#39;s l1: 457381
+[575]	valid_0&#39;s l1: 457462
+[576]	valid_0&#39;s l1: 457474
+[577]	valid_0&#39;s l1: 457479
+[578]	valid_0&#39;s l1: 457502
+[579]	valid_0&#39;s l1: 457540
+[580]	valid_0&#39;s l1: 457554
+[581]	valid_0&#39;s l1: 457550
+[582]	valid_0&#39;s l1: 457570
+[583]	valid_0&#39;s l1: 457599
+[584]	valid_0&#39;s l1: 457614
+[585]	valid_0&#39;s l1: 457541
+[586]	valid_0&#39;s l1: 457555
+[587]	valid_0&#39;s l1: 457509
+[588]	valid_0&#39;s l1: 457516
+[589]	valid_0&#39;s l1: 457514
+[590]	valid_0&#39;s l1: 457530
+[591]	valid_0&#39;s l1: 457562
+[592]	valid_0&#39;s l1: 457637
+[593]	valid_0&#39;s l1: 457598
+[594]	valid_0&#39;s l1: 457622
+[595]	valid_0&#39;s l1: 457728
+[596]	valid_0&#39;s l1: 457669
+[597]	valid_0&#39;s l1: 457765
+[598]	valid_0&#39;s l1: 457829
+[599]	valid_0&#39;s l1: 457794
+[600]	valid_0&#39;s l1: 457896
+[601]	valid_0&#39;s l1: 457879
+[602]	valid_0&#39;s l1: 457878
+[603]	valid_0&#39;s l1: 457851
+[604]	valid_0&#39;s l1: 457839
+[605]	valid_0&#39;s l1: 457871
+[606]	valid_0&#39;s l1: 457908
+[607]	valid_0&#39;s l1: 457965
+[608]	valid_0&#39;s l1: 457754
+[609]	valid_0&#39;s l1: 457746
+[610]	valid_0&#39;s l1: 457768
+[611]	valid_0&#39;s l1: 457801
+[612]	valid_0&#39;s l1: 457782
+[613]	valid_0&#39;s l1: 457776
+[614]	valid_0&#39;s l1: 457737
+[615]	valid_0&#39;s l1: 457640
+[616]	valid_0&#39;s l1: 457662
+[617]	valid_0&#39;s l1: 457631
+[618]	valid_0&#39;s l1: 457664
+[619]	valid_0&#39;s l1: 457674
+[620]	valid_0&#39;s l1: 457701
+[621]	valid_0&#39;s l1: 457603
+[622]	valid_0&#39;s l1: 457086
+[623]	valid_0&#39;s l1: 456947
+[624]	valid_0&#39;s l1: 456956
+[625]	valid_0&#39;s l1: 457113
+[626]	valid_0&#39;s l1: 457184
+[627]	valid_0&#39;s l1: 457185
+[628]	valid_0&#39;s l1: 457203
+[629]	valid_0&#39;s l1: 457168
+[630]	valid_0&#39;s l1: 457167
+[631]	valid_0&#39;s l1: 457239
+[632]	valid_0&#39;s l1: 457130
+[633]	valid_0&#39;s l1: 457102
+[634]	valid_0&#39;s l1: 457091
+[635]	valid_0&#39;s l1: 457037
+[636]	valid_0&#39;s l1: 456969
+[637]	valid_0&#39;s l1: 457019
+[638]	valid_0&#39;s l1: 456990
+[639]	valid_0&#39;s l1: 456978
+[640]	valid_0&#39;s l1: 456981
+[641]	valid_0&#39;s l1: 456959
+[642]	valid_0&#39;s l1: 456963
+[643]	valid_0&#39;s l1: 456963
+[644]	valid_0&#39;s l1: 456897
+[645]	valid_0&#39;s l1: 456854
+[646]	valid_0&#39;s l1: 456768
+[647]	valid_0&#39;s l1: 456833
+[648]	valid_0&#39;s l1: 456754
+[649]	valid_0&#39;s l1: 456239
+[650]	valid_0&#39;s l1: 456251
+[651]	valid_0&#39;s l1: 456370
+[652]	valid_0&#39;s l1: 456345
+[653]	valid_0&#39;s l1: 456360
+[654]	valid_0&#39;s l1: 456400
+[655]	valid_0&#39;s l1: 456383
+[656]	valid_0&#39;s l1: 456380
+[657]	valid_0&#39;s l1: 456440
+[658]	valid_0&#39;s l1: 456449
+[659]	valid_0&#39;s l1: 456466
+[660]	valid_0&#39;s l1: 456258
+[661]	valid_0&#39;s l1: 456226
+[662]	valid_0&#39;s l1: 456385
+[663]	valid_0&#39;s l1: 456386
+[664]	valid_0&#39;s l1: 456039
+[665]	valid_0&#39;s l1: 456070
+[666]	valid_0&#39;s l1: 456160
+[667]	valid_0&#39;s l1: 456223
+[668]	valid_0&#39;s l1: 456309
+[669]	valid_0&#39;s l1: 456263
+[670]	valid_0&#39;s l1: 456220
+[671]	valid_0&#39;s l1: 456297
+[672]	valid_0&#39;s l1: 456346
+[673]	valid_0&#39;s l1: 456151
+[674]	valid_0&#39;s l1: 456134
+[675]	valid_0&#39;s l1: 456156
+[676]	valid_0&#39;s l1: 456157
+[677]	valid_0&#39;s l1: 456135
+[678]	valid_0&#39;s l1: 456112
+[679]	valid_0&#39;s l1: 456199
+[680]	valid_0&#39;s l1: 456119
+[681]	valid_0&#39;s l1: 455723
+[682]	valid_0&#39;s l1: 455745
+[683]	valid_0&#39;s l1: 455768
+[684]	valid_0&#39;s l1: 455798
+[685]	valid_0&#39;s l1: 455767
+[686]	valid_0&#39;s l1: 455722
+[687]	valid_0&#39;s l1: 455689
+[688]	valid_0&#39;s l1: 455672
+[689]	valid_0&#39;s l1: 455733
+[690]	valid_0&#39;s l1: 455724
+[691]	valid_0&#39;s l1: 455694
+[692]	valid_0&#39;s l1: 455706
+[693]	valid_0&#39;s l1: 455659
+[694]	valid_0&#39;s l1: 455748
+[695]	valid_0&#39;s l1: 455718
+[696]	valid_0&#39;s l1: 455794
+[697]	valid_0&#39;s l1: 455759
+[698]	valid_0&#39;s l1: 455915
+[699]	valid_0&#39;s l1: 455855
+[700]	valid_0&#39;s l1: 455749
+[701]	valid_0&#39;s l1: 455708
+[702]	valid_0&#39;s l1: 455727
+[703]	valid_0&#39;s l1: 455690
+[704]	valid_0&#39;s l1: 455638
+[705]	valid_0&#39;s l1: 455568
+[706]	valid_0&#39;s l1: 455561
+[707]	valid_0&#39;s l1: 455546
+[708]	valid_0&#39;s l1: 455541
+[709]	valid_0&#39;s l1: 455598
+[710]	valid_0&#39;s l1: 455603
+[711]	valid_0&#39;s l1: 455519
+[712]	valid_0&#39;s l1: 455506
+[713]	valid_0&#39;s l1: 455495
+[714]	valid_0&#39;s l1: 455494
+[715]	valid_0&#39;s l1: 455466
+[716]	valid_0&#39;s l1: 455384
+[717]	valid_0&#39;s l1: 454947
+[718]	valid_0&#39;s l1: 454960
+[719]	valid_0&#39;s l1: 454965
+[720]	valid_0&#39;s l1: 455008
+[721]	valid_0&#39;s l1: 455077
+[722]	valid_0&#39;s l1: 455113
+[723]	valid_0&#39;s l1: 455127
+[724]	valid_0&#39;s l1: 455135
+[725]	valid_0&#39;s l1: 454813
+[726]	valid_0&#39;s l1: 454893
+[727]	valid_0&#39;s l1: 454938
+[728]	valid_0&#39;s l1: 454987
+[729]	valid_0&#39;s l1: 454961
+[730]	valid_0&#39;s l1: 454987
+[731]	valid_0&#39;s l1: 454962
+[732]	valid_0&#39;s l1: 454936
+[733]	valid_0&#39;s l1: 454938
+[734]	valid_0&#39;s l1: 454909
+[735]	valid_0&#39;s l1: 455026
+[736]	valid_0&#39;s l1: 454999
+[737]	valid_0&#39;s l1: 455058
+[738]	valid_0&#39;s l1: 455062
+[739]	valid_0&#39;s l1: 455128
+[740]	valid_0&#39;s l1: 455215
+[741]	valid_0&#39;s l1: 455142
+[742]	valid_0&#39;s l1: 455132
+[743]	valid_0&#39;s l1: 455262
+[744]	valid_0&#39;s l1: 455265
+[745]	valid_0&#39;s l1: 455219
+[746]	valid_0&#39;s l1: 454748
+[747]	valid_0&#39;s l1: 454884
+[748]	valid_0&#39;s l1: 454930
+[749]	valid_0&#39;s l1: 454863
+[750]	valid_0&#39;s l1: 454858
+[751]	valid_0&#39;s l1: 454839
+[752]	valid_0&#39;s l1: 454815
+[753]	valid_0&#39;s l1: 454734
+[754]	valid_0&#39;s l1: 454721
+[755]	valid_0&#39;s l1: 454605
+[756]	valid_0&#39;s l1: 454557
+[757]	valid_0&#39;s l1: 454491
+[758]	valid_0&#39;s l1: 454577
+[759]	valid_0&#39;s l1: 454607
+[760]	valid_0&#39;s l1: 454555
+[761]	valid_0&#39;s l1: 454616
+[762]	valid_0&#39;s l1: 454672
+[763]	valid_0&#39;s l1: 454232
+[764]	valid_0&#39;s l1: 454259
+[765]	valid_0&#39;s l1: 454251
+[766]	valid_0&#39;s l1: 454274
+[767]	valid_0&#39;s l1: 454253
+[768]	valid_0&#39;s l1: 454239
+[769]	valid_0&#39;s l1: 454365
+[770]	valid_0&#39;s l1: 454346
+[771]	valid_0&#39;s l1: 454323
+[772]	valid_0&#39;s l1: 454353
+[773]	valid_0&#39;s l1: 454353
+[774]	valid_0&#39;s l1: 454352
+[775]	valid_0&#39;s l1: 454464
+[776]	valid_0&#39;s l1: 454477
+[777]	valid_0&#39;s l1: 454569
+[778]	valid_0&#39;s l1: 454456
+[779]	valid_0&#39;s l1: 454425
+[780]	valid_0&#39;s l1: 454403
+[781]	valid_0&#39;s l1: 454457
+[782]	valid_0&#39;s l1: 454468
+[783]	valid_0&#39;s l1: 454424
+[784]	valid_0&#39;s l1: 454376
+[785]	valid_0&#39;s l1: 454456
+[786]	valid_0&#39;s l1: 454451
+[787]	valid_0&#39;s l1: 454426
+[788]	valid_0&#39;s l1: 454413
+[789]	valid_0&#39;s l1: 454505
+[790]	valid_0&#39;s l1: 454491
+[791]	valid_0&#39;s l1: 454502
+[792]	valid_0&#39;s l1: 454479
+[793]	valid_0&#39;s l1: 454588
+[794]	valid_0&#39;s l1: 454556
+[795]	valid_0&#39;s l1: 454567
+[796]	valid_0&#39;s l1: 454529
+[797]	valid_0&#39;s l1: 454481
+[798]	valid_0&#39;s l1: 454435
+[799]	valid_0&#39;s l1: 454498
+[800]	valid_0&#39;s l1: 454474
+[801]	valid_0&#39;s l1: 454513
+[802]	valid_0&#39;s l1: 454508
+[803]	valid_0&#39;s l1: 454519
+[804]	valid_0&#39;s l1: 454541
+[805]	valid_0&#39;s l1: 454527
+[806]	valid_0&#39;s l1: 454560
+[807]	valid_0&#39;s l1: 454604
+[808]	valid_0&#39;s l1: 454805
+[809]	valid_0&#39;s l1: 454795
+[810]	valid_0&#39;s l1: 454841
+[811]	valid_0&#39;s l1: 454889
+[812]	valid_0&#39;s l1: 454875
+[813]	valid_0&#39;s l1: 454830
+[814]	valid_0&#39;s l1: 454780
+[815]	valid_0&#39;s l1: 454816
+[816]	valid_0&#39;s l1: 454844
+[817]	valid_0&#39;s l1: 454799
+[818]	valid_0&#39;s l1: 454678
+[819]	valid_0&#39;s l1: 454654
+[820]	valid_0&#39;s l1: 454627
+[821]	valid_0&#39;s l1: 454637
+[822]	valid_0&#39;s l1: 454563
+[823]	valid_0&#39;s l1: 454557
+[824]	valid_0&#39;s l1: 454635
+[825]	valid_0&#39;s l1: 454485
+[826]	valid_0&#39;s l1: 454389
+[827]	valid_0&#39;s l1: 454343
+[828]	valid_0&#39;s l1: 454364
+[829]	valid_0&#39;s l1: 454394
+[830]	valid_0&#39;s l1: 454360
+[831]	valid_0&#39;s l1: 454350
+[832]	valid_0&#39;s l1: 454366
+[833]	valid_0&#39;s l1: 454391
+[834]	valid_0&#39;s l1: 454342
+[835]	valid_0&#39;s l1: 454259
+[836]	valid_0&#39;s l1: 454255
+[837]	valid_0&#39;s l1: 454285
+[838]	valid_0&#39;s l1: 454210
+[839]	valid_0&#39;s l1: 454067
+[840]	valid_0&#39;s l1: 454024
+[841]	valid_0&#39;s l1: 453980
+[842]	valid_0&#39;s l1: 453865
+[843]	valid_0&#39;s l1: 453874
+[844]	valid_0&#39;s l1: 453814
+[845]	valid_0&#39;s l1: 453785
+[846]	valid_0&#39;s l1: 453735
+[847]	valid_0&#39;s l1: 453720
+[848]	valid_0&#39;s l1: 453640
+[849]	valid_0&#39;s l1: 453576
+[850]	valid_0&#39;s l1: 453631
+[851]	valid_0&#39;s l1: 453567
+[852]	valid_0&#39;s l1: 453592
+[853]	valid_0&#39;s l1: 453626
+[854]	valid_0&#39;s l1: 453477
+[855]	valid_0&#39;s l1: 453532
+[856]	valid_0&#39;s l1: 453526
+[857]	valid_0&#39;s l1: 453459
+[858]	valid_0&#39;s l1: 453392
+[859]	valid_0&#39;s l1: 453344
+[860]	valid_0&#39;s l1: 453443
+[861]	valid_0&#39;s l1: 453548
+[862]	valid_0&#39;s l1: 453573
+[863]	valid_0&#39;s l1: 453513
+[864]	valid_0&#39;s l1: 453457
+[865]	valid_0&#39;s l1: 453465
+[866]	valid_0&#39;s l1: 453551
+[867]	valid_0&#39;s l1: 453564
+[868]	valid_0&#39;s l1: 453506
+[869]	valid_0&#39;s l1: 453524
+[870]	valid_0&#39;s l1: 453491
+[871]	valid_0&#39;s l1: 453441
+[872]	valid_0&#39;s l1: 453555
+[873]	valid_0&#39;s l1: 453510
+[874]	valid_0&#39;s l1: 453070
+[875]	valid_0&#39;s l1: 453060
+[876]	valid_0&#39;s l1: 453141
+[877]	valid_0&#39;s l1: 453110
+[878]	valid_0&#39;s l1: 453143
+[879]	valid_0&#39;s l1: 453107
+[880]	valid_0&#39;s l1: 453081
+[881]	valid_0&#39;s l1: 453039
+[882]	valid_0&#39;s l1: 453091
+[883]	valid_0&#39;s l1: 453074
+[884]	valid_0&#39;s l1: 453170
+[885]	valid_0&#39;s l1: 453239
+[886]	valid_0&#39;s l1: 453240
+[887]	valid_0&#39;s l1: 453275
+[888]	valid_0&#39;s l1: 453280
+[889]	valid_0&#39;s l1: 453201
+[890]	valid_0&#39;s l1: 453216
+[891]	valid_0&#39;s l1: 453222
+[892]	valid_0&#39;s l1: 453178
+[893]	valid_0&#39;s l1: 452638
+[894]	valid_0&#39;s l1: 452635
+[895]	valid_0&#39;s l1: 452587
+[896]	valid_0&#39;s l1: 452556
+[897]	valid_0&#39;s l1: 452540
+[898]	valid_0&#39;s l1: 452535
+[899]	valid_0&#39;s l1: 452689
+[900]	valid_0&#39;s l1: 452613
+[901]	valid_0&#39;s l1: 452627
+[902]	valid_0&#39;s l1: 452597
+[903]	valid_0&#39;s l1: 452589
+[904]	valid_0&#39;s l1: 452611
+[905]	valid_0&#39;s l1: 452584
+[906]	valid_0&#39;s l1: 452520
+[907]	valid_0&#39;s l1: 452558
+[908]	valid_0&#39;s l1: 452521
+[909]	valid_0&#39;s l1: 452503
+[910]	valid_0&#39;s l1: 452495
+[911]	valid_0&#39;s l1: 452571
+[912]	valid_0&#39;s l1: 452562
+[913]	valid_0&#39;s l1: 452555
+[914]	valid_0&#39;s l1: 452605
+[915]	valid_0&#39;s l1: 452622
+[916]	valid_0&#39;s l1: 452633
+[917]	valid_0&#39;s l1: 452608
+[918]	valid_0&#39;s l1: 452578
+[919]	valid_0&#39;s l1: 452551
+[920]	valid_0&#39;s l1: 452569
+[921]	valid_0&#39;s l1: 452559
+[922]	valid_0&#39;s l1: 452609
+[923]	valid_0&#39;s l1: 452616
+[924]	valid_0&#39;s l1: 452621
+[925]	valid_0&#39;s l1: 452635
+[926]	valid_0&#39;s l1: 452631
+[927]	valid_0&#39;s l1: 452623
+[928]	valid_0&#39;s l1: 452646
+[929]	valid_0&#39;s l1: 452664
+[930]	valid_0&#39;s l1: 452693
+[931]	valid_0&#39;s l1: 452663
+[932]	valid_0&#39;s l1: 452674
+[933]	valid_0&#39;s l1: 452683
+[934]	valid_0&#39;s l1: 452749
+[935]	valid_0&#39;s l1: 452685
+[936]	valid_0&#39;s l1: 452631
+[937]	valid_0&#39;s l1: 452601
+[938]	valid_0&#39;s l1: 452742
+[939]	valid_0&#39;s l1: 452755
+[940]	valid_0&#39;s l1: 452786
+[941]	valid_0&#39;s l1: 452362
+[942]	valid_0&#39;s l1: 452388
+[943]	valid_0&#39;s l1: 452381
+[944]	valid_0&#39;s l1: 452420
+[945]	valid_0&#39;s l1: 452395
+[946]	valid_0&#39;s l1: 452359
+[947]	valid_0&#39;s l1: 452408
+[948]	valid_0&#39;s l1: 452423
+[949]	valid_0&#39;s l1: 452450
+[950]	valid_0&#39;s l1: 452464
+[951]	valid_0&#39;s l1: 452515
+[952]	valid_0&#39;s l1: 452446
+[953]	valid_0&#39;s l1: 452037
+[954]	valid_0&#39;s l1: 452038
+[955]	valid_0&#39;s l1: 452053
+[956]	valid_0&#39;s l1: 452161
+[957]	valid_0&#39;s l1: 452114
+[958]	valid_0&#39;s l1: 452080
+[959]	valid_0&#39;s l1: 452096
+[960]	valid_0&#39;s l1: 452129
+[961]	valid_0&#39;s l1: 452150
+[962]	valid_0&#39;s l1: 452237
+[963]	valid_0&#39;s l1: 452311
+[964]	valid_0&#39;s l1: 452252
+[965]	valid_0&#39;s l1: 452199
+[966]	valid_0&#39;s l1: 452169
+[967]	valid_0&#39;s l1: 452116
+[968]	valid_0&#39;s l1: 452084
+[969]	valid_0&#39;s l1: 452045
+[970]	valid_0&#39;s l1: 452176
+[971]	valid_0&#39;s l1: 452227
+[972]	valid_0&#39;s l1: 452252
+[973]	valid_0&#39;s l1: 452175
+[974]	valid_0&#39;s l1: 452146
+[975]	valid_0&#39;s l1: 452122
+[976]	valid_0&#39;s l1: 452146
+[977]	valid_0&#39;s l1: 452082
+[978]	valid_0&#39;s l1: 452127
+[979]	valid_0&#39;s l1: 452154
+[980]	valid_0&#39;s l1: 452282
+[981]	valid_0&#39;s l1: 452265
+[982]	valid_0&#39;s l1: 452178
+[983]	valid_0&#39;s l1: 452214
+[984]	valid_0&#39;s l1: 452249
+[985]	valid_0&#39;s l1: 452242
+[986]	valid_0&#39;s l1: 452274
+[987]	valid_0&#39;s l1: 452260
+[988]	valid_0&#39;s l1: 452285
+[989]	valid_0&#39;s l1: 452271
+[990]	valid_0&#39;s l1: 452240
+[991]	valid_0&#39;s l1: 452191
+[992]	valid_0&#39;s l1: 452205
+[993]	valid_0&#39;s l1: 452169
+[994]	valid_0&#39;s l1: 452158
+[995]	valid_0&#39;s l1: 452110
+[996]	valid_0&#39;s l1: 452160
+[997]	valid_0&#39;s l1: 452172
+[998]	valid_0&#39;s l1: 452094
+[999]	valid_0&#39;s l1: 452155
+[1000]	valid_0&#39;s l1: 452115
+MAE LightGBM (train): 304328.49540
+MAE LightGBM (test): 452114.64147
 </pre>
 </div>
 </div>
@@ -15949,14 +16161,14 @@ MAE LightGBM (test): 296882.52107
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_pred_eval</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">features</span><span class="p">),</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
 <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred_eval</span>
 
 <span class="c1"># df_test_f = utils.pesificar_df(df_test_f, &#39;target&#39;, &#39;target&#39;)</span>
-<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta17.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta23.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
