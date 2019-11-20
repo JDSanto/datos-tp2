@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13084,13 +13084,16 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">import</span> <span class="n">features_independientes_precio</span><span class="p">,</span> <span class="n">features_dependientes_precio</span><span class="p">,</span> <span class="n">columna_a_ohe</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features</span>
 <span class="kn">import</span> <span class="nn">ipynb.fs.full.utils</span> <span class="k">as</span> <span class="nn">utils</span>
 <span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_absolute_error</span>
 
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13107,23 +13110,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
 
-<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
-<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
 
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_zona_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_f</span><span class="p">)</span>
 
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13140,23 +13145,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
        <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
-<span class="c1">#             &#39;lat&#39;, &#39;lng&#39;,</span>
+            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
        <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
 <span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">]</span>
 
 <span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
 
 <span class="n">df_XGBoost</span><span class="p">,</span> <span class="n">df_eval</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 
@@ -13178,7 +13185,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">xgb_eval</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -13244,7 +13251,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  0%|          | 0/50 [00:00&lt;?, ?it/s, best loss: ?]</pre>
+<pre>  2%|▏         | 1/50 [00:31&lt;26:00, 31.84s/it, best loss: 536204.5653767361]</pre>
 </div>
 </div>
 
@@ -13270,7 +13277,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  2%|▏         | 1/50 [00:13&lt;10:55, 13.37s/it, best loss: 527353.3421701388]</pre>
+<pre>  4%|▍         | 2/50 [00:35&lt;18:38, 23.29s/it, best loss: 536204.5653767361]</pre>
 </div>
 </div>
 
@@ -13296,7 +13303,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  4%|▍         | 2/50 [00:17&lt;08:26, 10.54s/it, best loss: 527353.3421701388]</pre>
+<pre>  6%|▌         | 3/50 [00:43&lt;14:45, 18.85s/it, best loss: 536204.5653767361]</pre>
 </div>
 </div>
 
@@ -13322,7 +13329,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  6%|▌         | 3/50 [00:30&lt;08:49, 11.27s/it, best loss: 526487.0738363715]</pre>
+<pre>  8%|▊         | 4/50 [01:02&lt;14:21, 18.73s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13348,7 +13355,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  8%|▊         | 4/50 [00:43&lt;09:08, 11.92s/it, best loss: 526487.0738363715]</pre>
+<pre> 10%|█         | 5/50 [01:08&lt;11:11, 14.92s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13374,7 +13381,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 10%|█         | 5/50 [01:01&lt;10:13, 13.64s/it, best loss: 526487.0738363715]</pre>
+<pre> 12%|█▏        | 6/50 [01:29&lt;12:25, 16.95s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13400,7 +13407,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 12%|█▏        | 6/50 [01:09&lt;08:49, 12.04s/it, best loss: 526487.0738363715]</pre>
+<pre> 14%|█▍        | 7/50 [01:41&lt;10:59, 15.33s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13426,7 +13433,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 14%|█▍        | 7/50 [01:21&lt;08:41, 12.12s/it, best loss: 526487.0738363715]</pre>
+<pre> 16%|█▌        | 8/50 [01:48&lt;08:55, 12.74s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13452,7 +13459,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 16%|█▌        | 8/50 [01:37&lt;09:09, 13.09s/it, best loss: 526487.0738363715]</pre>
+<pre> 18%|█▊        | 9/50 [02:01&lt;08:48, 12.90s/it, best loss: 534373.3772743056]</pre>
 </div>
 </div>
 
@@ -13478,7 +13485,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 18%|█▊        | 9/50 [02:23&lt;15:40, 22.95s/it, best loss: 526487.0738363715]</pre>
+<pre> 20%|██        | 10/50 [02:17&lt;09:14, 13.85s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13504,7 +13511,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 20%|██        | 10/50 [03:43&lt;26:40, 40.02s/it, best loss: 520398.3488046875]</pre>
+<pre> 22%|██▏       | 11/50 [02:55&lt;13:42, 21.10s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13530,7 +13537,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 22%|██▏       | 11/50 [03:55&lt;20:35, 31.67s/it, best loss: 520398.3488046875]</pre>
+<pre> 24%|██▍       | 12/50 [03:07&lt;11:40, 18.44s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13556,7 +13563,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 24%|██▍       | 12/50 [04:04&lt;15:49, 25.00s/it, best loss: 520398.3488046875]</pre>
+<pre> 26%|██▌       | 13/50 [03:20&lt;10:21, 16.81s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13582,7 +13589,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 26%|██▌       | 13/50 [04:09&lt;11:41, 18.96s/it, best loss: 520398.3488046875]</pre>
+<pre> 28%|██▊       | 14/50 [03:25&lt;07:56, 13.23s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13608,7 +13615,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 28%|██▊       | 14/50 [04:19&lt;09:40, 16.14s/it, best loss: 520398.3488046875]</pre>
+<pre> 30%|███       | 15/50 [03:30&lt;06:18, 10.80s/it, best loss: 532342.4761484375]</pre>
 </div>
 </div>
 
@@ -13634,7 +13641,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 30%|███       | 15/50 [04:23&lt;07:18, 12.52s/it, best loss: 520398.3488046875]</pre>
+<pre> 32%|███▏      | 16/50 [04:13&lt;11:30, 20.31s/it, best loss: 528302.63565625]  </pre>
 </div>
 </div>
 
@@ -13660,7 +13667,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 32%|███▏      | 16/50 [04:38&lt;07:29, 13.23s/it, best loss: 520398.3488046875]</pre>
+<pre> 34%|███▍      | 17/50 [04:24&lt;09:38, 17.54s/it, best loss: 528302.63565625]</pre>
 </div>
 </div>
 
@@ -13686,7 +13693,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 34%|███▍      | 17/50 [04:59&lt;08:34, 15.59s/it, best loss: 520398.3488046875]</pre>
+<pre> 36%|███▌      | 18/50 [04:42&lt;09:24, 17.65s/it, best loss: 495289.55463888886]</pre>
 </div>
 </div>
 
@@ -13712,7 +13719,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 36%|███▌      | 18/50 [05:06&lt;07:02, 13.21s/it, best loss: 520398.3488046875]</pre>
+<pre> 38%|███▊      | 19/50 [04:46&lt;06:58, 13.51s/it, best loss: 495289.55463888886]</pre>
 </div>
 </div>
 
@@ -13738,7 +13745,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 38%|███▊      | 19/50 [05:12&lt;05:37, 10.88s/it, best loss: 520398.3488046875]</pre>
+<pre> 40%|████      | 20/50 [05:44&lt;13:29, 26.97s/it, best loss: 495289.55463888886]</pre>
 </div>
 </div>
 
@@ -13764,7 +13771,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 40%|████      | 20/50 [05:19&lt;04:49,  9.66s/it, best loss: 520398.3488046875]</pre>
+<pre> 42%|████▏     | 21/50 [06:01&lt;11:39, 24.12s/it, best loss: 495289.55463888886]</pre>
 </div>
 </div>
 
@@ -13790,7 +13797,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 42%|████▏     | 21/50 [05:58&lt;08:59, 18.61s/it, best loss: 508333.1542291667]</pre>
+<pre> 44%|████▍     | 22/50 [06:17&lt;10:03, 21.54s/it, best loss: 487142.821109375]  </pre>
 </div>
 </div>
 
@@ -13816,7 +13823,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 44%|████▍     | 22/50 [06:38&lt;11:40, 25.01s/it, best loss: 506570.3321588542]</pre>
+<pre> 46%|████▌     | 23/50 [06:28&lt;08:17, 18.43s/it, best loss: 487142.821109375]</pre>
 </div>
 </div>
 
@@ -13842,7 +13849,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 46%|████▌     | 23/50 [07:25&lt;14:10, 31.51s/it, best loss: 506570.3321588542]</pre>
+<pre> 48%|████▊     | 24/50 [06:46&lt;07:51, 18.15s/it, best loss: 487142.821109375]</pre>
 </div>
 </div>
 
@@ -13868,7 +13875,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 48%|████▊     | 24/50 [08:02&lt;14:21, 33.13s/it, best loss: 506570.3321588542]</pre>
+<pre> 50%|█████     | 25/50 [07:22&lt;09:49, 23.58s/it, best loss: 484432.2250295139]</pre>
 </div>
 </div>
 
@@ -13894,7 +13901,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 50%|█████     | 25/50 [08:36&lt;13:54, 33.38s/it, best loss: 505790.8125052083]</pre>
+<pre> 52%|█████▏    | 26/50 [07:37&lt;08:23, 21.00s/it, best loss: 484432.2250295139]</pre>
 </div>
 </div>
 
@@ -13920,7 +13927,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 52%|█████▏    | 26/50 [08:59&lt;12:05, 30.25s/it, best loss: 505790.8125052083]</pre>
+<pre> 54%|█████▍    | 27/50 [08:18&lt;10:21, 27.03s/it, best loss: 484432.2250295139]</pre>
 </div>
 </div>
 
@@ -13946,7 +13953,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 54%|█████▍    | 27/50 [09:35&lt;12:20, 32.21s/it, best loss: 501508.92386371526]</pre>
+<pre> 56%|█████▌    | 28/50 [08:57&lt;11:14, 30.67s/it, best loss: 484432.2250295139]</pre>
 </div>
 </div>
 
@@ -13972,7 +13979,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 56%|█████▌    | 28/50 [10:04&lt;11:27, 31.24s/it, best loss: 501508.92386371526]</pre>
+<pre> 58%|█████▊    | 29/50 [09:53&lt;13:23, 38.26s/it, best loss: 484432.2250295139]</pre>
 </div>
 </div>
 
@@ -13998,7 +14005,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 58%|█████▊    | 29/50 [10:25&lt;09:51, 28.18s/it, best loss: 501508.92386371526]</pre>
+<pre> 60%|██████    | 30/50 [10:54&lt;15:01, 45.05s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14024,7 +14031,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 60%|██████    | 30/50 [10:51&lt;09:07, 27.37s/it, best loss: 501508.92386371526]</pre>
+<pre> 62%|██████▏   | 31/50 [12:11&lt;17:16, 54.58s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14050,7 +14057,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 62%|██████▏   | 31/50 [11:10&lt;07:55, 25.01s/it, best loss: 501508.92386371526]</pre>
+<pre> 64%|██████▍   | 32/50 [12:52&lt;15:08, 50.49s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14076,7 +14083,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 64%|██████▍   | 32/50 [11:41&lt;08:01, 26.76s/it, best loss: 501508.92386371526]</pre>
+<pre> 66%|██████▌   | 33/50 [14:00&lt;15:50, 55.89s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14102,7 +14109,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 66%|██████▌   | 33/50 [11:59&lt;06:50, 24.14s/it, best loss: 501508.92386371526]</pre>
+<pre> 68%|██████▊   | 34/50 [14:36&lt;13:18, 49.93s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14128,7 +14135,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 68%|██████▊   | 34/50 [12:38&lt;07:36, 28.56s/it, best loss: 501508.92386371526]</pre>
+<pre> 70%|███████   | 35/50 [15:05&lt;10:51, 43.46s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14154,7 +14161,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 70%|███████   | 35/50 [13:21&lt;08:14, 32.99s/it, best loss: 501508.92386371526]</pre>
+<pre> 72%|███████▏  | 36/50 [15:24&lt;08:25, 36.13s/it, best loss: 481652.43170746526]</pre>
 </div>
 </div>
 
@@ -14180,7 +14187,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 72%|███████▏  | 36/50 [13:33&lt;06:11, 26.56s/it, best loss: 501508.92386371526]</pre>
+<pre> 74%|███████▍  | 37/50 [16:17&lt;08:57, 41.35s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14206,7 +14213,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 74%|███████▍  | 37/50 [13:52&lt;05:14, 24.23s/it, best loss: 501508.92386371526]</pre>
+<pre> 76%|███████▌  | 38/50 [17:10&lt;08:57, 44.79s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14232,7 +14239,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 76%|███████▌  | 38/50 [14:05&lt;04:12, 21.07s/it, best loss: 501508.92386371526]</pre>
+<pre> 78%|███████▊  | 39/50 [17:44&lt;07:38, 41.66s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14258,7 +14265,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 78%|███████▊  | 39/50 [14:54&lt;05:22, 29.30s/it, best loss: 501508.92386371526]</pre>
+<pre> 80%|████████  | 40/50 [18:36&lt;07:27, 44.71s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14284,7 +14291,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 80%|████████  | 40/50 [15:04&lt;03:56, 23.66s/it, best loss: 501508.92386371526]</pre>
+<pre> 82%|████████▏ | 41/50 [19:15&lt;06:26, 42.98s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14310,7 +14317,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 82%|████████▏ | 41/50 [15:40&lt;04:04, 27.21s/it, best loss: 501508.92386371526]</pre>
+<pre> 84%|████████▍ | 42/50 [19:50&lt;05:24, 40.57s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14336,7 +14343,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 84%|████████▍ | 42/50 [16:08&lt;03:40, 27.56s/it, best loss: 501508.92386371526]</pre>
+<pre> 86%|████████▌ | 43/50 [20:27&lt;04:35, 39.39s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14362,7 +14369,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 86%|████████▌ | 43/50 [16:45&lt;03:31, 30.20s/it, best loss: 501508.92386371526]</pre>
+<pre> 88%|████████▊ | 44/50 [21:05&lt;03:54, 39.10s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14388,7 +14395,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 88%|████████▊ | 44/50 [17:03&lt;02:40, 26.67s/it, best loss: 501508.92386371526]</pre>
+<pre> 90%|█████████ | 45/50 [21:28&lt;02:51, 34.21s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14414,7 +14421,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 90%|█████████ | 45/50 [17:32&lt;02:16, 27.33s/it, best loss: 501508.92386371526]</pre>
+<pre> 92%|█████████▏| 46/50 [22:10&lt;02:25, 36.44s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14440,7 +14447,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 92%|█████████▏| 46/50 [18:10&lt;02:02, 30.64s/it, best loss: 501508.92386371526]</pre>
+<pre> 94%|█████████▍| 47/50 [22:18&lt;01:24, 28.15s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14466,7 +14473,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 94%|█████████▍| 47/50 [18:22&lt;01:14, 24.83s/it, best loss: 501508.92386371526]</pre>
+<pre> 96%|█████████▌| 48/50 [23:03&lt;01:06, 33.02s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14492,7 +14499,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 96%|█████████▌| 48/50 [18:57&lt;00:56, 28.06s/it, best loss: 501508.92386371526]</pre>
+<pre> 98%|█████████▊| 49/50 [24:07&lt;00:42, 42.54s/it, best loss: 481494.25492100697]</pre>
 </div>
 </div>
 
@@ -14518,33 +14525,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre> 98%|█████████▊| 49/50 [19:22&lt;00:27, 27.14s/it, best loss: 501508.92386371526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>100%|██████████| 50/50 [19:31&lt;00:00, 23.44s/it, best loss: 501508.92386371526]
+<pre>100%|██████████| 50/50 [24:48&lt;00:00, 29.77s/it, best loss: 481494.25492100697]
 </pre>
 </div>
 </div>
@@ -14557,11 +14538,11 @@ div#notebook {
 
 
 <div class="output_text output_subarea ">
-<pre>{&#39;alpha&#39;: 20.91434940058063,
+<pre>{&#39;alpha&#39;: 19.99916025229205,
  &#39;colsample_bytree&#39;: 0.65,
- &#39;learning_rate&#39;: 0.14,
- &#39;max_depth&#39;: 16.0,
- &#39;n_estimators&#39;: 150.0,
+ &#39;learning_rate&#39;: 0.15,
+ &#39;max_depth&#39;: 20.0,
+ &#39;n_estimators&#39;: 90.0,
  &#39;test_size&#39;: 0.1}</pre>
 </div>
 
@@ -14699,24 +14680,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
        <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
-<span class="c1">#             &#39;lat&#39;, &#39;lng&#39;,</span>
+            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
        <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
 <span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">]</span>
 
 <span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span>
-
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
 
 <span class="c1"># Preparación hiperparámetros</span>
 
@@ -14727,11 +14709,11 @@ div#notebook {
 <span class="c1">#  &#39;n_estimators&#39;: 300.0,</span>
 <span class="c1">#  &#39;test_size&#39;: 0.15000000000000002}</span>
 
-<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">20.91434940058063</span><span class="p">,</span>
+<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">19.99916025229205</span><span class="p">,</span>
  <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.14</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">16.0</span><span class="p">),</span>
- <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">150.0</span><span class="p">),</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">20.0</span><span class="p">),</span>
+ <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">90.0</span><span class="p">),</span>
  <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
@@ -14819,59 +14801,59 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0]	train-mae:2.18158e+06	test-mae:2.1978e+06
-[1]	train-mae:1.88329e+06	test-mae:1.90038e+06
-[2]	train-mae:1.62764e+06	test-mae:1.64632e+06
-[3]	train-mae:1.40866e+06	test-mae:1.43295e+06
-[4]	train-mae:1.22136e+06	test-mae:1.25308e+06
-[5]	train-mae:1.06140e+06	test-mae:1.10262e+06
-[6]	train-mae:925465	test-mae:979498
-[7]	train-mae:810357	test-mae:877989
-[8]	train-mae:713868	test-mae:797339
-[9]	train-mae:632277	test-mae:732024
-[10]	train-mae:562950	test-mae:680198
-[11]	train-mae:506820	test-mae:640341
-[12]	train-mae:460596	test-mae:609310
-[13]	train-mae:420124	test-mae:584957
-[14]	train-mae:386418	test-mae:566562
-[15]	train-mae:359766	test-mae:552164
-[16]	train-mae:336512	test-mae:541408
-[17]	train-mae:316903	test-mae:533376
-[18]	train-mae:300420	test-mae:526763
-[19]	train-mae:286051	test-mae:522179
-[20]	train-mae:274933	test-mae:518592
-[21]	train-mae:264194	test-mae:515521
-[22]	train-mae:254612	test-mae:512816
-[23]	train-mae:245736	test-mae:510966
-[24]	train-mae:237429	test-mae:509551
-[25]	train-mae:230498	test-mae:508490
-[26]	train-mae:224240	test-mae:507270
-[27]	train-mae:218545	test-mae:506678
-[28]	train-mae:213182	test-mae:506069
-[29]	train-mae:208990	test-mae:505606
-[30]	train-mae:204538	test-mae:505294
-[31]	train-mae:201376	test-mae:504748
-[32]	train-mae:198022	test-mae:504482
-[33]	train-mae:193728	test-mae:504246
-[34]	train-mae:190438	test-mae:503921
-[35]	train-mae:187138	test-mae:503885
-[36]	train-mae:184472	test-mae:503711
-[37]	train-mae:181322	test-mae:503591
-[38]	train-mae:178673	test-mae:503434
-[39]	train-mae:175770	test-mae:503023
-[40]	train-mae:173265	test-mae:502811
-[41]	train-mae:170688	test-mae:502659
-[42]	train-mae:168493	test-mae:502418
-[43]	train-mae:166547	test-mae:502141
-[44]	train-mae:164353	test-mae:501959
-[45]	train-mae:162995	test-mae:501886
-[46]	train-mae:161054	test-mae:501863
-[47]	train-mae:159209	test-mae:501592
-[48]	train-mae:157551	test-mae:501514
-[49]	train-mae:155586	test-mae:501414
-MAE (train): 155585.31897
-MAE: 501413.47531
-MAE (eval): 493153.48604
+<pre>[0]	train-mae:2.16263e+06	test-mae:2.18108e+06
+[1]	train-mae:1.84763e+06	test-mae:1.86739e+06
+[2]	train-mae:1.58015e+06	test-mae:1.60335e+06
+[3]	train-mae:1.35271e+06	test-mae:1.38282e+06
+[4]	train-mae:1.1596e+06	test-mae:1.19971e+06
+[5]	train-mae:996237	test-mae:1.05124e+06
+[6]	train-mae:857518	test-mae:930787
+[7]	train-mae:738939	test-mae:833015
+[8]	train-mae:638519	test-mae:755706
+[9]	train-mae:552710	test-mae:694137
+[10]	train-mae:479926	test-mae:647447
+[11]	train-mae:417837	test-mae:610690
+[12]	train-mae:364434	test-mae:581549
+[13]	train-mae:318952	test-mae:559763
+[14]	train-mae:279914	test-mae:542763
+[15]	train-mae:246921	test-mae:530034
+[16]	train-mae:218572	test-mae:519891
+[17]	train-mae:194438	test-mae:512738
+[18]	train-mae:173315	test-mae:506899
+[19]	train-mae:155467	test-mae:502224
+[20]	train-mae:140111	test-mae:498859
+[21]	train-mae:126857	test-mae:496404
+[22]	train-mae:115677	test-mae:494486
+[23]	train-mae:105637	test-mae:492864
+[24]	train-mae:96929.6	test-mae:491596
+[25]	train-mae:89376.7	test-mae:490559
+[26]	train-mae:82796.2	test-mae:489663
+[27]	train-mae:76818.8	test-mae:489055
+[28]	train-mae:71591	test-mae:488487
+[29]	train-mae:66999.1	test-mae:488180
+[30]	train-mae:62708.3	test-mae:487752
+[31]	train-mae:58712.6	test-mae:487477
+[32]	train-mae:55806	test-mae:487277
+[33]	train-mae:52335.5	test-mae:487047
+[34]	train-mae:49871.4	test-mae:486847
+[35]	train-mae:47345.2	test-mae:486569
+[36]	train-mae:45070.3	test-mae:486406
+[37]	train-mae:42884.3	test-mae:486288
+[38]	train-mae:40695.2	test-mae:486226
+[39]	train-mae:38871.9	test-mae:486133
+[40]	train-mae:37097.5	test-mae:486118
+[41]	train-mae:35534.5	test-mae:486072
+[42]	train-mae:33988	test-mae:485939
+[43]	train-mae:32317.2	test-mae:485840
+[44]	train-mae:30979.9	test-mae:485771
+[45]	train-mae:29831.1	test-mae:485704
+[46]	train-mae:28775	test-mae:485650
+[47]	train-mae:27663	test-mae:485617
+[48]	train-mae:26811.7	test-mae:485582
+[49]	train-mae:25769	test-mae:485525
+MAE (train): 25769.01166
+MAE: 485525.17163
+MAE (eval): 476124.34970
 </pre>
 </div>
 </div>
@@ -14889,16 +14871,30 @@ MAE (eval): 493153.48604
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
 <span class="n">df_test_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
 
-<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train_final</span><span class="p">)</span>
-<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="n">df_train_final</span><span class="p">)</span>
-<span class="n">df_test_final_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test_final</span><span class="p">)</span>
-<span class="n">df_test_final_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">df_train_final</span><span class="p">)</span>
+<span class="n">df_train_final</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train_final</span><span class="p">)</span>
+<span class="n">df_test_final</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test_final</span><span class="p">)</span>
+
+<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train_final</span><span class="p">)</span>
+<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="n">df_train_final</span><span class="p">)</span>
+<span class="n">df_test_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test_final</span><span class="p">)</span>
+<span class="n">df_test_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">df_train_final</span><span class="p">)</span>
+
+<span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_final</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_final</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">cols_zona_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_final</span><span class="p">)</span>
+<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_final</span><span class="p">)</span>
+<span class="n">df_train_final_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_final_f</span><span class="p">)</span>
+
+<span class="n">df_train_final_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df_test_final_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14908,23 +14904,47 @@ MAE (eval): 493153.48604
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
-<span class="n">features_extra</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span><span class="s1">&#39;turismo&#39;</span><span class="p">,</span><span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;anio&#39;</span><span class="p">,</span><span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> 
-       <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">]</span>
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">]</span>
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">features_extra</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
+
+<span class="n">features</span> <span class="o">+=</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">+</span> <span class="n">cols_provincia_ohe</span> <span class="o">+</span> <span class="n">cols_zona_ohe</span>
+
+
+<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">19.99916025229205</span><span class="p">,</span>
+ <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">20.0</span><span class="p">),</span>
+ <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">90.0</span><span class="p">),</span>
+ <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
+<span class="n">colsample_bytree</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;colsample_bytree&#39;</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">]</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span>
+<span class="n">n_estimators</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">]</span>
+<span class="n">test_size</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;test_size&#39;</span><span class="p">]</span>
+
+<span class="n">n_estimators</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">])</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+
 
 <span class="c1"># Filtro columnas</span>
-<span class="n">df_XGBoost_fin</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<span class="n">df_XGBoost_fin</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_final_f</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span>
 <span class="n">df_eval_fin</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_final_f</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
 
 <span class="n">x_train_f</span><span class="p">,</span> <span class="n">x_test_f</span><span class="p">,</span> <span class="n">y_train_f</span><span class="p">,</span> <span class="n">y_test_f</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_XGBoost_fin</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
@@ -14949,8 +14969,9 @@ MAE (eval): 493153.48604
 <span class="c1"># Entrenamiento</span>
 <span class="n">xg_reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> 
                    <span class="n">xg_train</span><span class="p">,</span> 
-                   <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
-                   <span class="n">evals</span><span class="o">=</span><span class="n">watchlist</span>
+                   <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                   <span class="n">evals</span><span class="o">=</span><span class="n">watchlist</span><span class="p">,</span>
+                   <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span>
                   <span class="p">)</span>
 
 
@@ -14968,10 +14989,320 @@ MAE (eval): 493153.48604
 
 <span class="n">prediccion_final</span> <span class="o">=</span> <span class="n">xg_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">df_eval_fin</span><span class="p">))</span>
 <span class="n">df_test_final_f</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediccion_final</span>
-<span class="n">df_test_final_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta2.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df_test_final_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta22.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0]	train-mae:2.16798e+06	test-mae:2.14817e+06
+Multiple eval metrics have been passed: &#39;test-mae&#39; will be used for early stopping.
+
+Will train until test-mae hasn&#39;t improved in 10 rounds.
+[1]	train-mae:1.85233e+06	test-mae:1.83954e+06
+[2]	train-mae:1.58405e+06	test-mae:1.57918e+06
+[3]	train-mae:1.35618e+06	test-mae:1.36214e+06
+[4]	train-mae:1.16279e+06	test-mae:1.18192e+06
+[5]	train-mae:999053	test-mae:1.03559e+06
+[6]	train-mae:860037	test-mae:917059
+[7]	train-mae:741232	test-mae:820760
+[8]	train-mae:640462	test-mae:744287
+[9]	train-mae:554488	test-mae:683466
+[10]	train-mae:481530	test-mae:636930
+[11]	train-mae:419246	test-mae:600240
+[12]	train-mae:365754	test-mae:571849
+[13]	train-mae:320298	test-mae:550081
+[14]	train-mae:281190	test-mae:533091
+[15]	train-mae:248057	test-mae:519944
+[16]	train-mae:219714	test-mae:510212
+[17]	train-mae:195572	test-mae:502873
+[18]	train-mae:174462	test-mae:496886
+[19]	train-mae:156750	test-mae:492071
+[20]	train-mae:141258	test-mae:488564
+[21]	train-mae:127938	test-mae:485871
+[22]	train-mae:116784	test-mae:483953
+[23]	train-mae:106788	test-mae:482217
+[24]	train-mae:98069.3	test-mae:480903
+[25]	train-mae:90661.3	test-mae:479906
+[26]	train-mae:84139.2	test-mae:479152
+[27]	train-mae:78119.5	test-mae:478533
+[28]	train-mae:72713.4	test-mae:477973
+[29]	train-mae:68138	test-mae:477536
+[30]	train-mae:63619.3	test-mae:477197
+[31]	train-mae:59866.8	test-mae:476892
+[32]	train-mae:56618.7	test-mae:476640
+[33]	train-mae:53291.8	test-mae:476472
+[34]	train-mae:50793.8	test-mae:476347
+[35]	train-mae:48193.4	test-mae:476157
+[36]	train-mae:45758.9	test-mae:475980
+[37]	train-mae:43597.6	test-mae:475869
+[38]	train-mae:41384.4	test-mae:475746
+[39]	train-mae:39634.7	test-mae:475628
+[40]	train-mae:38012	test-mae:475572
+[41]	train-mae:36245.1	test-mae:475518
+[42]	train-mae:34778.1	test-mae:475448
+[43]	train-mae:33255.6	test-mae:475399
+[44]	train-mae:31804.7	test-mae:475293
+[45]	train-mae:30366.2	test-mae:475229
+[46]	train-mae:29395.8	test-mae:475184
+[47]	train-mae:28180.4	test-mae:475128
+[48]	train-mae:27194	test-mae:475075
+[49]	train-mae:26220.2	test-mae:475025
+[50]	train-mae:25111.9	test-mae:474957
+[51]	train-mae:24157.5	test-mae:474904
+[52]	train-mae:23209.3	test-mae:474865
+[53]	train-mae:22618.2	test-mae:474846
+[54]	train-mae:22120.3	test-mae:474820
+[55]	train-mae:21287.8	test-mae:474792
+[56]	train-mae:20588.8	test-mae:474771
+[57]	train-mae:20036.3	test-mae:474743
+[58]	train-mae:19410.8	test-mae:474707
+[59]	train-mae:18744.8	test-mae:474680
+[60]	train-mae:18307	test-mae:474661
+[61]	train-mae:17726.2	test-mae:474646
+[62]	train-mae:17277	test-mae:474628
+[63]	train-mae:16988.2	test-mae:474620
+[64]	train-mae:16743.6	test-mae:474608
+[65]	train-mae:16328.3	test-mae:474601
+[66]	train-mae:16122.7	test-mae:474595
+[67]	train-mae:15561.2	test-mae:474581
+[68]	train-mae:15227.2	test-mae:474574
+[69]	train-mae:14836	test-mae:474548
+[70]	train-mae:14362.9	test-mae:474546
+[71]	train-mae:13960.6	test-mae:474540
+[72]	train-mae:13749.9	test-mae:474525
+[73]	train-mae:13576.9	test-mae:474521
+[74]	train-mae:13313.8	test-mae:474509
+[75]	train-mae:12869.8	test-mae:474498
+[76]	train-mae:12724.5	test-mae:474493
+[77]	train-mae:12523.4	test-mae:474490
+[78]	train-mae:12275.6	test-mae:474481
+[79]	train-mae:11993.9	test-mae:474468
+[80]	train-mae:11757.6	test-mae:474463
+[81]	train-mae:11445.4	test-mae:474458
+[82]	train-mae:11250.4	test-mae:474451
+[83]	train-mae:11077.5	test-mae:474451
+[84]	train-mae:10981.6	test-mae:474454
+[85]	train-mae:10795.3	test-mae:474449
+[86]	train-mae:10721	test-mae:474443
+[87]	train-mae:10605.7	test-mae:474437
+[88]	train-mae:10471.8	test-mae:474434
+[89]	train-mae:10437.5	test-mae:474434
+[90]	train-mae:10303	test-mae:474424
+[91]	train-mae:10211	test-mae:474423
+[92]	train-mae:10115.2	test-mae:474422
+[93]	train-mae:9916.61	test-mae:474419
+[94]	train-mae:9807.53	test-mae:474410
+[95]	train-mae:9576.38	test-mae:474396
+[96]	train-mae:9500.64	test-mae:474399
+[97]	train-mae:9438.17	test-mae:474401
+[98]	train-mae:9286.17	test-mae:474396
+[99]	train-mae:9232.84	test-mae:474395
+[100]	train-mae:9085.36	test-mae:474388
+[101]	train-mae:8877.46	test-mae:474378
+[102]	train-mae:8693.57	test-mae:474372
+[103]	train-mae:8500.16	test-mae:474364
+[104]	train-mae:8433.23	test-mae:474360
+[105]	train-mae:8252.04	test-mae:474359
+[106]	train-mae:8234.53	test-mae:474360
+[107]	train-mae:8150.26	test-mae:474354
+[108]	train-mae:8078.09	test-mae:474350
+[109]	train-mae:8066.04	test-mae:474348
+[110]	train-mae:7995.45	test-mae:474341
+[111]	train-mae:7897.56	test-mae:474340
+[112]	train-mae:7792.62	test-mae:474336
+[113]	train-mae:7691.09	test-mae:474334
+[114]	train-mae:7569.23	test-mae:474334
+[115]	train-mae:7528.57	test-mae:474332
+[116]	train-mae:7463.98	test-mae:474329
+[117]	train-mae:7346.88	test-mae:474327
+[118]	train-mae:7086.34	test-mae:474324
+[119]	train-mae:6918.46	test-mae:474321
+[120]	train-mae:6834.57	test-mae:474319
+[121]	train-mae:6749.56	test-mae:474315
+[122]	train-mae:6609.48	test-mae:474314
+[123]	train-mae:6549.86	test-mae:474314
+[124]	train-mae:6524.18	test-mae:474314
+[125]	train-mae:6399.43	test-mae:474308
+[126]	train-mae:6317.8	test-mae:474304
+[127]	train-mae:6206.63	test-mae:474302
+[128]	train-mae:6034.64	test-mae:474302
+[129]	train-mae:5940.49	test-mae:474299
+[130]	train-mae:5880.65	test-mae:474297
+[131]	train-mae:5824.2	test-mae:474299
+[132]	train-mae:5801.45	test-mae:474298
+[133]	train-mae:5729.98	test-mae:474295
+[134]	train-mae:5674.43	test-mae:474294
+[135]	train-mae:5583.77	test-mae:474292
+[136]	train-mae:5538.74	test-mae:474292
+[137]	train-mae:5465.9	test-mae:474291
+[138]	train-mae:5355.28	test-mae:474285
+[139]	train-mae:5285.1	test-mae:474285
+[140]	train-mae:5214.8	test-mae:474283
+[141]	train-mae:5176.22	test-mae:474281
+[142]	train-mae:5088.92	test-mae:474277
+[143]	train-mae:5041.68	test-mae:474275
+[144]	train-mae:4990.33	test-mae:474272
+[145]	train-mae:4964.01	test-mae:474271
+[146]	train-mae:4900.17	test-mae:474269
+[147]	train-mae:4858.17	test-mae:474267
+[148]	train-mae:4772.85	test-mae:474264
+[149]	train-mae:4730.6	test-mae:474265
+[150]	train-mae:4663.26	test-mae:474262
+[151]	train-mae:4633.1	test-mae:474262
+[152]	train-mae:4571.47	test-mae:474259
+[153]	train-mae:4555.03	test-mae:474258
+[154]	train-mae:4523.85	test-mae:474258
+[155]	train-mae:4441.36	test-mae:474255
+[156]	train-mae:4287.51	test-mae:474253
+[157]	train-mae:4265.09	test-mae:474254
+[158]	train-mae:4236.99	test-mae:474252
+[159]	train-mae:4177.5	test-mae:474251
+[160]	train-mae:4129.37	test-mae:474251
+[161]	train-mae:4036.78	test-mae:474248
+[162]	train-mae:3979.28	test-mae:474249
+[163]	train-mae:3902.04	test-mae:474246
+[164]	train-mae:3848.44	test-mae:474246
+[165]	train-mae:3840.67	test-mae:474246
+[166]	train-mae:3761.8	test-mae:474246
+[167]	train-mae:3671.6	test-mae:474247
+[168]	train-mae:3625.7	test-mae:474243
+[169]	train-mae:3613.08	test-mae:474243
+[170]	train-mae:3545.4	test-mae:474243
+[171]	train-mae:3538.91	test-mae:474243
+[172]	train-mae:3518.61	test-mae:474243
+[173]	train-mae:3459.59	test-mae:474240
+[174]	train-mae:3435.03	test-mae:474239
+[175]	train-mae:3402.35	test-mae:474238
+[176]	train-mae:3356.54	test-mae:474237
+[177]	train-mae:3319.54	test-mae:474236
+[178]	train-mae:3284.79	test-mae:474235
+[179]	train-mae:3239.88	test-mae:474234
+[180]	train-mae:3192.8	test-mae:474233
+[181]	train-mae:3149.57	test-mae:474232
+[182]	train-mae:3129.1	test-mae:474231
+[183]	train-mae:3105.1	test-mae:474230
+[184]	train-mae:3084.11	test-mae:474229
+[185]	train-mae:3073.05	test-mae:474230
+[186]	train-mae:3025.7	test-mae:474229
+[187]	train-mae:3016.41	test-mae:474230
+[188]	train-mae:2968.8	test-mae:474229
+[189]	train-mae:2968.67	test-mae:474229
+[190]	train-mae:2909.13	test-mae:474226
+[191]	train-mae:2876.73	test-mae:474227
+[192]	train-mae:2857.28	test-mae:474227
+[193]	train-mae:2834.23	test-mae:474225
+[194]	train-mae:2782.72	test-mae:474223
+[195]	train-mae:2768.52	test-mae:474223
+[196]	train-mae:2762.87	test-mae:474222
+[197]	train-mae:2744.77	test-mae:474224
+[198]	train-mae:2730.07	test-mae:474222
+[199]	train-mae:2693.86	test-mae:474221
+[200]	train-mae:2651.82	test-mae:474219
+[201]	train-mae:2638.48	test-mae:474218
+[202]	train-mae:2616.61	test-mae:474217
+[203]	train-mae:2596.9	test-mae:474216
+[204]	train-mae:2585.54	test-mae:474215
+[205]	train-mae:2563.16	test-mae:474213
+[206]	train-mae:2530.77	test-mae:474212
+[207]	train-mae:2516.53	test-mae:474213
+[208]	train-mae:2506.4	test-mae:474212
+[209]	train-mae:2490.79	test-mae:474212
+[210]	train-mae:2455.49	test-mae:474211
+[211]	train-mae:2447.47	test-mae:474210
+[212]	train-mae:2423.23	test-mae:474209
+[213]	train-mae:2393.27	test-mae:474210
+[214]	train-mae:2389.99	test-mae:474210
+[215]	train-mae:2345.39	test-mae:474209
+[216]	train-mae:2332.67	test-mae:474209
+[217]	train-mae:2302.1	test-mae:474209
+[218]	train-mae:2274.37	test-mae:474207
+[219]	train-mae:2255.51	test-mae:474206
+[220]	train-mae:2244.46	test-mae:474207
+[221]	train-mae:2202.9	test-mae:474206
+[222]	train-mae:2197.45	test-mae:474206
+[223]	train-mae:2188.91	test-mae:474206
+[224]	train-mae:2183.04	test-mae:474206
+[225]	train-mae:2172.98	test-mae:474205
+[226]	train-mae:2160.07	test-mae:474204
+[227]	train-mae:2143.07	test-mae:474204
+[228]	train-mae:2134.78	test-mae:474204
+[229]	train-mae:2122.44	test-mae:474204
+[230]	train-mae:2100.7	test-mae:474204
+[231]	train-mae:2087.93	test-mae:474203
+[232]	train-mae:2068.51	test-mae:474203
+[233]	train-mae:2045.42	test-mae:474202
+[234]	train-mae:2035.87	test-mae:474202
+[235]	train-mae:2023.13	test-mae:474202
+[236]	train-mae:2011.39	test-mae:474202
+[237]	train-mae:1986.84	test-mae:474201
+[238]	train-mae:1934.59	test-mae:474201
+[239]	train-mae:1923.2	test-mae:474201
+[240]	train-mae:1916.63	test-mae:474201
+[241]	train-mae:1902.92	test-mae:474200
+[242]	train-mae:1893.85	test-mae:474199
+[243]	train-mae:1872.48	test-mae:474198
+[244]	train-mae:1872.4	test-mae:474198
+[245]	train-mae:1856.16	test-mae:474199
+[246]	train-mae:1839.93	test-mae:474198
+[247]	train-mae:1815.11	test-mae:474198
+[248]	train-mae:1804.87	test-mae:474198
+[249]	train-mae:1770.48	test-mae:474199
+[250]	train-mae:1768.42	test-mae:474199
+[251]	train-mae:1756.76	test-mae:474198
+[252]	train-mae:1722.79	test-mae:474198
+[253]	train-mae:1720.38	test-mae:474199
+[254]	train-mae:1705.81	test-mae:474199
+[255]	train-mae:1672.41	test-mae:474198
+[256]	train-mae:1650.65	test-mae:474198
+[257]	train-mae:1634.68	test-mae:474197
+[258]	train-mae:1626.21	test-mae:474197
+[259]	train-mae:1604.87	test-mae:474197
+[260]	train-mae:1603.91	test-mae:474197
+[261]	train-mae:1578.24	test-mae:474196
+[262]	train-mae:1573.01	test-mae:474196
+[263]	train-mae:1564.41	test-mae:474196
+[264]	train-mae:1555.08	test-mae:474197
+[265]	train-mae:1546.96	test-mae:474197
+[266]	train-mae:1542.91	test-mae:474197
+[267]	train-mae:1537.53	test-mae:474197
+[268]	train-mae:1514.61	test-mae:474196
+[269]	train-mae:1510.44	test-mae:474196
+[270]	train-mae:1488.68	test-mae:474195
+[271]	train-mae:1481.86	test-mae:474195
+[272]	train-mae:1479.47	test-mae:474195
+[273]	train-mae:1478.36	test-mae:474195
+[274]	train-mae:1460.84	test-mae:474194
+[275]	train-mae:1456.58	test-mae:474195
+[276]	train-mae:1452.71	test-mae:474194
+[277]	train-mae:1445.76	test-mae:474195
+[278]	train-mae:1444.72	test-mae:474195
+[279]	train-mae:1443.59	test-mae:474195
+[280]	train-mae:1431.26	test-mae:474195
+[281]	train-mae:1428.94	test-mae:474195
+[282]	train-mae:1422.17	test-mae:474195
+[283]	train-mae:1418.97	test-mae:474195
+[284]	train-mae:1411.46	test-mae:474195
+Stopping. Best iteration:
+[274]	train-mae:1460.84	test-mae:474194
+
+MAE (train): 1411.46204
+MAE: 474194.53022
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
