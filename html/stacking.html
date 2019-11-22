@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13086,12 +13086,14 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">ipynb.fs.full.utils</span> <span class="k">as</span> <span class="nn">utils</span>
 <span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features</span>
 
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_filtrado.csv&#39;</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">])</span>
 <span class="c1"># Para usarse con el submit a Kaggle</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
 
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">])</span>
 
 <span class="c1"># df_train, df_test = features_de_csvs(df_train, df_test)</span>
 
@@ -13105,7 +13107,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13141,7 +13143,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13156,13 +13158,13 @@ div#notebook {
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">LightGBMWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> 
                <span class="n">num_iteration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">best_iteration_</span><span class="p">)</span>
 
-<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8999882607358867</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">95.0</span><span class="p">,</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.2570109385381975</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.13601832720254403</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">26.0</span><span class="p">,</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">175.0</span><span class="p">,</span>
- <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.08363501292068126</span><span class="p">}</span>
+<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8988911725316586</span><span class="p">,</span>
+ <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.6622442122619671</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.16422725363286422</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">180.0</span><span class="p">,</span>
+ <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.20892455926004772</span><span class="p">}</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
@@ -13194,7 +13196,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="k">import</span> <span class="n">KerasRegressor</span>
@@ -13219,24 +13221,6 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13247,7 +13231,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
@@ -13291,25 +13275,47 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 
 <span class="kn">from</span> <span class="nn">vecstack</span> <span class="k">import</span> <span class="n">StackingTransformer</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;garages&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span>
+            <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
 
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+                     <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;count_id_zona&#39;</span>
+                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span>
+
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
+
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+                     <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;count_id_zona&#39;</span>
+                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span>
+
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 
@@ -13345,628 +13351,628 @@ variant:      [A]
 n_estimators: [2]
 
 estimator  0: [lightgbm: LightGBMWrapper]
-    fold  0:  [513908.86251132]
-    fold  1:  [519487.44676944]
-    fold  2:  [517465.89578313]
-    fold  3:  [517615.34308838]
+    fold  0:  [0.20419658]
+    fold  1:  [0.20448883]
+    fold  2:  [0.20467907]
+    fold  3:  [0.20347208]
     ----
-    MEAN:     [517119.38703807] + [2017.49940164]
+    MEAN:     [0.20420914] + [0.00045893]
 
 estimator  1: [xgboost: XGBoostWrapper]
-[22:55:40] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
-[0]	validation_0-mae:2.18901e+06
+[18:01:19] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:11.9652
 Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:1.89059e+06
-[2]	validation_0-mae:1.63412e+06
-[3]	validation_0-mae:1.41386e+06
-[4]	validation_0-mae:1.22503e+06
-[5]	validation_0-mae:1.06324e+06
-[6]	validation_0-mae:924910
-[7]	validation_0-mae:806933
-[8]	validation_0-mae:706275
-[9]	validation_0-mae:621479
-[10]	validation_0-mae:550127
-[11]	validation_0-mae:489707
-[12]	validation_0-mae:438620
-[13]	validation_0-mae:396915
-[14]	validation_0-mae:361730
-[15]	validation_0-mae:333319
-[16]	validation_0-mae:307485
-[17]	validation_0-mae:286673
-[18]	validation_0-mae:268407
-[19]	validation_0-mae:253633
-[20]	validation_0-mae:240332
-[21]	validation_0-mae:229361
-[22]	validation_0-mae:219917
-[23]	validation_0-mae:210105
-[24]	validation_0-mae:202547
-[25]	validation_0-mae:195765
-[26]	validation_0-mae:188487
-[27]	validation_0-mae:182092
-[28]	validation_0-mae:176394
-[29]	validation_0-mae:171556
-[30]	validation_0-mae:167025
-[31]	validation_0-mae:163398
-[32]	validation_0-mae:159946
-[33]	validation_0-mae:157044
-[34]	validation_0-mae:154058
-[35]	validation_0-mae:151011
-[36]	validation_0-mae:147765
-[37]	validation_0-mae:143865
-[38]	validation_0-mae:141010
-[39]	validation_0-mae:137532
-[40]	validation_0-mae:134424
-[41]	validation_0-mae:131465
-[42]	validation_0-mae:130147
-[43]	validation_0-mae:127634
-[44]	validation_0-mae:125213
-[45]	validation_0-mae:122795
-[46]	validation_0-mae:120230
-[47]	validation_0-mae:118517
-[48]	validation_0-mae:116458
-[49]	validation_0-mae:114757
-[50]	validation_0-mae:113267
-[51]	validation_0-mae:111980
-[52]	validation_0-mae:110620
-[53]	validation_0-mae:108946
-[54]	validation_0-mae:107968
-[55]	validation_0-mae:105797
-[56]	validation_0-mae:104353
-[57]	validation_0-mae:103392
-[58]	validation_0-mae:102035
-[59]	validation_0-mae:100773
-[60]	validation_0-mae:99888.4
-[61]	validation_0-mae:98424.2
-[62]	validation_0-mae:97047.5
-[63]	validation_0-mae:95659
-[64]	validation_0-mae:94678.2
-[65]	validation_0-mae:93986.7
-[66]	validation_0-mae:93168.9
-[67]	validation_0-mae:91822.2
-[68]	validation_0-mae:91512.8
-[69]	validation_0-mae:90340.8
-[70]	validation_0-mae:89462.8
-[71]	validation_0-mae:89316.9
-[72]	validation_0-mae:88614.6
-[73]	validation_0-mae:87681.6
-[74]	validation_0-mae:86980.3
-[75]	validation_0-mae:86538.2
-[76]	validation_0-mae:86152
-[77]	validation_0-mae:85780.1
-[78]	validation_0-mae:85429.6
-[79]	validation_0-mae:84413.3
-[80]	validation_0-mae:83828.6
-[81]	validation_0-mae:83403.8
-[82]	validation_0-mae:83142.6
-[83]	validation_0-mae:82804.2
-[84]	validation_0-mae:82199.4
-[85]	validation_0-mae:81589.8
-[86]	validation_0-mae:81208.3
-[87]	validation_0-mae:80881.1
-[88]	validation_0-mae:80530.8
-[89]	validation_0-mae:80013.7
-[90]	validation_0-mae:79161.5
-[91]	validation_0-mae:78678
-[92]	validation_0-mae:78549.3
-[93]	validation_0-mae:78407.6
-[94]	validation_0-mae:78236.6
-[95]	validation_0-mae:77507.7
-[96]	validation_0-mae:77243.2
-[97]	validation_0-mae:77014.1
-[98]	validation_0-mae:76836.7
-[99]	validation_0-mae:76305
-[100]	validation_0-mae:76046.3
-[101]	validation_0-mae:75831.4
-[102]	validation_0-mae:75754.6
-[103]	validation_0-mae:74474.5
-[104]	validation_0-mae:73697.2
-[105]	validation_0-mae:73152.6
-[106]	validation_0-mae:72156.9
-[107]	validation_0-mae:72037.6
-[108]	validation_0-mae:71190.7
-[109]	validation_0-mae:70740.8
-[110]	validation_0-mae:70444.5
-[111]	validation_0-mae:70199.7
-[112]	validation_0-mae:69878.5
-[113]	validation_0-mae:69555.1
-[114]	validation_0-mae:69063.9
-[115]	validation_0-mae:68651.8
-[116]	validation_0-mae:67636.3
-[117]	validation_0-mae:66921.6
-[118]	validation_0-mae:66723.4
-[119]	validation_0-mae:66215.9
-[120]	validation_0-mae:65610.3
-[121]	validation_0-mae:65152.4
-[122]	validation_0-mae:64770.3
-[123]	validation_0-mae:64674.8
-[124]	validation_0-mae:64612.7
-[125]	validation_0-mae:64523.5
-[126]	validation_0-mae:64263.3
-[127]	validation_0-mae:63953.2
-[128]	validation_0-mae:63731.4
-[129]	validation_0-mae:63414.3
-[130]	validation_0-mae:63115
-[131]	validation_0-mae:62836.5
-[132]	validation_0-mae:62330.4
-[133]	validation_0-mae:62251.2
-[134]	validation_0-mae:61583.3
-[135]	validation_0-mae:61332.1
-[136]	validation_0-mae:61197.6
-[137]	validation_0-mae:60952.7
-[138]	validation_0-mae:60457.7
-[139]	validation_0-mae:60162.4
-[140]	validation_0-mae:59428.3
-[141]	validation_0-mae:59357.6
-[142]	validation_0-mae:58870.6
-[143]	validation_0-mae:58408.1
-[144]	validation_0-mae:58170.4
-[145]	validation_0-mae:58036.5
-[146]	validation_0-mae:57789.4
-[147]	validation_0-mae:57727.1
-[148]	validation_0-mae:57304.3
-[149]	validation_0-mae:57067.9
-    fold  0:  [486109.84349975]
-[22:57:12] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
-[0]	validation_0-mae:2.18115e+06
+[1]	validation_0-mae:10.2902
+[2]	validation_0-mae:8.84998
+[3]	validation_0-mae:7.6111
+[4]	validation_0-mae:6.54574
+[5]	validation_0-mae:5.62954
+[6]	validation_0-mae:4.84163
+[7]	validation_0-mae:4.164
+[8]	validation_0-mae:3.58128
+[9]	validation_0-mae:3.08017
+[10]	validation_0-mae:2.64919
+[11]	validation_0-mae:2.2786
+[12]	validation_0-mae:1.95995
+[13]	validation_0-mae:1.68608
+[14]	validation_0-mae:1.45074
+[15]	validation_0-mae:1.24861
+[16]	validation_0-mae:1.07527
+[17]	validation_0-mae:0.926672
+[18]	validation_0-mae:0.799669
+[19]	validation_0-mae:0.691068
+[20]	validation_0-mae:0.598525
+[21]	validation_0-mae:0.519562
+[22]	validation_0-mae:0.452828
+[23]	validation_0-mae:0.396278
+[24]	validation_0-mae:0.348745
+[25]	validation_0-mae:0.309748
+[26]	validation_0-mae:0.276382
+[27]	validation_0-mae:0.249055
+[28]	validation_0-mae:0.22581
+[29]	validation_0-mae:0.207025
+[30]	validation_0-mae:0.191465
+[31]	validation_0-mae:0.17927
+[32]	validation_0-mae:0.168735
+[33]	validation_0-mae:0.160495
+[34]	validation_0-mae:0.153236
+[35]	validation_0-mae:0.14696
+[36]	validation_0-mae:0.141154
+[37]	validation_0-mae:0.136644
+[38]	validation_0-mae:0.132859
+[39]	validation_0-mae:0.12915
+[40]	validation_0-mae:0.126306
+[41]	validation_0-mae:0.122692
+[42]	validation_0-mae:0.12003
+[43]	validation_0-mae:0.117479
+[44]	validation_0-mae:0.115474
+[45]	validation_0-mae:0.11369
+[46]	validation_0-mae:0.11206
+[47]	validation_0-mae:0.109737
+[48]	validation_0-mae:0.107768
+[49]	validation_0-mae:0.106643
+[50]	validation_0-mae:0.104703
+[51]	validation_0-mae:0.103382
+[52]	validation_0-mae:0.102133
+[53]	validation_0-mae:0.100906
+[54]	validation_0-mae:0.100271
+[55]	validation_0-mae:0.099227
+[56]	validation_0-mae:0.097476
+[57]	validation_0-mae:0.096108
+[58]	validation_0-mae:0.094976
+[59]	validation_0-mae:0.093508
+[60]	validation_0-mae:0.092911
+[61]	validation_0-mae:0.091837
+[62]	validation_0-mae:0.090804
+[63]	validation_0-mae:0.089882
+[64]	validation_0-mae:0.088881
+[65]	validation_0-mae:0.088295
+[66]	validation_0-mae:0.087183
+[67]	validation_0-mae:0.085845
+[68]	validation_0-mae:0.084694
+[69]	validation_0-mae:0.083729
+[70]	validation_0-mae:0.082973
+[71]	validation_0-mae:0.081974
+[72]	validation_0-mae:0.080751
+[73]	validation_0-mae:0.080129
+[74]	validation_0-mae:0.079667
+[75]	validation_0-mae:0.079195
+[76]	validation_0-mae:0.078442
+[77]	validation_0-mae:0.077718
+[78]	validation_0-mae:0.076714
+[79]	validation_0-mae:0.075984
+[80]	validation_0-mae:0.075352
+[81]	validation_0-mae:0.074847
+[82]	validation_0-mae:0.074603
+[83]	validation_0-mae:0.073972
+[84]	validation_0-mae:0.073203
+[85]	validation_0-mae:0.072508
+[86]	validation_0-mae:0.071821
+[87]	validation_0-mae:0.071103
+[88]	validation_0-mae:0.070703
+[89]	validation_0-mae:0.070357
+[90]	validation_0-mae:0.069854
+[91]	validation_0-mae:0.069518
+[92]	validation_0-mae:0.069041
+[93]	validation_0-mae:0.068669
+[94]	validation_0-mae:0.068382
+[95]	validation_0-mae:0.068137
+[96]	validation_0-mae:0.067539
+[97]	validation_0-mae:0.067329
+[98]	validation_0-mae:0.066798
+[99]	validation_0-mae:0.066264
+[100]	validation_0-mae:0.065965
+[101]	validation_0-mae:0.065627
+[102]	validation_0-mae:0.065231
+[103]	validation_0-mae:0.064562
+[104]	validation_0-mae:0.063905
+[105]	validation_0-mae:0.063389
+[106]	validation_0-mae:0.063114
+[107]	validation_0-mae:0.062383
+[108]	validation_0-mae:0.062138
+[109]	validation_0-mae:0.061863
+[110]	validation_0-mae:0.061727
+[111]	validation_0-mae:0.06147
+[112]	validation_0-mae:0.061263
+[113]	validation_0-mae:0.060911
+[114]	validation_0-mae:0.060277
+[115]	validation_0-mae:0.059703
+[116]	validation_0-mae:0.059485
+[117]	validation_0-mae:0.059417
+[118]	validation_0-mae:0.058623
+[119]	validation_0-mae:0.058272
+[120]	validation_0-mae:0.05809
+[121]	validation_0-mae:0.057746
+[122]	validation_0-mae:0.05696
+[123]	validation_0-mae:0.056598
+[124]	validation_0-mae:0.05628
+[125]	validation_0-mae:0.055966
+[126]	validation_0-mae:0.055705
+[127]	validation_0-mae:0.055425
+[128]	validation_0-mae:0.054855
+[129]	validation_0-mae:0.05461
+[130]	validation_0-mae:0.05425
+[131]	validation_0-mae:0.054168
+[132]	validation_0-mae:0.053996
+[133]	validation_0-mae:0.053457
+[134]	validation_0-mae:0.053401
+[135]	validation_0-mae:0.053353
+[136]	validation_0-mae:0.053202
+[137]	validation_0-mae:0.053074
+[138]	validation_0-mae:0.052846
+[139]	validation_0-mae:0.052255
+[140]	validation_0-mae:0.051879
+[141]	validation_0-mae:0.051723
+[142]	validation_0-mae:0.05138
+[143]	validation_0-mae:0.051092
+[144]	validation_0-mae:0.051033
+[145]	validation_0-mae:0.050853
+[146]	validation_0-mae:0.050782
+[147]	validation_0-mae:0.050421
+[148]	validation_0-mae:0.050365
+[149]	validation_0-mae:0.050014
+    fold  0:  [0.18974855]
+[18:02:45] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:11.9625
 Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:1.88397e+06
-[2]	validation_0-mae:1.6283e+06
-[3]	validation_0-mae:1.40875e+06
-[4]	validation_0-mae:1.22064e+06
-[5]	validation_0-mae:1.05923e+06
-[6]	validation_0-mae:921632
-[7]	validation_0-mae:804164
-[8]	validation_0-mae:703813
-[9]	validation_0-mae:619086
-[10]	validation_0-mae:548159
-[11]	validation_0-mae:487693
-[12]	validation_0-mae:436715
-[13]	validation_0-mae:395101
-[14]	validation_0-mae:360097
-[15]	validation_0-mae:331704
-[16]	validation_0-mae:305983
-[17]	validation_0-mae:284428
-[18]	validation_0-mae:266495
-[19]	validation_0-mae:251262
-[20]	validation_0-mae:238337
-[21]	validation_0-mae:227070
-[22]	validation_0-mae:217341
-[23]	validation_0-mae:206943
-[24]	validation_0-mae:199456
-[25]	validation_0-mae:193039
-[26]	validation_0-mae:185899
-[27]	validation_0-mae:179751
-[28]	validation_0-mae:173707
-[29]	validation_0-mae:168907
-[30]	validation_0-mae:164308
-[31]	validation_0-mae:160076
-[32]	validation_0-mae:156146
-[33]	validation_0-mae:152976
-[34]	validation_0-mae:149338
-[35]	validation_0-mae:146563
-[36]	validation_0-mae:143220
-[37]	validation_0-mae:139596
-[38]	validation_0-mae:137525
-[39]	validation_0-mae:134062
-[40]	validation_0-mae:131158
-[41]	validation_0-mae:128448
-[42]	validation_0-mae:126789
-[43]	validation_0-mae:124208
-[44]	validation_0-mae:122127
-[45]	validation_0-mae:119971
-[46]	validation_0-mae:118086
-[47]	validation_0-mae:116133
-[48]	validation_0-mae:113832
-[49]	validation_0-mae:112258
-[50]	validation_0-mae:110508
-[51]	validation_0-mae:109350
-[52]	validation_0-mae:108244
-[53]	validation_0-mae:106741
-[54]	validation_0-mae:106053
-[55]	validation_0-mae:104980
-[56]	validation_0-mae:103200
-[57]	validation_0-mae:101522
-[58]	validation_0-mae:101061
-[59]	validation_0-mae:99909.7
-[60]	validation_0-mae:98698.4
-[61]	validation_0-mae:97551.8
-[62]	validation_0-mae:96822.8
-[63]	validation_0-mae:95484.1
-[64]	validation_0-mae:94346.8
-[65]	validation_0-mae:94018.8
-[66]	validation_0-mae:93392.3
-[67]	validation_0-mae:92377.4
-[68]	validation_0-mae:92114.8
-[69]	validation_0-mae:90935.9
-[70]	validation_0-mae:90556.7
-[71]	validation_0-mae:89773.5
-[72]	validation_0-mae:89213.9
-[73]	validation_0-mae:88810.9
-[74]	validation_0-mae:87984.9
-[75]	validation_0-mae:87458.9
-[76]	validation_0-mae:86529.6
-[77]	validation_0-mae:85892.4
-[78]	validation_0-mae:85393.4
-[79]	validation_0-mae:84811.1
-[80]	validation_0-mae:84536.5
-[81]	validation_0-mae:83878.6
-[82]	validation_0-mae:83734.2
-[83]	validation_0-mae:83449.9
-[84]	validation_0-mae:83154.9
-[85]	validation_0-mae:82637.6
-[86]	validation_0-mae:82339
-[87]	validation_0-mae:81716
-[88]	validation_0-mae:81501.3
-[89]	validation_0-mae:80282.9
-[90]	validation_0-mae:79749.4
-[91]	validation_0-mae:79462.1
-[92]	validation_0-mae:78660.6
-[93]	validation_0-mae:78065.4
-[94]	validation_0-mae:77504.2
-[95]	validation_0-mae:77141.5
-[96]	validation_0-mae:76624.1
-[97]	validation_0-mae:76183.6
-[98]	validation_0-mae:75671.3
-[99]	validation_0-mae:75337.4
-[100]	validation_0-mae:75180.4
-[101]	validation_0-mae:74730.3
-[102]	validation_0-mae:74513.2
-[103]	validation_0-mae:74167.4
-[104]	validation_0-mae:73517.2
-[105]	validation_0-mae:73241.7
-[106]	validation_0-mae:72629
-[107]	validation_0-mae:72035
-[108]	validation_0-mae:71428.2
-[109]	validation_0-mae:70881.5
-[110]	validation_0-mae:70263.9
-[111]	validation_0-mae:69941.3
-[112]	validation_0-mae:69759.3
-[113]	validation_0-mae:69373.7
-[114]	validation_0-mae:68952.5
-[115]	validation_0-mae:68465.1
-[116]	validation_0-mae:68303.2
-[117]	validation_0-mae:68006.8
-[118]	validation_0-mae:67624.8
-[119]	validation_0-mae:67079.4
-[120]	validation_0-mae:66610.5
-[121]	validation_0-mae:66486.9
-[122]	validation_0-mae:66221.9
-[123]	validation_0-mae:65667.9
-[124]	validation_0-mae:65594.9
-[125]	validation_0-mae:65223.7
-[126]	validation_0-mae:64739.5
-[127]	validation_0-mae:64352.1
-[128]	validation_0-mae:64154.4
-[129]	validation_0-mae:63418
-[130]	validation_0-mae:63221.8
-[131]	validation_0-mae:62909.3
-[132]	validation_0-mae:62708.7
-[133]	validation_0-mae:61983.4
-[134]	validation_0-mae:61685.1
-[135]	validation_0-mae:61461.8
-[136]	validation_0-mae:61294.5
-[137]	validation_0-mae:60915.5
-[138]	validation_0-mae:60577.3
-[139]	validation_0-mae:60249
-[140]	validation_0-mae:59768.1
-[141]	validation_0-mae:59065.7
-[142]	validation_0-mae:58596.7
-[143]	validation_0-mae:58227.3
-[144]	validation_0-mae:57964.2
-[145]	validation_0-mae:57602.8
-[146]	validation_0-mae:57332.8
-[147]	validation_0-mae:56690.3
-[148]	validation_0-mae:56562.5
-[149]	validation_0-mae:56278.8
-    fold  1:  [497930.69818308]
-[22:58:35] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
-[0]	validation_0-mae:2.18256e+06
+[1]	validation_0-mae:10.288
+[2]	validation_0-mae:8.84797
+[3]	validation_0-mae:7.60947
+[4]	validation_0-mae:6.54432
+[5]	validation_0-mae:5.6283
+[6]	validation_0-mae:4.84054
+[7]	validation_0-mae:4.16308
+[8]	validation_0-mae:3.58046
+[9]	validation_0-mae:3.07945
+[10]	validation_0-mae:2.6486
+[11]	validation_0-mae:2.27811
+[12]	validation_0-mae:1.95955
+[13]	validation_0-mae:1.68575
+[14]	validation_0-mae:1.45043
+[15]	validation_0-mae:1.24833
+[16]	validation_0-mae:1.07495
+[17]	validation_0-mae:0.92639
+[18]	validation_0-mae:0.799382
+[19]	validation_0-mae:0.690858
+[20]	validation_0-mae:0.598297
+[21]	validation_0-mae:0.519526
+[22]	validation_0-mae:0.452759
+[23]	validation_0-mae:0.396361
+[24]	validation_0-mae:0.348748
+[25]	validation_0-mae:0.30978
+[26]	validation_0-mae:0.276551
+[27]	validation_0-mae:0.249405
+[28]	validation_0-mae:0.226224
+[29]	validation_0-mae:0.207376
+[30]	validation_0-mae:0.191891
+[31]	validation_0-mae:0.179205
+[32]	validation_0-mae:0.168376
+[33]	validation_0-mae:0.159873
+[34]	validation_0-mae:0.152939
+[35]	validation_0-mae:0.146997
+[36]	validation_0-mae:0.141316
+[37]	validation_0-mae:0.136717
+[38]	validation_0-mae:0.132925
+[39]	validation_0-mae:0.129293
+[40]	validation_0-mae:0.125579
+[41]	validation_0-mae:0.122498
+[42]	validation_0-mae:0.120049
+[43]	validation_0-mae:0.117528
+[44]	validation_0-mae:0.115602
+[45]	validation_0-mae:0.11359
+[46]	validation_0-mae:0.111302
+[47]	validation_0-mae:0.109774
+[48]	validation_0-mae:0.108065
+[49]	validation_0-mae:0.105936
+[50]	validation_0-mae:0.104569
+[51]	validation_0-mae:0.103549
+[52]	validation_0-mae:0.101966
+[53]	validation_0-mae:0.100387
+[54]	validation_0-mae:0.099415
+[55]	validation_0-mae:0.097393
+[56]	validation_0-mae:0.095489
+[57]	validation_0-mae:0.094355
+[58]	validation_0-mae:0.093089
+[59]	validation_0-mae:0.091896
+[60]	validation_0-mae:0.090821
+[61]	validation_0-mae:0.089863
+[62]	validation_0-mae:0.088933
+[63]	validation_0-mae:0.087595
+[64]	validation_0-mae:0.086559
+[65]	validation_0-mae:0.08589
+[66]	validation_0-mae:0.085479
+[67]	validation_0-mae:0.084186
+[68]	validation_0-mae:0.0832
+[69]	validation_0-mae:0.081457
+[70]	validation_0-mae:0.080873
+[71]	validation_0-mae:0.079883
+[72]	validation_0-mae:0.078864
+[73]	validation_0-mae:0.07782
+[74]	validation_0-mae:0.077259
+[75]	validation_0-mae:0.076341
+[76]	validation_0-mae:0.075336
+[77]	validation_0-mae:0.074385
+[78]	validation_0-mae:0.073951
+[79]	validation_0-mae:0.073638
+[80]	validation_0-mae:0.072955
+[81]	validation_0-mae:0.072264
+[82]	validation_0-mae:0.071546
+[83]	validation_0-mae:0.070701
+[84]	validation_0-mae:0.069854
+[85]	validation_0-mae:0.069396
+[86]	validation_0-mae:0.068806
+[87]	validation_0-mae:0.068389
+[88]	validation_0-mae:0.067959
+[89]	validation_0-mae:0.067202
+[90]	validation_0-mae:0.066744
+[91]	validation_0-mae:0.066499
+[92]	validation_0-mae:0.066138
+[93]	validation_0-mae:0.0659
+[94]	validation_0-mae:0.065614
+[95]	validation_0-mae:0.065119
+[96]	validation_0-mae:0.064805
+[97]	validation_0-mae:0.064612
+[98]	validation_0-mae:0.063859
+[99]	validation_0-mae:0.063547
+[100]	validation_0-mae:0.063049
+[101]	validation_0-mae:0.062387
+[102]	validation_0-mae:0.061902
+[103]	validation_0-mae:0.061447
+[104]	validation_0-mae:0.060543
+[105]	validation_0-mae:0.060296
+[106]	validation_0-mae:0.05957
+[107]	validation_0-mae:0.058843
+[108]	validation_0-mae:0.0584
+[109]	validation_0-mae:0.058186
+[110]	validation_0-mae:0.057874
+[111]	validation_0-mae:0.057553
+[112]	validation_0-mae:0.057483
+[113]	validation_0-mae:0.057082
+[114]	validation_0-mae:0.05688
+[115]	validation_0-mae:0.056533
+[116]	validation_0-mae:0.055916
+[117]	validation_0-mae:0.055684
+[118]	validation_0-mae:0.055259
+[119]	validation_0-mae:0.054773
+[120]	validation_0-mae:0.054587
+[121]	validation_0-mae:0.054225
+[122]	validation_0-mae:0.053953
+[123]	validation_0-mae:0.053477
+[124]	validation_0-mae:0.053091
+[125]	validation_0-mae:0.052668
+[126]	validation_0-mae:0.052513
+[127]	validation_0-mae:0.052285
+[128]	validation_0-mae:0.051864
+[129]	validation_0-mae:0.051711
+[130]	validation_0-mae:0.051499
+[131]	validation_0-mae:0.051376
+[132]	validation_0-mae:0.051255
+[133]	validation_0-mae:0.050963
+[134]	validation_0-mae:0.050549
+[135]	validation_0-mae:0.050178
+[136]	validation_0-mae:0.049889
+[137]	validation_0-mae:0.049671
+[138]	validation_0-mae:0.049496
+[139]	validation_0-mae:0.049367
+[140]	validation_0-mae:0.049179
+[141]	validation_0-mae:0.048859
+[142]	validation_0-mae:0.048444
+[143]	validation_0-mae:0.048361
+[144]	validation_0-mae:0.048174
+[145]	validation_0-mae:0.047595
+[146]	validation_0-mae:0.047397
+[147]	validation_0-mae:0.047229
+[148]	validation_0-mae:0.04703
+[149]	validation_0-mae:0.046678
+    fold  1:  [0.19005437]
+[18:04:15] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:11.9632
 Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:1.88521e+06
-[2]	validation_0-mae:1.62962e+06
-[3]	validation_0-mae:1.41033e+06
-[4]	validation_0-mae:1.22218e+06
-[5]	validation_0-mae:1.06054e+06
-[6]	validation_0-mae:922606
-[7]	validation_0-mae:804878
-[8]	validation_0-mae:704509
-[9]	validation_0-mae:619860
-[10]	validation_0-mae:548802
-[11]	validation_0-mae:488427
-[12]	validation_0-mae:437247
-[13]	validation_0-mae:395703
-[14]	validation_0-mae:361046
-[15]	validation_0-mae:332658
-[16]	validation_0-mae:307123
-[17]	validation_0-mae:286304
-[18]	validation_0-mae:268575
-[19]	validation_0-mae:253879
-[20]	validation_0-mae:240550
-[21]	validation_0-mae:229691
-[22]	validation_0-mae:219965
-[23]	validation_0-mae:210647
-[24]	validation_0-mae:203130
-[25]	validation_0-mae:196538
-[26]	validation_0-mae:189611
-[27]	validation_0-mae:183792
-[28]	validation_0-mae:178190
-[29]	validation_0-mae:173727
-[30]	validation_0-mae:169407
-[31]	validation_0-mae:165615
-[32]	validation_0-mae:161568
-[33]	validation_0-mae:158277
-[34]	validation_0-mae:155088
-[35]	validation_0-mae:152049
-[36]	validation_0-mae:148015
-[37]	validation_0-mae:143747
-[38]	validation_0-mae:141466
-[39]	validation_0-mae:137772
-[40]	validation_0-mae:134465
-[41]	validation_0-mae:131271
-[42]	validation_0-mae:129504
-[43]	validation_0-mae:126878
-[44]	validation_0-mae:124805
-[45]	validation_0-mae:122610
-[46]	validation_0-mae:120601
-[47]	validation_0-mae:118426
-[48]	validation_0-mae:116204
-[49]	validation_0-mae:115000
-[50]	validation_0-mae:113654
-[51]	validation_0-mae:112120
-[52]	validation_0-mae:110896
-[53]	validation_0-mae:109151
-[54]	validation_0-mae:108360
-[55]	validation_0-mae:107642
-[56]	validation_0-mae:106181
-[57]	validation_0-mae:104649
-[58]	validation_0-mae:104022
-[59]	validation_0-mae:102885
-[60]	validation_0-mae:102019
-[61]	validation_0-mae:100468
-[62]	validation_0-mae:99080.3
-[63]	validation_0-mae:97608.9
-[64]	validation_0-mae:96539.5
-[65]	validation_0-mae:95872.4
-[66]	validation_0-mae:94761.1
-[67]	validation_0-mae:94517.4
-[68]	validation_0-mae:93985.8
-[69]	validation_0-mae:92612.1
-[70]	validation_0-mae:92260.8
-[71]	validation_0-mae:91284.7
-[72]	validation_0-mae:90604.8
-[73]	validation_0-mae:90128.4
-[74]	validation_0-mae:89460.4
-[75]	validation_0-mae:88942.7
-[76]	validation_0-mae:88617.8
-[77]	validation_0-mae:88179.6
-[78]	validation_0-mae:87441.2
-[79]	validation_0-mae:86759.8
-[80]	validation_0-mae:85965.1
-[81]	validation_0-mae:85813
-[82]	validation_0-mae:85260.9
-[83]	validation_0-mae:84691.5
-[84]	validation_0-mae:84184.9
-[85]	validation_0-mae:83941.7
-[86]	validation_0-mae:83513.7
-[87]	validation_0-mae:83298
-[88]	validation_0-mae:82656.2
-[89]	validation_0-mae:82377.5
-[90]	validation_0-mae:81740.7
-[91]	validation_0-mae:81412.4
-[92]	validation_0-mae:81251.2
-[93]	validation_0-mae:81098.9
-[94]	validation_0-mae:80585
-[95]	validation_0-mae:79911.3
-[96]	validation_0-mae:79245.1
-[97]	validation_0-mae:78894.9
-[98]	validation_0-mae:78298.2
-[99]	validation_0-mae:78086.6
-[100]	validation_0-mae:77918.7
-[101]	validation_0-mae:77037.2
-[102]	validation_0-mae:76213.3
-[103]	validation_0-mae:74583.9
-[104]	validation_0-mae:73714.4
-[105]	validation_0-mae:73133.7
-[106]	validation_0-mae:72236.8
-[107]	validation_0-mae:71671.5
-[108]	validation_0-mae:70982.7
-[109]	validation_0-mae:70795
-[110]	validation_0-mae:70572.4
-[111]	validation_0-mae:69605.6
-[112]	validation_0-mae:69362.7
-[113]	validation_0-mae:69272.1
-[114]	validation_0-mae:68987.4
-[115]	validation_0-mae:68700.3
-[116]	validation_0-mae:67994
-[117]	validation_0-mae:67867.5
-[118]	validation_0-mae:67377.3
-[119]	validation_0-mae:67086.4
-[120]	validation_0-mae:66969.4
-[121]	validation_0-mae:66591
-[122]	validation_0-mae:66170.8
-[123]	validation_0-mae:66088.8
-[124]	validation_0-mae:65958.2
-[125]	validation_0-mae:65557.5
-[126]	validation_0-mae:65171.8
-[127]	validation_0-mae:64582.6
-[128]	validation_0-mae:64212.5
-[129]	validation_0-mae:63350.9
-[130]	validation_0-mae:62977.8
-[131]	validation_0-mae:62450.9
-[132]	validation_0-mae:62080.1
-[133]	validation_0-mae:61591.4
-[134]	validation_0-mae:61321.3
-[135]	validation_0-mae:61256.2
-[136]	validation_0-mae:60929.3
-[137]	validation_0-mae:60406.6
-[138]	validation_0-mae:60288.7
-[139]	validation_0-mae:59751.4
-[140]	validation_0-mae:59179.8
-[141]	validation_0-mae:59084.9
-[142]	validation_0-mae:58557
-[143]	validation_0-mae:58468.7
-[144]	validation_0-mae:58111.9
-[145]	validation_0-mae:57738.2
-[146]	validation_0-mae:57531.4
-[147]	validation_0-mae:57055
-[148]	validation_0-mae:56629.8
-[149]	validation_0-mae:56338.5
-    fold  2:  [490185.82285671]
-[22:59:57] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
-[0]	validation_0-mae:2.18252e+06
+[1]	validation_0-mae:10.2885
+[2]	validation_0-mae:8.84845
+[3]	validation_0-mae:7.60986
+[4]	validation_0-mae:6.54466
+[5]	validation_0-mae:5.6286
+[6]	validation_0-mae:4.84081
+[7]	validation_0-mae:4.16329
+[8]	validation_0-mae:3.5807
+[9]	validation_0-mae:3.07966
+[10]	validation_0-mae:2.64875
+[11]	validation_0-mae:2.27823
+[12]	validation_0-mae:1.95965
+[13]	validation_0-mae:1.68589
+[14]	validation_0-mae:1.45057
+[15]	validation_0-mae:1.24852
+[16]	validation_0-mae:1.07516
+[17]	validation_0-mae:0.926644
+[18]	validation_0-mae:0.799635
+[19]	validation_0-mae:0.691059
+[20]	validation_0-mae:0.598524
+[21]	validation_0-mae:0.519589
+[22]	validation_0-mae:0.452726
+[23]	validation_0-mae:0.396151
+[24]	validation_0-mae:0.348348
+[25]	validation_0-mae:0.309022
+[26]	validation_0-mae:0.275444
+[27]	validation_0-mae:0.248234
+[28]	validation_0-mae:0.225121
+[29]	validation_0-mae:0.206193
+[30]	validation_0-mae:0.190673
+[31]	validation_0-mae:0.178495
+[32]	validation_0-mae:0.168313
+[33]	validation_0-mae:0.160141
+[34]	validation_0-mae:0.152506
+[35]	validation_0-mae:0.146399
+[36]	validation_0-mae:0.140871
+[37]	validation_0-mae:0.13645
+[38]	validation_0-mae:0.132749
+[39]	validation_0-mae:0.129411
+[40]	validation_0-mae:0.126221
+[41]	validation_0-mae:0.123476
+[42]	validation_0-mae:0.121466
+[43]	validation_0-mae:0.119312
+[44]	validation_0-mae:0.117155
+[45]	validation_0-mae:0.115163
+[46]	validation_0-mae:0.112972
+[47]	validation_0-mae:0.11099
+[48]	validation_0-mae:0.109435
+[49]	validation_0-mae:0.107755
+[50]	validation_0-mae:0.106132
+[51]	validation_0-mae:0.104158
+[52]	validation_0-mae:0.102905
+[53]	validation_0-mae:0.101276
+[54]	validation_0-mae:0.099965
+[55]	validation_0-mae:0.098084
+[56]	validation_0-mae:0.096875
+[57]	validation_0-mae:0.096131
+[58]	validation_0-mae:0.094884
+[59]	validation_0-mae:0.092974
+[60]	validation_0-mae:0.092113
+[61]	validation_0-mae:0.091187
+[62]	validation_0-mae:0.090221
+[63]	validation_0-mae:0.088979
+[64]	validation_0-mae:0.088042
+[65]	validation_0-mae:0.086944
+[66]	validation_0-mae:0.086642
+[67]	validation_0-mae:0.085002
+[68]	validation_0-mae:0.083838
+[69]	validation_0-mae:0.082473
+[70]	validation_0-mae:0.082064
+[71]	validation_0-mae:0.081002
+[72]	validation_0-mae:0.079973
+[73]	validation_0-mae:0.079104
+[74]	validation_0-mae:0.078407
+[75]	validation_0-mae:0.077788
+[76]	validation_0-mae:0.077173
+[77]	validation_0-mae:0.076573
+[78]	validation_0-mae:0.075639
+[79]	validation_0-mae:0.074897
+[80]	validation_0-mae:0.074377
+[81]	validation_0-mae:0.073921
+[82]	validation_0-mae:0.072723
+[83]	validation_0-mae:0.071687
+[84]	validation_0-mae:0.070887
+[85]	validation_0-mae:0.070293
+[86]	validation_0-mae:0.069555
+[87]	validation_0-mae:0.069147
+[88]	validation_0-mae:0.068643
+[89]	validation_0-mae:0.068193
+[90]	validation_0-mae:0.067975
+[91]	validation_0-mae:0.067709
+[92]	validation_0-mae:0.067419
+[93]	validation_0-mae:0.066824
+[94]	validation_0-mae:0.066009
+[95]	validation_0-mae:0.065437
+[96]	validation_0-mae:0.065129
+[97]	validation_0-mae:0.064803
+[98]	validation_0-mae:0.064059
+[99]	validation_0-mae:0.063304
+[100]	validation_0-mae:0.062596
+[101]	validation_0-mae:0.062322
+[102]	validation_0-mae:0.061987
+[103]	validation_0-mae:0.061623
+[104]	validation_0-mae:0.06137
+[105]	validation_0-mae:0.061145
+[106]	validation_0-mae:0.060981
+[107]	validation_0-mae:0.060733
+[108]	validation_0-mae:0.060362
+[109]	validation_0-mae:0.060008
+[110]	validation_0-mae:0.059575
+[111]	validation_0-mae:0.059024
+[112]	validation_0-mae:0.058825
+[113]	validation_0-mae:0.058387
+[114]	validation_0-mae:0.058174
+[115]	validation_0-mae:0.057953
+[116]	validation_0-mae:0.057412
+[117]	validation_0-mae:0.057221
+[118]	validation_0-mae:0.056509
+[119]	validation_0-mae:0.056091
+[120]	validation_0-mae:0.055938
+[121]	validation_0-mae:0.055581
+[122]	validation_0-mae:0.055128
+[123]	validation_0-mae:0.054884
+[124]	validation_0-mae:0.054683
+[125]	validation_0-mae:0.054505
+[126]	validation_0-mae:0.054348
+[127]	validation_0-mae:0.05408
+[128]	validation_0-mae:0.053497
+[129]	validation_0-mae:0.053234
+[130]	validation_0-mae:0.052757
+[131]	validation_0-mae:0.052344
+[132]	validation_0-mae:0.052187
+[133]	validation_0-mae:0.05186
+[134]	validation_0-mae:0.05146
+[135]	validation_0-mae:0.050826
+[136]	validation_0-mae:0.05043
+[137]	validation_0-mae:0.050055
+[138]	validation_0-mae:0.0499
+[139]	validation_0-mae:0.049492
+[140]	validation_0-mae:0.049248
+[141]	validation_0-mae:0.049111
+[142]	validation_0-mae:0.04862
+[143]	validation_0-mae:0.048033
+[144]	validation_0-mae:0.047757
+[145]	validation_0-mae:0.047299
+[146]	validation_0-mae:0.047257
+[147]	validation_0-mae:0.046829
+[148]	validation_0-mae:0.046661
+[149]	validation_0-mae:0.046441
+    fold  2:  [0.18953391]
+[18:05:27] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:11.9626
 Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:1.88503e+06
-[2]	validation_0-mae:1.6293e+06
-[3]	validation_0-mae:1.40981e+06
-[4]	validation_0-mae:1.22175e+06
-[5]	validation_0-mae:1.06038e+06
-[6]	validation_0-mae:922512
-[7]	validation_0-mae:804804
-[8]	validation_0-mae:704580
-[9]	validation_0-mae:619902
-[10]	validation_0-mae:548891
-[11]	validation_0-mae:488434
-[12]	validation_0-mae:437301
-[13]	validation_0-mae:395327
-[14]	validation_0-mae:360002
-[15]	validation_0-mae:331402
-[16]	validation_0-mae:305738
-[17]	validation_0-mae:284741
-[18]	validation_0-mae:266355
-[19]	validation_0-mae:251199
-[20]	validation_0-mae:238011
-[21]	validation_0-mae:227281
-[22]	validation_0-mae:217068
-[23]	validation_0-mae:206883
-[24]	validation_0-mae:199436
-[25]	validation_0-mae:192699
-[26]	validation_0-mae:185459
-[27]	validation_0-mae:179744
-[28]	validation_0-mae:173606
-[29]	validation_0-mae:169122
-[30]	validation_0-mae:164898
-[31]	validation_0-mae:161203
-[32]	validation_0-mae:156940
-[33]	validation_0-mae:153766
-[34]	validation_0-mae:150861
-[35]	validation_0-mae:148263
-[36]	validation_0-mae:144348
-[37]	validation_0-mae:140902
-[38]	validation_0-mae:138537
-[39]	validation_0-mae:135421
-[40]	validation_0-mae:132298
-[41]	validation_0-mae:129420
-[42]	validation_0-mae:127989
-[43]	validation_0-mae:125085
-[44]	validation_0-mae:122206
-[45]	validation_0-mae:119981
-[46]	validation_0-mae:118505
-[47]	validation_0-mae:116769
-[48]	validation_0-mae:114450
-[49]	validation_0-mae:112854
-[50]	validation_0-mae:111347
-[51]	validation_0-mae:109736
-[52]	validation_0-mae:108186
-[53]	validation_0-mae:106843
-[54]	validation_0-mae:106290
-[55]	validation_0-mae:104069
-[56]	validation_0-mae:102971
-[57]	validation_0-mae:101973
-[58]	validation_0-mae:100951
-[59]	validation_0-mae:100065
-[60]	validation_0-mae:99362.9
-[61]	validation_0-mae:97946.9
-[62]	validation_0-mae:96594.4
-[63]	validation_0-mae:95459.5
-[64]	validation_0-mae:94388.5
-[65]	validation_0-mae:94123.4
-[66]	validation_0-mae:93565.9
-[67]	validation_0-mae:93131.4
-[68]	validation_0-mae:92680.9
-[69]	validation_0-mae:92221.8
-[70]	validation_0-mae:92052
-[71]	validation_0-mae:91064.4
-[72]	validation_0-mae:90213.9
-[73]	validation_0-mae:88446.2
-[74]	validation_0-mae:87709.7
-[75]	validation_0-mae:86658.2
-[76]	validation_0-mae:86005.7
-[77]	validation_0-mae:85215.4
-[78]	validation_0-mae:84740
-[79]	validation_0-mae:84204.9
-[80]	validation_0-mae:83831.8
-[81]	validation_0-mae:83637.6
-[82]	validation_0-mae:83479.4
-[83]	validation_0-mae:82583.8
-[84]	validation_0-mae:82210.9
-[85]	validation_0-mae:82110.2
-[86]	validation_0-mae:81526.7
-[87]	validation_0-mae:80758.3
-[88]	validation_0-mae:79754
-[89]	validation_0-mae:79422.4
-[90]	validation_0-mae:78984.6
-[91]	validation_0-mae:78713.7
-[92]	validation_0-mae:78081.5
-[93]	validation_0-mae:77449
-[94]	validation_0-mae:77253.2
-[95]	validation_0-mae:76662.4
-[96]	validation_0-mae:76412.5
-[97]	validation_0-mae:75593
-[98]	validation_0-mae:75471
-[99]	validation_0-mae:75306.4
-[100]	validation_0-mae:75050.6
-[101]	validation_0-mae:74636.4
-[102]	validation_0-mae:74230.7
-[103]	validation_0-mae:72831.9
-[104]	validation_0-mae:72327.7
-[105]	validation_0-mae:71878.1
-[106]	validation_0-mae:71261.8
-[107]	validation_0-mae:70861.2
-[108]	validation_0-mae:70771.3
-[109]	validation_0-mae:70353.8
-[110]	validation_0-mae:69722
-[111]	validation_0-mae:69569.3
-[112]	validation_0-mae:68935.2
-[113]	validation_0-mae:68500.3
-[114]	validation_0-mae:68336.6
-[115]	validation_0-mae:68022
-[116]	validation_0-mae:67741.2
-[117]	validation_0-mae:67556.7
-[118]	validation_0-mae:67057.8
-[119]	validation_0-mae:66936.1
-[120]	validation_0-mae:66357.4
-[121]	validation_0-mae:65887.3
-[122]	validation_0-mae:65421.8
-[123]	validation_0-mae:65178.9
-[124]	validation_0-mae:64876.3
-[125]	validation_0-mae:64427.6
-[126]	validation_0-mae:63977.7
-[127]	validation_0-mae:63680.4
-[128]	validation_0-mae:63478.8
-[129]	validation_0-mae:63238.6
-[130]	validation_0-mae:62899
-[131]	validation_0-mae:62492.9
-[132]	validation_0-mae:62416.5
-[133]	validation_0-mae:62375.9
-[134]	validation_0-mae:62096.8
-[135]	validation_0-mae:61738.3
-[136]	validation_0-mae:61401.5
-[137]	validation_0-mae:61029
-[138]	validation_0-mae:60948.2
-[139]	validation_0-mae:60452.8
-[140]	validation_0-mae:60096.4
-[141]	validation_0-mae:59774.1
-[142]	validation_0-mae:59338.6
-[143]	validation_0-mae:58973
-[144]	validation_0-mae:58772.1
-[145]	validation_0-mae:58556.3
-[146]	validation_0-mae:58097
-[147]	validation_0-mae:57890.8
-[148]	validation_0-mae:57579.2
-[149]	validation_0-mae:57439.4
-    fold  3:  [493145.28574408]
+[1]	validation_0-mae:10.288
+[2]	validation_0-mae:8.84801
+[3]	validation_0-mae:7.60951
+[4]	validation_0-mae:6.54432
+[5]	validation_0-mae:5.62831
+[6]	validation_0-mae:4.84052
+[7]	validation_0-mae:4.16309
+[8]	validation_0-mae:3.58048
+[9]	validation_0-mae:3.07948
+[10]	validation_0-mae:2.64863
+[11]	validation_0-mae:2.2781
+[12]	validation_0-mae:1.95957
+[13]	validation_0-mae:1.68577
+[14]	validation_0-mae:1.45046
+[15]	validation_0-mae:1.2484
+[16]	validation_0-mae:1.07505
+[17]	validation_0-mae:0.926537
+[18]	validation_0-mae:0.799553
+[19]	validation_0-mae:0.691001
+[20]	validation_0-mae:0.598447
+[21]	validation_0-mae:0.519601
+[22]	validation_0-mae:0.452967
+[23]	validation_0-mae:0.396401
+[24]	validation_0-mae:0.348612
+[25]	validation_0-mae:0.309489
+[26]	validation_0-mae:0.276252
+[27]	validation_0-mae:0.248945
+[28]	validation_0-mae:0.225825
+[29]	validation_0-mae:0.207193
+[30]	validation_0-mae:0.191931
+[31]	validation_0-mae:0.179693
+[32]	validation_0-mae:0.169414
+[33]	validation_0-mae:0.161012
+[34]	validation_0-mae:0.15356
+[35]	validation_0-mae:0.147727
+[36]	validation_0-mae:0.14216
+[37]	validation_0-mae:0.137784
+[38]	validation_0-mae:0.133637
+[39]	validation_0-mae:0.129855
+[40]	validation_0-mae:0.126357
+[41]	validation_0-mae:0.123337
+[42]	validation_0-mae:0.121122
+[43]	validation_0-mae:0.118587
+[44]	validation_0-mae:0.116832
+[45]	validation_0-mae:0.114146
+[46]	validation_0-mae:0.11276
+[47]	validation_0-mae:0.110885
+[48]	validation_0-mae:0.108986
+[49]	validation_0-mae:0.107538
+[50]	validation_0-mae:0.105899
+[51]	validation_0-mae:0.104058
+[52]	validation_0-mae:0.102569
+[53]	validation_0-mae:0.100944
+[54]	validation_0-mae:0.100016
+[55]	validation_0-mae:0.098213
+[56]	validation_0-mae:0.0971
+[57]	validation_0-mae:0.095917
+[58]	validation_0-mae:0.095005
+[59]	validation_0-mae:0.094389
+[60]	validation_0-mae:0.093215
+[61]	validation_0-mae:0.092257
+[62]	validation_0-mae:0.09081
+[63]	validation_0-mae:0.090192
+[64]	validation_0-mae:0.088683
+[65]	validation_0-mae:0.087276
+[66]	validation_0-mae:0.086841
+[67]	validation_0-mae:0.085545
+[68]	validation_0-mae:0.084438
+[69]	validation_0-mae:0.083734
+[70]	validation_0-mae:0.082638
+[71]	validation_0-mae:0.081776
+[72]	validation_0-mae:0.080875
+[73]	validation_0-mae:0.08033
+[74]	validation_0-mae:0.07967
+[75]	validation_0-mae:0.078723
+[76]	validation_0-mae:0.077592
+[77]	validation_0-mae:0.076699
+[78]	validation_0-mae:0.076065
+[79]	validation_0-mae:0.07542
+[80]	validation_0-mae:0.074715
+[81]	validation_0-mae:0.0739
+[82]	validation_0-mae:0.073326
+[83]	validation_0-mae:0.072594
+[84]	validation_0-mae:0.072152
+[85]	validation_0-mae:0.07192
+[86]	validation_0-mae:0.07123
+[87]	validation_0-mae:0.070708
+[88]	validation_0-mae:0.069871
+[89]	validation_0-mae:0.069594
+[90]	validation_0-mae:0.06857
+[91]	validation_0-mae:0.068375
+[92]	validation_0-mae:0.068127
+[93]	validation_0-mae:0.067922
+[94]	validation_0-mae:0.067634
+[95]	validation_0-mae:0.066982
+[96]	validation_0-mae:0.066415
+[97]	validation_0-mae:0.066052
+[98]	validation_0-mae:0.065795
+[99]	validation_0-mae:0.065603
+[100]	validation_0-mae:0.0652
+[101]	validation_0-mae:0.064856
+[102]	validation_0-mae:0.064542
+[103]	validation_0-mae:0.06416
+[104]	validation_0-mae:0.063801
+[105]	validation_0-mae:0.06316
+[106]	validation_0-mae:0.06269
+[107]	validation_0-mae:0.062454
+[108]	validation_0-mae:0.062083
+[109]	validation_0-mae:0.061712
+[110]	validation_0-mae:0.061313
+[111]	validation_0-mae:0.061171
+[112]	validation_0-mae:0.060873
+[113]	validation_0-mae:0.060604
+[114]	validation_0-mae:0.060377
+[115]	validation_0-mae:0.059977
+[116]	validation_0-mae:0.059521
+[117]	validation_0-mae:0.059348
+[118]	validation_0-mae:0.058489
+[119]	validation_0-mae:0.05815
+[120]	validation_0-mae:0.057544
+[121]	validation_0-mae:0.05721
+[122]	validation_0-mae:0.056849
+[123]	validation_0-mae:0.05637
+[124]	validation_0-mae:0.055943
+[125]	validation_0-mae:0.05565
+[126]	validation_0-mae:0.055286
+[127]	validation_0-mae:0.055034
+[128]	validation_0-mae:0.054695
+[129]	validation_0-mae:0.053815
+[130]	validation_0-mae:0.053655
+[131]	validation_0-mae:0.053378
+[132]	validation_0-mae:0.053319
+[133]	validation_0-mae:0.052414
+[134]	validation_0-mae:0.051547
+[135]	validation_0-mae:0.051433
+[136]	validation_0-mae:0.050954
+[137]	validation_0-mae:0.050716
+[138]	validation_0-mae:0.050567
+[139]	validation_0-mae:0.050126
+[140]	validation_0-mae:0.049977
+[141]	validation_0-mae:0.049782
+[142]	validation_0-mae:0.049618
+[143]	validation_0-mae:0.049104
+[144]	validation_0-mae:0.048563
+[145]	validation_0-mae:0.048276
+[146]	validation_0-mae:0.048221
+[147]	validation_0-mae:0.048059
+[148]	validation_0-mae:0.047821
+[149]	validation_0-mae:0.047769
+    fold  3:  [0.18920069]
     ----
-    MEAN:     [491842.91257090] + [4311.94088658]
+    MEAN:     [0.18963438] + [0.00031129]
 
 Train set was detected.
 Transforming...
@@ -14015,7 +14021,7 @@ estimator  1: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_train</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">features</span><span class="p">))</span>
@@ -14089,7 +14095,7 @@ estimator  1: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span> <span class="o">=</span> <span class="n">df_train_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -14106,7 +14112,7 @@ estimator  1: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
@@ -14120,19 +14126,25 @@ estimator  1: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params_2nd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8999882607358867</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">95.0</span><span class="p">),</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.2570109385381975</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.13601832720254403</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">26.0</span><span class="p">),</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">175.0</span><span class="p">),</span>
- <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.08363501292068126</span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">20.91434940058063</span><span class="p">,</span>
+       <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span>
+       <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.14</span><span class="p">,</span>
+       <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">16.0</span><span class="p">),</span>
+       <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">150.0</span><span class="p">),</span>
+       <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+       <span class="s1">&#39;early_stopping_rounds&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+       <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
 
-<span class="n">lgb_m_2nd</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params_2nd</span><span class="p">)</span>
-<span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">]),</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">n_estimators</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">])</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
+
+<span class="n">xgb_m_2nd</span> <span class="o">=</span> <span class="n">XGBoostWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">hps</span><span class="p">)</span>
+
+<span class="n">xgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">]),</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14145,22 +14157,182 @@ estimator  1: [xgboost: XGBoostWrapper]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[18:27:33] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:11.963
+Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
+[1]	validation_0-mae:10.2883
+[2]	validation_0-mae:8.84807
+[3]	validation_0-mae:7.60942
+[4]	validation_0-mae:6.54419
+[5]	validation_0-mae:5.62819
+[6]	validation_0-mae:4.84034
+[7]	validation_0-mae:4.16281
+[8]	validation_0-mae:3.58011
+[9]	validation_0-mae:3.07896
+[10]	validation_0-mae:2.64792
+[11]	validation_0-mae:2.27724
+[12]	validation_0-mae:1.95845
+[13]	validation_0-mae:1.68436
+[14]	validation_0-mae:1.44858
+[15]	validation_0-mae:1.24591
+[16]	validation_0-mae:1.0715
+[17]	validation_0-mae:0.921609
+[18]	validation_0-mae:0.792701
+[19]	validation_0-mae:0.681765
+[20]	validation_0-mae:0.58641
+[21]	validation_0-mae:0.504503
+[22]	validation_0-mae:0.434236
+[23]	validation_0-mae:0.373886
+[24]	validation_0-mae:0.322083
+[25]	validation_0-mae:0.277377
+[26]	validation_0-mae:0.23902
+[27]	validation_0-mae:0.206152
+[28]	validation_0-mae:0.178219
+[29]	validation_0-mae:0.154607
+[30]	validation_0-mae:0.134807
+[31]	validation_0-mae:0.117476
+[32]	validation_0-mae:0.102789
+[33]	validation_0-mae:0.090406
+[34]	validation_0-mae:0.080079
+[35]	validation_0-mae:0.071439
+[36]	validation_0-mae:0.064764
+[37]	validation_0-mae:0.059322
+[38]	validation_0-mae:0.054039
+[39]	validation_0-mae:0.049818
+[40]	validation_0-mae:0.046885
+[41]	validation_0-mae:0.044456
+[42]	validation_0-mae:0.041762
+[43]	validation_0-mae:0.039591
+[44]	validation_0-mae:0.038158
+[45]	validation_0-mae:0.036998
+[46]	validation_0-mae:0.036046
+[47]	validation_0-mae:0.034686
+[48]	validation_0-mae:0.033882
+[49]	validation_0-mae:0.033458
+[50]	validation_0-mae:0.032399
+[51]	validation_0-mae:0.031398
+[52]	validation_0-mae:0.030306
+[53]	validation_0-mae:0.029202
+[54]	validation_0-mae:0.028858
+[55]	validation_0-mae:0.028099
+[56]	validation_0-mae:0.027449
+[57]	validation_0-mae:0.026945
+[58]	validation_0-mae:0.026611
+[59]	validation_0-mae:0.02604
+[60]	validation_0-mae:0.025375
+[61]	validation_0-mae:0.02503
+[62]	validation_0-mae:0.024523
+[63]	validation_0-mae:0.023696
+[64]	validation_0-mae:0.022861
+[65]	validation_0-mae:0.022452
+[66]	validation_0-mae:0.02195
+[67]	validation_0-mae:0.021445
+[68]	validation_0-mae:0.020801
+[69]	validation_0-mae:0.020481
+[70]	validation_0-mae:0.02017
+[71]	validation_0-mae:0.019824
+[72]	validation_0-mae:0.019645
+[73]	validation_0-mae:0.019363
+[74]	validation_0-mae:0.01883
+[75]	validation_0-mae:0.018539
+[76]	validation_0-mae:0.018218
+[77]	validation_0-mae:0.018022
+[78]	validation_0-mae:0.01773
+[79]	validation_0-mae:0.017464
+[80]	validation_0-mae:0.017
+[81]	validation_0-mae:0.016728
+[82]	validation_0-mae:0.016431
+[83]	validation_0-mae:0.016179
+[84]	validation_0-mae:0.016007
+[85]	validation_0-mae:0.015813
+[86]	validation_0-mae:0.015402
+[87]	validation_0-mae:0.015158
+[88]	validation_0-mae:0.014968
+[89]	validation_0-mae:0.014798
+[90]	validation_0-mae:0.014589
+[91]	validation_0-mae:0.014323
+[92]	validation_0-mae:0.014097
+[93]	validation_0-mae:0.013889
+[94]	validation_0-mae:0.013713
+[95]	validation_0-mae:0.013534
+[96]	validation_0-mae:0.013428
+[97]	validation_0-mae:0.013276
+[98]	validation_0-mae:0.013109
+[99]	validation_0-mae:0.012923
+[100]	validation_0-mae:0.012779
+[101]	validation_0-mae:0.012628
+[102]	validation_0-mae:0.012536
+[103]	validation_0-mae:0.012441
+[104]	validation_0-mae:0.012261
+[105]	validation_0-mae:0.012142
+[106]	validation_0-mae:0.012029
+[107]	validation_0-mae:0.011928
+[108]	validation_0-mae:0.011893
+[109]	validation_0-mae:0.01179
+[110]	validation_0-mae:0.011628
+[111]	validation_0-mae:0.011562
+[112]	validation_0-mae:0.011481
+[113]	validation_0-mae:0.011366
+[114]	validation_0-mae:0.011222
+[115]	validation_0-mae:0.011098
+[116]	validation_0-mae:0.010971
+[117]	validation_0-mae:0.010899
+[118]	validation_0-mae:0.010809
+[119]	validation_0-mae:0.010645
+[120]	validation_0-mae:0.010451
+[121]	validation_0-mae:0.010313
+[122]	validation_0-mae:0.010223
+[123]	validation_0-mae:0.010114
+[124]	validation_0-mae:0.01
+[125]	validation_0-mae:0.009955
+[126]	validation_0-mae:0.009822
+[127]	validation_0-mae:0.009705
+[128]	validation_0-mae:0.00964
+[129]	validation_0-mae:0.009561
+[130]	validation_0-mae:0.009468
+[131]	validation_0-mae:0.009436
+[132]	validation_0-mae:0.009337
+[133]	validation_0-mae:0.00929
+[134]	validation_0-mae:0.009253
+[135]	validation_0-mae:0.009166
+[136]	validation_0-mae:0.009119
+[137]	validation_0-mae:0.009047
+[138]	validation_0-mae:0.009009
+[139]	validation_0-mae:0.008954
+[140]	validation_0-mae:0.008924
+[141]	validation_0-mae:0.008858
+[142]	validation_0-mae:0.008826
+[143]	validation_0-mae:0.008751
+[144]	validation_0-mae:0.00867
+[145]	validation_0-mae:0.008635
+[146]	validation_0-mae:0.008594
+[147]	validation_0-mae:0.008555
+[148]	validation_0-mae:0.008472
+[149]	validation_0-mae:0.008398
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>LightGBMWrapper(bagging_fraction=0.8999882607358867, bagging_freq=95,
-                boosting_type=&#39;gbdt&#39;, class_weight=None, colsample_bytree=1.0,
-                feature_fraction=0.2570109385381975, importance_type=&#39;split&#39;,
-                learning_rate=0.13601832720254403, max_depth=26,
-                min_child_samples=20, min_child_weight=0.001,
-                min_split_gain=0.0, n_estimators=100, n_jobs=-1, num_leaves=175,
-                objective=None, random_state=None, reg_alpha=0.0,
-                reg_lambda=0.0, silent=True, subsample=1.0,
-                subsample_for_bin=200000, subsample_freq=0,
-                test_size=0.08363501292068126)</pre>
+<pre>XGBoostWrapper(alpha=20.91434940058063, base_score=0.5, booster=&#39;gbtree&#39;,
+               colsample_bylevel=1, colsample_bynode=1, colsample_bytree=0.65,
+               early_stopping_rounds=5, gamma=0, importance_type=&#39;gain&#39;,
+               learning_rate=0.14, max_delta_step=0, max_depth=16,
+               min_child_weight=1, missing=None, n_estimators=150, n_jobs=4,
+               nthread=None, objective=&#39;reg:linear&#39;, random_state=0,
+               reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
+               silent=None, subsample=1, test_size=0.2, verbosity=1)</pre>
 </div>
 
 </div>
@@ -14171,11 +14343,11 @@ estimator  1: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">]))</span>
-<span class="n">df_test_s</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta26.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">])))</span>
+<span class="n">df_test_s</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta29.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
