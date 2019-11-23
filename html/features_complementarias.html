@@ -13147,13 +13147,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Simil a value_counts. Dada una columna, agrega al df, cuantas propiedades existen con esa misma propiedad&#39;&#39;&#39;</span>
     <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
     <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
     <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
@@ -13172,7 +13172,48 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Cuenta cuantas propiedades hay con los atributos de la columna recibida. Y para cada propiedad,</span>
+<span class="sd">    se fija en que posicion esta del ranking. Por ejemplo, si hay dos propuedades, una con dos banos y otra </span>
+<span class="sd">    con uno solo, el rankin de las que tengan dos banos en 1, y de las propiedades que tengan un solo bano es </span>
+<span class="sd">    dos&#39;&#39;&#39;</span>
+    
+    <span class="sd">&#39;&#39;&#39;Rellena los nulos con &quot;otros&quot; &#39;&#39;&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;otros&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">df_aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;cantidad&#39;</span><span class="p">)</span> 
+    <span class="n">lista_ranking</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">contador</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_ranking</span><span class="p">:</span>
+        <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador</span>
+        <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">col1</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[153]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
@@ -13180,7 +13221,8 @@ div#notebook {
 
 <span class="c1"># concatenar_categoricos(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
 <span class="c1"># cantidad_propiedad_misma_cantidad(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
-<span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+<span class="c1"># cantidad_atributo(df, &#39;provincia&#39;)</span>
+<span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13197,19 +13239,24 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/tomas/Facultad/datos/datos-tp2/.venv/lib/python3.6/site-packages/ipykernel_launcher.py:12: SettingWithCopyWarning: 
+<pre>/home/tomas/Facultad/datos/datos-tp2/.venv/lib/python3.6/site-packages/ipykernel_launcher.py:8: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  if sys.path[0] == &#39;&#39;:
+  
+/home/tomas/Facultad/datos/datos-tp2/.venv/lib/python3.6/site-packages/ipykernel_launcher.py:28: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[98]:</div>
+    <div class="prompt output_prompt">Out[153]:</div>
 
 
 
@@ -13252,7 +13299,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <th>centroscomercialescercanos</th>
       <th>precio</th>
       <th>cantidad_tipodepropiedad_provincia</th>
-      <th>cantidad_propiedades_en_provincia</th>
+      <th>ranking_en_provincia</th>
     </tr>
   </thead>
   <tbody>
@@ -13278,7 +13325,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>2273000.0</td>
       <td>3</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -13302,7 +13349,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>3600000.0</td>
       <td>2</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -13326,7 +13373,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>1200000.0</td>
       <td>2</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>3</th>
@@ -13350,7 +13397,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>650000.0</td>
       <td>2</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>4</th>
@@ -13374,7 +13421,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>1150000.0</td>
       <td>1</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>5</th>
@@ -13398,7 +13445,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>1100000.0</td>
       <td>3</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
@@ -13422,7 +13469,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>1150000.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>7</th>
@@ -13446,7 +13493,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>4200000.0</td>
       <td>1</td>
-      <td>2</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>8</th>
@@ -13470,7 +13517,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>310000.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>9</th>
@@ -13494,7 +13541,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>6200000.0</td>
       <td>1</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>10</th>
@@ -13518,7 +13565,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>488000.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>11</th>
@@ -13542,7 +13589,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>7200000.0</td>
       <td>1</td>
-      <td>3</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>12</th>
@@ -13566,7 +13613,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>1500000.0</td>
       <td>4</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>13</th>
@@ -13590,7 +13637,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>3000000.0</td>
       <td>1</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>14</th>
@@ -13614,7 +13661,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>5300000.0</td>
       <td>2</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>15</th>
@@ -13638,7 +13685,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>3650000.0</td>
       <td>2</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>16</th>
@@ -13662,7 +13709,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>2450000.0</td>
       <td>4</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>17</th>
@@ -13686,7 +13733,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>4750000.0</td>
       <td>3</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>18</th>
@@ -13710,7 +13757,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>794078.0</td>
       <td>1</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>19</th>
@@ -13734,7 +13781,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>1850000.0</td>
       <td>4</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>20</th>
@@ -13758,7 +13805,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>490000.0</td>
       <td>1</td>
-      <td>3</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>21</th>
@@ -13782,7 +13829,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>2300000.0</td>
       <td>1</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>22</th>
@@ -13806,7 +13853,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>1340000.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>11</td>
     </tr>
     <tr>
       <th>23</th>
@@ -13830,7 +13877,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>3500000.0</td>
       <td>1</td>
-      <td>2</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>24</th>
@@ -13854,7 +13901,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>3900000.0</td>
       <td>4</td>
-      <td>6</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>25</th>
@@ -13878,7 +13925,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>850000.0</td>
       <td>1</td>
-      <td>3</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>26</th>
@@ -13902,7 +13949,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>1.0</td>
       <td>310000.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>27</th>
@@ -13926,7 +13973,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>10800000.0</td>
       <td>2</td>
-      <td>6</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>28</th>
@@ -13950,7 +13997,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>2600000.0</td>
       <td>1</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>29</th>
@@ -13974,7 +14021,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
       <td>0.0</td>
       <td>10707900.0</td>
       <td>1</td>
-      <td>5</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
