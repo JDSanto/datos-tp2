@@ -13092,7 +13092,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columna1</span><span class="p">,</span> <span class="n">columna2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -13118,7 +13118,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">agrupar_col</span><span class="p">,</span> <span class="n">misma_cantidad_col</span><span class="p">):</span>
@@ -13147,7 +13147,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13172,7 +13172,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13213,16 +13213,74 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[153]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="c1"># df = df_train</span>
 
+<span class="c1">#Ejs:</span>
 <span class="c1"># concatenar_categoricos(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
 <span class="c1"># cantidad_propiedad_misma_cantidad(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
 <span class="c1"># cantidad_atributo(df, &#39;provincia&#39;)</span>
-<span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+<span class="c1"># ranking_atributo(df, &#39;provincia&#39;)</span>
+
+<span class="k">def</span> <span class="nf">aplicar_features</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="c1"># -- </span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">)</span>
+    <span class="c1"># --</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gimasio&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;centrocomercialescercanos&#39;</span><span class="p">)</span>
+    <span class="c1"># --</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;pisicina&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;pisina&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13232,6 +13290,24 @@ div#notebook {
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
+       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;,
+       &#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;idzona&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;fecha&#39;,
+       &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, &#39;escuelascercanas&#39;,
+       &#39;centroscomercialescercanos&#39;, &#39;precio&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
 
 <div class="output_area">
 
@@ -13252,783 +13328,6 @@ Try using .loc[row_indexer,col_indexer] = value instead
 See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[153]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>descripcion</th>
-      <th>tipodepropiedad</th>
-      <th>direccion</th>
-      <th>ciudad</th>
-      <th>provincia</th>
-      <th>antiguedad</th>
-      <th>habitaciones</th>
-      <th>garages</th>
-      <th>...</th>
-      <th>lng</th>
-      <th>fecha</th>
-      <th>gimnasio</th>
-      <th>usosmultiples</th>
-      <th>piscina</th>
-      <th>escuelascercanas</th>
-      <th>centroscomercialescercanos</th>
-      <th>precio</th>
-      <th>cantidad_tipodepropiedad_provincia</th>
-      <th>ranking_en_provincia</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>depto. interior de 80.15m2, consta de sala com...</td>
-      <td>Apartamento</td>
-      <td>Avenida Division del Norte 2005</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2015-08-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2273000.0</td>
-      <td>3</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
-      <td>Casa en condominio</td>
-      <td>AV. MEXICO</td>
-      <td>La Magdalena Contreras</td>
-      <td>Distrito Federal</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-99.227655</td>
-      <td>2013-06-28 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3600000.0</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>descripcion \nla mejor ubicacion residencial e...</td>
-      <td>Casa</td>
-      <td>Urbi Tonala</td>
-      <td>Tonalá</td>
-      <td>Jalisco</td>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2015-10-17 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1200000.0</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>casa en privada con caseta de vigilancia casas...</td>
-      <td>Casa</td>
-      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>-99.688015</td>
-      <td>2012-03-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>650000.0</td>
-      <td>2</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>bonito departamento en excelentes condiciones ...</td>
-      <td>Apartamento</td>
-      <td>PASEOS DEL SOL</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-06-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>126147</td>
-      <td>departamento en venta taxqueña</td>
-      <td>amplio departamento, estancia de sala y comedo...</td>
-      <td>Apartamento</td>
-      <td>Condominio Tlalpan 2B</td>
-      <td>Coyoacán</td>
-      <td>Distrito Federal</td>
-      <td>5.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>-99.148475</td>
-      <td>2014-03-18 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1100000.0</td>
-      <td>3</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>139233</td>
-      <td>de oportunidad casa en san lorenzo</td>
-      <td>ubicada en esquina, pertenece san lorenzo agen...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Oaxaca de Juárez</td>
-      <td>Oaxaca</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>-96.803504</td>
-      <td>2016-02-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>1</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>5013</td>
-      <td>casa emilia en venta en selvamar playa del carmen</td>
-      <td>casa emilia en venta playa del carmenfracciona...</td>
-      <td>Casa</td>
-      <td>condominio el trebol</td>
-      <td>Playa del Carmen</td>
-      <td>Quintana Roo</td>
-      <td>2.0</td>
-      <td>4.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-87.037968</td>
-      <td>2016-10-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>4200000.0</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>44962</td>
-      <td>pre- venta preciosos depas 2 recamaras con sub...</td>
-      <td>&lt;p&gt;pre-venta de preciosos departamento ecologi...</td>
-      <td>Apartamento</td>
-      <td>BUENAVISTA DEPTOS CON SUBSIDIO</td>
-      <td>Villa de Alvarez</td>
-      <td>Colima</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2014-01-06 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>310000.0</td>
-      <td>1</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>134537</td>
-      <td>terreno</td>
-      <td>terreno de 5.500m2 bardeado, uso de suelo h-20...</td>
-      <td>Terreno</td>
-      <td>Av. Morelos</td>
-      <td>Ixtapaluca</td>
-      <td>Edo. de México</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>-98.887000</td>
-      <td>2016-12-22 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>6200000.0</td>
-      <td>1</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>51180</td>
-      <td>mi 2° credito</td>
-      <td>&lt;p&gt;mi 2&amp;deg; credito&lt;br /&gt;para todos aquellos ...</td>
-      <td>Casa</td>
-      <td>MI 2° CREDITO</td>
-      <td>San Luis Potosí</td>
-      <td>San luis Potosí</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>-101.018956</td>
-      <td>2013-01-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>488000.0</td>
-      <td>1</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>103293</td>
-      <td>departamento en venta, san pedro garza garcia,...</td>
-      <td>departamento nuevo ,256 m2 de construccion,un ...</td>
-      <td>Apartamento</td>
-      <td>NaN</td>
-      <td>San Pedro Garza García</td>
-      <td>Nuevo León</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2014-12-01 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7200000.0</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>47890</td>
-      <td>hermosa casa en zibata queretaro 170m²</td>
-      <td>&lt;p&gt;&lt;strong&gt;casa &lt;/strong&gt;en venta en fracciona...</td>
-      <td>Casa</td>
-      <td>Pitahayas 2 - 58, Zibata</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-100.317503</td>
-      <td>2013-08-12 00:00:00</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1500000.0</td>
-      <td>4</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>130216</td>
-      <td>casa matias romero - sión bancaria</td>
-      <td>flamante casa habitación en condominio horizon...</td>
-      <td>Casa</td>
-      <td>MATIAS ROMERO, COLONIA DEL VALLE</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>20.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>-99.149519</td>
-      <td>2015-03-31 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3000000.0</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>181436</td>
-      <td>casa en venta en valle real</td>
-      <td>pre venta de residencia en la toscana con exce...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-103.431993</td>
-      <td>2014-11-25 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>5300000.0</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>201923</td>
-      <td>casa en venta lomas verdes naucalpan</td>
-      <td>&lt;p&gt;casa en dos niveles, 3 recámaras la princip...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Naucalpan de Juárez</td>
-      <td>Edo. de México</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-99.256028</td>
-      <td>2015-01-13 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3650000.0</td>
-      <td>2</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>283945</td>
-      <td>preciosa casa en cumbres del lago \t</td>
-      <td>&lt;p&gt;clave: vcln2450 fecha de actualizaci&amp;oacute...</td>
-      <td>Casa</td>
-      <td>CUMBRES DEL LAGO JURIQUILLA, QUERETARO, MEXICO</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-100.459303</td>
-      <td>2013-03-06 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2450000.0</td>
-      <td>4</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>73348</td>
-      <td>oportunidad, departamento col del valle, 3 rec...</td>
-      <td>magnifico departamento con excelente distribuc...</td>
-      <td>Apartamento</td>
-      <td>Pazaje Santa Cruz</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-10-30 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>4750000.0</td>
-      <td>3</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>40421</td>
-      <td>últimos terrenos en preventa!! en bukara coto ...</td>
-      <td>terreno ubicado en bukara coto club, el cual s...</td>
-      <td>Terreno</td>
-      <td>Milenio</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-12-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>794078.0</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>87655</td>
-      <td>NaN</td>
-      <td>-- rcv151104-lv-27 --    linda casa con area d...</td>
-      <td>Casa</td>
-      <td>SENDA CELESTIAL 10</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-01-15 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1850000.0</td>
-      <td>4</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>90071</td>
-      <td>terreno residencial en venta en cumbres quinta...</td>
-      <td>&lt;p&gt;excelente terreno plano, frente a parque en...</td>
-      <td>Terreno</td>
-      <td>TERRENO RESIDENCIAL EN VENTA EN CUMBRES</td>
-      <td>Monterrey</td>
-      <td>Nuevo León</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2013-12-02 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>490000.0</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>224513</td>
-      <td>casa en venta en querétaro</td>
-      <td>nocnok id: mx15-bk0340. hermosa casa en conjun...</td>
-      <td>Casa en condominio</td>
-      <td>NaN</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-02-01 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2300000.0</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>129818</td>
-      <td>comoda casa con recamara en planta baja y ampl...</td>
-      <td>&lt;p&gt;comoda casa con recamara en planta baja y a...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Ciudad Madero</td>
-      <td>Tamaulipas</td>
-      <td>0.0</td>
-      <td>4.0</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>-97.841012</td>
-      <td>2013-12-12 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1340000.0</td>
-      <td>1</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>146699</td>
-      <td>casa en condominio en venta, benito juarez, ca...</td>
-      <td>casa en venta en cancun en residencial cumbres...</td>
-      <td>Casa en condominio</td>
-      <td>NaN</td>
-      <td>Cancún</td>
-      <td>Quintana Roo</td>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-86.846323</td>
-      <td>2015-05-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3500000.0</td>
-      <td>1</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>235958</td>
-      <td>casa en venta - colinas del cimatario, queréta...</td>
-      <td>&lt;p&gt;propiedad en un nivel, con espacios amplios...</td>
-      <td>Casa</td>
-      <td>Colinas del Cimatario   C721</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>4.0</td>
-      <td>3.0</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>-100.367382</td>
-      <td>2013-09-26 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3900000.0</td>
-      <td>4</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>97918</td>
-      <td>casa venta santa cecilia</td>
-      <td>hermosa casa en santa cecilia en apodaca, cerc...</td>
-      <td>Casa</td>
-      <td>Lopez Velarde</td>
-      <td>Apodaca</td>
-      <td>Nuevo León</td>
-      <td>8.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2016-12-31 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>850000.0</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>70294</td>
-      <td>casa en venta de un nivel , frac. misiones de ...</td>
-      <td>¡excelente oportunidad!  \n\ncasa de un nivel ...</td>
-      <td>Casa en condominio</td>
-      <td>MISIONES DE SAN FRANCISCO</td>
-      <td>Puebla</td>
-      <td>Puebla</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2014-07-22 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>310000.0</td>
-      <td>1</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>177031</td>
-      <td>NaN</td>
-      <td>hermosa casa remodelada, con acabados de lujo,...</td>
-      <td>Casa en condominio</td>
-      <td>PASEO DE LOS LAURELES</td>
-      <td>Miguel Hidalgo</td>
-      <td>Distrito Federal</td>
-      <td>18.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>2012-03-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>10800000.0</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>144635</td>
-      <td>casa en venta en santillana i</td>
-      <td>casa en coto 3 recamaras, estudio, sala-comedo...</td>
-      <td>Casa en condominio</td>
-      <td>Coto Santillana I Casa G11</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>1.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>-103.453808</td>
-      <td>2015-01-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2600000.0</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>146158</td>
-      <td>terreno urbano bardeado zona tesistán</td>
-      <td>en zona de urbanización progresiva, terreno pl...</td>
-      <td>Terreno comercial</td>
-      <td>camino viejo a Tesistan</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>20.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>-103.477062</td>
-      <td>2016-12-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>10707900.0</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-<p>30 rows × 25 columns</p>
-</div>
-</div>
-
 </div>
 
 </div>
