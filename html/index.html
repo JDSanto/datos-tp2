@@ -13017,6 +13017,45 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
+<style type="text/css">
+    
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+    </style>
 
 
 <style type="text/css">
@@ -13086,6 +13125,7 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">Imputer</span>
 <span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="k">import</span> <span class="n">SimpleImputer</span>
 <span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span>
+<span class="kn">from</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">import</span> <span class="n">features_independientes_precio</span><span class="p">,</span> <span class="n">features_dependientes_precio</span>
 
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
 
@@ -13107,7 +13147,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">RMSLE</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
@@ -13122,13 +13162,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-de-datos-precio/metroscubiertos">Set de datos precio/metroscubiertos<a class="anchor-link" href="#Set-de-datos-precio/metroscubiertos">&#182;</a></h2>
+<h2 id="Regresi&#243;n-lineal">Regresi&#243;n lineal<a class="anchor-link" href="#Regresi&#243;n-lineal">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]]</span>
@@ -13138,52 +13178,13 @@ div#notebook {
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># Para evitar SettingWithCopyWarning</span>
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">x_test</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">y_train</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">y_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Train shapes: x=</span><span class="si">{x_train.shape}</span><span class="s2"> y=</span><span class="si">{y_train.shape}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Test  shapes: x=</span><span class="si">{x_test.shape}</span><span class="s2">  y=</span><span class="si">{y_test.shape}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Rellenar </span>
 <span class="n">imp</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">()</span>
 <span class="n">x_train</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]])</span>
 <span class="n">x_test</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]])</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train shapes: x=(180000, 1) y=(180000,)
-Test  shapes: x=(60000, 1)  y=(60000,)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Regresi&#243;n-lineal">Regresi&#243;n lineal<a class="anchor-link" href="#Regresi&#243;n-lineal">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">linear_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">linear_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 
 <span class="c1"># El modelo de regresion lineal con una variable obtiene RMSLE=0.65</span>
@@ -13226,7 +13227,7 @@ RMSLE LinearRegression: 0.65657
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -13240,12 +13241,20 @@ RMSLE LinearRegression: 0.65657
 <span class="n">y_test_arr</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">k</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_train_arr</span><span class="p">)),</span> 
-                     <span class="n">space</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">200</span><span class="p">)[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+                     <span class="n">space</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">20</span><span class="p">)[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
 
 <span class="n">poly_k_rmsle_train</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_train_arr</span><span class="p">))</span>
 <span class="n">poly_k_rmsle</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">x_test_arr</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression (train): </span><span class="si">{poly_k_rmsle_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression (train): </span><span class="si">{poly_k_rmsle_train: .5f}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LinearRegression: </span><span class="si">{poly_k_rmsle:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_train_arr</span><span class="p">,</span> <span class="n">y_train_arr</span><span class="p">,</span> <span class="n">k</span><span class="p">))(</span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">])</span>
+
+<span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred_test</span>
+
+<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta_2.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
 </pre></div>
@@ -13264,8 +13273,8 @@ RMSLE LinearRegression: 0.65657
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>100%|██████████| 200/200 [00:20&lt;00:00,  9.67it/s, best loss: 0.6496065747766164]
-RMSLE LinearRegression (train): 0.64961
+<pre>100%|██████████| 20/20 [00:04&lt;00:00,  4.18it/s, best loss: 0.6496065747766164]
+RMSLE LinearRegression (train):  0.64961
 RMSLE LinearRegression: 0.65024
 </pre>
 </div>
@@ -13278,19 +13287,984 @@ RMSLE LinearRegression: 0.65024
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Nearest-Neighbours">Nearest Neighbours<a class="anchor-link" href="#Nearest-Neighbours">&#182;</a></h2>
+<h2 id="Features">Features<a class="anchor-link" href="#Features">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="LightBM">LightBM<a class="anchor-link" href="#LightBM">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_gbm</span> <span class="o">=</span> <span class="n">df_train_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;direccion&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> 
+                                 <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df_gbm</span> <span class="o">=</span> <span class="n">df_gbm</span><span class="p">[[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">]]</span>
+
+<span class="n">df_gbm_test</span><span class="p">,</span> <span class="n">df_gbm_train</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_gbm</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df_gbm_test</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_gbm_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">df_gbm_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">df_gbm_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lgb_eval</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">lgb_train</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">eval_lightgbm</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">num_leaves</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">feature_fraction</span><span class="p">,</span> <span class="n">bagging_fraction</span><span class="p">,</span> <span class="n">bagging_freq</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="n">num_leaves</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_leaves</span><span class="p">)</span>
+    <span class="n">bagging_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bagging_freq</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
+        <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="n">num_leaves</span><span class="p">,</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
+        <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="n">feature_fraction</span><span class="p">,</span>
+        <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="n">bagging_fraction</span><span class="p">,</span>
+        <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="n">bagging_freq</span><span class="p">,</span>
+        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">gbm</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span>
+                    <span class="n">lgb_train</span><span class="p">,</span>
+                    <span class="n">valid_sets</span><span class="o">=</span><span class="n">lgb_eval</span><span class="p">,</span>
+                    <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                    <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                    <span class="n">verbose_eval</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">)</span>
+
+<span class="n">space</span> <span class="o">=</span> <span class="p">[</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">),</span>
+        <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;feature_fraction&#39;</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">hps</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">eval_lightgbm</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">hps</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training until validation scores don&#39;t improve for 15 rounds
+Early stopping, best iteration is:                  
+[57]	valid_0&#39;s l2: 9.6837e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                            
+[72]	valid_0&#39;s l2: 9.43951e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                           
+[121]	valid_0&#39;s l2: 9.35345e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+  6%|▌         | 3/50 [00:07&lt;01:56,  2.47s/it, best loss: 0.27938684626008786]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in log
+  
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Early stopping, best iteration is:                                            
+[76]	valid_0&#39;s l2: 9.45423e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                           
+[325]	valid_0&#39;s l2: 9.02771e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                            
+[184]	valid_0&#39;s l2: 9.88207e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                            
+[158]	valid_0&#39;s l2: 9.3031e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Did not meet early stopping. Best iteration is:                               
+[1000]	valid_0&#39;s l2: 9.6091e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                            
+[364]	valid_0&#39;s l2: 9.71589e+11
+Training until validation scores don&#39;t improve for 15 rounds                  
+Early stopping, best iteration is:                                            
+[193]	valid_0&#39;s l2: 9.15903e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[127]	valid_0&#39;s l2: 9.57195e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[146]	valid_0&#39;s l2: 9.33355e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[86]	valid_0&#39;s l2: 9.49854e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[33]	valid_0&#39;s l2: 1.00919e+12
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[112]	valid_0&#39;s l2: 9.5154e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[276]	valid_0&#39;s l2: 9.17547e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[88]	valid_0&#39;s l2: 9.29342e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[147]	valid_0&#39;s l2: 9.68137e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[124]	valid_0&#39;s l2: 9.50845e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[92]	valid_0&#39;s l2: 9.62853e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[265]	valid_0&#39;s l2: 9.11585e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[243]	valid_0&#39;s l2: 9.08299e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[260]	valid_0&#39;s l2: 9.06375e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[231]	valid_0&#39;s l2: 9.13514e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[261]	valid_0&#39;s l2: 9.15391e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[379]	valid_0&#39;s l2: 9.02199e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[560]	valid_0&#39;s l2: 8.98088e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[304]	valid_0&#39;s l2: 8.99996e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[223]	valid_0&#39;s l2: 9.07067e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[60]	valid_0&#39;s l2: 9.65992e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[266]	valid_0&#39;s l2: 9.20072e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[62]	valid_0&#39;s l2: 9.43998e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[489]	valid_0&#39;s l2: 8.90909e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[349]	valid_0&#39;s l2: 8.94386e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[239]	valid_0&#39;s l2: 9.04547e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[172]	valid_0&#39;s l2: 9.15756e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[131]	valid_0&#39;s l2: 9.35733e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[276]	valid_0&#39;s l2: 9.02037e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[56]	valid_0&#39;s l2: 9.84159e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[106]	valid_0&#39;s l2: 9.26073e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[81]	valid_0&#39;s l2: 9.45534e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[176]	valid_0&#39;s l2: 9.09372e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[336]	valid_0&#39;s l2: 9.06399e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[306]	valid_0&#39;s l2: 9.14107e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[62]	valid_0&#39;s l2: 9.44408e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[153]	valid_0&#39;s l2: 9.18777e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[227]	valid_0&#39;s l2: 9.11046e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[99]	valid_0&#39;s l2: 9.49889e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[153]	valid_0&#39;s l2: 9.30162e+11
+Training until validation scores don&#39;t improve for 15 rounds                   
+Early stopping, best iteration is:                                             
+[323]	valid_0&#39;s l2: 9.28041e+11
+100%|██████████| 50/50 [03:34&lt;00:00,  4.29s/it, best loss: 0.25098757183644077]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;bagging_fraction&#39;: 0.9239025313228117,
+ &#39;bagging_freq&#39;: 3.0,
+ &#39;feature_fraction&#39;: 0.7985685775978174,
+ &#39;learning_rate&#39;: 0.05086005195331275,
+ &#39;num_leaves&#39;: 126.0}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bagging_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">]</span>
+<span class="n">bagging_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">])</span>
+<span class="n">feature_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;feature_fraction&#39;</span><span class="p">]</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span>
+<span class="n">num_leaves</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">])</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
+    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="n">num_leaves</span><span class="p">,</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
+    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="n">feature_fraction</span><span class="p">,</span>
+    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="n">bagging_fraction</span><span class="p">,</span>
+    <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="n">bagging_freq</span><span class="p">,</span>
+    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">gbm</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span>
+                <span class="n">lgb_train</span><span class="p">,</span>
+                <span class="n">valid_sets</span><span class="o">=</span><span class="n">lgb_eval</span><span class="p">,</span>
+                <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+
+<span class="n">gbm_rmsle_train</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">)</span>
+<span class="n">gbm_rmsle</span> <span class="o">=</span> <span class="n">RMSLE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LightGBM: </span><span class="si">{gbm_rmsle_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;RMSLE LightGBM: </span><span class="si">{gbm_rmsle:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1]	valid_0&#39;s l2: 4.34355e+12
+Training until validation scores don&#39;t improve for 15 rounds
+[2]	valid_0&#39;s l2: 4.04286e+12
+[3]	valid_0&#39;s l2: 3.773e+12
+[4]	valid_0&#39;s l2: 3.57691e+12
+[5]	valid_0&#39;s l2: 3.35036e+12
+[6]	valid_0&#39;s l2: 3.14362e+12
+[7]	valid_0&#39;s l2: 2.95512e+12
+[8]	valid_0&#39;s l2: 2.79656e+12
+[9]	valid_0&#39;s l2: 2.64309e+12
+[10]	valid_0&#39;s l2: 2.50549e+12
+[11]	valid_0&#39;s l2: 2.37894e+12
+[12]	valid_0&#39;s l2: 2.26395e+12
+[13]	valid_0&#39;s l2: 2.15758e+12
+[14]	valid_0&#39;s l2: 2.05905e+12
+[15]	valid_0&#39;s l2: 1.97468e+12
+[16]	valid_0&#39;s l2: 1.89301e+12
+[17]	valid_0&#39;s l2: 1.82331e+12
+[18]	valid_0&#39;s l2: 1.75931e+12
+[19]	valid_0&#39;s l2: 1.69997e+12
+[20]	valid_0&#39;s l2: 1.64687e+12
+[21]	valid_0&#39;s l2: 1.59342e+12
+[22]	valid_0&#39;s l2: 1.54534e+12
+[23]	valid_0&#39;s l2: 1.5e+12
+[24]	valid_0&#39;s l2: 1.4586e+12
+[25]	valid_0&#39;s l2: 1.42147e+12
+[26]	valid_0&#39;s l2: 1.3888e+12
+[27]	valid_0&#39;s l2: 1.35724e+12
+[28]	valid_0&#39;s l2: 1.32745e+12
+[29]	valid_0&#39;s l2: 1.30051e+12
+[30]	valid_0&#39;s l2: 1.27857e+12
+[31]	valid_0&#39;s l2: 1.2563e+12
+[32]	valid_0&#39;s l2: 1.23596e+12
+[33]	valid_0&#39;s l2: 1.21796e+12
+[34]	valid_0&#39;s l2: 1.20276e+12
+[35]	valid_0&#39;s l2: 1.18676e+12
+[36]	valid_0&#39;s l2: 1.17107e+12
+[37]	valid_0&#39;s l2: 1.15619e+12
+[38]	valid_0&#39;s l2: 1.14341e+12
+[39]	valid_0&#39;s l2: 1.13215e+12
+[40]	valid_0&#39;s l2: 1.12083e+12
+[41]	valid_0&#39;s l2: 1.11059e+12
+[42]	valid_0&#39;s l2: 1.10183e+12
+[43]	valid_0&#39;s l2: 1.09315e+12
+[44]	valid_0&#39;s l2: 1.08485e+12
+[45]	valid_0&#39;s l2: 1.07536e+12
+[46]	valid_0&#39;s l2: 1.06847e+12
+[47]	valid_0&#39;s l2: 1.06099e+12
+[48]	valid_0&#39;s l2: 1.0551e+12
+[49]	valid_0&#39;s l2: 1.04934e+12
+[50]	valid_0&#39;s l2: 1.04439e+12
+[51]	valid_0&#39;s l2: 1.0393e+12
+[52]	valid_0&#39;s l2: 1.03457e+12
+[53]	valid_0&#39;s l2: 1.02975e+12
+[54]	valid_0&#39;s l2: 1.02591e+12
+[55]	valid_0&#39;s l2: 1.02147e+12
+[56]	valid_0&#39;s l2: 1.01688e+12
+[57]	valid_0&#39;s l2: 1.01245e+12
+[58]	valid_0&#39;s l2: 1.00849e+12
+[59]	valid_0&#39;s l2: 1.00539e+12
+[60]	valid_0&#39;s l2: 1.00185e+12
+[61]	valid_0&#39;s l2: 9.98048e+11
+[62]	valid_0&#39;s l2: 9.95238e+11
+[63]	valid_0&#39;s l2: 9.92158e+11
+[64]	valid_0&#39;s l2: 9.90178e+11
+[65]	valid_0&#39;s l2: 9.87652e+11
+[66]	valid_0&#39;s l2: 9.85359e+11
+[67]	valid_0&#39;s l2: 9.83269e+11
+[68]	valid_0&#39;s l2: 9.81117e+11
+[69]	valid_0&#39;s l2: 9.78837e+11
+[70]	valid_0&#39;s l2: 9.76215e+11
+[71]	valid_0&#39;s l2: 9.7429e+11
+[72]	valid_0&#39;s l2: 9.72318e+11
+[73]	valid_0&#39;s l2: 9.70661e+11
+[74]	valid_0&#39;s l2: 9.68823e+11
+[75]	valid_0&#39;s l2: 9.67378e+11
+[76]	valid_0&#39;s l2: 9.66048e+11
+[77]	valid_0&#39;s l2: 9.64539e+11
+[78]	valid_0&#39;s l2: 9.6287e+11
+[79]	valid_0&#39;s l2: 9.61443e+11
+[80]	valid_0&#39;s l2: 9.60068e+11
+[81]	valid_0&#39;s l2: 9.5887e+11
+[82]	valid_0&#39;s l2: 9.57166e+11
+[83]	valid_0&#39;s l2: 9.55857e+11
+[84]	valid_0&#39;s l2: 9.54889e+11
+[85]	valid_0&#39;s l2: 9.53068e+11
+[86]	valid_0&#39;s l2: 9.51612e+11
+[87]	valid_0&#39;s l2: 9.50295e+11
+[88]	valid_0&#39;s l2: 9.49304e+11
+[89]	valid_0&#39;s l2: 9.47965e+11
+[90]	valid_0&#39;s l2: 9.46884e+11
+[91]	valid_0&#39;s l2: 9.46176e+11
+[92]	valid_0&#39;s l2: 9.45309e+11
+[93]	valid_0&#39;s l2: 9.44287e+11
+[94]	valid_0&#39;s l2: 9.43496e+11
+[95]	valid_0&#39;s l2: 9.42418e+11
+[96]	valid_0&#39;s l2: 9.41831e+11
+[97]	valid_0&#39;s l2: 9.4088e+11
+[98]	valid_0&#39;s l2: 9.40216e+11
+[99]	valid_0&#39;s l2: 9.39459e+11
+[100]	valid_0&#39;s l2: 9.38223e+11
+[101]	valid_0&#39;s l2: 9.37349e+11
+[102]	valid_0&#39;s l2: 9.36571e+11
+[103]	valid_0&#39;s l2: 9.35912e+11
+[104]	valid_0&#39;s l2: 9.35345e+11
+[105]	valid_0&#39;s l2: 9.34454e+11
+[106]	valid_0&#39;s l2: 9.33625e+11
+[107]	valid_0&#39;s l2: 9.32914e+11
+[108]	valid_0&#39;s l2: 9.32102e+11
+[109]	valid_0&#39;s l2: 9.31587e+11
+[110]	valid_0&#39;s l2: 9.30877e+11
+[111]	valid_0&#39;s l2: 9.30248e+11
+[112]	valid_0&#39;s l2: 9.29649e+11
+[113]	valid_0&#39;s l2: 9.28885e+11
+[114]	valid_0&#39;s l2: 9.28294e+11
+[115]	valid_0&#39;s l2: 9.27696e+11
+[116]	valid_0&#39;s l2: 9.26933e+11
+[117]	valid_0&#39;s l2: 9.26349e+11
+[118]	valid_0&#39;s l2: 9.25814e+11
+[119]	valid_0&#39;s l2: 9.25103e+11
+[120]	valid_0&#39;s l2: 9.24449e+11
+[121]	valid_0&#39;s l2: 9.2383e+11
+[122]	valid_0&#39;s l2: 9.23425e+11
+[123]	valid_0&#39;s l2: 9.22821e+11
+[124]	valid_0&#39;s l2: 9.22382e+11
+[125]	valid_0&#39;s l2: 9.21767e+11
+[126]	valid_0&#39;s l2: 9.21363e+11
+[127]	valid_0&#39;s l2: 9.21017e+11
+[128]	valid_0&#39;s l2: 9.20883e+11
+[129]	valid_0&#39;s l2: 9.20759e+11
+[130]	valid_0&#39;s l2: 9.20389e+11
+[131]	valid_0&#39;s l2: 9.20025e+11
+[132]	valid_0&#39;s l2: 9.19674e+11
+[133]	valid_0&#39;s l2: 9.19403e+11
+[134]	valid_0&#39;s l2: 9.19e+11
+[135]	valid_0&#39;s l2: 9.18668e+11
+[136]	valid_0&#39;s l2: 9.18152e+11
+[137]	valid_0&#39;s l2: 9.1802e+11
+[138]	valid_0&#39;s l2: 9.17794e+11
+[139]	valid_0&#39;s l2: 9.17376e+11
+[140]	valid_0&#39;s l2: 9.16921e+11
+[141]	valid_0&#39;s l2: 9.16693e+11
+[142]	valid_0&#39;s l2: 9.16337e+11
+[143]	valid_0&#39;s l2: 9.15987e+11
+[144]	valid_0&#39;s l2: 9.15665e+11
+[145]	valid_0&#39;s l2: 9.15339e+11
+[146]	valid_0&#39;s l2: 9.1501e+11
+[147]	valid_0&#39;s l2: 9.14724e+11
+[148]	valid_0&#39;s l2: 9.14401e+11
+[149]	valid_0&#39;s l2: 9.1423e+11
+[150]	valid_0&#39;s l2: 9.1406e+11
+[151]	valid_0&#39;s l2: 9.13911e+11
+[152]	valid_0&#39;s l2: 9.13589e+11
+[153]	valid_0&#39;s l2: 9.13465e+11
+[154]	valid_0&#39;s l2: 9.13349e+11
+[155]	valid_0&#39;s l2: 9.13149e+11
+[156]	valid_0&#39;s l2: 9.12769e+11
+[157]	valid_0&#39;s l2: 9.12638e+11
+[158]	valid_0&#39;s l2: 9.12308e+11
+[159]	valid_0&#39;s l2: 9.12187e+11
+[160]	valid_0&#39;s l2: 9.11638e+11
+[161]	valid_0&#39;s l2: 9.11434e+11
+[162]	valid_0&#39;s l2: 9.11147e+11
+[163]	valid_0&#39;s l2: 9.10869e+11
+[164]	valid_0&#39;s l2: 9.10657e+11
+[165]	valid_0&#39;s l2: 9.10085e+11
+[166]	valid_0&#39;s l2: 9.09901e+11
+[167]	valid_0&#39;s l2: 9.09699e+11
+[168]	valid_0&#39;s l2: 9.09549e+11
+[169]	valid_0&#39;s l2: 9.09482e+11
+[170]	valid_0&#39;s l2: 9.09214e+11
+[171]	valid_0&#39;s l2: 9.09168e+11
+[172]	valid_0&#39;s l2: 9.09097e+11
+[173]	valid_0&#39;s l2: 9.08874e+11
+[174]	valid_0&#39;s l2: 9.08706e+11
+[175]	valid_0&#39;s l2: 9.08247e+11
+[176]	valid_0&#39;s l2: 9.08009e+11
+[177]	valid_0&#39;s l2: 9.07781e+11
+[178]	valid_0&#39;s l2: 9.07495e+11
+[179]	valid_0&#39;s l2: 9.07203e+11
+[180]	valid_0&#39;s l2: 9.07032e+11
+[181]	valid_0&#39;s l2: 9.068e+11
+[182]	valid_0&#39;s l2: 9.06638e+11
+[183]	valid_0&#39;s l2: 9.06377e+11
+[184]	valid_0&#39;s l2: 9.06079e+11
+[185]	valid_0&#39;s l2: 9.06097e+11
+[186]	valid_0&#39;s l2: 9.059e+11
+[187]	valid_0&#39;s l2: 9.05848e+11
+[188]	valid_0&#39;s l2: 9.05646e+11
+[189]	valid_0&#39;s l2: 9.05592e+11
+[190]	valid_0&#39;s l2: 9.05398e+11
+[191]	valid_0&#39;s l2: 9.05228e+11
+[192]	valid_0&#39;s l2: 9.0511e+11
+[193]	valid_0&#39;s l2: 9.04906e+11
+[194]	valid_0&#39;s l2: 9.04837e+11
+[195]	valid_0&#39;s l2: 9.04625e+11
+[196]	valid_0&#39;s l2: 9.04427e+11
+[197]	valid_0&#39;s l2: 9.04313e+11
+[198]	valid_0&#39;s l2: 9.04363e+11
+[199]	valid_0&#39;s l2: 9.04246e+11
+[200]	valid_0&#39;s l2: 9.04269e+11
+[201]	valid_0&#39;s l2: 9.04112e+11
+[202]	valid_0&#39;s l2: 9.03903e+11
+[203]	valid_0&#39;s l2: 9.03738e+11
+[204]	valid_0&#39;s l2: 9.03513e+11
+[205]	valid_0&#39;s l2: 9.03459e+11
+[206]	valid_0&#39;s l2: 9.0325e+11
+[207]	valid_0&#39;s l2: 9.0319e+11
+[208]	valid_0&#39;s l2: 9.02935e+11
+[209]	valid_0&#39;s l2: 9.02803e+11
+[210]	valid_0&#39;s l2: 9.02492e+11
+[211]	valid_0&#39;s l2: 9.02216e+11
+[212]	valid_0&#39;s l2: 9.02118e+11
+[213]	valid_0&#39;s l2: 9.01949e+11
+[214]	valid_0&#39;s l2: 9.01645e+11
+[215]	valid_0&#39;s l2: 9.01613e+11
+[216]	valid_0&#39;s l2: 9.01379e+11
+[217]	valid_0&#39;s l2: 9.01241e+11
+[218]	valid_0&#39;s l2: 9.0118e+11
+[219]	valid_0&#39;s l2: 9.01185e+11
+[220]	valid_0&#39;s l2: 9.01073e+11
+[221]	valid_0&#39;s l2: 9.01095e+11
+[222]	valid_0&#39;s l2: 9.00792e+11
+[223]	valid_0&#39;s l2: 9.00592e+11
+[224]	valid_0&#39;s l2: 9.0045e+11
+[225]	valid_0&#39;s l2: 9.00333e+11
+[226]	valid_0&#39;s l2: 9.00282e+11
+[227]	valid_0&#39;s l2: 9.0022e+11
+[228]	valid_0&#39;s l2: 9.00182e+11
+[229]	valid_0&#39;s l2: 9.00133e+11
+[230]	valid_0&#39;s l2: 9.00132e+11
+[231]	valid_0&#39;s l2: 9.00016e+11
+[232]	valid_0&#39;s l2: 8.99931e+11
+[233]	valid_0&#39;s l2: 8.99795e+11
+[234]	valid_0&#39;s l2: 8.99804e+11
+[235]	valid_0&#39;s l2: 8.99765e+11
+[236]	valid_0&#39;s l2: 8.99578e+11
+[237]	valid_0&#39;s l2: 8.99415e+11
+[238]	valid_0&#39;s l2: 8.99242e+11
+[239]	valid_0&#39;s l2: 8.99147e+11
+[240]	valid_0&#39;s l2: 8.99108e+11
+[241]	valid_0&#39;s l2: 8.99014e+11
+[242]	valid_0&#39;s l2: 8.98928e+11
+[243]	valid_0&#39;s l2: 8.98858e+11
+[244]	valid_0&#39;s l2: 8.98646e+11
+[245]	valid_0&#39;s l2: 8.98308e+11
+[246]	valid_0&#39;s l2: 8.98122e+11
+[247]	valid_0&#39;s l2: 8.9795e+11
+[248]	valid_0&#39;s l2: 8.97842e+11
+[249]	valid_0&#39;s l2: 8.97673e+11
+[250]	valid_0&#39;s l2: 8.97669e+11
+[251]	valid_0&#39;s l2: 8.97623e+11
+[252]	valid_0&#39;s l2: 8.97573e+11
+[253]	valid_0&#39;s l2: 8.97458e+11
+[254]	valid_0&#39;s l2: 8.97407e+11
+[255]	valid_0&#39;s l2: 8.97202e+11
+[256]	valid_0&#39;s l2: 8.97099e+11
+[257]	valid_0&#39;s l2: 8.97025e+11
+[258]	valid_0&#39;s l2: 8.96861e+11
+[259]	valid_0&#39;s l2: 8.96917e+11
+[260]	valid_0&#39;s l2: 8.96876e+11
+[261]	valid_0&#39;s l2: 8.96794e+11
+[262]	valid_0&#39;s l2: 8.96658e+11
+[263]	valid_0&#39;s l2: 8.96477e+11
+[264]	valid_0&#39;s l2: 8.96462e+11
+[265]	valid_0&#39;s l2: 8.96463e+11
+[266]	valid_0&#39;s l2: 8.9629e+11
+[267]	valid_0&#39;s l2: 8.96216e+11
+[268]	valid_0&#39;s l2: 8.96113e+11
+[269]	valid_0&#39;s l2: 8.96057e+11
+[270]	valid_0&#39;s l2: 8.96047e+11
+[271]	valid_0&#39;s l2: 8.96039e+11
+[272]	valid_0&#39;s l2: 8.95952e+11
+[273]	valid_0&#39;s l2: 8.96004e+11
+[274]	valid_0&#39;s l2: 8.95943e+11
+[275]	valid_0&#39;s l2: 8.95925e+11
+[276]	valid_0&#39;s l2: 8.9582e+11
+[277]	valid_0&#39;s l2: 8.95726e+11
+[278]	valid_0&#39;s l2: 8.95616e+11
+[279]	valid_0&#39;s l2: 8.95535e+11
+[280]	valid_0&#39;s l2: 8.95323e+11
+[281]	valid_0&#39;s l2: 8.95417e+11
+[282]	valid_0&#39;s l2: 8.95336e+11
+[283]	valid_0&#39;s l2: 8.95326e+11
+[284]	valid_0&#39;s l2: 8.95341e+11
+[285]	valid_0&#39;s l2: 8.95315e+11
+[286]	valid_0&#39;s l2: 8.95321e+11
+[287]	valid_0&#39;s l2: 8.95341e+11
+[288]	valid_0&#39;s l2: 8.95332e+11
+[289]	valid_0&#39;s l2: 8.95287e+11
+[290]	valid_0&#39;s l2: 8.95242e+11
+[291]	valid_0&#39;s l2: 8.95247e+11
+[292]	valid_0&#39;s l2: 8.95115e+11
+[293]	valid_0&#39;s l2: 8.95096e+11
+[294]	valid_0&#39;s l2: 8.95051e+11
+[295]	valid_0&#39;s l2: 8.94992e+11
+[296]	valid_0&#39;s l2: 8.9494e+11
+[297]	valid_0&#39;s l2: 8.94922e+11
+[298]	valid_0&#39;s l2: 8.9486e+11
+[299]	valid_0&#39;s l2: 8.94827e+11
+[300]	valid_0&#39;s l2: 8.94829e+11
+[301]	valid_0&#39;s l2: 8.94932e+11
+[302]	valid_0&#39;s l2: 8.94897e+11
+[303]	valid_0&#39;s l2: 8.94711e+11
+[304]	valid_0&#39;s l2: 8.94604e+11
+[305]	valid_0&#39;s l2: 8.94645e+11
+[306]	valid_0&#39;s l2: 8.9458e+11
+[307]	valid_0&#39;s l2: 8.9448e+11
+[308]	valid_0&#39;s l2: 8.94451e+11
+[309]	valid_0&#39;s l2: 8.94428e+11
+[310]	valid_0&#39;s l2: 8.94442e+11
+[311]	valid_0&#39;s l2: 8.94362e+11
+[312]	valid_0&#39;s l2: 8.94357e+11
+[313]	valid_0&#39;s l2: 8.94338e+11
+[314]	valid_0&#39;s l2: 8.94313e+11
+[315]	valid_0&#39;s l2: 8.94336e+11
+[316]	valid_0&#39;s l2: 8.94298e+11
+[317]	valid_0&#39;s l2: 8.94224e+11
+[318]	valid_0&#39;s l2: 8.9421e+11
+[319]	valid_0&#39;s l2: 8.94131e+11
+[320]	valid_0&#39;s l2: 8.94175e+11
+[321]	valid_0&#39;s l2: 8.941e+11
+[322]	valid_0&#39;s l2: 8.9404e+11
+[323]	valid_0&#39;s l2: 8.94018e+11
+[324]	valid_0&#39;s l2: 8.94082e+11
+[325]	valid_0&#39;s l2: 8.9397e+11
+[326]	valid_0&#39;s l2: 8.93861e+11
+[327]	valid_0&#39;s l2: 8.93836e+11
+[328]	valid_0&#39;s l2: 8.93699e+11
+[329]	valid_0&#39;s l2: 8.93715e+11
+[330]	valid_0&#39;s l2: 8.93747e+11
+[331]	valid_0&#39;s l2: 8.93783e+11
+[332]	valid_0&#39;s l2: 8.93829e+11
+[333]	valid_0&#39;s l2: 8.93811e+11
+[334]	valid_0&#39;s l2: 8.93831e+11
+[335]	valid_0&#39;s l2: 8.93779e+11
+[336]	valid_0&#39;s l2: 8.93711e+11
+[337]	valid_0&#39;s l2: 8.93616e+11
+[338]	valid_0&#39;s l2: 8.93651e+11
+[339]	valid_0&#39;s l2: 8.93469e+11
+[340]	valid_0&#39;s l2: 8.93596e+11
+[341]	valid_0&#39;s l2: 8.93569e+11
+[342]	valid_0&#39;s l2: 8.93506e+11
+[343]	valid_0&#39;s l2: 8.93488e+11
+[344]	valid_0&#39;s l2: 8.93451e+11
+[345]	valid_0&#39;s l2: 8.93462e+11
+[346]	valid_0&#39;s l2: 8.93425e+11
+[347]	valid_0&#39;s l2: 8.93417e+11
+[348]	valid_0&#39;s l2: 8.93409e+11
+[349]	valid_0&#39;s l2: 8.93391e+11
+[350]	valid_0&#39;s l2: 8.93284e+11
+[351]	valid_0&#39;s l2: 8.93257e+11
+[352]	valid_0&#39;s l2: 8.93223e+11
+[353]	valid_0&#39;s l2: 8.93107e+11
+[354]	valid_0&#39;s l2: 8.93109e+11
+[355]	valid_0&#39;s l2: 8.9312e+11
+[356]	valid_0&#39;s l2: 8.93108e+11
+[357]	valid_0&#39;s l2: 8.9307e+11
+[358]	valid_0&#39;s l2: 8.93064e+11
+[359]	valid_0&#39;s l2: 8.93063e+11
+[360]	valid_0&#39;s l2: 8.93158e+11
+[361]	valid_0&#39;s l2: 8.93174e+11
+[362]	valid_0&#39;s l2: 8.93201e+11
+[363]	valid_0&#39;s l2: 8.93148e+11
+[364]	valid_0&#39;s l2: 8.93067e+11
+[365]	valid_0&#39;s l2: 8.93013e+11
+[366]	valid_0&#39;s l2: 8.92979e+11
+[367]	valid_0&#39;s l2: 8.92942e+11
+[368]	valid_0&#39;s l2: 8.92906e+11
+[369]	valid_0&#39;s l2: 8.92882e+11
+[370]	valid_0&#39;s l2: 8.92782e+11
+[371]	valid_0&#39;s l2: 8.9277e+11
+[372]	valid_0&#39;s l2: 8.9267e+11
+[373]	valid_0&#39;s l2: 8.92724e+11
+[374]	valid_0&#39;s l2: 8.92668e+11
+[375]	valid_0&#39;s l2: 8.92651e+11
+[376]	valid_0&#39;s l2: 8.92622e+11
+[377]	valid_0&#39;s l2: 8.92636e+11
+[378]	valid_0&#39;s l2: 8.92639e+11
+[379]	valid_0&#39;s l2: 8.92577e+11
+[380]	valid_0&#39;s l2: 8.92533e+11
+[381]	valid_0&#39;s l2: 8.92557e+11
+[382]	valid_0&#39;s l2: 8.92536e+11
+[383]	valid_0&#39;s l2: 8.92518e+11
+[384]	valid_0&#39;s l2: 8.92518e+11
+[385]	valid_0&#39;s l2: 8.92486e+11
+[386]	valid_0&#39;s l2: 8.92485e+11
+[387]	valid_0&#39;s l2: 8.92434e+11
+[388]	valid_0&#39;s l2: 8.92444e+11
+[389]	valid_0&#39;s l2: 8.92484e+11
+[390]	valid_0&#39;s l2: 8.9247e+11
+[391]	valid_0&#39;s l2: 8.92472e+11
+[392]	valid_0&#39;s l2: 8.92504e+11
+[393]	valid_0&#39;s l2: 8.92461e+11
+[394]	valid_0&#39;s l2: 8.92544e+11
+[395]	valid_0&#39;s l2: 8.92614e+11
+[396]	valid_0&#39;s l2: 8.92607e+11
+[397]	valid_0&#39;s l2: 8.9249e+11
+[398]	valid_0&#39;s l2: 8.9242e+11
+[399]	valid_0&#39;s l2: 8.92381e+11
+[400]	valid_0&#39;s l2: 8.92296e+11
+[401]	valid_0&#39;s l2: 8.92201e+11
+[402]	valid_0&#39;s l2: 8.92161e+11
+[403]	valid_0&#39;s l2: 8.92187e+11
+[404]	valid_0&#39;s l2: 8.922e+11
+[405]	valid_0&#39;s l2: 8.92133e+11
+[406]	valid_0&#39;s l2: 8.92104e+11
+[407]	valid_0&#39;s l2: 8.9215e+11
+[408]	valid_0&#39;s l2: 8.92118e+11
+[409]	valid_0&#39;s l2: 8.92198e+11
+[410]	valid_0&#39;s l2: 8.92218e+11
+[411]	valid_0&#39;s l2: 8.92207e+11
+[412]	valid_0&#39;s l2: 8.9218e+11
+[413]	valid_0&#39;s l2: 8.92174e+11
+[414]	valid_0&#39;s l2: 8.92195e+11
+[415]	valid_0&#39;s l2: 8.92152e+11
+[416]	valid_0&#39;s l2: 8.92031e+11
+[417]	valid_0&#39;s l2: 8.9199e+11
+[418]	valid_0&#39;s l2: 8.91941e+11
+[419]	valid_0&#39;s l2: 8.91885e+11
+[420]	valid_0&#39;s l2: 8.91846e+11
+[421]	valid_0&#39;s l2: 8.91879e+11
+[422]	valid_0&#39;s l2: 8.9186e+11
+[423]	valid_0&#39;s l2: 8.91843e+11
+[424]	valid_0&#39;s l2: 8.91792e+11
+[425]	valid_0&#39;s l2: 8.91775e+11
+[426]	valid_0&#39;s l2: 8.9159e+11
+[427]	valid_0&#39;s l2: 8.91608e+11
+[428]	valid_0&#39;s l2: 8.91711e+11
+[429]	valid_0&#39;s l2: 8.91776e+11
+[430]	valid_0&#39;s l2: 8.91761e+11
+[431]	valid_0&#39;s l2: 8.91707e+11
+[432]	valid_0&#39;s l2: 8.91626e+11
+[433]	valid_0&#39;s l2: 8.91627e+11
+[434]	valid_0&#39;s l2: 8.91652e+11
+[435]	valid_0&#39;s l2: 8.91641e+11
+[436]	valid_0&#39;s l2: 8.91664e+11
+[437]	valid_0&#39;s l2: 8.91607e+11
+[438]	valid_0&#39;s l2: 8.91641e+11
+[439]	valid_0&#39;s l2: 8.91645e+11
+[440]	valid_0&#39;s l2: 8.91614e+11
+[441]	valid_0&#39;s l2: 8.91545e+11
+[442]	valid_0&#39;s l2: 8.91565e+11
+[443]	valid_0&#39;s l2: 8.91593e+11
+[444]	valid_0&#39;s l2: 8.91521e+11
+[445]	valid_0&#39;s l2: 8.91523e+11
+[446]	valid_0&#39;s l2: 8.91553e+11
+[447]	valid_0&#39;s l2: 8.91526e+11
+[448]	valid_0&#39;s l2: 8.91508e+11
+[449]	valid_0&#39;s l2: 8.91633e+11
+[450]	valid_0&#39;s l2: 8.91613e+11
+[451]	valid_0&#39;s l2: 8.91555e+11
+[452]	valid_0&#39;s l2: 8.91601e+11
+[453]	valid_0&#39;s l2: 8.91587e+11
+[454]	valid_0&#39;s l2: 8.91617e+11
+[455]	valid_0&#39;s l2: 8.91582e+11
+[456]	valid_0&#39;s l2: 8.9163e+11
+[457]	valid_0&#39;s l2: 8.91605e+11
+[458]	valid_0&#39;s l2: 8.91561e+11
+[459]	valid_0&#39;s l2: 8.91513e+11
+[460]	valid_0&#39;s l2: 8.91479e+11
+[461]	valid_0&#39;s l2: 8.91485e+11
+[462]	valid_0&#39;s l2: 8.91503e+11
+[463]	valid_0&#39;s l2: 8.91464e+11
+[464]	valid_0&#39;s l2: 8.91453e+11
+[465]	valid_0&#39;s l2: 8.91437e+11
+[466]	valid_0&#39;s l2: 8.91513e+11
+[467]	valid_0&#39;s l2: 8.91489e+11
+[468]	valid_0&#39;s l2: 8.91547e+11
+[469]	valid_0&#39;s l2: 8.91428e+11
+[470]	valid_0&#39;s l2: 8.91407e+11
+[471]	valid_0&#39;s l2: 8.9139e+11
+[472]	valid_0&#39;s l2: 8.91321e+11
+[473]	valid_0&#39;s l2: 8.91298e+11
+[474]	valid_0&#39;s l2: 8.91242e+11
+[475]	valid_0&#39;s l2: 8.91246e+11
+[476]	valid_0&#39;s l2: 8.91224e+11
+[477]	valid_0&#39;s l2: 8.91207e+11
+[478]	valid_0&#39;s l2: 8.91186e+11
+[479]	valid_0&#39;s l2: 8.91103e+11
+[480]	valid_0&#39;s l2: 8.91128e+11
+[481]	valid_0&#39;s l2: 8.91109e+11
+[482]	valid_0&#39;s l2: 8.91065e+11
+[483]	valid_0&#39;s l2: 8.91025e+11
+[484]	valid_0&#39;s l2: 8.90987e+11
+[485]	valid_0&#39;s l2: 8.90931e+11
+[486]	valid_0&#39;s l2: 8.90995e+11
+[487]	valid_0&#39;s l2: 8.91021e+11
+[488]	valid_0&#39;s l2: 8.90964e+11
+[489]	valid_0&#39;s l2: 8.90909e+11
+[490]	valid_0&#39;s l2: 8.90983e+11
+[491]	valid_0&#39;s l2: 8.91166e+11
+[492]	valid_0&#39;s l2: 8.91233e+11
+[493]	valid_0&#39;s l2: 8.91289e+11
+[494]	valid_0&#39;s l2: 8.91347e+11
+[495]	valid_0&#39;s l2: 8.91395e+11
+[496]	valid_0&#39;s l2: 8.91458e+11
+[497]	valid_0&#39;s l2: 8.91316e+11
+[498]	valid_0&#39;s l2: 8.91305e+11
+[499]	valid_0&#39;s l2: 8.91305e+11
+[500]	valid_0&#39;s l2: 8.91322e+11
+[501]	valid_0&#39;s l2: 8.91331e+11
+[502]	valid_0&#39;s l2: 8.91359e+11
+[503]	valid_0&#39;s l2: 8.91403e+11
+[504]	valid_0&#39;s l2: 8.91443e+11
+Early stopping, best iteration is:
+[489]	valid_0&#39;s l2: 8.90909e+11
+RMSLE LightGBM: 0.25099
+RMSLE LightGBM: 0.31631
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in log
+  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_gdb</span> <span class="o">=</span> <span class="n">df_test_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_test_gdb_ids</span> <span class="o">=</span> <span class="n">df_test_gdb</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+
+<span class="n">df_test_gdb</span> <span class="o">=</span> <span class="n">df_test_gdb</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;direccion&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> 
+                                 <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_test_gdb</span><span class="p">[[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">]],</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
+
+<span class="n">df_test_gdb</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred_test</span>
+<span class="n">df_test_gdb</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test_gdb_ids</span>
+
+<span class="n">df_test_gdb</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">df_test_f</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>Index([&#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;, &#39;metroscubiertos&#39;,
+       &#39;metrostotales&#39;, &#39;idzona&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;,
+       &#39;piscina&#39;, &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;,
+       &#39;escomercial&#39;, &#39;promedio_precio_ciudad&#39;, &#39;promedio_id_zona&#39;,
+       &#39;porcentaje_metros&#39;, &#39;promedio_metros_tipo_propiedad&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[110]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;, &#39;metroscubiertos&#39;,
+       &#39;metrostotales&#39;, &#39;idzona&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;,
+       &#39;piscina&#39;, &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;,
+       &#39;escomercial&#39;, &#39;promedio_precio_ciudad&#39;, &#39;promedio_id_zona&#39;,
+       &#39;porcentaje_metros&#39;, &#39;promedio_metros_tipo_propiedad&#39;, &#39;target&#39;, &#39;id&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 

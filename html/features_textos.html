@@ -13115,7 +13115,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13159,11 +13159,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;titulo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
-<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">llenar_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;titulo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
     </div>
@@ -13173,7 +13175,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_no_queridas</span><span class="p">(</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13206,7 +13208,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tf_idf</span> <span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">cols</span><span class="p">):</span>
@@ -13228,7 +13230,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">contador_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_idf</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13250,50 +13252,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_titulo</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
-<span class="n">df_descripcion</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;idf_titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_frecuentes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_titulo</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_frecuentes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_descripcion</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">palabras_importantes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;balcon&#39;</span><span class="p">,</span> <span class="s1">&#39;estacionamiento&#39;</span><span class="p">,</span><span class="s1">&#39;niveles&#39;</span><span class="p">,</span><span class="s1">&#39;pent&#39;</span><span class="p">,</span> <span class="s1">&#39;vista&#39;</span><span class="p">,</span> <span class="s1">&#39;mar&#39;</span><span class="p">,</span> <span class="s1">&#39;lavanderia&#39;</span><span class="p">,</span> <span class="s1">&#39;patio&#39;</span><span class="p">,</span> <span class="s1">&#39;bien&#39;</span><span class="p">,</span> <span class="s1">&#39;hermosa&#39;</span><span class="p">,</span> <span class="s1">&#39;hermoso&#39;</span><span class="p">,</span> <span class="s1">&#39;jardin&#39;</span><span class="p">,</span> <span class="s1">&#39;vigilancia&#39;</span><span class="p">,</span> <span class="s1">&#39;preciosa&#39;</span><span class="p">,</span> <span class="s1">&#39;excelente&#39;</span><span class="p">,</span> <span class="s1">&#39;equipada&#39;</span><span class="p">,</span> <span class="s1">&#39;lujo&#39;</span><span class="p">,</span> <span class="s1">&#39;garage&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;pileta&#39;</span><span class="p">,</span> <span class="s1">&#39;privada&#39;</span><span class="p">,</span> <span class="s1">&#39;exclusiva&#39;</span><span class="p">,</span> <span class="s1">&#39;penthouse&#39;</span><span class="p">,</span> <span class="s1">&#39;facil&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">palabras_importantes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;balcon&#39;</span><span class="p">,</span> <span class="s1">&#39;estacionamiento&#39;</span><span class="p">,</span><span class="s1">&#39;niveles&#39;</span><span class="p">,</span><span class="s1">&#39;pent&#39;</span><span class="p">,</span> <span class="s1">&#39;vista&#39;</span><span class="p">,</span> <span class="s1">&#39;panorámica&#39;</span><span class="p">,</span><span class="s1">&#39;mar&#39;</span><span class="p">,</span> <span class="s1">&#39;lavanderia&#39;</span><span class="p">,</span> <span class="s1">&#39;patio&#39;</span><span class="p">,</span> <span class="s1">&#39;bien&#39;</span><span class="p">,</span> <span class="s1">&#39;hermosa&#39;</span><span class="p">,</span> <span class="s1">&#39;hermoso&#39;</span><span class="p">,</span> <span class="s1">&#39;jardin&#39;</span><span class="p">,</span> <span class="s1">&#39;vigilancia&#39;</span><span class="p">,</span> <span class="s1">&#39;preciosa&#39;</span><span class="p">,</span> <span class="s1">&#39;excelente&#39;</span><span class="p">,</span> <span class="s1">&#39;equipada&#39;</span><span class="p">,</span> <span class="s1">&#39;lujo&#39;</span><span class="p">,</span> <span class="s1">&#39;garage&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;pileta&#39;</span><span class="p">,</span> <span class="s1">&#39;privada&#39;</span><span class="p">,</span> <span class="s1">&#39;exclusiva&#39;</span><span class="p">,</span> <span class="s1">&#39;penthouse&#39;</span><span class="p">,</span> <span class="s1">&#39;facil&#39;</span><span class="p">,</span> <span class="s1">&#39;jacuzzi&#39;</span><span class="p">,</span> <span class="s1">&#39;seguridad&#39;</span><span class="p">,</span> <span class="s1">&#39;bodega&#39;</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">contador_mas_importantes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
     <span class="n">contadores</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13314,10 +13276,27 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;peso_titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_importantes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_textos</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Devuelve una copia del dataframe con nuevas columnas, </span>
+<span class="sd">    con relacion a los textos&#39;&#39;&#39;</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+   
+    <span class="sd">&#39;&#39;&#39; Calculo el tf idf&#39;&#39;&#39;</span>
+    <span class="n">df_titulo</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
+    <span class="n">df_descripcion</span> <span class="o">=</span> <span class="n">tf_idf</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;idf_titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_titulo</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_descripcion</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;peso_titulo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_importantes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;peso_descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_importantes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
     </div>
@@ -13327,10 +13306,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;peso_descripcion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador_mas_importantes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tr</span> <span class="o">=</span> <span class="n">features_textos</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13340,425 +13319,27 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_te</span> <span class="o">=</span> <span class="n">features_textos</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[87]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>descripcion</th>
-      <th>peso_descripcion</th>
-      <th>precio</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>174276</th>
-      <td>excelente oficina en venta en torre world trad...</td>
-      <td>3</td>
-      <td>12525000.0</td>
-    </tr>
-    <tr>
-      <th>209858</th>
-      <td>condominio tipo mexicano moderno de 3 casas ub...</td>
-      <td>0</td>
-      <td>12521000.0</td>
-    </tr>
-    <tr>
-      <th>81715</th>
-      <td>proyecto de imanol legorreta y carlos duclaud ...</td>
-      <td>3</td>
-      <td>12520000.0</td>
-    </tr>
-    <tr>
-      <th>192956</th>
-      <td>edificio de 5 niveles con 9 departamentos, ofr...</td>
-      <td>3</td>
-      <td>12516000.0</td>
-    </tr>
-    <tr>
-      <th>232457</th>
-      <td>¡excelente oportunidad de inversión! nosotros ...</td>
-      <td>2</td>
-      <td>12515000.0</td>
-    </tr>
-    <tr>
-      <th>75131</th>
-      <td>&lt;p&gt;edificio en donde la prioridad es aprovecha...</td>
-      <td>0</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>24470</th>
-      <td>residencia en venta en la zona más exclusiva d...</td>
-      <td>4</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>173245</th>
-      <td>se vende casa en copilco universidad, coyoacán...</td>
-      <td>1</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>139897</th>
-      <td>se vende hermosa casa sola en calle privada, c...</td>
-      <td>5</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>131181</th>
-      <td>terreno 1000 mts2 \nconstrucción 250 mts + rem...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>54693</th>
-      <td>muy funcional, facil de remodelar, iluminada, ...</td>
-      <td>2</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>166263</th>
-      <td>amplio departamento que cuenta con 3 recamaras...</td>
-      <td>0</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>188861</th>
-      <td>departamento de lujo en condominio palmeiras, ...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>119931</th>
-      <td>preciosa casa en exclusiva zona de tecamachalc...</td>
-      <td>6</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>75146</th>
-      <td>excelente terreno con uso de suelo h320, cerca...</td>
-      <td>2</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>3704</th>
-      <td>precioso departamento en bosques de las lomas,...</td>
-      <td>1</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>116120</th>
-      <td>efificio nuevo, 167 m2, se entrega con acabado...</td>
-      <td>1</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>150784</th>
-      <td>en planta baja.- 3 locales comerciales con bañ...</td>
-      <td>0</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>203997</th>
-      <td>&lt;p&gt;desarrollo a tres cuadras del parque lincol...</td>
-      <td>1</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>226605</th>
-      <td>casa muy bonita, completamente lista para ser ...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>297</th>
-      <td>&lt;p&gt;precioso departamento en bosques de las lom...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>70427</th>
-      <td>&lt;p&gt;excelente casa para estrenar, amplios espac...</td>
-      <td>4</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>201951</th>
-      <td>edificio mediterranea.  inmediato hospital abc...</td>
-      <td>2</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>84117</th>
-      <td>&lt;p&gt;casa nueva, estilo moderno.sala, comedor, a...</td>
-      <td>0</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>143832</th>
-      <td>&lt;p&gt;gh de 2 rec. la principal con vestidor y ba...</td>
-      <td>1</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>8562</th>
-      <td>preciosa casa en linda y segura privada, en ex...</td>
-      <td>6</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>14708</th>
-      <td>totalmente nueva tres recamaras con baño y ves...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>112661</th>
-      <td>magnifico departamento con acceso del elevador...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>109808</th>
-      <td>ven a conocer este precioso penthouse en bosqu...</td>
-      <td>3</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>21404</th>
-      <td>casa con excelente ubicación en el corazón de ...</td>
-      <td>4</td>
-      <td>12500000.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>177847</th>
-      <td>buena propiedad bien conservada</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>76709</th>
-      <td>&lt;p&gt;preventa casas duplex y departamentos. desd...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>85724</th>
-      <td>&lt;p&gt;casa habitacion dos recamaras, enyesada y v...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>236794</th>
-      <td>el departamento esta en infonavit la margarita...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>237996</th>
-      <td>vendo maravilloso desarrollo ubicado en huehue...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>87699</th>
-      <td>bonita  de 2 habitaciones, 1 baño, sala, comed...</td>
-      <td>3</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>69054</th>
-      <td>casa de 2 recámaras en hacienda las fuentes (f...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>65104</th>
-      <td>atención excelente oportunidad!  céntrico terr...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>234408</th>
-      <td>casa con muy buena ubicación en esquina sobre ...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>202234</th>
-      <td>casa economica a unos pasos de aurrera y carre...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>80868</th>
-      <td>casa de dos niveles con espacio para una segun...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>69092</th>
-      <td>departamento con excelente ubicacion. en esqui...</td>
-      <td>2</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>230993</th>
-      <td>departamento nuevo en 3er nivel \n\n- 2 recama...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>237290</th>
-      <td>queretaro, fraccionamiento el mirador, complet...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>150818</th>
-      <td>&lt;p&gt;casa de una sola planta, dos recamaras, sal...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>54126</th>
-      <td>excelente casa ubicada en el fraccionamiento r...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>35523</th>
-      <td>&lt;p&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;strong&gt;&lt;/strong&gt;&lt;st...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>126447</th>
-      <td>sala-comedor, cocina, baño, 2 recámaras, área ...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>179123</th>
-      <td>&lt;p&gt;casa a precio accesible. ubicada en cerrada...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>28738</th>
-      <td>manda whatsapp o mensaje para mayor informacio...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>116072</th>
-      <td>&lt;p&gt;departamento confortable, en excelentes con...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>91082</th>
-      <td>casa usada, 2 recamaras, sala y comedor, cocin...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>32508</th>
-      <td>venta de casa en el fracc. san luis rey en la ...</td>
-      <td>4</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>164244</th>
-      <td>vestíbulo, sala-comedor, cocina, escaleras hac...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>234344</th>
-      <td>casa de un precio muy accesible, propiedad par...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>21230</th>
-      <td>aproveche unica oportunidad departamento en re...</td>
-      <td>0</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>221260</th>
-      <td>vivienda muy bien ubicada. todo el departament...</td>
-      <td>2</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>89834</th>
-      <td>&lt;p&gt;casa unifamiliar, cochera, 1 recamara, baño...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>45772</th>
-      <td>&lt;p&gt;casa en privada con reja, ubicada en la zon...</td>
-      <td>2</td>
-      <td>310000.0</td>
-    </tr>
-    <tr>
-      <th>107544</th>
-      <td>vendo hermoso departamento nuevecito!! planta ...</td>
-      <td>1</td>
-      <td>310000.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>240000 rows × 3 columns</p>
 </div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tr</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/train_idf.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_te</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/test_idf.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
