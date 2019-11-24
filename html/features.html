@@ -13017,45 +13017,6 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -13553,7 +13514,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">llenar_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13577,9 +13538,9 @@ div#notebook {
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     
-    <span class="n">df_lat_lng_idzona</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;idzona&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;lat_idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span><span class="s1">&#39;lng_idzona&#39;</span><span class="p">})</span>
-    <span class="n">df_lat_lng_ciudad</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ciudad&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;lat_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="s1">&#39;lng_ciudad&#39;</span><span class="p">})</span>
-    <span class="n">df_lat_lng_provincia</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;lat_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="s1">&#39;lng_provincia&#39;</span><span class="p">})</span>
+    <span class="n">df_lat_lng_idzona</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;idzona&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">lat_idzona</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span> <span class="n">lng_idzona</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">))</span>
+    <span class="n">df_lat_lng_ciudad</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ciudad&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">lat_ciudad</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span> <span class="n">lng_ciudad</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">))</span>
+    <span class="n">df_lat_lng_provincia</span> <span class="o">=</span> <span class="n">df_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">lat_provincia</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span> <span class="n">lng_provincia</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">))</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_lat_lng_idzona</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;idzona&#39;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_lat_lng_ciudad</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_lat_lng_provincia</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
@@ -13718,10 +13679,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KDTree</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from sklearn.neighbors import KDTree</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import numpy as np</span>
+
+<span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
 </pre></div>
 
     </div>
@@ -13731,7 +13696,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = pd.get_dummies(df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
@@ -13739,7 +13704,6 @@ div#notebook {
 <span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]])</span>
 
 <span class="c1"># df_ohe.head(10)</span>
-<span class="n">df_coor</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">]]</span>
 </pre></div>
 
     </div>
@@ -13749,10 +13713,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">df_coor</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tree = KDTree(df_ohe, leaf_size=200)</span>
 </pre></div>
 
     </div>
@@ -13778,6 +13742,19 @@ div#notebook {
 
 <span class="c1"># df_ohe_test = pd.get_dummies(df_full).iloc[0:60000]</span>
 <span class="c1"># df_ohe_test = df_ohe_test.fillna(0)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># KDTree.valid_metrics</span>
 </pre></div>
 
     </div>
@@ -14145,7 +14122,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">columna_a_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -14167,7 +14144,7 @@ div#notebook {
     
     <span class="n">df_full_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
     <span class="c1"># Eliminar caracteres utf-8</span>
-    <span class="c1">#df_full_ohe.columns = df_full_ohe.columns.str.encode(&#39;ascii&#39;, &#39;ignore&#39;).str.decode(&#39;ascii&#39;)</span>
+    <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
     <span class="n">df_ohe</span> <span class="o">=</span> <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
     
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_ohe</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
@@ -14238,10 +14215,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">])[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Agrega las etiquetas de los cluster al df, y retorna el df</span>
+
+<span class="n">df_clustering_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clustering_train.csv&#39;</span><span class="p">)</span>
+<span class="n">df_clustering_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clustering_test.csv&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">agregar_clustering</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">df_cluster</span> <span class="o">=</span> <span class="n">df_clustering_train</span> <span class="k">if</span> <span class="n">train</span> <span class="k">else</span> <span class="n">df_clustering_test</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_cluster</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df</span>
+    <span class="k">return</span> <span class="n">df_merge</span>
+    
+
+    
+<span class="n">agregar_clustering</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14254,33 +14244,325 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-1e906f1713ae&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>df_train<span class="ansi-blue-fg">.</span>groupby<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;provincia&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;ciudad&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;id&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>agg<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;count&#39;</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">NameError</span>: name &#39;df_train&#39; is not defined</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>titulo</th>
+      <th>descripcion</th>
+      <th>tipodepropiedad</th>
+      <th>direccion</th>
+      <th>ciudad</th>
+      <th>provincia</th>
+      <th>antiguedad</th>
+      <th>habitaciones</th>
+      <th>garages</th>
+      <th>...</th>
+      <th>lat</th>
+      <th>lng</th>
+      <th>fecha</th>
+      <th>gimnasio</th>
+      <th>usosmultiples</th>
+      <th>piscina</th>
+      <th>escuelascercanas</th>
+      <th>centroscomercialescercanos</th>
+      <th>precio</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>254099</td>
+      <td>depto. tipo a-402</td>
+      <td>depto. interior de 80.15m2, consta de sala com...</td>
+      <td>Apartamento</td>
+      <td>Avenida Division del Norte 2005</td>
+      <td>Benito Juárez</td>
+      <td>Distrito Federal</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2015-08-23 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2273000.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>53461</td>
+      <td>condominio horizontal en venta</td>
+      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
+      <td>Casa en condominio</td>
+      <td>AV. MEXICO</td>
+      <td>La Magdalena Contreras</td>
+      <td>Distrito Federal</td>
+      <td>10.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>19.310205</td>
+      <td>-99.227655</td>
+      <td>2013-06-28 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>3600000.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>247984</td>
+      <td>casa en venta urbi 3 recamaras tonala</td>
+      <td>descripcion \nla mejor ubicacion residencial e...</td>
+      <td>Casa</td>
+      <td>Urbi Tonala</td>
+      <td>Tonalá</td>
+      <td>Jalisco</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2015-10-17 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1200000.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>209067</td>
+      <td>casa sola en toluca zinacantepec con credito i...</td>
+      <td>casa en privada con caseta de vigilancia casas...</td>
+      <td>Casa</td>
+      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
+      <td>Zinacantepec</td>
+      <td>Edo. de México</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>19.301890</td>
+      <td>-99.688015</td>
+      <td>2012-03-09 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>650000.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>185997</td>
+      <td>paseos del sol</td>
+      <td>bonito departamento en excelentes condiciones ...</td>
+      <td>Apartamento</td>
+      <td>PASEOS DEL SOL</td>
+      <td>Zapopan</td>
+      <td>Jalisco</td>
+      <td>10.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2016-06-07 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1150000.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239995</th>
+      <td>119879</td>
+      <td>bonita casas de 2 recamaras a 10 minutos del c...</td>
+      <td>vendo casa en bosques de ica residencial a 10 ...</td>
+      <td>Casa</td>
+      <td>BOSQUES</td>
+      <td>Zinacantepec</td>
+      <td>Edo. de México</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2015-02-08 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>650000.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>239996</th>
+      <td>259178</td>
+      <td>casa en condominio a 10 min. del centro de toluca</td>
+      <td>casa con un jardin amplio, un cuarto de servic...</td>
+      <td>Casa</td>
+      <td>Filiberto Navas 325</td>
+      <td>Toluca</td>
+      <td>Edo. de México</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>...</td>
+      <td>19.294665</td>
+      <td>-99.692916</td>
+      <td>2014-07-10 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1940000.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>239997</th>
+      <td>131932</td>
+      <td>nicolas san juan</td>
+      <td>departamento con excelente ubicación, muy cerc...</td>
+      <td>Apartamento</td>
+      <td>Nicolas San Juan</td>
+      <td>Benito Juárez</td>
+      <td>Distrito Federal</td>
+      <td>20.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2015-03-03 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3400000.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>239998</th>
+      <td>146867</td>
+      <td>casa sola. javier rojo gomez.</td>
+      <td>casa sola, dividida en cuatro departamentos de...</td>
+      <td>Casa</td>
+      <td>Javier Rojo Gomez 120</td>
+      <td>Iztapalapa</td>
+      <td>Distrito Federal</td>
+      <td>20.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>19.366651</td>
+      <td>-99.082246</td>
+      <td>2014-12-26 00:00:00</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2890000.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>239999</th>
+      <td>121958</td>
+      <td>departamento en bosques de las lomas  / av. st...</td>
+      <td>id:19816, muy bonito e iluminado departamento,...</td>
+      <td>Apartamento</td>
+      <td>AVE. STIM</td>
+      <td>Cuajimalpa de Morelos</td>
+      <td>Distrito Federal</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2015-06-19 00:00:00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3650000.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>240000 rows × 24 columns</p>
 </div>
 </div>
 
 </div>
-</div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
 </div>
 </div>
 
