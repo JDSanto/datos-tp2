@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Random_forest</title>
+<title>RandomForest</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13076,69 +13076,33 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
-<span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">SelectFromModel</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">make_classification</span>
-<span class="kn">import</span> <span class="nn">ipynb.fs.full.utils</span> <span class="k">as</span> <span class="nn">utils</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/train.csv&quot;</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="n">column_names</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
-    <span class="n">column_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">column_names</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
-<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.utils</span> <span class="k">as</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.features_distancias</span> <span class="k">as</span> <span class="nn">f_distancias</span>
 
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_filtrado.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Para usarse con el submit a Kaggle</span>
+<span class="n">df_eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_eval</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_de_csvs</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_eval</span><span class="p">)</span>
+
+<span class="n">df_train_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_idf.csv&#39;</span><span class="p">)</span>
+<span class="n">df_eval_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_idf.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_eval</span><span class="p">,</span> <span class="n">df_eval_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13151,13 +13115,30 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">categoricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">]</span>
-<span class="n">categoricas_ohe</span> <span class="o">=</span> <span class="p">[]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">categoricas</span><span class="p">:</span>
-    <span class="n">df_test_f</span><span class="p">,</span> <span class="n">nuevas_cols</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_f</span><span class="p">)</span>
-    <span class="n">categoricas_ohe</span> <span class="o">+=</span> <span class="n">nuevas_cols</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_dependientes_precio</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train</span><span class="p">)</span>
+
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_tipodepropiedad_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_provincia_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">,</span> <span class="n">cols_zona_ohe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test</span><span class="p">)</span>
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_test_f</span><span class="p">)</span>
+
+
+<span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># df_train_f = df_train_f.sample(frac=1).reset_index(drop=True)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13165,33 +13146,46 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-
-<span class="n">features_drop</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;direccion&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">]</span>
-
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">features_drop</span><span class="p">]</span>
-
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GridSearchCV">GridSearchCV<a class="anchor-link" href="#GridSearchCV">&#182;</a></h2>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x_train</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span><span class="s1">&#39;banos&#39;</span><span class="p">,</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>  <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">]</span>
+
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+               <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span><span class="s1">&#39;count_id_zona&#39;</span>
+           <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span>
+
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
+
+<span class="n">forest_params</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+    <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;log2&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="s2">&quot;bootstrap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rs_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">RandomForestRegressor</span><span class="p">(),</span> 
+                           <span class="n">param_grid</span><span class="o">=</span><span class="n">forest_params</span><span class="p">,</span> 
+                           <span class="n">cv</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rs_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13204,69 +13198,54 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt"></div>
 
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>36242</td>
-    </tr>
-    <tr>
-      <td>203272</td>
-    </tr>
-    <tr>
-      <td>201436</td>
-    </tr>
-    <tr>
-      <td>114481</td>
-    </tr>
-    <tr>
-      <td>65169</td>
-    </tr>
-    <tr>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>73349</td>
-    </tr>
-    <tr>
-      <td>109259</td>
-    </tr>
-    <tr>
-      <td>50057</td>
-    </tr>
-    <tr>
-      <td>5192</td>
-    </tr>
-    <tr>
-      <td>128037</td>
-    </tr>
-  </tbody>
-</table>
-<p>153000 rows × 0 columns</p>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 4 folds for each of 18 candidates, totalling 72 fits
+</pre>
 </div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done  72 out of  72 | elapsed: 14.1min finished
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>GridSearchCV(cv=4, error_score=&#39;raise-deprecating&#39;,
+             estimator=RandomForestRegressor(bootstrap=True, criterion=&#39;mse&#39;,
+                                             max_depth=None,
+                                             max_features=&#39;auto&#39;,
+                                             max_leaf_nodes=None,
+                                             min_impurity_decrease=0.0,
+                                             min_impurity_split=None,
+                                             min_samples_leaf=1,
+                                             min_samples_split=2,
+                                             min_weight_fraction_leaf=0.0,
+                                             n_estimators=&#39;warn&#39;, n_jobs=None,
+                                             oob_score=False, random_state=None,
+                                             verbose=0, warm_start=False),
+             iid=&#39;warn&#39;, n_jobs=None,
+             param_grid={&#39;bootstrap&#39;: [True, False],
+                         &#39;max_features&#39;: [&#39;auto&#39;, &#39;sqrt&#39;, &#39;log2&#39;],
+                         &#39;min_samples_split&#39;: [2, 4, 8], &#39;n_estimators&#39;: [10]},
+             pre_dispatch=&#39;2*n_jobs&#39;, refit=True, return_train_score=False,
+             scoring=&#39;neg_mean_absolute_error&#39;, verbose=1)</pre>
 </div>
 
 </div>
@@ -13277,29 +13256,80 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">zona</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span><span class="s1">&#39;direccion&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_gen&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df_encoding</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zona</span><span class="p">,</span> <span class="n">categoricos</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-
-<span class="n">zona_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;descripcion&#39;</span><span class="p">,</span><span class="s1">&#39;direccion&#39;</span><span class="p">,</span> <span class="s1">&#39;zona&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;escualas_centros_cercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;idzona&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_gen&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df_encoding_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zona_test</span><span class="p">,</span> <span class="n">categoricos_test</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="n">df_encoding_test</span> <span class="o">=</span> <span class="n">df_encoding_test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad_Garage&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Hospedaje&#39;</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">rs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;bootstrap&#39;: False,
+ &#39;max_features&#39;: &#39;sqrt&#39;,
+ &#39;min_samples_split&#39;: 4,
+ &#39;n_estimators&#39;: 10}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
+
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bootstrap&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+ <span class="s1">&#39;max_features&#39;</span><span class="p">:</span> <span class="s1">&#39;sqrt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+<span class="n">forest</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span><span class="s1">&#39;banos&#39;</span><span class="p">,</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>  <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">]</span>
+
+<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+               <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span><span class="s1">&#39;count_id_zona&#39;</span>
+           <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span>
+
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
+
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
+<span class="n">x_eval</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<span class="n">y_eval</span> <span class="o">=</span> <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
+
+<span class="n">forest</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">forest</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+<span class="n">y_pred_eval</span> <span class="o">=</span> <span class="n">forest</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_eval</span><span class="p">)</span>
+
+<span class="n">mae_train</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">)</span>
+<span class="n">mae_eval</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_eval</span><span class="p">,</span> <span class="n">y_pred_eval</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE RandomForest (train): </span><span class="si">{mae_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE RandomForest (eval): </span><span class="si">{mae_eval:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13316,723 +13346,25 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=4)]: Using backend ThreadingBackend with 4 concurrent workers.
-[Parallel(n_jobs=4)]: Done  42 tasks      | elapsed:  1.0min
-[Parallel(n_jobs=4)]: Done 100 out of 100 | elapsed:  2.4min finished
+<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:  1.6min finished
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    9.0s finished
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>RandomForestRegressor(bootstrap=True, criterion=&#39;mse&#39;, max_depth=10,
-                      max_features=&#39;auto&#39;, max_leaf_nodes=None,
-                      min_impurity_decrease=0.0, min_impurity_split=None,
-                      min_samples_leaf=1, min_samples_split=2,
-                      min_weight_fraction_leaf=0.0, n_estimators=100, n_jobs=4,
-                      oob_score=False, random_state=0, verbose=1,
-                      warm_start=False)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">categoricos</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">categoricos_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_encoding</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_encoding_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="nb">set</span><span class="p">(</span><span class="n">df_encoding_test</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>  <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">df_encoding</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-14336df6569e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span>categoricos<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span>categoricos_test<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> print<span class="ansi-blue-fg">(</span>df_encoding<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> print<span class="ansi-blue-fg">(</span>df_encoding_test<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> 
-
-<span class="ansi-red-fg">NameError</span>: name &#39;categoricos&#39; is not defined</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MAE RandomForest (train): 58145.90947
+MAE RandomForest (eval): 506702.25115
+</pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_encoding_test</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>  <span class="c1"># more options can be specified also</span>
-        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">feats</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># a dict to hold feature_name: feature_importance</span>
-<span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">importance</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">):</span>
-    <span class="n">feats</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">importance</span> <span class="c1">#add the name/value pair </span>
-
-<span class="n">importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Gini-importance&#39;</span><span class="p">})</span>
-<span class="n">full_display</span><span class="p">(</span><span class="n">importances</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Gini-importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="c1"># importances.sort_values(by=&#39;Gini-importance&#39;).nlargest(40, &#39;Gini-importance&#39;).plot(kind=&#39;barh&#39;, rot=0, figsize=(12, 12))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Gini-importance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>promedio_precio_hbg_tipo_propiedad_provincia</td>
-      <td>5.371382e-01</td>
-    </tr>
-    <tr>
-      <td>promedio_id_zona</td>
-      <td>1.195847e-01</td>
-    </tr>
-    <tr>
-      <td>promedio_id_zona_log</td>
-      <td>1.188250e-01</td>
-    </tr>
-    <tr>
-      <td>puntaje</td>
-      <td>3.741368e-02</td>
-    </tr>
-    <tr>
-      <td>varianza_id_zona</td>
-      <td>2.860231e-02</td>
-    </tr>
-    <tr>
-      <td>tam_ambientes</td>
-      <td>1.921727e-02</td>
-    </tr>
-    <tr>
-      <td>metros_cubiertos_normalizados</td>
-      <td>1.762405e-02</td>
-    </tr>
-    <tr>
-      <td>metroscubiertos</td>
-      <td>1.485811e-02</td>
-    </tr>
-    <tr>
-      <td>metroscubiertos_log</td>
-      <td>1.286173e-02</td>
-    </tr>
-    <tr>
-      <td>metrostotales_log</td>
-      <td>1.116415e-02</td>
-    </tr>
-    <tr>
-      <td>metros_totales_normalizados</td>
-      <td>9.435729e-03</td>
-    </tr>
-    <tr>
-      <td>metrostotales</td>
-      <td>9.245843e-03</td>
-    </tr>
-    <tr>
-      <td>fecha</td>
-      <td>7.014102e-03</td>
-    </tr>
-    <tr>
-      <td>dias_desde_datos</td>
-      <td>6.832772e-03</td>
-    </tr>
-    <tr>
-      <td>varianza_por_mes</td>
-      <td>5.168811e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_por_mes</td>
-      <td>3.928643e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_tipo_propiedad_ciudad</td>
-      <td>3.679055e-03</td>
-    </tr>
-    <tr>
-      <td>count_id_zona</td>
-      <td>3.485582e-03</td>
-    </tr>
-    <tr>
-      <td>varianza_precio_ciudad</td>
-      <td>3.371477e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_tipo_propiedad_ciudad_gen</td>
-      <td>2.207816e-03</td>
-    </tr>
-    <tr>
-      <td>antiguedad</td>
-      <td>2.175006e-03</td>
-    </tr>
-    <tr>
-      <td>count_tipo_propiedad_ciudad</td>
-      <td>2.002019e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_id_zona_gen</td>
-      <td>1.917653e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_metros_tipo_propiedad</td>
-      <td>1.774982e-03</td>
-    </tr>
-    <tr>
-      <td>count_tipo_propiedad</td>
-      <td>1.605820e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_hbg_tipo_propiedad</td>
-      <td>1.547390e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_metros_cub_tipo_propiedad</td>
-      <td>1.507887e-03</td>
-    </tr>
-    <tr>
-      <td>lat</td>
-      <td>1.418193e-03</td>
-    </tr>
-    <tr>
-      <td>count_ciudad</td>
-      <td>1.369539e-03</td>
-    </tr>
-    <tr>
-      <td>lng</td>
-      <td>1.119191e-03</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_tipo_propiedad</td>
-      <td>9.142762e-04</td>
-    </tr>
-    <tr>
-      <td>porcentaje_metros</td>
-      <td>8.570609e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_habitaciones_banos_garages</td>
-      <td>8.371480e-04</td>
-    </tr>
-    <tr>
-      <td>diferencia_metros</td>
-      <td>7.295197e-04</td>
-    </tr>
-    <tr>
-      <td>meses_desde_datos</td>
-      <td>6.457361e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_ciudad_gen</td>
-      <td>6.445714e-04</td>
-    </tr>
-    <tr>
-      <td>dia</td>
-      <td>6.189247e-04</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Terreno</td>
-      <td>5.875524e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_ciudad</td>
-      <td>5.714337e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_banos_garages</td>
-      <td>3.889400e-04</td>
-    </tr>
-    <tr>
-      <td>mes</td>
-      <td>3.697092e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_metros_totales_provincia</td>
-      <td>3.349111e-04</td>
-    </tr>
-    <tr>
-      <td>garages</td>
-      <td>3.136884e-04</td>
-    </tr>
-    <tr>
-      <td>provincia_Edo. de Mxico</td>
-      <td>3.073882e-04</td>
-    </tr>
-    <tr>
-      <td>cantidad_inquilinos</td>
-      <td>2.909787e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_metros_cubiertos_provincia</td>
-      <td>2.826321e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_habitaciones</td>
-      <td>2.002402e-04</td>
-    </tr>
-    <tr>
-      <td>habitaciones</td>
-      <td>1.878172e-04</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Local Comercial</td>
-      <td>1.714282e-04</td>
-    </tr>
-    <tr>
-      <td>top_provincia</td>
-      <td>1.495499e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_provincia</td>
-      <td>1.419959e-04</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Terreno comercial</td>
-      <td>1.363818e-04</td>
-    </tr>
-    <tr>
-      <td>promedio_precio_booleanos</td>
-      <td>1.356060e-04</td>
-    </tr>
-    <tr>
-      <td>banos</td>
-      <td>1.191237e-04</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Casa</td>
-      <td>1.031383e-04</td>
-    </tr>
-    <tr>
-      <td>trimestre</td>
-      <td>1.012725e-04</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Apartamento</td>
-      <td>9.159941e-05</td>
-    </tr>
-    <tr>
-      <td>escualas_centros_cercanos_Centro Comerciales</td>
-      <td>8.417111e-05</td>
-    </tr>
-    <tr>
-      <td>es_ciudad_centrica</td>
-      <td>7.610422e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_cubiertos_Grupo5</td>
-      <td>6.731260e-05</td>
-    </tr>
-    <tr>
-      <td>anio</td>
-      <td>6.534693e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Chiapas</td>
-      <td>6.456484e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Oaxaca</td>
-      <td>6.318402e-05</td>
-    </tr>
-    <tr>
-      <td>escomercial</td>
-      <td>5.768836e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Nayarit</td>
-      <td>5.705356e-05</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Bodega comercial</td>
-      <td>5.209984e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_totales_Grupo5</td>
-      <td>4.931333e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_totales_Grupo4</td>
-      <td>4.487523e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_cubiertos_Grupo4</td>
-      <td>4.471107e-05</td>
-    </tr>
-    <tr>
-      <td>prop_frecuente</td>
-      <td>4.468044e-05</td>
-    </tr>
-    <tr>
-      <td>escualas_centros_cercanos_Ninguno</td>
-      <td>3.820801e-05</td>
-    </tr>
-    <tr>
-      <td>centroscomercialescercanos</td>
-      <td>3.719522e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Puebla</td>
-      <td>3.602930e-05</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Oficina comercial</td>
-      <td>3.557989e-05</td>
-    </tr>
-    <tr>
-      <td>gimnasio</td>
-      <td>3.440989e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Chihuahua</td>
-      <td>3.250407e-05</td>
-    </tr>
-    <tr>
-      <td>zona_Centro</td>
-      <td>3.142454e-05</td>
-    </tr>
-    <tr>
-      <td>escualas_centros_cercanos_Ambos</td>
-      <td>2.788416e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Guanajuato</td>
-      <td>2.749249e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Yucatn</td>
-      <td>2.723614e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Baja California Sur</td>
-      <td>2.711461e-05</td>
-    </tr>
-    <tr>
-      <td>escuelascercanas</td>
-      <td>2.711128e-05</td>
-    </tr>
-    <tr>
-      <td>turismo</td>
-      <td>2.556608e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Distrito Federal</td>
-      <td>2.555647e-05</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Edificio</td>
-      <td>2.544052e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_totales_Grupo3</td>
-      <td>2.384133e-05</td>
-    </tr>
-    <tr>
-      <td>escualas_centros_cercanos_Escuelas Cercanas</td>
-      <td>2.291865e-05</td>
-    </tr>
-    <tr>
-      <td>es_antigua</td>
-      <td>2.229492e-05</td>
-    </tr>
-    <tr>
-      <td>delincuencia</td>
-      <td>2.118908e-05</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Casa en condominio</td>
-      <td>1.991358e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_cubiertos_Grupo3</td>
-      <td>1.952753e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Quintana Roo</td>
-      <td>1.939569e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Veracruz</td>
-      <td>1.878981e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_cubiertos_Grupo2</td>
-      <td>1.878291e-05</td>
-    </tr>
-    <tr>
-      <td>piscina</td>
-      <td>1.738452e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Michoacn</td>
-      <td>1.628110e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_totales_Grupo2</td>
-      <td>1.579209e-05</td>
-    </tr>
-    <tr>
-      <td>tipo_propiedad_compartida</td>
-      <td>1.306443e-05</td>
-    </tr>
-    <tr>
-      <td>usosmultiples</td>
-      <td>1.282038e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Sinaloa</td>
-      <td>1.214315e-05</td>
-    </tr>
-    <tr>
-      <td>zona_Sur</td>
-      <td>1.198746e-05</td>
-    </tr>
-    <tr>
-      <td>provincia_Sonora</td>
-      <td>1.183930e-05</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_cubiertos_Grupo1</td>
-      <td>1.172541e-05</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Casa uso de suelo</td>
-      <td>1.108300e-05</td>
-    </tr>
-    <tr>
-      <td>zona_Norte</td>
-      <td>9.872990e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_San luis Potos</td>
-      <td>9.524107e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Nuevo Len</td>
-      <td>9.049376e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Quinta Vacacional</td>
-      <td>8.709546e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Jalisco</td>
-      <td>8.694678e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Morelos</td>
-      <td>8.634631e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Inmuebles productivos urbanos</td>
-      <td>6.844744e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Quertaro</td>
-      <td>6.549739e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Coahuila</td>
-      <td>5.813143e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Guerrero</td>
-      <td>5.718310e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Otros</td>
-      <td>5.088348e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Campeche</td>
-      <td>4.666591e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Aguascalientes</td>
-      <td>4.404441e-06</td>
-    </tr>
-    <tr>
-      <td>intervalo_metros_totales_Grupo1</td>
-      <td>3.495810e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Hidalgo</td>
-      <td>3.241381e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Local en centro comercial</td>
-      <td>3.174311e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Tamaulipas</td>
-      <td>3.092125e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Colima</td>
-      <td>3.072584e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Villa</td>
-      <td>2.154524e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Tlaxcala</td>
-      <td>1.828704e-06</td>
-    </tr>
-    <tr>
-      <td>provincia_Tabasco</td>
-      <td>1.641478e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Rancho</td>
-      <td>1.238279e-06</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Huerta</td>
-      <td>9.837899e-07</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Nave industrial</td>
-      <td>7.472416e-07</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_otro</td>
-      <td>6.602785e-07</td>
-    </tr>
-    <tr>
-      <td>provincia_Baja California Norte</td>
-      <td>5.234360e-07</td>
-    </tr>
-    <tr>
-      <td>provincia_Durango</td>
-      <td>3.922850e-07</td>
-    </tr>
-    <tr>
-      <td>provincia_otro</td>
-      <td>2.659156e-07</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Terreno industrial</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Garage</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Lote</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Duplex</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>provincia_Zacatecas</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Hospedaje</td>
-      <td>0.000000e+00</td>
-    </tr>
-    <tr>
-      <td>tipodepropiedad_Departamento Compartido</td>
-      <td>0.000000e+00</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 <div class="output_area">
@@ -14040,44 +13372,12 @@ div#notebook {
     <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea ">
-<pre>(139, 1)</pre>
-</div>
-
-</div>
-
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Done 100 out of 100 | elapsed:    3.0s finished
+</pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cubiertos</span> <span class="o">=</span> <span class="n">importances</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-<span class="n">cubiertos</span> <span class="o">=</span> <span class="n">cubiertos</span><span class="p">[[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos_Grupo1&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos_Grupo2&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos_Grupo3&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos_Grupo4&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos_Grupo5&#39;</span><span class="p">]]</span>
-<span class="n">cubiertos</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">totales</span> <span class="o">=</span> <span class="n">importances</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-<span class="n">totales</span> <span class="o">=</span> <span class="n">totales</span><span class="p">[[</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales_Grupo1&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales_Grupo2&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales_Grupo3&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales_Grupo4&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales_Grupo5&#39;</span><span class="p">]]</span>
-<span class="n">totales</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
