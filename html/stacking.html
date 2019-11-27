@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13105,7 +13105,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_cluster</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/clustering_train.csv&#39;</span><span class="p">)</span>
@@ -13121,7 +13121,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_cluster</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
@@ -13135,7 +13135,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13180,7 +13180,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13233,7 +13233,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="k">import</span> <span class="n">KerasRegressor</span>
@@ -13258,6 +13258,48 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&#34;qint8&#34;, np.int8, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&#34;quint8&#34;, np.uint8, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&#34;qint16&#34;, np.int16, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&#34;quint16&#34;, np.uint16, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&#34;qint32&#34;, np.int32, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&#34;resource&#34;, np.ubyte, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&#34;qint8&#34;, np.int8, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&#34;quint8&#34;, np.uint8, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&#34;qint16&#34;, np.int16, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&#34;quint16&#34;, np.uint16, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&#34;qint32&#34;, np.int32, 1)])
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&#34;resource&#34;, np.ubyte, 1)])
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13268,7 +13310,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
@@ -13312,7 +13354,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
@@ -13347,10 +13389,693 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>task:         [regression]
+metric:       [mean_absolute_error]
+variant:      [A]
+n_estimators: [2]
+
+estimator  0: [lightgbm: LightGBMWrapper]
+    fold  0:  [505496.87323449]
+    fold  1:  [500746.68351727]
+    fold  2:  [497757.49704180]
+    fold  3:  [502248.94914206]
+    ----
+    MEAN:     [501562.50073391] + [2788.10460790]
+
+estimator  1: [xgboost: XGBoostWrapper]
+[00:22:42] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:2.17759e+06
+Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
+[1]	validation_0-mae:1.88021e+06
+[2]	validation_0-mae:1.62583e+06
+[3]	validation_0-mae:1.40653e+06
+[4]	validation_0-mae:1.21858e+06
+[5]	validation_0-mae:1.05881e+06
+[6]	validation_0-mae:921543
+[7]	validation_0-mae:805071
+[8]	validation_0-mae:705913
+[9]	validation_0-mae:622931
+[10]	validation_0-mae:552796
+[11]	validation_0-mae:493844
+[12]	validation_0-mae:444366
+[13]	validation_0-mae:402966
+[14]	validation_0-mae:367867
+[15]	validation_0-mae:338819
+[16]	validation_0-mae:313492
+[17]	validation_0-mae:292703
+[18]	validation_0-mae:274139
+[19]	validation_0-mae:258547
+[20]	validation_0-mae:245961
+[21]	validation_0-mae:233756
+[22]	validation_0-mae:223241
+[23]	validation_0-mae:213555
+[24]	validation_0-mae:204159
+[25]	validation_0-mae:197976
+[26]	validation_0-mae:191001
+[27]	validation_0-mae:185010
+[28]	validation_0-mae:180095
+[29]	validation_0-mae:175375
+[30]	validation_0-mae:170831
+[31]	validation_0-mae:166881
+[32]	validation_0-mae:162434
+[33]	validation_0-mae:159522
+[34]	validation_0-mae:155645
+[35]	validation_0-mae:152674
+[36]	validation_0-mae:149381
+[37]	validation_0-mae:146013
+[38]	validation_0-mae:142216
+[39]	validation_0-mae:138870
+[40]	validation_0-mae:136326
+[41]	validation_0-mae:133809
+[42]	validation_0-mae:131731
+[43]	validation_0-mae:129237
+[44]	validation_0-mae:127351
+[45]	validation_0-mae:125183
+[46]	validation_0-mae:123195
+[47]	validation_0-mae:120674
+[48]	validation_0-mae:119006
+[49]	validation_0-mae:117450
+[50]	validation_0-mae:115383
+[51]	validation_0-mae:114001
+[52]	validation_0-mae:112587
+[53]	validation_0-mae:111172
+[54]	validation_0-mae:110308
+[55]	validation_0-mae:108836
+[56]	validation_0-mae:107474
+[57]	validation_0-mae:106488
+[58]	validation_0-mae:105481
+[59]	validation_0-mae:104393
+[60]	validation_0-mae:103395
+[61]	validation_0-mae:102098
+[62]	validation_0-mae:101000
+[63]	validation_0-mae:99991
+[64]	validation_0-mae:99353
+[65]	validation_0-mae:98374.2
+[66]	validation_0-mae:97335
+[67]	validation_0-mae:96662.8
+[68]	validation_0-mae:95312.4
+[69]	validation_0-mae:94884.8
+[70]	validation_0-mae:94181.7
+[71]	validation_0-mae:92993
+[72]	validation_0-mae:92541.9
+[73]	validation_0-mae:92154.7
+[74]	validation_0-mae:91745.8
+[75]	validation_0-mae:90885
+[76]	validation_0-mae:89070.9
+[77]	validation_0-mae:88572.4
+[78]	validation_0-mae:88222.1
+[79]	validation_0-mae:87584.2
+[80]	validation_0-mae:87115.9
+[81]	validation_0-mae:86561.1
+[82]	validation_0-mae:86075.8
+[83]	validation_0-mae:85539.3
+[84]	validation_0-mae:84625
+[85]	validation_0-mae:84368.2
+[86]	validation_0-mae:83450.3
+[87]	validation_0-mae:82898.2
+[88]	validation_0-mae:82591.9
+[89]	validation_0-mae:82014.4
+[90]	validation_0-mae:81681.8
+[91]	validation_0-mae:81013.9
+[92]	validation_0-mae:80590.1
+[93]	validation_0-mae:80132.5
+[94]	validation_0-mae:80041
+[95]	validation_0-mae:79740.8
+[96]	validation_0-mae:79514.2
+[97]	validation_0-mae:79145.2
+[98]	validation_0-mae:78499.8
+[99]	validation_0-mae:78098.9
+[100]	validation_0-mae:77670.3
+[101]	validation_0-mae:77240.7
+[102]	validation_0-mae:77017.6
+[103]	validation_0-mae:76616.8
+[104]	validation_0-mae:76372.9
+[105]	validation_0-mae:76134
+[106]	validation_0-mae:75979.5
+[107]	validation_0-mae:75520.1
+[108]	validation_0-mae:75067.3
+[109]	validation_0-mae:74759.5
+[110]	validation_0-mae:74011.3
+[111]	validation_0-mae:73736.4
+[112]	validation_0-mae:73631.6
+[113]	validation_0-mae:73545.1
+[114]	validation_0-mae:72716.4
+[115]	validation_0-mae:71755.4
+[116]	validation_0-mae:71421.2
+[117]	validation_0-mae:70823.6
+[118]	validation_0-mae:69582.4
+[119]	validation_0-mae:69316.9
+[120]	validation_0-mae:68575.7
+[121]	validation_0-mae:68313.9
+[122]	validation_0-mae:68174.6
+[123]	validation_0-mae:68086.5
+[124]	validation_0-mae:67299.1
+[125]	validation_0-mae:67005
+[126]	validation_0-mae:66618.6
+[127]	validation_0-mae:66341.9
+[128]	validation_0-mae:66228.1
+[129]	validation_0-mae:65807.9
+[130]	validation_0-mae:65586.5
+[131]	validation_0-mae:65290.5
+[132]	validation_0-mae:64910.8
+[133]	validation_0-mae:64732.5
+[134]	validation_0-mae:63815.1
+[135]	validation_0-mae:63739.6
+[136]	validation_0-mae:62890.8
+[137]	validation_0-mae:62765.3
+[138]	validation_0-mae:62321.5
+[139]	validation_0-mae:62122.6
+[140]	validation_0-mae:61921.8
+[141]	validation_0-mae:61805.9
+[142]	validation_0-mae:61508.1
+[143]	validation_0-mae:61308.7
+[144]	validation_0-mae:61105.5
+[145]	validation_0-mae:60968.4
+[146]	validation_0-mae:60579.4
+[147]	validation_0-mae:60510.8
+[148]	validation_0-mae:60367
+[149]	validation_0-mae:60092.5
+    fold  0:  [483820.03042529]
+[00:24:32] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:2.18039e+06
+Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
+[1]	validation_0-mae:1.88272e+06
+[2]	validation_0-mae:1.62803e+06
+[3]	validation_0-mae:1.40835e+06
+[4]	validation_0-mae:1.22011e+06
+[5]	validation_0-mae:1.06019e+06
+[6]	validation_0-mae:922616
+[7]	validation_0-mae:805865
+[8]	validation_0-mae:706877
+[9]	validation_0-mae:623366
+[10]	validation_0-mae:552991
+[11]	validation_0-mae:493488
+[12]	validation_0-mae:443678
+[13]	validation_0-mae:402102
+[14]	validation_0-mae:367084
+[15]	validation_0-mae:337754
+[16]	validation_0-mae:311928
+[17]	validation_0-mae:290655
+[18]	validation_0-mae:272594
+[19]	validation_0-mae:256610
+[20]	validation_0-mae:243961
+[21]	validation_0-mae:231635
+[22]	validation_0-mae:221350
+[23]	validation_0-mae:211696
+[24]	validation_0-mae:202322
+[25]	validation_0-mae:195895
+[26]	validation_0-mae:188732
+[27]	validation_0-mae:182961
+[28]	validation_0-mae:177423
+[29]	validation_0-mae:172348
+[30]	validation_0-mae:167979
+[31]	validation_0-mae:163788
+[32]	validation_0-mae:159528
+[33]	validation_0-mae:156435
+[34]	validation_0-mae:152407
+[35]	validation_0-mae:149176
+[36]	validation_0-mae:145009
+[37]	validation_0-mae:141542
+[38]	validation_0-mae:138282
+[39]	validation_0-mae:135042
+[40]	validation_0-mae:132311
+[41]	validation_0-mae:129661
+[42]	validation_0-mae:127645
+[43]	validation_0-mae:125239
+[44]	validation_0-mae:123314
+[45]	validation_0-mae:121156
+[46]	validation_0-mae:119631
+[47]	validation_0-mae:117282
+[48]	validation_0-mae:115303
+[49]	validation_0-mae:113494
+[50]	validation_0-mae:111509
+[51]	validation_0-mae:109984
+[52]	validation_0-mae:108790
+[53]	validation_0-mae:107303
+[54]	validation_0-mae:106223
+[55]	validation_0-mae:105087
+[56]	validation_0-mae:103981
+[57]	validation_0-mae:103232
+[58]	validation_0-mae:102454
+[59]	validation_0-mae:101182
+[60]	validation_0-mae:100145
+[61]	validation_0-mae:98736.9
+[62]	validation_0-mae:97940.1
+[63]	validation_0-mae:97045.6
+[64]	validation_0-mae:96325
+[65]	validation_0-mae:95505.4
+[66]	validation_0-mae:94451
+[67]	validation_0-mae:93501.9
+[68]	validation_0-mae:92389.4
+[69]	validation_0-mae:92100.9
+[70]	validation_0-mae:91777.1
+[71]	validation_0-mae:90902.7
+[72]	validation_0-mae:90427.2
+[73]	validation_0-mae:89075.1
+[74]	validation_0-mae:88839.3
+[75]	validation_0-mae:88164
+[76]	validation_0-mae:87801.7
+[77]	validation_0-mae:87376.2
+[78]	validation_0-mae:86550
+[79]	validation_0-mae:86139.4
+[80]	validation_0-mae:85699.7
+[81]	validation_0-mae:85106.6
+[82]	validation_0-mae:84665.1
+[83]	validation_0-mae:83633.9
+[84]	validation_0-mae:82609.2
+[85]	validation_0-mae:81714.4
+[86]	validation_0-mae:81455
+[87]	validation_0-mae:81105.3
+[88]	validation_0-mae:80840.6
+[89]	validation_0-mae:80652.6
+[90]	validation_0-mae:80370.3
+[91]	validation_0-mae:79230.2
+[92]	validation_0-mae:78922.6
+[93]	validation_0-mae:78679.8
+[94]	validation_0-mae:78478.6
+[95]	validation_0-mae:78389.6
+[96]	validation_0-mae:77729
+[97]	validation_0-mae:77072
+[98]	validation_0-mae:76710.4
+[99]	validation_0-mae:76166.7
+[100]	validation_0-mae:76017.6
+[101]	validation_0-mae:75788
+[102]	validation_0-mae:75467.5
+[103]	validation_0-mae:75411.7
+[104]	validation_0-mae:74861.8
+[105]	validation_0-mae:74724.5
+[106]	validation_0-mae:74331.6
+[107]	validation_0-mae:73509.8
+[108]	validation_0-mae:73224
+[109]	validation_0-mae:73082.5
+[110]	validation_0-mae:72929.9
+[111]	validation_0-mae:72690.5
+[112]	validation_0-mae:72186.3
+[113]	validation_0-mae:72123.1
+[114]	validation_0-mae:71679.4
+[115]	validation_0-mae:71457.8
+[116]	validation_0-mae:71181.3
+[117]	validation_0-mae:71063.8
+[118]	validation_0-mae:70218.8
+[119]	validation_0-mae:70075.6
+[120]	validation_0-mae:69553
+[121]	validation_0-mae:69431.4
+[122]	validation_0-mae:69329.5
+[123]	validation_0-mae:68793.5
+[124]	validation_0-mae:68572
+[125]	validation_0-mae:68005.6
+[126]	validation_0-mae:67688.1
+[127]	validation_0-mae:67593.6
+[128]	validation_0-mae:67413.9
+[129]	validation_0-mae:67324.4
+[130]	validation_0-mae:67070.2
+[131]	validation_0-mae:66522.4
+[132]	validation_0-mae:66356.5
+[133]	validation_0-mae:65554.3
+[134]	validation_0-mae:65412.7
+[135]	validation_0-mae:65062.5
+[136]	validation_0-mae:64764.2
+[137]	validation_0-mae:64566.9
+[138]	validation_0-mae:64398
+[139]	validation_0-mae:64318.7
+[140]	validation_0-mae:64177.6
+[141]	validation_0-mae:63966.7
+[142]	validation_0-mae:63850
+[143]	validation_0-mae:63318.4
+[144]	validation_0-mae:62835.7
+[145]	validation_0-mae:62448.3
+[146]	validation_0-mae:62171.8
+[147]	validation_0-mae:61970
+[148]	validation_0-mae:61381.1
+[149]	validation_0-mae:61031.1
+    fold  1:  [480248.50332849]
+[00:26:22] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:2.18607e+06
+Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
+[1]	validation_0-mae:1.88758e+06
+[2]	validation_0-mae:1.63227e+06
+[3]	validation_0-mae:1.41226e+06
+[4]	validation_0-mae:1.22367e+06
+[5]	validation_0-mae:1.0637e+06
+[6]	validation_0-mae:925677
+[7]	validation_0-mae:808861
+[8]	validation_0-mae:709452
+[9]	validation_0-mae:625979
+[10]	validation_0-mae:555484
+[11]	validation_0-mae:495875
+[12]	validation_0-mae:446494
+[13]	validation_0-mae:404807
+[14]	validation_0-mae:369624
+[15]	validation_0-mae:340296
+[16]	validation_0-mae:314462
+[17]	validation_0-mae:293262
+[18]	validation_0-mae:274647
+[19]	validation_0-mae:258633
+[20]	validation_0-mae:246080
+[21]	validation_0-mae:233623
+[22]	validation_0-mae:222968
+[23]	validation_0-mae:213463
+[24]	validation_0-mae:203871
+[25]	validation_0-mae:197406
+[26]	validation_0-mae:190313
+[27]	validation_0-mae:184710
+[28]	validation_0-mae:179096
+[29]	validation_0-mae:174040
+[30]	validation_0-mae:169689
+[31]	validation_0-mae:165630
+[32]	validation_0-mae:161308
+[33]	validation_0-mae:158324
+[34]	validation_0-mae:154143
+[35]	validation_0-mae:151313
+[36]	validation_0-mae:147322
+[37]	validation_0-mae:144197
+[38]	validation_0-mae:140452
+[39]	validation_0-mae:137210
+[40]	validation_0-mae:134438
+[41]	validation_0-mae:131186
+[42]	validation_0-mae:128554
+[43]	validation_0-mae:126119
+[44]	validation_0-mae:124134
+[45]	validation_0-mae:121662
+[46]	validation_0-mae:120377
+[47]	validation_0-mae:118205
+[48]	validation_0-mae:116129
+[49]	validation_0-mae:114410
+[50]	validation_0-mae:112794
+[51]	validation_0-mae:111194
+[52]	validation_0-mae:109549
+[53]	validation_0-mae:108150
+[54]	validation_0-mae:107205
+[55]	validation_0-mae:105621
+[56]	validation_0-mae:104117
+[57]	validation_0-mae:102401
+[58]	validation_0-mae:101734
+[59]	validation_0-mae:100192
+[60]	validation_0-mae:99381.2
+[61]	validation_0-mae:98118.1
+[62]	validation_0-mae:97089.1
+[63]	validation_0-mae:96047.5
+[64]	validation_0-mae:95388.8
+[65]	validation_0-mae:94502
+[66]	validation_0-mae:93322.4
+[67]	validation_0-mae:92345.2
+[68]	validation_0-mae:91745.8
+[69]	validation_0-mae:91288.4
+[70]	validation_0-mae:90591.5
+[71]	validation_0-mae:90271
+[72]	validation_0-mae:89821.7
+[73]	validation_0-mae:89320.4
+[74]	validation_0-mae:88756.7
+[75]	validation_0-mae:87692.1
+[76]	validation_0-mae:86481.1
+[77]	validation_0-mae:85781.4
+[78]	validation_0-mae:85188.4
+[79]	validation_0-mae:84731.9
+[80]	validation_0-mae:84056.5
+[81]	validation_0-mae:83650.8
+[82]	validation_0-mae:83279.5
+[83]	validation_0-mae:82489.3
+[84]	validation_0-mae:82012.5
+[85]	validation_0-mae:80915
+[86]	validation_0-mae:80336.3
+[87]	validation_0-mae:80086.7
+[88]	validation_0-mae:79775.7
+[89]	validation_0-mae:79130.3
+[90]	validation_0-mae:78648.6
+[91]	validation_0-mae:78044.6
+[92]	validation_0-mae:77834.8
+[93]	validation_0-mae:77751.1
+[94]	validation_0-mae:77687.4
+[95]	validation_0-mae:77380.3
+[96]	validation_0-mae:77167.6
+[97]	validation_0-mae:76419.4
+[98]	validation_0-mae:76025.9
+[99]	validation_0-mae:75491.1
+[100]	validation_0-mae:75006.2
+[101]	validation_0-mae:74294
+[102]	validation_0-mae:73946.5
+[103]	validation_0-mae:73642.9
+[104]	validation_0-mae:73355.8
+[105]	validation_0-mae:73301.3
+[106]	validation_0-mae:72946
+[107]	validation_0-mae:72688.7
+[108]	validation_0-mae:72311
+[109]	validation_0-mae:72032.2
+[110]	validation_0-mae:71629.8
+[111]	validation_0-mae:71050.7
+[112]	validation_0-mae:70775.1
+[113]	validation_0-mae:70405.4
+[114]	validation_0-mae:70030.9
+[115]	validation_0-mae:69595.1
+[116]	validation_0-mae:69306.9
+[117]	validation_0-mae:68876.2
+[118]	validation_0-mae:68442.7
+[119]	validation_0-mae:68219.4
+[120]	validation_0-mae:67962.4
+[121]	validation_0-mae:67783.5
+[122]	validation_0-mae:67619.3
+[123]	validation_0-mae:67542.2
+[124]	validation_0-mae:66863.2
+[125]	validation_0-mae:66743.3
+[126]	validation_0-mae:66677
+[127]	validation_0-mae:66556.7
+[128]	validation_0-mae:66452.9
+[129]	validation_0-mae:66109.7
+[130]	validation_0-mae:65890.1
+[131]	validation_0-mae:65323.8
+[132]	validation_0-mae:65222.7
+[133]	validation_0-mae:65172.6
+[134]	validation_0-mae:64787.2
+[135]	validation_0-mae:64261.1
+[136]	validation_0-mae:63810.5
+[137]	validation_0-mae:63393.3
+[138]	validation_0-mae:63142
+[139]	validation_0-mae:62948.5
+[140]	validation_0-mae:62803.6
+[141]	validation_0-mae:62696.4
+[142]	validation_0-mae:62589.2
+[143]	validation_0-mae:62354.8
+[144]	validation_0-mae:61830.4
+[145]	validation_0-mae:61546.4
+[146]	validation_0-mae:61358.3
+[147]	validation_0-mae:60886.7
+[148]	validation_0-mae:60637.1
+[149]	validation_0-mae:60542.9
+    fold  2:  [476732.06766941]
+[00:28:09] WARNING: /workspace/src/objective/regression_obj.cu:152: reg:linear is now deprecated in favor of reg:squarederror.
+[0]	validation_0-mae:2.18249e+06
+Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
+[1]	validation_0-mae:1.88431e+06
+[2]	validation_0-mae:1.6294e+06
+[3]	validation_0-mae:1.40954e+06
+[4]	validation_0-mae:1.22101e+06
+[5]	validation_0-mae:1.06104e+06
+[6]	validation_0-mae:923585
+[7]	validation_0-mae:806888
+[8]	validation_0-mae:707731
+[9]	validation_0-mae:624332
+[10]	validation_0-mae:554222
+[11]	validation_0-mae:495002
+[12]	validation_0-mae:445166
+[13]	validation_0-mae:403797
+[14]	validation_0-mae:368497
+[15]	validation_0-mae:339099
+[16]	validation_0-mae:313476
+[17]	validation_0-mae:292251
+[18]	validation_0-mae:273685
+[19]	validation_0-mae:257744
+[20]	validation_0-mae:245172
+[21]	validation_0-mae:232960
+[22]	validation_0-mae:222149
+[23]	validation_0-mae:212690
+[24]	validation_0-mae:203038
+[25]	validation_0-mae:196854
+[26]	validation_0-mae:190372
+[27]	validation_0-mae:184861
+[28]	validation_0-mae:179101
+[29]	validation_0-mae:174589
+[30]	validation_0-mae:170350
+[31]	validation_0-mae:166507
+[32]	validation_0-mae:162319
+[33]	validation_0-mae:159099
+[34]	validation_0-mae:155220
+[35]	validation_0-mae:152370
+[36]	validation_0-mae:148634
+[37]	validation_0-mae:145379
+[38]	validation_0-mae:141697
+[39]	validation_0-mae:138577
+[40]	validation_0-mae:135636
+[41]	validation_0-mae:133224
+[42]	validation_0-mae:131048
+[43]	validation_0-mae:128236
+[44]	validation_0-mae:126830
+[45]	validation_0-mae:124132
+[46]	validation_0-mae:122789
+[47]	validation_0-mae:120678
+[48]	validation_0-mae:118874
+[49]	validation_0-mae:117091
+[50]	validation_0-mae:114595
+[51]	validation_0-mae:113054
+[52]	validation_0-mae:112135
+[53]	validation_0-mae:110696
+[54]	validation_0-mae:109818
+[55]	validation_0-mae:108086
+[56]	validation_0-mae:106991
+[57]	validation_0-mae:105911
+[58]	validation_0-mae:105335
+[59]	validation_0-mae:103884
+[60]	validation_0-mae:102982
+[61]	validation_0-mae:101513
+[62]	validation_0-mae:100551
+[63]	validation_0-mae:99570.2
+[64]	validation_0-mae:98835.7
+[65]	validation_0-mae:97898.4
+[66]	validation_0-mae:96876.9
+[67]	validation_0-mae:96049.4
+[68]	validation_0-mae:95163.6
+[69]	validation_0-mae:93953.8
+[70]	validation_0-mae:93040
+[71]	validation_0-mae:92333
+[72]	validation_0-mae:91998
+[73]	validation_0-mae:91501
+[74]	validation_0-mae:90762.6
+[75]	validation_0-mae:90312.8
+[76]	validation_0-mae:89255.3
+[77]	validation_0-mae:88676.1
+[78]	validation_0-mae:87944.6
+[79]	validation_0-mae:87145.4
+[80]	validation_0-mae:86628.6
+[81]	validation_0-mae:86155.6
+[82]	validation_0-mae:85348.3
+[83]	validation_0-mae:84537.9
+[84]	validation_0-mae:83931.2
+[85]	validation_0-mae:83147.7
+[86]	validation_0-mae:82871.1
+[87]	validation_0-mae:82176.8
+[88]	validation_0-mae:81627.3
+[89]	validation_0-mae:81150.9
+[90]	validation_0-mae:80803.1
+[91]	validation_0-mae:79929
+[92]	validation_0-mae:79417.8
+[93]	validation_0-mae:78832.5
+[94]	validation_0-mae:78225.9
+[95]	validation_0-mae:77456.8
+[96]	validation_0-mae:77306.5
+[97]	validation_0-mae:76729.8
+[98]	validation_0-mae:76501
+[99]	validation_0-mae:75697.4
+[100]	validation_0-mae:75338.3
+[101]	validation_0-mae:74847.2
+[102]	validation_0-mae:74598
+[103]	validation_0-mae:74337
+[104]	validation_0-mae:74026.8
+[105]	validation_0-mae:73791.7
+[106]	validation_0-mae:73657.8
+[107]	validation_0-mae:73576.7
+[108]	validation_0-mae:72797.3
+[109]	validation_0-mae:72628.9
+[110]	validation_0-mae:72018.5
+[111]	validation_0-mae:71898.6
+[112]	validation_0-mae:71777.8
+[113]	validation_0-mae:71694.8
+[114]	validation_0-mae:71524
+[115]	validation_0-mae:70758.3
+[116]	validation_0-mae:70454.4
+[117]	validation_0-mae:70142
+[118]	validation_0-mae:69795.8
+[119]	validation_0-mae:69260
+[120]	validation_0-mae:68820.4
+[121]	validation_0-mae:68455.8
+[122]	validation_0-mae:68360.7
+[123]	validation_0-mae:68077.5
+[124]	validation_0-mae:67509.3
+[125]	validation_0-mae:67127
+[126]	validation_0-mae:66764.7
+[127]	validation_0-mae:66493.9
+[128]	validation_0-mae:66297.9
+[129]	validation_0-mae:66175
+[130]	validation_0-mae:66044.7
+[131]	validation_0-mae:65477.7
+[132]	validation_0-mae:64900.4
+[133]	validation_0-mae:64796.6
+[134]	validation_0-mae:64556.4
+[135]	validation_0-mae:64284.1
+[136]	validation_0-mae:63992.1
+[137]	validation_0-mae:63876.9
+[138]	validation_0-mae:63250.7
+[139]	validation_0-mae:62912.6
+[140]	validation_0-mae:62831.1
+[141]	validation_0-mae:62436.6
+[142]	validation_0-mae:62191.1
+[143]	validation_0-mae:61733.1
+[144]	validation_0-mae:60882.8
+[145]	validation_0-mae:60358.4
+[146]	validation_0-mae:60216.8
+[147]	validation_0-mae:60189.8
+[148]	validation_0-mae:60027
+[149]	validation_0-mae:59798.5
+    fold  3:  [482060.69769136]
+    ----
+    MEAN:     [480715.32477864] + [2623.61796434]
+
+Train set was detected.
+Transforming...
+
+estimator  0: [lightgbm: LightGBMWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+estimator  1: [xgboost: XGBoostWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+Transforming...
+
+estimator  0: [lightgbm: LightGBMWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+estimator  1: [xgboost: XGBoostWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="o">.</span><span class="n">columns</span>
@@ -13360,10 +14085,36 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
+       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;,
+       ...
+       &#39;provincia_Zacatecas&#39;, &#39;provincia_otro&#39;, &#39;zona_Centro&#39;, &#39;zona_Norte &#39;,
+       &#39;zona_Sur&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;, &#39;peso_titulo&#39;,
+       &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
+      dtype=&#39;object&#39;, length=147)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span><span class="o">.</span><span class="n">columns</span>
@@ -13373,10 +14124,36 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
+       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;,
+       ...
+       &#39;provincia_Zacatecas&#39;, &#39;provincia_otro&#39;, &#39;zona_Centro&#39;, &#39;zona_Norte &#39;,
+       &#39;zona_Sur&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;, &#39;peso_titulo&#39;,
+       &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
+      dtype=&#39;object&#39;, length=146)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_train</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">features</span><span class="p">))</span>
@@ -13384,6 +14161,59 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Transforming...
+
+estimator  0: [lightgbm: LightGBMWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+estimator  1: [xgboost: XGBoostWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+Transforming...
+
+estimator  0: [lightgbm: LightGBMWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+estimator  1: [xgboost: XGBoostWrapper]
+    model from fold  0: done
+    model from fold  1: done
+    model from fold  2: done
+    model from fold  3: done
+    ----
+    DONE
+
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13397,7 +14227,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span> <span class="o">=</span> <span class="n">df_train_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -13414,7 +14244,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
@@ -13428,7 +14258,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">params_2nd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8999882607358867</span><span class="p">,</span>
@@ -13447,10 +14277,39 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>LightGBMWrapper(bagging_fraction=0.8999882607358867, bagging_freq=95,
+                boosting_type=&#39;gbdt&#39;, class_weight=None, colsample_bytree=1.0,
+                feature_fraction=0.2570109385381975, importance_type=&#39;split&#39;,
+                learning_rate=0.13601832720254403, max_depth=26,
+                min_child_samples=20, min_child_weight=0.001,
+                min_split_gain=0.0, n_estimators=100, n_jobs=-1, num_leaves=175,
+                objective=None, random_state=None, reg_alpha=0.0,
+                reg_lambda=0.0, silent=True, subsample=1.0,
+                subsample_for_bin=200000, subsample_freq=0,
+                test_size=0.08363501292068126)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">]))</span>
