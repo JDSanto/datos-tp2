@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13106,7 +13106,43 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_cluster</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/clustering_train.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">})</span>
+<span class="n">df_test_cluster</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/clustering_test.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">})</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_cluster</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_cluster</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+
+<span class="n">df_train_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_idf.csv&#39;</span><span class="p">)</span>
+<span class="n">df_test_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_idf.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train, df_test = utils.dividir_df_testeo(df_train, test_size=0.20)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13127,11 +13163,6 @@ div#notebook {
 <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-<span class="n">df_train_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_idf.csv&#39;</span><span class="p">)</span>
-<span class="n">df_test_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_idf.csv&#39;</span><span class="p">)</span>
-
-<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_test_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
 
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">)</span>
 <span class="n">df_test_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
@@ -13155,7 +13186,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13208,7 +13239,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="k">import</span> <span class="n">KerasRegressor</span>
@@ -13263,7 +13294,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
@@ -13271,20 +13302,10 @@ div#notebook {
 <span class="k">class</span> <span class="nc">XGBoostWrapper</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;mae&#39;</span><span class="p">,</span> <span class="n">eval_set</span><span class="o">=</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-
-<span class="c1"># hps = {&#39;alpha&#39;: 9.616105489494071,</span>
-<span class="c1">#      &#39;colsample_bytree&#39;: 0.8500000000000001,</span>
-<span class="c1">#      &#39;learning_rate&#39;: 0.14,</span>
-<span class="c1">#      &#39;max_depth&#39;: int(16.0),</span>
-<span class="c1">#      &#39;n_estimators&#39;: int(450.0),</span>
-<span class="c1">#      &#39;test_size&#39;: 0.1,</span>
-<span class="c1">#      &#39;early_stopping_rounds&#39;: 5,</span>
-<span class="c1">#      &#39;n_jobs&#39;: 4}</span>
 
 <span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
  <span class="s1">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
@@ -13317,7 +13338,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
@@ -13327,7 +13348,33 @@ div#notebook {
           <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
           <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
 
-<span class="n">forest_m</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">forest_m</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="ExtraTrees">ExtraTrees<a class="anchor-link" href="#ExtraTrees">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">ExtraTreesRegressor</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;criterion&#39;</span><span class="p">:</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;max_features&#39;</span><span class="p">:</span> <span class="s1">&#39;sqrt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+<span class="n">extratrees_m</span> <span class="o">=</span> <span class="n">ExtraTreesRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13344,52 +13391,35 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">vecstack</span> <span class="k">import</span> <span class="n">StackingTransformer</span>
-
-<span class="c1"># from sklearn.preprocessing import StandardScaler</span>
-<span class="c1"># from keras.models import Sequential</span>
-<span class="c1"># from keras.layers import Dense, Dropout, AlphaDropout</span>
-
-<span class="c1"># def normalizar_df(df, features):</span>
-<span class="c1">#     min_max = StandardScaler()</span>
-<span class="c1">#     df[features] = pd.DataFrame(min_max.fit_transform(df[features]), columns=features)</span>
-<span class="c1">#     return df</span>
-    
 
 <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span><span class="s1">&#39;banos&#39;</span><span class="p">,</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>  <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> 
            <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">]</span>
 
 <span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
-               <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span>
+                 <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;clustering_label&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span>
+                <span class="p">]</span>
 
-<span class="c1"># features_cat = [&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;intervalo_metros_totales&#39;, &#39;intervalo_metros_cubiertos&#39;,</span>
-<span class="c1">#                &#39;zona&#39;]</span>
+<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span> 
 
-<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span> <span class="c1">#+ features_cat</span>
-
-<span class="c1"># df_train_g = utils.filtrar_features(df_train_f, features, &#39;precio&#39;)</span>
-
-<span class="c1"># features_a_normalizar = [f for f in features if f not in features_cat + [&#39;precio&#39;]]</span>
-
-<span class="c1"># df_train_n = pd.get_dummies(df_train_g, columns=features_cat)</span>
-<span class="c1"># df_train_n = normalizar_df(df_train_n, features_a_normalizar)</span>
-
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">modelos</span> <span class="o">=</span> <span class="p">[</span>
            <span class="p">(</span><span class="s1">&#39;lightgbm&#39;</span><span class="p">,</span> <span class="n">lgb_m</span><span class="p">),</span> 
+           <span class="p">(</span><span class="s1">&#39;extratrees&#39;</span><span class="p">,</span> <span class="n">extratrees_m</span><span class="p">),</span>
            <span class="p">(</span><span class="s1">&#39;randomforest&#39;</span><span class="p">,</span> <span class="n">forest_m</span><span class="p">),</span>
          <span class="c1">#   (&#39;keras&#39;, keras_m), </span>
            <span class="p">(</span><span class="s1">&#39;xgboost&#39;</span><span class="p">,</span> <span class="n">xgb_m</span><span class="p">)</span>
           <span class="p">]</span>
 
-<span class="n">stack</span> <span class="o">=</span> <span class="n">StackingTransformer</span><span class="p">(</span><span class="n">modelos</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">StackingTransformer</span><span class="p">(</span><span class="n">modelos</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
 
 <span class="n">stack</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
@@ -13413,1070 +13443,48 @@ div#notebook {
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>task:         [regression]
 metric:       [mean_absolute_error]
-variant:      [A]
-n_estimators: [3]
+variant:      [B]
+n_estimators: [4]
 
 estimator  0: [lightgbm: LightGBMWrapper]
-    fold  0:  [500048.82303763]
-    fold  1:  [498234.18788983]
-    fold  2:  [498223.18022674]
-    fold  3:  [497179.28424232]
-    fold  4:  [492265.26021487]
-    fold  5:  [495102.86257527]
-    fold  6:  [503024.22269548]
+    fold  0:  [501478.01739473]
+    fold  1:  [497414.73277108]
+    fold  2:  [495426.11090588]
+    fold  3:  [500568.06879772]
     ----
-    MEAN:     [497725.40298316] + [3184.14685319]
+    MEAN:     [498721.73246735] + [2427.72702997]
 
-estimator  1: [randomforest: RandomForestRegressor]
-</pre>
-</div>
-</div>
+    Fitting on full train set...
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.9s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   52.1s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.5s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.2s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  0:  [472004.87398085]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.5s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   48.8s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.4s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.0s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  1:  [469794.05911717]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.4s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   50.0s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.7s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.2s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  2:  [470264.31916355]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.2s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   48.9s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.6s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.2s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  3:  [467056.51030406]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.7s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   49.4s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.7s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.2s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  4:  [463233.69109204]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   24.3s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   50.8s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.6s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.2s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  5:  [465555.70108495]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   22.8s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   53.1s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:    0.6s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:    1.3s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    fold  6:  [474039.07696581]
+estimator  1: [extratrees: ExtraTreesRegressor]
+    fold  0:  [509672.81794688]
+    fold  1:  [507053.70398601]
+    fold  2:  [503436.13110065]
+    fold  3:  [508618.59928154]
     ----
-    MEAN:     [468849.74738692] + [3492.50691459]
+    MEAN:     [507195.31307877] + [2361.95238448]
 
-estimator  2: [xgboost: XGBoostWrapper]
-[0]	validation_0-mae:2.27271e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.04691e+06
-[2]	validation_0-mae:1.84426e+06
-[3]	validation_0-mae:1.6632e+06
-[4]	validation_0-mae:1.50182e+06
-[5]	validation_0-mae:1.35878e+06
-[6]	validation_0-mae:1.23265e+06
-[7]	validation_0-mae:1.12156e+06
-[8]	validation_0-mae:1.02431e+06
-[9]	validation_0-mae:939562
-[10]	validation_0-mae:866289
-[11]	validation_0-mae:802850
-[12]	validation_0-mae:748454
-[13]	validation_0-mae:701966
-[14]	validation_0-mae:662463
-[15]	validation_0-mae:628900
-[16]	validation_0-mae:600523
-[17]	validation_0-mae:576299
-[18]	validation_0-mae:556182
-[19]	validation_0-mae:538576
-[20]	validation_0-mae:524085
-[21]	validation_0-mae:511865
-[22]	validation_0-mae:501569
-[23]	validation_0-mae:492768
-[24]	validation_0-mae:485297
-[25]	validation_0-mae:478752
-[26]	validation_0-mae:472796
-[27]	validation_0-mae:467980
-[28]	validation_0-mae:463634
-[29]	validation_0-mae:459567
-[30]	validation_0-mae:455914
-[31]	validation_0-mae:452556
-[32]	validation_0-mae:449924
-[33]	validation_0-mae:447311
-[34]	validation_0-mae:444966
-[35]	validation_0-mae:442638
-[36]	validation_0-mae:440546
-[37]	validation_0-mae:438233
-[38]	validation_0-mae:436263
-[39]	validation_0-mae:434490
-[40]	validation_0-mae:432527
-[41]	validation_0-mae:430648
-[42]	validation_0-mae:429048
-[43]	validation_0-mae:427367
-[44]	validation_0-mae:425972
-[45]	validation_0-mae:424470
-[46]	validation_0-mae:423003
-[47]	validation_0-mae:421627
-[48]	validation_0-mae:420474
-[49]	validation_0-mae:418796
-[50]	validation_0-mae:417861
-[51]	validation_0-mae:416685
-[52]	validation_0-mae:415368
-[53]	validation_0-mae:414500
-[54]	validation_0-mae:413380
-[55]	validation_0-mae:412210
-[56]	validation_0-mae:411226
-[57]	validation_0-mae:410420
-[58]	validation_0-mae:409479
-[59]	validation_0-mae:408333
-[60]	validation_0-mae:407550
-[61]	validation_0-mae:406828
-[62]	validation_0-mae:406015
-[63]	validation_0-mae:405320
-[64]	validation_0-mae:404617
-[65]	validation_0-mae:403379
-[66]	validation_0-mae:402312
-[67]	validation_0-mae:400964
-[68]	validation_0-mae:400082
-[69]	validation_0-mae:399313
-[70]	validation_0-mae:398417
-[71]	validation_0-mae:397904
-[72]	validation_0-mae:396850
-[73]	validation_0-mae:396095
-[74]	validation_0-mae:395232
-[75]	validation_0-mae:394255
-[76]	validation_0-mae:393688
-[77]	validation_0-mae:392899
-[78]	validation_0-mae:392130
-[79]	validation_0-mae:391131
-[80]	validation_0-mae:390471
-[81]	validation_0-mae:389782
-[82]	validation_0-mae:389397
-[83]	validation_0-mae:388263
-[84]	validation_0-mae:387508
-[85]	validation_0-mae:386720
-[86]	validation_0-mae:386371
-[87]	validation_0-mae:385822
-[88]	validation_0-mae:385230
-[89]	validation_0-mae:384587
-[90]	validation_0-mae:384248
-[91]	validation_0-mae:383949
-[92]	validation_0-mae:383244
-[93]	validation_0-mae:382832
-[94]	validation_0-mae:382406
-[95]	validation_0-mae:381655
-[96]	validation_0-mae:380896
-[97]	validation_0-mae:380313
-[98]	validation_0-mae:379882
-[99]	validation_0-mae:379304
-[100]	validation_0-mae:379020
-[101]	validation_0-mae:378437
-[102]	validation_0-mae:378034
-[103]	validation_0-mae:377843
-[104]	validation_0-mae:377502
-[105]	validation_0-mae:377070
-[106]	validation_0-mae:376627
-[107]	validation_0-mae:375694
-[108]	validation_0-mae:375222
-[109]	validation_0-mae:374783
-[110]	validation_0-mae:374423
-[111]	validation_0-mae:373704
-[112]	validation_0-mae:373084
-[113]	validation_0-mae:372466
-[114]	validation_0-mae:372057
-[115]	validation_0-mae:371644
-[116]	validation_0-mae:371525
-[117]	validation_0-mae:371091
-[118]	validation_0-mae:370259
-[119]	validation_0-mae:369607
-    fold  0:  [486328.82002177]
-[0]	validation_0-mae:2.2724e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.04667e+06
-[2]	validation_0-mae:1.84405e+06
-[3]	validation_0-mae:1.66299e+06
-[4]	validation_0-mae:1.50159e+06
-[5]	validation_0-mae:1.35858e+06
-[6]	validation_0-mae:1.23245e+06
-[7]	validation_0-mae:1.12131e+06
-[8]	validation_0-mae:1.02415e+06
-[9]	validation_0-mae:939571
-[10]	validation_0-mae:866184
-[11]	validation_0-mae:802889
-[12]	validation_0-mae:748585
-[13]	validation_0-mae:702098
-[14]	validation_0-mae:662635
-[15]	validation_0-mae:628684
-[16]	validation_0-mae:600252
-[17]	validation_0-mae:576530
-[18]	validation_0-mae:556280
-[19]	validation_0-mae:538978
-[20]	validation_0-mae:524381
-[21]	validation_0-mae:512129
-[22]	validation_0-mae:501565
-[23]	validation_0-mae:492640
-[24]	validation_0-mae:485001
-[25]	validation_0-mae:478233
-[26]	validation_0-mae:472773
-[27]	validation_0-mae:467504
-[28]	validation_0-mae:463120
-[29]	validation_0-mae:459409
-[30]	validation_0-mae:455526
-[31]	validation_0-mae:452072
-[32]	validation_0-mae:449185
-[33]	validation_0-mae:446766
-[34]	validation_0-mae:444414
-[35]	validation_0-mae:442041
-[36]	validation_0-mae:439608
-[37]	validation_0-mae:437169
-[38]	validation_0-mae:435041
-[39]	validation_0-mae:432976
-[40]	validation_0-mae:430999
-[41]	validation_0-mae:428949
-[42]	validation_0-mae:427220
-[43]	validation_0-mae:425764
-[44]	validation_0-mae:424346
-[45]	validation_0-mae:422740
-[46]	validation_0-mae:421658
-[47]	validation_0-mae:420185
-[48]	validation_0-mae:419038
-[49]	validation_0-mae:417754
-[50]	validation_0-mae:416720
-[51]	validation_0-mae:415616
-[52]	validation_0-mae:414584
-[53]	validation_0-mae:413179
-[54]	validation_0-mae:412264
-[55]	validation_0-mae:411021
-[56]	validation_0-mae:409815
-[57]	validation_0-mae:408555
-[58]	validation_0-mae:408066
-[59]	validation_0-mae:407290
-[60]	validation_0-mae:406564
-[61]	validation_0-mae:405013
-[62]	validation_0-mae:403780
-[63]	validation_0-mae:402574
-[64]	validation_0-mae:402008
-[65]	validation_0-mae:400544
-[66]	validation_0-mae:399664
-[67]	validation_0-mae:398919
-[68]	validation_0-mae:398230
-[69]	validation_0-mae:397142
-[70]	validation_0-mae:396213
-[71]	validation_0-mae:395472
-[72]	validation_0-mae:395105
-[73]	validation_0-mae:394323
-[74]	validation_0-mae:393397
-[75]	validation_0-mae:392666
-[76]	validation_0-mae:391862
-[77]	validation_0-mae:390602
-[78]	validation_0-mae:389868
-[79]	validation_0-mae:389319
-[80]	validation_0-mae:388745
-[81]	validation_0-mae:387888
-[82]	validation_0-mae:387029
-[83]	validation_0-mae:386576
-[84]	validation_0-mae:385763
-[85]	validation_0-mae:384929
-[86]	validation_0-mae:384096
-[87]	validation_0-mae:383439
-[88]	validation_0-mae:382807
-[89]	validation_0-mae:382044
-[90]	validation_0-mae:380858
-[91]	validation_0-mae:380295
-[92]	validation_0-mae:379782
-[93]	validation_0-mae:379293
-[94]	validation_0-mae:378806
-[95]	validation_0-mae:378377
-[96]	validation_0-mae:377612
-[97]	validation_0-mae:377160
-[98]	validation_0-mae:376511
-[99]	validation_0-mae:375979
-[100]	validation_0-mae:375321
-[101]	validation_0-mae:374246
-[102]	validation_0-mae:374008
-[103]	validation_0-mae:373666
-[104]	validation_0-mae:373001
-[105]	validation_0-mae:372359
-[106]	validation_0-mae:372139
-[107]	validation_0-mae:371647
-[108]	validation_0-mae:371172
-[109]	validation_0-mae:370696
-[110]	validation_0-mae:370097
-[111]	validation_0-mae:369498
-[112]	validation_0-mae:368857
-[113]	validation_0-mae:368024
-[114]	validation_0-mae:367678
-[115]	validation_0-mae:367079
-[116]	validation_0-mae:366215
-[117]	validation_0-mae:365783
-[118]	validation_0-mae:365221
-[119]	validation_0-mae:364719
-    fold  1:  [482552.12234564]
-[0]	validation_0-mae:2.27201e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.04632e+06
-[2]	validation_0-mae:1.84373e+06
-[3]	validation_0-mae:1.66266e+06
-[4]	validation_0-mae:1.50146e+06
-[5]	validation_0-mae:1.35849e+06
-[6]	validation_0-mae:1.23238e+06
-[7]	validation_0-mae:1.12122e+06
-[8]	validation_0-mae:1.02409e+06
-[9]	validation_0-mae:939525
-[10]	validation_0-mae:866159
-[11]	validation_0-mae:802986
-[12]	validation_0-mae:748627
-[13]	validation_0-mae:702065
-[14]	validation_0-mae:662636
-[15]	validation_0-mae:628880
-[16]	validation_0-mae:600388
-[17]	validation_0-mae:576755
-[18]	validation_0-mae:556457
-[19]	validation_0-mae:539590
-[20]	validation_0-mae:524972
-[21]	validation_0-mae:512672
-[22]	validation_0-mae:502473
-[23]	validation_0-mae:493507
-[24]	validation_0-mae:485805
-[25]	validation_0-mae:479279
-[26]	validation_0-mae:473464
-[27]	validation_0-mae:468668
-[28]	validation_0-mae:463909
-[29]	validation_0-mae:460074
-[30]	validation_0-mae:456376
-[31]	validation_0-mae:452966
-[32]	validation_0-mae:450146
-[33]	validation_0-mae:447488
-[34]	validation_0-mae:444983
-[35]	validation_0-mae:442601
-[36]	validation_0-mae:440547
-[37]	validation_0-mae:438326
-[38]	validation_0-mae:436424
-[39]	validation_0-mae:434089
-[40]	validation_0-mae:432262
-[41]	validation_0-mae:430251
-[42]	validation_0-mae:428391
-[43]	validation_0-mae:426776
-[44]	validation_0-mae:425518
-[45]	validation_0-mae:424186
-[46]	validation_0-mae:422943
-[47]	validation_0-mae:421400
-[48]	validation_0-mae:420114
-[49]	validation_0-mae:418999
-[50]	validation_0-mae:417907
-[51]	validation_0-mae:416430
-[52]	validation_0-mae:415674
-[53]	validation_0-mae:414969
-[54]	validation_0-mae:413791
-[55]	validation_0-mae:413088
-[56]	validation_0-mae:411802
-[57]	validation_0-mae:410931
-[58]	validation_0-mae:410098
-[59]	validation_0-mae:408844
-[60]	validation_0-mae:408235
-[61]	validation_0-mae:407746
-[62]	validation_0-mae:407059
-[63]	validation_0-mae:406611
-[64]	validation_0-mae:405485
-[65]	validation_0-mae:404503
-[66]	validation_0-mae:403607
-[67]	validation_0-mae:402488
-[68]	validation_0-mae:401658
-[69]	validation_0-mae:400702
-[70]	validation_0-mae:399986
-[71]	validation_0-mae:399518
-[72]	validation_0-mae:398349
-[73]	validation_0-mae:397230
-[74]	validation_0-mae:396383
-[75]	validation_0-mae:395627
-[76]	validation_0-mae:394545
-[77]	validation_0-mae:393548
-[78]	validation_0-mae:392878
-[79]	validation_0-mae:391643
-[80]	validation_0-mae:390521
-[81]	validation_0-mae:389982
-[82]	validation_0-mae:389186
-[83]	validation_0-mae:388746
-[84]	validation_0-mae:388343
-[85]	validation_0-mae:387404
-[86]	validation_0-mae:386616
-[87]	validation_0-mae:385847
-[88]	validation_0-mae:385051
-[89]	validation_0-mae:384307
-[90]	validation_0-mae:383785
-[91]	validation_0-mae:383404
-[92]	validation_0-mae:382612
-[93]	validation_0-mae:382165
-[94]	validation_0-mae:381586
-[95]	validation_0-mae:380886
-[96]	validation_0-mae:380410
-[97]	validation_0-mae:379731
-[98]	validation_0-mae:378877
-[99]	validation_0-mae:378272
-[100]	validation_0-mae:377438
-[101]	validation_0-mae:377135
-[102]	validation_0-mae:376482
-[103]	validation_0-mae:375887
-[104]	validation_0-mae:375271
-[105]	validation_0-mae:374933
-[106]	validation_0-mae:374296
-[107]	validation_0-mae:373513
-[108]	validation_0-mae:372937
-[109]	validation_0-mae:372007
-[110]	validation_0-mae:371637
-[111]	validation_0-mae:370937
-[112]	validation_0-mae:370537
-[113]	validation_0-mae:369758
-[114]	validation_0-mae:369666
-[115]	validation_0-mae:369339
-[116]	validation_0-mae:369273
-[117]	validation_0-mae:368955
-[118]	validation_0-mae:368576
-[119]	validation_0-mae:368123
-    fold  2:  [483651.77444151]
-[0]	validation_0-mae:2.27616e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.05006e+06
-[2]	validation_0-mae:1.84713e+06
-[3]	validation_0-mae:1.6657e+06
-[4]	validation_0-mae:1.50402e+06
-[5]	validation_0-mae:1.36063e+06
-[6]	validation_0-mae:1.23422e+06
-[7]	validation_0-mae:1.12278e+06
-[8]	validation_0-mae:1.02537e+06
-[9]	validation_0-mae:940655
-[10]	validation_0-mae:867171
-[11]	validation_0-mae:803863
-[12]	validation_0-mae:749304
-[13]	validation_0-mae:702779
-[14]	validation_0-mae:663305
-[15]	validation_0-mae:629771
-[16]	validation_0-mae:601164
-[17]	validation_0-mae:577109
-[18]	validation_0-mae:556731
-[19]	validation_0-mae:539340
-[20]	validation_0-mae:525074
-[21]	validation_0-mae:512884
-[22]	validation_0-mae:502460
-[23]	validation_0-mae:493670
-[24]	validation_0-mae:486104
-[25]	validation_0-mae:479479
-[26]	validation_0-mae:473774
-[27]	validation_0-mae:468753
-[28]	validation_0-mae:464527
-[29]	validation_0-mae:460656
-[30]	validation_0-mae:457363
-[31]	validation_0-mae:454357
-[32]	validation_0-mae:451494
-[33]	validation_0-mae:448764
-[34]	validation_0-mae:446066
-[35]	validation_0-mae:443837
-[36]	validation_0-mae:441571
-[37]	validation_0-mae:439734
-[38]	validation_0-mae:437784
-[39]	validation_0-mae:435620
-[40]	validation_0-mae:433849
-[41]	validation_0-mae:432194
-[42]	validation_0-mae:430263
-[43]	validation_0-mae:428463
-[44]	validation_0-mae:427008
-[45]	validation_0-mae:425506
-[46]	validation_0-mae:423842
-[47]	validation_0-mae:422572
-[48]	validation_0-mae:421087
-[49]	validation_0-mae:419625
-[50]	validation_0-mae:418238
-[51]	validation_0-mae:416942
-[52]	validation_0-mae:415741
-[53]	validation_0-mae:414821
-[54]	validation_0-mae:414148
-[55]	validation_0-mae:412871
-[56]	validation_0-mae:411797
-[57]	validation_0-mae:411261
-[58]	validation_0-mae:410475
-[59]	validation_0-mae:409217
-[60]	validation_0-mae:408824
-[61]	validation_0-mae:407338
-[62]	validation_0-mae:406842
-[63]	validation_0-mae:406436
-[64]	validation_0-mae:405725
-[65]	validation_0-mae:404823
-[66]	validation_0-mae:403739
-[67]	validation_0-mae:402802
-[68]	validation_0-mae:401672
-[69]	validation_0-mae:400934
-[70]	validation_0-mae:399678
-[71]	validation_0-mae:399207
-[72]	validation_0-mae:398599
-[73]	validation_0-mae:397748
-[74]	validation_0-mae:397156
-[75]	validation_0-mae:396300
-[76]	validation_0-mae:395458
-[77]	validation_0-mae:394098
-[78]	validation_0-mae:393541
-[79]	validation_0-mae:392794
-[80]	validation_0-mae:392073
-[81]	validation_0-mae:391741
-[82]	validation_0-mae:391347
-[83]	validation_0-mae:390795
-[84]	validation_0-mae:390002
-[85]	validation_0-mae:388937
-[86]	validation_0-mae:387996
-[87]	validation_0-mae:387307
-[88]	validation_0-mae:386517
-[89]	validation_0-mae:385859
-[90]	validation_0-mae:385186
-[91]	validation_0-mae:384501
-[92]	validation_0-mae:383755
-[93]	validation_0-mae:383256
-[94]	validation_0-mae:382494
-[95]	validation_0-mae:381977
-[96]	validation_0-mae:381406
-[97]	validation_0-mae:380834
-[98]	validation_0-mae:380443
-[99]	validation_0-mae:380182
-[100]	validation_0-mae:379391
-[101]	validation_0-mae:378647
-[102]	validation_0-mae:378405
-[103]	validation_0-mae:377995
-[104]	validation_0-mae:377559
-[105]	validation_0-mae:377082
-[106]	validation_0-mae:376231
-[107]	validation_0-mae:375986
-[108]	validation_0-mae:375411
-[109]	validation_0-mae:374781
-[110]	validation_0-mae:374048
-[111]	validation_0-mae:373763
-[112]	validation_0-mae:373495
-[113]	validation_0-mae:373193
-[114]	validation_0-mae:372645
-[115]	validation_0-mae:372047
-[116]	validation_0-mae:371612
-[117]	validation_0-mae:370990
-[118]	validation_0-mae:370131
-[119]	validation_0-mae:369630
-    fold  3:  [481572.20043450]
-[0]	validation_0-mae:2.27657e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.05049e+06
-[2]	validation_0-mae:1.84758e+06
-[3]	validation_0-mae:1.66624e+06
-[4]	validation_0-mae:1.50474e+06
-[5]	validation_0-mae:1.36156e+06
-[6]	validation_0-mae:1.2352e+06
-[7]	validation_0-mae:1.12395e+06
-[8]	validation_0-mae:1.02652e+06
-[9]	validation_0-mae:941724
-[10]	validation_0-mae:868180
-[11]	validation_0-mae:804786
-[12]	validation_0-mae:750341
-[13]	validation_0-mae:703762
-[14]	validation_0-mae:664283
-[15]	validation_0-mae:630491
-[16]	validation_0-mae:602116
-[17]	validation_0-mae:578125
-[18]	validation_0-mae:557865
-[19]	validation_0-mae:540413
-[20]	validation_0-mae:525889
-[21]	validation_0-mae:513737
-[22]	validation_0-mae:503376
-[23]	validation_0-mae:494523
-[24]	validation_0-mae:487037
-[25]	validation_0-mae:480305
-[26]	validation_0-mae:474378
-[27]	validation_0-mae:469533
-[28]	validation_0-mae:465036
-[29]	validation_0-mae:461180
-[30]	validation_0-mae:457474
-[31]	validation_0-mae:453948
-[32]	validation_0-mae:451090
-[33]	validation_0-mae:448312
-[34]	validation_0-mae:445711
-[35]	validation_0-mae:443204
-[36]	validation_0-mae:441078
-[37]	validation_0-mae:438993
-[38]	validation_0-mae:437254
-[39]	validation_0-mae:435253
-[40]	validation_0-mae:433864
-[41]	validation_0-mae:432049
-[42]	validation_0-mae:430150
-[43]	validation_0-mae:428649
-[44]	validation_0-mae:427039
-[45]	validation_0-mae:425474
-[46]	validation_0-mae:424173
-[47]	validation_0-mae:423186
-[48]	validation_0-mae:421926
-[49]	validation_0-mae:420469
-[50]	validation_0-mae:419135
-[51]	validation_0-mae:418023
-[52]	validation_0-mae:416589
-[53]	validation_0-mae:415539
-[54]	validation_0-mae:414962
-[55]	validation_0-mae:413933
-[56]	validation_0-mae:412854
-[57]	validation_0-mae:411420
-[58]	validation_0-mae:410849
-[59]	validation_0-mae:409567
-[60]	validation_0-mae:408743
-[61]	validation_0-mae:407992
-[62]	validation_0-mae:407458
-[63]	validation_0-mae:406228
-[64]	validation_0-mae:405624
-[65]	validation_0-mae:404358
-[66]	validation_0-mae:403161
-[67]	validation_0-mae:402412
-[68]	validation_0-mae:401791
-[69]	validation_0-mae:400981
-[70]	validation_0-mae:400573
-[71]	validation_0-mae:400121
-[72]	validation_0-mae:399359
-[73]	validation_0-mae:397860
-[74]	validation_0-mae:397575
-[75]	validation_0-mae:396533
-[76]	validation_0-mae:395307
-[77]	validation_0-mae:394442
-[78]	validation_0-mae:393655
-[79]	validation_0-mae:392784
-[80]	validation_0-mae:391803
-[81]	validation_0-mae:391038
-[82]	validation_0-mae:390515
-[83]	validation_0-mae:390127
-[84]	validation_0-mae:389258
-[85]	validation_0-mae:388558
-[86]	validation_0-mae:387805
-[87]	validation_0-mae:387084
-[88]	validation_0-mae:386132
-[89]	validation_0-mae:385428
-[90]	validation_0-mae:384989
-[91]	validation_0-mae:384459
-[92]	validation_0-mae:383831
-[93]	validation_0-mae:383301
-[94]	validation_0-mae:382804
-[95]	validation_0-mae:382219
-[96]	validation_0-mae:381567
-[97]	validation_0-mae:381038
-[98]	validation_0-mae:380420
-[99]	validation_0-mae:379985
-[100]	validation_0-mae:379675
-[101]	validation_0-mae:379382
-[102]	validation_0-mae:378922
-[103]	validation_0-mae:378253
-[104]	validation_0-mae:377823
-[105]	validation_0-mae:377274
-[106]	validation_0-mae:376343
-[107]	validation_0-mae:375657
-[108]	validation_0-mae:374963
-[109]	validation_0-mae:374461
-[110]	validation_0-mae:373924
-[111]	validation_0-mae:373664
-[112]	validation_0-mae:373050
-[113]	validation_0-mae:372697
-[114]	validation_0-mae:372182
-[115]	validation_0-mae:371869
-[116]	validation_0-mae:371460
-[117]	validation_0-mae:370877
-[118]	validation_0-mae:370603
-[119]	validation_0-mae:370346
-    fold  4:  [477165.40014159]
-[0]	validation_0-mae:2.27636e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.05027e+06
-[2]	validation_0-mae:1.84725e+06
-[3]	validation_0-mae:1.66582e+06
-[4]	validation_0-mae:1.5042e+06
-[5]	validation_0-mae:1.36091e+06
-[6]	validation_0-mae:1.23469e+06
-[7]	validation_0-mae:1.12349e+06
-[8]	validation_0-mae:1.02644e+06
-[9]	validation_0-mae:941776
-[10]	validation_0-mae:868231
-[11]	validation_0-mae:804776
-[12]	validation_0-mae:750381
-[13]	validation_0-mae:703953
-[14]	validation_0-mae:664406
-[15]	validation_0-mae:630982
-[16]	validation_0-mae:602368
-[17]	validation_0-mae:578509
-[18]	validation_0-mae:558391
-[19]	validation_0-mae:541354
-[20]	validation_0-mae:526735
-[21]	validation_0-mae:514417
-[22]	validation_0-mae:504027
-[23]	validation_0-mae:494930
-[24]	validation_0-mae:487039
-[25]	validation_0-mae:480432
-[26]	validation_0-mae:474613
-[27]	validation_0-mae:469590
-[28]	validation_0-mae:464644
-[29]	validation_0-mae:460683
-[30]	validation_0-mae:457177
-[31]	validation_0-mae:453818
-[32]	validation_0-mae:451005
-[33]	validation_0-mae:448212
-[34]	validation_0-mae:445667
-[35]	validation_0-mae:443478
-[36]	validation_0-mae:441438
-[37]	validation_0-mae:439037
-[38]	validation_0-mae:437102
-[39]	validation_0-mae:435210
-[40]	validation_0-mae:433149
-[41]	validation_0-mae:431518
-[42]	validation_0-mae:429558
-[43]	validation_0-mae:428176
-[44]	validation_0-mae:426693
-[45]	validation_0-mae:425527
-[46]	validation_0-mae:423946
-[47]	validation_0-mae:422747
-[48]	validation_0-mae:421105
-[49]	validation_0-mae:419735
-[50]	validation_0-mae:418444
-[51]	validation_0-mae:417401
-[52]	validation_0-mae:416416
-[53]	validation_0-mae:415299
-[54]	validation_0-mae:414419
-[55]	validation_0-mae:413452
-[56]	validation_0-mae:412376
-[57]	validation_0-mae:411463
-[58]	validation_0-mae:410655
-[59]	validation_0-mae:409428
-[60]	validation_0-mae:408555
-[61]	validation_0-mae:407571
-[62]	validation_0-mae:406139
-[63]	validation_0-mae:405666
-[64]	validation_0-mae:404309
-[65]	validation_0-mae:402892
-[66]	validation_0-mae:402353
-[67]	validation_0-mae:401267
-[68]	validation_0-mae:400015
-[69]	validation_0-mae:398954
-[70]	validation_0-mae:398362
-[71]	validation_0-mae:397645
-[72]	validation_0-mae:396791
-[73]	validation_0-mae:395634
-[74]	validation_0-mae:395011
-[75]	validation_0-mae:394050
-[76]	validation_0-mae:393384
-[77]	validation_0-mae:392618
-[78]	validation_0-mae:391998
-[79]	validation_0-mae:391300
-[80]	validation_0-mae:390532
-[81]	validation_0-mae:389945
-[82]	validation_0-mae:389281
-[83]	validation_0-mae:388386
-[84]	validation_0-mae:388129
-[85]	validation_0-mae:387610
-[86]	validation_0-mae:386732
-[87]	validation_0-mae:385682
-[88]	validation_0-mae:385306
-[89]	validation_0-mae:384908
-[90]	validation_0-mae:384090
-[91]	validation_0-mae:383796
-[92]	validation_0-mae:383182
-[93]	validation_0-mae:382537
-[94]	validation_0-mae:382117
-[95]	validation_0-mae:381984
-[96]	validation_0-mae:381169
-[97]	validation_0-mae:380580
-[98]	validation_0-mae:380009
-[99]	validation_0-mae:379628
-[100]	validation_0-mae:379255
-[101]	validation_0-mae:378914
-[102]	validation_0-mae:378508
-[103]	validation_0-mae:377945
-[104]	validation_0-mae:377098
-[105]	validation_0-mae:376728
-[106]	validation_0-mae:375854
-[107]	validation_0-mae:375638
-[108]	validation_0-mae:375114
-[109]	validation_0-mae:374642
-[110]	validation_0-mae:373898
-[111]	validation_0-mae:373369
-[112]	validation_0-mae:372841
-[113]	validation_0-mae:372668
-[114]	validation_0-mae:372293
-[115]	validation_0-mae:371513
-[116]	validation_0-mae:370631
-[117]	validation_0-mae:370370
-[118]	validation_0-mae:369504
-[119]	validation_0-mae:369115
-    fold  5:  [480732.05467997]
-[0]	validation_0-mae:2.27483e+06
-Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
-[1]	validation_0-mae:2.04883e+06
-[2]	validation_0-mae:1.84597e+06
-[3]	validation_0-mae:1.66474e+06
-[4]	validation_0-mae:1.5032e+06
-[5]	validation_0-mae:1.35999e+06
-[6]	validation_0-mae:1.23367e+06
-[7]	validation_0-mae:1.12242e+06
-[8]	validation_0-mae:1.02481e+06
-[9]	validation_0-mae:940013
-[10]	validation_0-mae:866521
-[11]	validation_0-mae:803273
-[12]	validation_0-mae:749123
-[13]	validation_0-mae:702469
-[14]	validation_0-mae:662958
-[15]	validation_0-mae:629311
-[16]	validation_0-mae:600435
-[17]	validation_0-mae:576493
-[18]	validation_0-mae:556410
-[19]	validation_0-mae:538841
-[20]	validation_0-mae:524297
-[21]	validation_0-mae:512068
-[22]	validation_0-mae:501508
-[23]	validation_0-mae:492709
-[24]	validation_0-mae:485063
-[25]	validation_0-mae:478187
-[26]	validation_0-mae:472568
-[27]	validation_0-mae:467617
-[28]	validation_0-mae:463186
-[29]	validation_0-mae:459210
-[30]	validation_0-mae:455802
-[31]	validation_0-mae:452353
-[32]	validation_0-mae:449533
-[33]	validation_0-mae:446455
-[34]	validation_0-mae:443912
-[35]	validation_0-mae:441302
-[36]	validation_0-mae:439249
-[37]	validation_0-mae:437404
-[38]	validation_0-mae:435502
-[39]	validation_0-mae:433523
-[40]	validation_0-mae:431722
-[41]	validation_0-mae:429757
-[42]	validation_0-mae:427769
-[43]	validation_0-mae:425958
-[44]	validation_0-mae:424689
-[45]	validation_0-mae:423161
-[46]	validation_0-mae:421943
-[47]	validation_0-mae:420793
-[48]	validation_0-mae:419643
-[49]	validation_0-mae:418454
-[50]	validation_0-mae:417184
-[51]	validation_0-mae:416214
-[52]	validation_0-mae:415369
-[53]	validation_0-mae:413900
-[54]	validation_0-mae:412921
-[55]	validation_0-mae:411504
-[56]	validation_0-mae:410591
-[57]	validation_0-mae:409882
-[58]	validation_0-mae:408788
-[59]	validation_0-mae:407921
-[60]	validation_0-mae:407083
-[61]	validation_0-mae:406349
-[62]	validation_0-mae:405532
-[63]	validation_0-mae:405048
-[64]	validation_0-mae:404236
-[65]	validation_0-mae:403250
-[66]	validation_0-mae:401994
-[67]	validation_0-mae:400909
-[68]	validation_0-mae:399670
-[69]	validation_0-mae:399110
-[70]	validation_0-mae:398170
-[71]	validation_0-mae:397735
-[72]	validation_0-mae:397217
-[73]	validation_0-mae:396310
-[74]	validation_0-mae:395755
-[75]	validation_0-mae:394717
-[76]	validation_0-mae:393604
-[77]	validation_0-mae:392791
-[78]	validation_0-mae:391994
-[79]	validation_0-mae:391105
-[80]	validation_0-mae:389860
-[81]	validation_0-mae:389404
-[82]	validation_0-mae:388917
-[83]	validation_0-mae:388444
-[84]	validation_0-mae:387711
-[85]	validation_0-mae:387031
-[86]	validation_0-mae:386432
-[87]	validation_0-mae:385785
-[88]	validation_0-mae:384877
-[89]	validation_0-mae:384186
-[90]	validation_0-mae:383474
-[91]	validation_0-mae:382402
-[92]	validation_0-mae:381722
-[93]	validation_0-mae:381367
-[94]	validation_0-mae:380993
-[95]	validation_0-mae:380048
-[96]	validation_0-mae:379374
-[97]	validation_0-mae:378852
-[98]	validation_0-mae:378305
-[99]	validation_0-mae:377744
-[100]	validation_0-mae:377406
-[101]	validation_0-mae:376842
-[102]	validation_0-mae:376253
-[103]	validation_0-mae:375766
-[104]	validation_0-mae:375316
-[105]	validation_0-mae:374721
-[106]	validation_0-mae:373836
-[107]	validation_0-mae:372951
-[108]	validation_0-mae:372364
-[109]	validation_0-mae:371932
-[110]	validation_0-mae:371325
-[111]	validation_0-mae:370749
-[112]	validation_0-mae:370204
-[113]	validation_0-mae:369459
-[114]	validation_0-mae:369171
-[115]	validation_0-mae:368632
-[116]	validation_0-mae:368314
-[117]	validation_0-mae:367784
-[118]	validation_0-mae:367345
-[119]	validation_0-mae:366753
-    fold  6:  [486817.99595741]
+    Fitting on full train set...
+
+estimator  2: [randomforest: RandomForestRegressor]
+    fold  0:  [477209.60261355]
+    fold  1:  [473691.24736816]
+    fold  2:  [472930.47367288]
+    fold  3:  [476387.60918731]
     ----
-    MEAN:     [482688.62400320] + [3089.83582980]
+    MEAN:     [475054.73321047] + [1788.26681029]
+
+    Fitting on full train set...
+
+estimator  3: [xgboost: XGBoostWrapper]
+    fold  0:  [486552.78820370]
+    fold  1:  [482792.98843684]
+    fold  2:  [480674.17929459]
+    fold  3:  [485654.34528671]
+    ----
+    MEAN:     [483918.57530546] + [2331.57812947]
+
+    Fitting on full train set...
 
 </pre>
 </div>
@@ -14488,7 +13496,7 @@ Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_train</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">features</span><span class="p">))</span>
@@ -14512,393 +13520,29 @@ Will train until validation_0-mae hasn&#39;t improved in 2 rounds.
 <pre>Transforming...
 
 estimator  0: [lightgbm: LightGBMWrapper]
-    model from fold  0: done
-    model from fold  1: done
-    model from fold  2: done
-    model from fold  3: done
-    model from fold  4: done
-    model from fold  5: done
-    model from fold  6: done
-    ----
     DONE
 
-estimator  1: [randomforest: RandomForestRegressor]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   14.9s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   33.1s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  0: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   17.7s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   35.5s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  1: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   16.5s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   34.9s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  2: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   19.1s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   35.3s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  3: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   14.6s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   30.3s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  4: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   13.3s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   28.8s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  5: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   18.0s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   37.9s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  6: done
-    ----
+estimator  1: [extratrees: ExtraTreesRegressor]
     DONE
 
-estimator  2: [xgboost: XGBoostWrapper]
-    model from fold  0: done
-    model from fold  1: done
-    model from fold  2: done
-    model from fold  3: done
-    model from fold  4: done
-    model from fold  5: done
-    model from fold  6: done
-    ----
+estimator  2: [randomforest: RandomForestRegressor]
+    DONE
+
+estimator  3: [xgboost: XGBoostWrapper]
     DONE
 
 Transforming...
 
 estimator  0: [lightgbm: LightGBMWrapper]
-    model from fold  0: done
-    model from fold  1: done
-    model from fold  2: done
-    model from fold  3: done
-    model from fold  4: done
-    model from fold  5: done
-    model from fold  6: done
-    ----
     DONE
 
-estimator  1: [randomforest: RandomForestRegressor]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   11.8s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   25.9s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  0: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   14.7s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   29.3s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  1: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   12.9s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   27.4s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  2: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   15.0s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   26.9s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  3: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   12.0s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   26.2s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  4: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   12.1s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   25.7s finished
-[Parallel(n_jobs=2)]: Using backend ThreadingBackend with 2 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  5: done
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=2)]: Done  46 tasks      | elapsed:   13.5s
-[Parallel(n_jobs=2)]: Done 100 out of 100 | elapsed:   30.3s finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>    model from fold  6: done
-    ----
+estimator  1: [extratrees: ExtraTreesRegressor]
     DONE
 
-estimator  2: [xgboost: XGBoostWrapper]
-    model from fold  0: done
-    model from fold  1: done
-    model from fold  2: done
-    model from fold  3: done
-    model from fold  4: done
-    model from fold  5: done
-    model from fold  6: done
-    ----
+estimator  2: [randomforest: RandomForestRegressor]
+    DONE
+
+estimator  3: [xgboost: XGBoostWrapper]
     DONE
 
 </pre>
@@ -14918,14 +13562,16 @@ estimator  2: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span> <span class="o">=</span> <span class="n">df_train_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_test_s</span> <span class="o">=</span> <span class="n">df_test_f</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">],</span> <span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack02&#39;</span><span class="p">],</span> <span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack03&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">s_train</span><span class="p">)</span>
-<span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">],</span> <span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack02&#39;</span><span class="p">],</span> <span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack03&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">s_test</span><span class="p">)</span>
+<span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">],</span> <span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack02&#39;</span><span class="p">],</span> <span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack03&#39;</span><span class="p">],</span> <span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;stack04&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">s_train</span><span class="p">)</span>
+<span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">],</span> <span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack02&#39;</span><span class="p">],</span> <span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack03&#39;</span><span class="p">],</span> <span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;stack04&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">s_test</span><span class="p">)</span>
+
+<span class="n">features_stacking</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">,</span> <span class="s1">&#39;stack04&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -14935,7 +13581,7 @@ estimator  2: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_s</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
@@ -14949,7 +13595,7 @@ estimator  2: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">params_2nd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8999882607358867</span><span class="p">,</span>
@@ -14965,31 +13611,7 @@ estimator  2: [xgboost: XGBoostWrapper]
  <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">}</span>
 
 <span class="n">lgb_m_2nd</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params_2nd</span><span class="p">)</span>
-<span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">]),</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="c1"># hps = {&#39;bagging_fraction&#39;: 0.8999882607358867,</span>
-<span class="c1">#  &#39;bagging_freq&#39;: int(95.0),</span>
-<span class="c1">#  &#39;feature_fraction&#39;: 0.2570109385381975,</span>
-<span class="c1">#  &#39;learning_rate&#39;: 0.13601832720254403,</span>
-<span class="c1">#  &#39;max_depth&#39;: int(26.0),</span>
-<span class="c1">#  &#39;num_leaves&#39;: int(175.0),</span>
-<span class="c1">#  &#39;test_size&#39;: 0.08363501292068126}</span>
-
-<span class="c1"># params_2nd = {</span>
-<span class="c1">#     &#39;boosting_type&#39;: &#39;dart&#39;,</span>
-<span class="c1">#     &#39;num_boost_round&#39;: 1500,</span>
-<span class="c1">#     &#39;objective&#39;: &#39;regression&#39;,</span>
-<span class="c1">#     &#39;metric&#39;: &#39;mae&#39;, # Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
-<span class="c1">#     &#39;num_leaves&#39;: int(hps[&#39;num_leaves&#39;]),</span>
-<span class="c1">#     &#39;learning_rate&#39;: hps[&#39;learning_rate&#39;],</span>
-<span class="c1">#     &#39;feature_fraction&#39;: hps[&#39;feature_fraction&#39;],</span>
-<span class="c1">#     &#39;bagging_fraction&#39;: hps[&#39;bagging_fraction&#39;],</span>
-<span class="c1">#     &#39;bagging_freq&#39;: int(hps[&#39;bagging_freq&#39;]),</span>
-<span class="c1">#     &#39;max_depth&#39;: int(hps[&#39;max_depth&#39;]),</span>
-<span class="c1">#     &#39;verbose&#39;: 0</span>
-<span class="c1"># }</span>
-
-<span class="c1"># lgb_m_2nd = LightGBMWrapper(**params_2nd)</span>
-<span class="c1"># lgb_m_2nd.fit(utils.filtrar_features(df_train_s, features + [&#39;stack01&#39;, &#39;stack02&#39;]), df_train[&#39;precio&#39;].values)</span>
+<span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="n">features_stacking</span><span class="p">),</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15014,14 +13636,14 @@ estimator  2: [xgboost: XGBoostWrapper]
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[58]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>LightGBMWrapper(bagging_fraction=0.8999882607358867, bagging_freq=95,
-                boosting_type=&#39;dart&#39;, class_weight=None, colsample_bytree=1.0,
+                boosting_type=&#39;gbdt&#39;, class_weight=None, colsample_bytree=1.0,
                 feature_fraction=0.2570109385381975, importance_type=&#39;split&#39;,
                 learning_rate=0.13601832720254403, max_depth=26, metric=&#39;mae&#39;,
                 min_child_samples=20, min_child_weight=0.001,
@@ -15040,26 +13662,13 @@ estimator  2: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_s</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="n">features_stacking</span><span class="p">))</span>
 <span class="n">df_test_s</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta41.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_s</span><span class="p">,</span> <span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_train_s</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;MAE Stacking-full: {utils.MAE(df_test_s[&quot;precio&quot;].values, df_test_s[&quot;target&quot;].values)}&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15076,9 +13685,7 @@ estimator  2: [xgboost: XGBoostWrapper]
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(60000, 29)
-(236303, 29)
-(236303, 151)
+<pre>MAE Stacking-full: 514117.80862808606
 </pre>
 </div>
 </div>
@@ -15096,176 +13703,35 @@ estimator  2: [xgboost: XGBoostWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params_2nd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8924398062087346</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">36.0</span><span class="p">),</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.16167385124183287</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.054693418899570134</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">4.0</span><span class="p">),</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">93.0</span><span class="p">)}</span>
-<span class="n">keras_mae_train</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)))</span>
-<span class="n">keras_mae_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking (train): </span><span class="si">{keras_mae_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking (test): </span><span class="si">{keras_mae_test:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># params_2nd = {&#39;bagging_fraction&#39;: 0.8924398062087346,</span>
+<span class="c1">#  &#39;bagging_freq&#39;: int(36.0),</span>
+<span class="c1">#  &#39;feature_fraction&#39;: 0.16167385124183287,</span>
+<span class="c1">#  &#39;learning_rate&#39;: 0.054693418899570134,</span>
+<span class="c1">#  &#39;max_depth&#39;: int(4.0),</span>
+<span class="c1">#  &#39;num_leaves&#39;: int(93.0),</span>
+<span class="c1">#  &#39;objective&#39;: &#39;regression&#39;,</span>
+<span class="c1">#  &#39;boosting_type&#39;: &#39;gbdt&#39;,</span>
+<span class="c1">#  &#39;metric&#39;: &#39;mae&#39;}</span>
+
+<span class="n">params_2nd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8243831977099841</span><span class="p">,</span>
+ <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.9228324501365147</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.050664243951241736</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">),</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">78.0</span><span class="p">),</span>
+ <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;dart&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">}</span>
+
+
 <span class="n">lgb_m_2nd</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params_2nd</span><span class="p">)</span>
-<span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">features</span><span class="p">)),</span> <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-</pre></div>
+<span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">s_train</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train set was detected.
-Transforming...
-
-estimator  0: [lightgbm: LightGBMWrapper]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-35-f46cd07a799b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>  <span class="ansi-blue-fg">&#39;max_depth&#39;</span><span class="ansi-blue-fg">:</span> int<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4.0</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span>  &#39;num_leaves&#39;: int(93.0)}
-<span class="ansi-green-fg">----&gt; 7</span><span class="ansi-red-fg"> </span>keras_mae_train <span class="ansi-blue-fg">=</span> utils<span class="ansi-blue-fg">.</span>MAE<span class="ansi-blue-fg">(</span>y_train<span class="ansi-blue-fg">,</span> lgb_m_2nd<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>stack<span class="ansi-blue-fg">.</span>transform<span class="ansi-blue-fg">(</span>x_train<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span> keras_mae_test <span class="ansi-blue-fg">=</span> utils<span class="ansi-blue-fg">.</span>MAE<span class="ansi-blue-fg">(</span>y_test<span class="ansi-blue-fg">,</span> lgb_m_2nd<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>stack<span class="ansi-blue-fg">.</span>transform<span class="ansi-blue-fg">(</span>x_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      9</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;MAE Stacking (train): {keras_mae_train:.5f}&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/vecstack/coresk.py</span> in <span class="ansi-cyan-fg">transform</span><span class="ansi-blue-fg">(self, X, is_train_set)</span>
-<span class="ansi-green-intense-fg ansi-bold">    691</span>                                                                                     <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    692</span>                                                                                     X_te<span class="ansi-blue-fg">,</span> action<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>action_<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">--&gt; 693</span><span class="ansi-red-fg">                                                                                     transform=self.transform_pred)
-</span><span class="ansi-green-intense-fg ansi-bold">    694</span>                     <span class="ansi-red-fg"># Print</span>
-<span class="ansi-green-intense-fg ansi-bold">    695</span>                     <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>verbose <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/vecstack/coresk.py</span> in <span class="ansi-cyan-fg">_estimator_action</span><span class="ansi-blue-fg">(self, estimator, X_train, y_train, X_test, sample_weight, action, transform)</span>
-<span class="ansi-green-intense-fg ansi-bold">    843</span>                 <span class="ansi-green-fg">return</span> estimator<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>X_train<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>y_train<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    844</span>         <span class="ansi-green-fg">elif</span> <span class="ansi-blue-fg">&#39;predict&#39;</span> <span class="ansi-blue-fg">==</span> action<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 845</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>estimator<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>X_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    846</span>         <span class="ansi-green-fg">elif</span> <span class="ansi-blue-fg">&#39;predict_proba&#39;</span> <span class="ansi-blue-fg">==</span> action<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    847</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>estimator<span class="ansi-blue-fg">.</span>predict_proba<span class="ansi-blue-fg">(</span>X_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-3-aa2f2c3f0b71&gt;</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> 
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     <span class="ansi-green-fg">def</span> predict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> X<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg">         return super(LightGBMWrapper, self).predict(X, 
-</span><span class="ansi-green-intense-fg ansi-bold">     10</span>                num_iteration=self.best_iteration_)
-<span class="ansi-green-intense-fg ansi-bold">     11</span> 
-
-<span class="ansi-red-fg">TypeError</span>: super(type, obj): obj must be an instance or subtype of type</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">keras_mae_train</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)))</span>
-<span class="n">keras_mae_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking (train): </span><span class="si">{keras_mae_train:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking (test): </span><span class="si">{keras_mae_test:.5f}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train set was detected.
-Transforming...
-
-estimator  0: [lightgbm: LightGBMWrapper]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-36-ae26a2fb8d58&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>keras_mae_train <span class="ansi-blue-fg">=</span> utils<span class="ansi-blue-fg">.</span>MAE<span class="ansi-blue-fg">(</span>y_train<span class="ansi-blue-fg">,</span> lgb_m_2nd<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>stack<span class="ansi-blue-fg">.</span>transform<span class="ansi-blue-fg">(</span>x_train<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> keras_mae_test <span class="ansi-blue-fg">=</span> utils<span class="ansi-blue-fg">.</span>MAE<span class="ansi-blue-fg">(</span>y_test<span class="ansi-blue-fg">,</span> lgb_m_2nd<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>stack<span class="ansi-blue-fg">.</span>transform<span class="ansi-blue-fg">(</span>x_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;MAE Stacking (train): {keras_mae_train:.5f}&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;MAE Stacking (test): {keras_mae_test:.5f}&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/vecstack/coresk.py</span> in <span class="ansi-cyan-fg">transform</span><span class="ansi-blue-fg">(self, X, is_train_set)</span>
-<span class="ansi-green-intense-fg ansi-bold">    691</span>                                                                                     <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    692</span>                                                                                     X_te<span class="ansi-blue-fg">,</span> action<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>action_<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">--&gt; 693</span><span class="ansi-red-fg">                                                                                     transform=self.transform_pred)
-</span><span class="ansi-green-intense-fg ansi-bold">    694</span>                     <span class="ansi-red-fg"># Print</span>
-<span class="ansi-green-intense-fg ansi-bold">    695</span>                     <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>verbose <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/vecstack/coresk.py</span> in <span class="ansi-cyan-fg">_estimator_action</span><span class="ansi-blue-fg">(self, estimator, X_train, y_train, X_test, sample_weight, action, transform)</span>
-<span class="ansi-green-intense-fg ansi-bold">    843</span>                 <span class="ansi-green-fg">return</span> estimator<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>X_train<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>y_train<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    844</span>         <span class="ansi-green-fg">elif</span> <span class="ansi-blue-fg">&#39;predict&#39;</span> <span class="ansi-blue-fg">==</span> action<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 845</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>estimator<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>X_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    846</span>         <span class="ansi-green-fg">elif</span> <span class="ansi-blue-fg">&#39;predict_proba&#39;</span> <span class="ansi-blue-fg">==</span> action<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    847</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_transformer<span class="ansi-blue-fg">(</span>estimator<span class="ansi-blue-fg">.</span>predict_proba<span class="ansi-blue-fg">(</span>X_test<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">=</span>transform<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-3-aa2f2c3f0b71&gt;</span> in <span class="ansi-cyan-fg">predict</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span> 
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     <span class="ansi-green-fg">def</span> predict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> X<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg">         return super(LightGBMWrapper, self).predict(X, 
-</span><span class="ansi-green-intense-fg ansi-bold">     10</span>                num_iteration=self.best_iteration_)
-<span class="ansi-green-intense-fg ansi-bold">     11</span> 
-
-<span class="ansi-red-fg">TypeError</span>: super(type, obj): obj must be an instance or subtype of type</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_test_f</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">filtrar_features</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">features</span><span class="p">))</span>
-<span class="n">y_pred_test_f</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">s_test_f</span><span class="p">)</span>
-<span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred_test_f</span>
-<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta35.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lgb_m_2nd</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">s_test</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta43.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15275,16 +13741,15 @@ estimator  0: [lightgbm: LightGBMWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stack01&#39;</span><span class="p">,</span> <span class="s1">&#39;stack02&#39;</span><span class="p">,</span> <span class="s1">&#39;stack03&#39;</span><span class="p">,</span> <span class="s1">&#39;stack04&#39;</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">eval_lightgbm</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
     <span class="n">num_leaves</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">feature_fraction</span><span class="p">,</span> <span class="n">bagging_fraction</span><span class="p">,</span> <span class="n">bagging_freq</span><span class="p">,</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="n">args</span>
 
-    <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">s_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="c1">#     lgb_eval = lgb.Dataset(s_test, y_test, reference=lgb_train)</span>
+    <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">s_train</span><span class="p">,</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     
     <span class="n">num_leaves</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_leaves</span><span class="p">)</span>
     <span class="n">bagging_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bagging_freq</span><span class="p">)</span>
@@ -15304,21 +13769,76 @@ estimator  0: [lightgbm: LightGBMWrapper]
 
     <span class="n">gbm</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span>
                     <span class="n">lgb_train</span><span class="p">,</span>
-<span class="c1">#                     valid_sets=lgb_eval,</span>
                     <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
-<span class="c1">#                     early_stopping_rounds=15,</span>
                     <span class="n">verbose_eval</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     
     <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">num_iteration</span><span class="o">=</span><span class="n">gbm</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
 
-<span class="n">space</span> <span class="o">=</span> <span class="p">[</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span>
-        <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;feature_fraction&#39;</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">),</span>
-        <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">space</span> <span class="o">=</span> <span class="p">[</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span>
+        <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;feature_fraction&#39;</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
 
-<span class="n">hps</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">eval_lightgbm</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">hps</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">eval_lightgbm</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">hps</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>100%|██████████| 400/400 [17:21&lt;00:00,  2.60s/it, best loss: 511432.09539443516]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;bagging_fraction&#39;: 0.8243831977099841,
+ &#39;bagging_freq&#39;: 10.0,
+ &#39;feature_fraction&#39;: 0.9228324501365147,
+ &#39;learning_rate&#39;: 0.050664243951241736,
+ &#39;max_depth&#39;: 3.0,
+ &#39;num_leaves&#39;: 78.0}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prediccion-con-promedios">Prediccion con promedios<a class="anchor-link" href="#Prediccion-con-promedios">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_test_f</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;respuesta42.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15328,14 +13848,170 @@ estimator  0: [lightgbm: LightGBMWrapper]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># keras_mae_train = utils.MAE(y_test, lgb_m.predict(x_test_s))</span>
-<span class="c1"># print(f&quot;MAE Keras (train): {keras_mae_train:.5f}&quot;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">mode</span>
+
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking only: {utils.MAE(y_pred_test, df_test_f[&#39;precio&#39;].values)}&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MAE Stacking only: 519840.412728738
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;MAE Stacking only: {utils.MAE(y_pred_test, df_test_f[&#39;precio&#39;].values)}&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MAE Stacking only: 502391.48180612386
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+
+<span class="k">def</span> <span class="nf">mae_res</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_pred_test</span><span class="p">,</span> <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_test</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">mae_res</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[91]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>      fun: 497375.416620218
+ hess_inv: array([[ 7.64527106e-05, -6.84363088e-05,  5.18102889e-04,
+         1.30966978e-03],
+       [-6.84363088e-05,  6.84021400e-05, -4.91721763e-04,
+        -1.17091868e-03],
+       [ 5.18102889e-04, -4.91721763e-04,  4.00738244e-03,
+         9.31303274e-03],
+       [ 1.30966978e-03, -1.17091868e-03,  9.31303274e-03,
+         2.30019160e-02]])
+      jac: array([5.8359375 , 2.96484375, 0.3671875 , 1.5859375 ])
+  message: &#39;Desired error not necessarily achieved due to precision loss.&#39;
+     nfev: 702
+      nit: 15
+     njev: 115
+   status: 2
+  success: False
+        x: array([ 0.40410989, -0.16217251,  2.30245548,  0.39816892])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">differential_evolution</span>
+
+<span class="k">def</span> <span class="nf">mae_res</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">s_test</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_pred_test</span><span class="p">,</span> <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_test</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">differential_evolution</span><span class="p">(</span><span class="n">mae_res</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[92]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>     fun: 497375.4169548869
+     jac: array([-0.58207661, -0.83819032, -0.23283064,  1.65309757])
+ message: &#39;Optimization terminated successfully.&#39;
+    nfev: 425
+     nit: 5
+ success: True
+       x: array([ 0.49248228, -0.19790651,  2.80637364,  0.48548681])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
