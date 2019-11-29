@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13105,7 +13105,7 @@ div#notebook {
 <span class="c1"># df_train = utils.dolarizar_df(df_train)</span>
 <span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
 
-<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13123,7 +13123,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
@@ -13167,45 +13167,1321 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="RandomizedSearchCV">RandomizedSearchCV<a class="anchor-link" href="#RandomizedSearchCV">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
+
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span>
+
+<span class="n">lgb_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbdt&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;regression&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mae&#39;</span><span class="p">],</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
+    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.85</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">],</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">],</span>
+    <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rs_cv</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">lgb</span><span class="o">.</span><span class="n">LGBMRegressor</span><span class="p">(),</span>
+                           <span class="n">param_distributions</span><span class="o">=</span><span class="n">lgb_params</span><span class="p">,</span> 
+                           <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                           <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                           <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">)</span>
+
+<span class="n">rs_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 3 folds for each of 50 candidates, totalling 150 fits
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-492142.518, total=   8.9s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    8.9s remaining:    0.0s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-491026.250, total=   8.0s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Done   2 out of   2 | elapsed:   16.9s remaining:    0.0s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-490274.982, total=   8.1s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-491847.641, total=   8.5s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-490011.143, total=   8.4s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-491849.495, total=   8.4s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491912.141, total=   8.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-492365.068, total=   7.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491054.073, total=   7.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-522514.340, total=   4.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-521975.270, total=   4.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-520332.246, total=   4.8s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-496531.424, total=   9.7s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-494668.285, total=   7.0s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-494654.649, total=   8.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-493530.100, total=  12.1s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-492663.982, total=   7.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-490556.113, total=  10.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-497782.681, total=   8.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-498089.099, total=   9.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-496223.027, total=  10.2s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-522102.587, total=   4.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-525136.606, total=   4.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-523522.029, total=   9.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-519242.340, total=   4.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-518797.109, total=   7.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-521165.820, total=   6.3s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-626503.828, total=   8.1s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-627413.825, total=   4.0s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-622458.774, total=   3.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-493112.505, total=   8.4s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-490945.340, total=   9.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491264.453, total=   9.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-506427.977, total=   5.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-503426.692, total=   5.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-505059.553, total=   6.2s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-490015.896, total=   7.2s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489248.878, total=  12.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489378.158, total=  14.1s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-490227.710, total=  13.5s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489773.970, total=  10.9s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489716.116, total=  12.1s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-514445.567, total=   7.6s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-513884.296, total=   5.8s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-514775.104, total=   6.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-575009.619, total=   3.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-573640.804, total=   3.7s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-573028.033, total=   4.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-493070.332, total=   8.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-492323.742, total=   7.4s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-490740.244, total=   7.8s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-492914.020, total=   7.3s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-491911.713, total=   7.4s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-491400.328, total=   7.3s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-498482.852, total=   6.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-497455.170, total=   6.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-498304.979, total=   6.4s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-492142.518, total=   6.8s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-491026.250, total=   7.9s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-490274.982, total=  16.0s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498504.940, total=   9.2s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-499371.396, total=   9.7s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498159.240, total=  11.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-498815.460, total=   8.4s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-499081.886, total=   7.1s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-496736.825, total=   8.3s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-506965.011, total=   5.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-508051.737, total=   6.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-505419.210, total=   7.5s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-503432.277, total=   7.1s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-502586.039, total=   6.9s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-504318.654, total=   7.3s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-495625.509, total=   8.5s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-493965.141, total=   9.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-493253.988, total=  13.1s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-495918.406, total=  16.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-493586.361, total=   8.8s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-493989.790, total=   7.3s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-521918.426, total=   4.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-523818.879, total=   5.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-525205.970, total=   9.6s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-533313.791, total=   7.5s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-530046.126, total=  10.4s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-529396.381, total=   5.0s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-530152.660, total=   4.7s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-529672.386, total=   5.7s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-529111.483, total=   5.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-490917.784, total=   7.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492107.799, total=  14.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-490493.508, total=   8.9s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-581010.035, total=   4.7s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-580854.555, total=   4.0s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-580160.214, total=   4.0s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-563605.807, total=   3.7s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-562411.811, total=   3.5s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-562262.972, total=   4.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-533393.784, total=   5.3s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-532308.121, total=   5.4s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-534760.300, total=   5.4s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499318.051, total=  12.4s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499860.855, total=   9.7s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-500661.603, total=   8.1s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499620.536, total=   8.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-496142.146, total=   6.3s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-495905.780, total=   5.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489235.328, total=   9.3s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489336.367, total=   7.1s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489482.817, total=   7.1s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501298.752, total=   7.5s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501391.266, total=   7.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501485.970, total=   7.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-524833.221, total=   5.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-520457.626, total=   7.1s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-522729.820, total=   5.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-524879.342, total=   4.3s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-522202.128, total=   5.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-524719.810, total=   7.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-511854.809, total=   6.0s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-512474.050, total=   7.4s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-511948.213, total=   6.2s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-594375.434, total=   3.3s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-594216.484, total=   4.0s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-597221.720, total=   7.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492729.152, total=  11.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492481.745, total=  10.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-489887.958, total=   7.8s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-492408.740, total=  10.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-491047.192, total=  10.4s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-490573.357, total=  16.0s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-502904.706, total=   7.9s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-500392.975, total=   6.8s
+[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
+[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-499022.225, total=   7.1s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523638.451, total=   4.6s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523073.840, total=   4.7s
+[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
+[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523803.933, total=   4.5s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-507659.386, total=   5.7s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-507662.786, total=   6.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-506754.531, total=   5.4s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-502985.998, total=   6.8s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-501990.249, total=  11.3s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-501290.847, total=   7.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-500105.349, total=   8.2s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498850.182, total=   6.7s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-497917.350, total=   7.5s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-493928.780, total=   8.1s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-490321.607, total=   8.2s
+[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-491773.607, total=   7.9s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-488723.589, total=   6.6s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489013.106, total=   7.0s
+[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
+[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489253.822, total=   6.9s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed: 18.9min finished
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>RandomizedSearchCV(cv=3, error_score=&#39;raise-deprecating&#39;,
+                   estimator=LGBMRegressor(boosting_type=&#39;gbdt&#39;,
+                                           class_weight=None,
+                                           colsample_bytree=1.0,
+                                           importance_type=&#39;split&#39;,
+                                           learning_rate=0.1, max_depth=-1,
+                                           min_child_samples=20,
+                                           min_child_weight=0.001,
+                                           min_split_gain=0.0, n_estimators=100,
+                                           n_jobs=-1, num_leaves=31,
+                                           objective=None, random_state=None,
+                                           reg_alpha=0.0, reg_...
+                                        &#39;learning_rate&#39;: [0.25],
+                                        &#39;max_bin&#39;: [100, 175, 255],
+                                        &#39;max_depth&#39;: [10], &#39;metric&#39;: [&#39;mae&#39;],
+                                        &#39;min_data_in_leaf&#39;: [10, 20, 40],
+                                        &#39;min_split_gain&#39;: [0, 0.05, 0.1, 0.2],
+                                        &#39;n_jobs&#39;: [4], &#39;num_leaves&#39;: [200],
+                                        &#39;objective&#39;: [&#39;regression&#39;],
+                                        &#39;reg_lambda&#39;: [0, 2, 6, 10]},
+                   pre_dispatch=&#39;2*n_jobs&#39;, random_state=None, refit=True,
+                   return_train_score=False, scoring=&#39;neg_mean_absolute_error&#39;,
+                   verbose=3)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">rs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+<span class="c1"># Guarda el modelo</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">gs_cv</span><span class="p">,</span> <span class="s1">&#39;lightgbm_rscv.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;reg_lambda&#39;: 10,
+ &#39;objective&#39;: &#39;regression&#39;,
+ &#39;num_leaves&#39;: 200,
+ &#39;n_jobs&#39;: 4,
+ &#39;min_split_gain&#39;: 0.05,
+ &#39;min_data_in_leaf&#39;: 20,
+ &#39;metric&#39;: &#39;mae&#39;,
+ &#39;max_depth&#39;: 10,
+ &#39;max_bin&#39;: 100,
+ &#39;learning_rate&#39;: 0.25,
+ &#39;feature_fraction&#39;: 0.85,
+ &#39;boosting_type&#39;: &#39;gbdt&#39;,
+ &#39;bagging_freq&#39;: 0,
+ &#39;bagging_fraction&#39;: 0.1}</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=DeprecationWarning)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;lightgbm_rscv.pkl&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rs_cv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;param_bagging_fraction&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_bagging_freq&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_min_data_in_leaf&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_bagging_freq&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_max_bin&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_reg_lambda&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_min_split_gain&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span> <span class="s1">&#39;rank_test_score&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>param_bagging_fraction</th>
+      <th>param_bagging_freq</th>
+      <th>param_min_data_in_leaf</th>
+      <th>param_bagging_freq</th>
+      <th>param_max_bin</th>
+      <th>param_reg_lambda</th>
+      <th>param_min_split_gain</th>
+      <th>mean_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>49</td>
+      <td>0.1</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-488996.837672</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>0.7</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-489351.503529</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>0.1</td>
+      <td>0</td>
+      <td>40</td>
+      <td>0</td>
+      <td>255</td>
+      <td>6</td>
+      <td>0.1</td>
+      <td>-489547.645885</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>0.7</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td>255</td>
+      <td>6</td>
+      <td>0</td>
+      <td>-489905.933716</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>0.5</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>100</td>
+      <td>6</td>
+      <td>0</td>
+      <td>-491147.920608</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0.3</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>100</td>
+      <td>6</td>
+      <td>0.1</td>
+      <td>-491147.920608</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>0.9</td>
+      <td>20</td>
+      <td>20</td>
+      <td>20</td>
+      <td>255</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-491173.029298</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.7</td>
+      <td>0</td>
+      <td>40</td>
+      <td>0</td>
+      <td>100</td>
+      <td>6</td>
+      <td>0.05</td>
+      <td>-491236.095317</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>0.9</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>-491343.100939</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>0.9</td>
+      <td>20</td>
+      <td>20</td>
+      <td>20</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-491699.622921</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>0.9</td>
+      <td>10</td>
+      <td>20</td>
+      <td>10</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-491774.104746</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.9</td>
+      <td>10</td>
+      <td>20</td>
+      <td>10</td>
+      <td>255</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>-491777.094600</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>0.1</td>
+      <td>0</td>
+      <td>40</td>
+      <td>0</td>
+      <td>255</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-492008.006193</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>0.9</td>
+      <td>5</td>
+      <td>40</td>
+      <td>5</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-492044.777028</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>0.9</td>
+      <td>40</td>
+      <td>40</td>
+      <td>40</td>
+      <td>175</td>
+      <td>6</td>
+      <td>0</td>
+      <td>-492075.357088</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.9</td>
+      <td>40</td>
+      <td>40</td>
+      <td>40</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>-492250.070381</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>0.9</td>
+      <td>20</td>
+      <td>10</td>
+      <td>20</td>
+      <td>255</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-494281.551479</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>0.9</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>100</td>
+      <td>2</td>
+      <td>0.2</td>
+      <td>-494498.191549</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.9</td>
+      <td>40</td>
+      <td>20</td>
+      <td>40</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>-495284.791352</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>0.7</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-497222.830665</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.7</td>
+      <td>1</td>
+      <td>40</td>
+      <td>1</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-497364.937354</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>0.7</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-498081.001978</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>0.7</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-498211.392937</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>0.7</td>
+      <td>40</td>
+      <td>20</td>
+      <td>40</td>
+      <td>255</td>
+      <td>6</td>
+      <td>0.1</td>
+      <td>-498678.524237</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>0.7</td>
+      <td>40</td>
+      <td>40</td>
+      <td>40</td>
+      <td>255</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-498957.631617</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>0.7</td>
+      <td>10</td>
+      <td>40</td>
+      <td>10</td>
+      <td>255</td>
+      <td>0</td>
+      <td>0.05</td>
+      <td>-499946.833461</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>0.7</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>100</td>
+      <td>2</td>
+      <td>0.2</td>
+      <td>-500773.311204</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>0.7</td>
+      <td>40</td>
+      <td>10</td>
+      <td>40</td>
+      <td>255</td>
+      <td>2</td>
+      <td>0.2</td>
+      <td>-501391.995747</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>0.7</td>
+      <td>20</td>
+      <td>20</td>
+      <td>20</td>
+      <td>175</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>-502089.035295</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>0.7</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>255</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>-503445.656668</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>0.5</td>
+      <td>40</td>
+      <td>20</td>
+      <td>40</td>
+      <td>255</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>-504971.413564</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>20</td>
+      <td>5</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-506811.986787</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-507358.902158</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>175</td>
+      <td>2</td>
+      <td>0.2</td>
+      <td>-512092.356008</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>0.5</td>
+      <td>10</td>
+      <td>20</td>
+      <td>10</td>
+      <td>255</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>-514368.322485</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.3</td>
+      <td>40</td>
+      <td>20</td>
+      <td>40</td>
+      <td>255</td>
+      <td>10</td>
+      <td>0.05</td>
+      <td>-519735.087663</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.3</td>
+      <td>10</td>
+      <td>40</td>
+      <td>10</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-521607.289418</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>0.3</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0</td>
+      <td>-522673.564734</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>0.3</td>
+      <td>1</td>
+      <td>40</td>
+      <td>1</td>
+      <td>100</td>
+      <td>6</td>
+      <td>0.05</td>
+      <td>-523505.408140</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.3</td>
+      <td>5</td>
+      <td>40</td>
+      <td>5</td>
+      <td>255</td>
+      <td>6</td>
+      <td>0.2</td>
+      <td>-523587.067723</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>0.3</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>175</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-523647.751131</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>0.3</td>
+      <td>20</td>
+      <td>40</td>
+      <td>20</td>
+      <td>100</td>
+      <td>6</td>
+      <td>0.1</td>
+      <td>-523933.763844</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>0.3</td>
+      <td>20</td>
+      <td>20</td>
+      <td>20</td>
+      <td>100</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-529645.511712</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>0.3</td>
+      <td>1</td>
+      <td>20</td>
+      <td>1</td>
+      <td>255</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-530918.775987</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>0.3</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>100</td>
+      <td>2</td>
+      <td>0.05</td>
+      <td>-533487.401128</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>0.1</td>
+      <td>40</td>
+      <td>40</td>
+      <td>40</td>
+      <td>255</td>
+      <td>2</td>
+      <td>0.1</td>
+      <td>-562760.200178</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>0.1</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>100</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>-573892.823502</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>0.1</td>
+      <td>1</td>
+      <td>10</td>
+      <td>1</td>
+      <td>255</td>
+      <td>6</td>
+      <td>0.2</td>
+      <td>-580674.936281</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>0.1</td>
+      <td>5</td>
+      <td>20</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>-595271.208980</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.1</td>
+      <td>5</td>
+      <td>10</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>-625458.813213</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="GridSearchCV">GridSearchCV<a class="anchor-link" href="#GridSearchCV">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;garages&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span>
 
-<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
-                     <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;count_id_zona&#39;</span>
-                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">]</span>
-
-<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
+<span class="c1"># lgb_params = {</span>
+<span class="c1">#     &#39;boosting_type&#39;: [&#39;gbdt&#39;],</span>
+<span class="c1">#     &#39;objective&#39;: [&#39;regression&#39;],</span>
+<span class="c1">#     &#39;metric&#39;: [&#39;mae&#39;], # Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
+<span class="c1">#     &#39;bagging_fraction&#39;: [0.5, 0.7, 0.9],</span>
+<span class="c1">#     &#39;feature_fraction&#39;: [0.15, 0.35, 0.55, 0.65, 0.9],</span>
+<span class="c1">#     &#39;max_depth&#39;: [5, 10, 20],</span>
+<span class="c1">#     &#39;num_leaves&#39;: [15, 30, 45, 60, 100, 200],</span>
+<span class="c1">#     &#39;learning_rate&#39;: np.arange(0.05, 0.95, 0.2),</span>
+<span class="c1">#     &#39;n_jobs&#39;: [2]</span>
+<span class="c1"># }</span>
 
 <span class="n">lgb_params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
-    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
-    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbdt&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;regression&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mae&#39;</span><span class="p">],</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
+    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">],</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">],</span>
     <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="p">}</span>
 
@@ -13214,7 +14490,7 @@ div#notebook {
 <span class="n">gs_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">lgb</span><span class="o">.</span><span class="n">LGBMRegressor</span><span class="p">(),</span> 
                            <span class="n">param_grid</span><span class="o">=</span><span class="n">lgb_params</span><span class="p">,</span> 
                            <span class="n">cv</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                           <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                           <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">)</span>
 
 <span class="n">gs_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -13233,7 +14509,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting 4 folds for each of 1350 candidates, totalling 5400 fits
+<pre>Fitting 4 folds for each of 30 candidates, totalling 120 fits
 </pre>
 </div>
 </div>
@@ -13245,8 +14521,38 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done 120 out of 120 | elapsed: 15.5min finished
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>GridSearchCV(cv=4, error_score=&#39;raise-deprecating&#39;,
+             estimator=LGBMRegressor(boosting_type=&#39;gbdt&#39;, class_weight=None,
+                                     colsample_bytree=1.0,
+                                     importance_type=&#39;split&#39;, learning_rate=0.1,
+                                     max_depth=-1, min_child_samples=20,
+                                     min_child_weight=0.001, min_split_gain=0.0,
+                                     n_estimators=100, n_jobs=-1, num_leaves=31,
+                                     objective=None, random_state=None,
+                                     reg_alpha=0.0, reg_lambda...
+             param_grid={&#39;bagging_fraction&#39;: [0.1, 0.3, 0.5, 0.7, 0.9],
+                         &#39;bagging_freq&#39;: [0, 1, 5, 10, 20, 40],
+                         &#39;boosting_type&#39;: [&#39;gbdt&#39;], &#39;feature_fraction&#39;: [0.9],
+                         &#39;learning_rate&#39;: [0.25], &#39;max_depth&#39;: [10],
+                         &#39;metric&#39;: [&#39;mae&#39;], &#39;n_jobs&#39;: [2], &#39;num_leaves&#39;: [200],
+                         &#39;objective&#39;: [&#39;regression&#39;]},
+             pre_dispatch=&#39;2*n_jobs&#39;, refit=True, return_train_score=False,
+             scoring=&#39;neg_mean_absolute_error&#39;, verbose=1)</pre>
+</div>
+
 </div>
 
 </div>
@@ -13255,16 +14561,118 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
 <span class="c1"># Guarda el modelo</span>
-<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">gs_cv</span><span class="p">,</span> <span class="s1">&#39;lightgbm_gscv.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">gs_cv</span><span class="p">,</span> <span class="s1">&#39;lightgbm_gscv_4.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;bagging_fraction&#39;: 0.5,
+ &#39;boosting_type&#39;: &#39;gbdt&#39;,
+ &#39;feature_fraction&#39;: 0.9,
+ &#39;learning_rate&#39;: 0.25,
+ &#39;max_depth&#39;: 10,
+ &#39;metric&#39;: &#39;mae&#39;,
+ &#39;n_jobs&#39;: 2,
+ &#39;num_leaves&#39;: 200,
+ &#39;objective&#39;: &#39;regression&#39;}</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=DeprecationWarning)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;lightgbm_gscv_3.pkl&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-1-6382ab97dc24&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>results<span class="ansi-blue-fg">.</span>head<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;results&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -14137,94 +15545,63 @@ Early stopping, best iteration is:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;garages&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> 
-            <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span>
-            <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">]</span>
-
-<span class="n">features_test</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
-                     <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;count_id_zona&#39;</span>
-                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">]</span>
-
-<span class="n">features</span> <span class="o">+=</span> <span class="n">features_test</span>
-
-<span class="c1"># features += features_test</span>
-
-<span class="c1"># features += cols_tipodepropiedad_ohe + cols_provincia_ohe + cols_zona_ohe</span>
-
-
-<span class="c1"># features = [&#39;antiguedad&#39;, &#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;,</span>
-<span class="c1">#        &#39;porcentaje_metros&#39;, &#39;promedio_metros_tipo_propiedad&#39;,</span>
-<span class="c1">#        &#39;dias_desde_datos&#39;, &#39;tam_ambientes&#39;, &#39;promedio_precio_ciudad&#39;,</span>
-<span class="c1">#        &#39;varianza_precio_ciudad&#39;, &#39;promedio_id_zona&#39;, &#39;varianza_id_zona&#39;,</span>
-<span class="c1">#        &#39;count_id_zona&#39;, &#39;promedio_precio_tipo_propiedad_ciudad&#39;,</span>
-<span class="c1">#        &#39;count_tipo_propiedad_ciudad&#39;,</span>
-<span class="c1">#        &#39;promedio_precio_habitaciones_banos_garages&#39;,</span>
-<span class="c1">#        &#39;promedio_precio_hbg_tipo_propiedad&#39;,</span>
-<span class="c1">#        &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;puntaje&#39;]</span>
-    
-    
-<span class="c1"># hps = {&#39;bagging_fraction&#39;: 0.8988911725316586,</span>
-<span class="c1">#  &#39;bagging_freq&#39;: 22.0,</span>
-<span class="c1">#  &#39;feature_fraction&#39;: 0.6622442122619671,</span>
-<span class="c1">#  &#39;learning_rate&#39;: 0.16422725363286422,</span>
-<span class="c1">#  &#39;max_depth&#39;: 22.0,</span>
-<span class="c1">#  &#39;num_leaves&#39;: 180.0,</span>
-<span class="c1">#  &#39;test_size&#39;: 0.20892455926004772}</span>
-
-<span class="c1">#hps = {&#39;bagging_fraction&#39;: 0.8999882607358867,</span>
-<span class="c1"># &#39;bagging_freq&#39;: 95.0,</span>
-<span class="c1"># &#39;feature_fraction&#39;: 0.2570109385381975,</span>
-<span class="c1"># &#39;learning_rate&#39;: 0.13601832720254403,</span>
-<span class="c1"># &#39;max_depth&#39;: 26.0,</span>
-<span class="c1"># &#39;num_leaves&#39;: 175.0,</span>
-<span class="c1"># &#39;test_size&#39;: 0.08363501292068126}</span>
-
-<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.8667885775824707</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">72.0</span><span class="p">,</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.5369072488159948</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.13480325449634387</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">174.0</span><span class="p">,</span>
- <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.1050550407163082</span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span>
 
 
-<span class="n">bagging_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">]</span>
-<span class="n">bagging_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">])</span>
-<span class="n">feature_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;feature_fraction&#39;</span><span class="p">]</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">]</span>
-<span class="n">num_leaves</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;num_leaves&#39;</span><span class="p">])</span>
-<span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">])</span>
-<span class="n">test_size</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;test_size&#39;</span><span class="p">]</span>
+<span class="c1"># params = {&#39;bagging_fraction&#39;: 0.5,</span>
+<span class="c1">#  &#39;boosting_type&#39;: &#39;gbdt&#39;,</span>
+<span class="c1">#  &#39;feature_fraction&#39;: 0.9,</span>
+<span class="c1">#  &#39;learning_rate&#39;: 0.25,</span>
+<span class="c1">#  &#39;max_depth&#39;: 10,</span>
+<span class="c1">#  &#39;metric&#39;: &#39;mae&#39;,</span>
+<span class="c1">#  &#39;n_jobs&#39;: 2,</span>
+<span class="c1">#  &#39;num_leaves&#39;: 200,</span>
+<span class="c1">#  &#39;objective&#39;: &#39;regression&#39;}</span>
 
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">},</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
-    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="n">num_leaves</span><span class="p">,</span>
-    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
-    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="n">feature_fraction</span><span class="p">,</span>
-    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="n">bagging_fraction</span><span class="p">,</span>
-    <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="n">bagging_freq</span><span class="p">,</span>
-    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">max_depth</span><span class="p">,</span>
-    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span>
-<span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+ <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+ <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+ <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+ <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+ <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+ <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+ <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> 
+ <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">}</span>
 
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">)</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
 <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">lgb_eval</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="n">lgb_train</span><span class="p">)</span>
@@ -14232,7 +15609,7 @@ Early stopping, best iteration is:
 <span class="n">gbm</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span>
                 <span class="n">lgb_train</span><span class="p">,</span>
                 <span class="n">valid_sets</span><span class="o">=</span><span class="n">lgb_eval</span><span class="p">,</span>
-                <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
                 <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
                 <span class="n">verbose_eval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -14267,477 +15644,188 @@ Early stopping, best iteration is:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1]	valid_0&#39;s l1: 1.45153e+06
+<pre>[1]	valid_0&#39;s l1: 1.29653e+06
 Training until validation scores don&#39;t improve for 25 rounds
-[2]	valid_0&#39;s l1: 1.31398e+06
-[3]	valid_0&#39;s l1: 1.19767e+06
-[4]	valid_0&#39;s l1: 1.08932e+06
-[5]	valid_0&#39;s l1: 1.0001e+06
-[6]	valid_0&#39;s l1: 929073
-[7]	valid_0&#39;s l1: 873661
-[8]	valid_0&#39;s l1: 823122
-[9]	valid_0&#39;s l1: 775506
-[10]	valid_0&#39;s l1: 735409
-[11]	valid_0&#39;s l1: 703082
-[12]	valid_0&#39;s l1: 676356
-[13]	valid_0&#39;s l1: 652426
-[14]	valid_0&#39;s l1: 633892
-[15]	valid_0&#39;s l1: 617968
-[16]	valid_0&#39;s l1: 605668
-[17]	valid_0&#39;s l1: 595131
-[18]	valid_0&#39;s l1: 584140
-[19]	valid_0&#39;s l1: 577433
-[20]	valid_0&#39;s l1: 569623
-[21]	valid_0&#39;s l1: 563011
-[22]	valid_0&#39;s l1: 558723
-[23]	valid_0&#39;s l1: 554775
-[24]	valid_0&#39;s l1: 549928
-[25]	valid_0&#39;s l1: 545940
-[26]	valid_0&#39;s l1: 543005
-[27]	valid_0&#39;s l1: 539752
-[28]	valid_0&#39;s l1: 537250
-[29]	valid_0&#39;s l1: 534325
-[30]	valid_0&#39;s l1: 531874
-[31]	valid_0&#39;s l1: 529366
-[32]	valid_0&#39;s l1: 526908
-[33]	valid_0&#39;s l1: 525365
-[34]	valid_0&#39;s l1: 524277
-[35]	valid_0&#39;s l1: 523017
-[36]	valid_0&#39;s l1: 521479
-[37]	valid_0&#39;s l1: 520187
-[38]	valid_0&#39;s l1: 519182
-[39]	valid_0&#39;s l1: 518013
-[40]	valid_0&#39;s l1: 517142
-[41]	valid_0&#39;s l1: 516345
-[42]	valid_0&#39;s l1: 515530
-[43]	valid_0&#39;s l1: 514698
-[44]	valid_0&#39;s l1: 513936
-[45]	valid_0&#39;s l1: 512937
-[46]	valid_0&#39;s l1: 511874
-[47]	valid_0&#39;s l1: 511528
-[48]	valid_0&#39;s l1: 510853
-[49]	valid_0&#39;s l1: 510217
-[50]	valid_0&#39;s l1: 509779
-[51]	valid_0&#39;s l1: 509016
-[52]	valid_0&#39;s l1: 508469
-[53]	valid_0&#39;s l1: 507570
-[54]	valid_0&#39;s l1: 507155
-[55]	valid_0&#39;s l1: 506589
-[56]	valid_0&#39;s l1: 506009
-[57]	valid_0&#39;s l1: 505489
-[58]	valid_0&#39;s l1: 505083
-[59]	valid_0&#39;s l1: 504717
-[60]	valid_0&#39;s l1: 504565
-[61]	valid_0&#39;s l1: 504169
-[62]	valid_0&#39;s l1: 503777
-[63]	valid_0&#39;s l1: 503503
-[64]	valid_0&#39;s l1: 502949
-[65]	valid_0&#39;s l1: 502701
-[66]	valid_0&#39;s l1: 502518
-[67]	valid_0&#39;s l1: 502163
-[68]	valid_0&#39;s l1: 501866
-[69]	valid_0&#39;s l1: 501618
-[70]	valid_0&#39;s l1: 501484
-[71]	valid_0&#39;s l1: 501163
-[72]	valid_0&#39;s l1: 500695
-[73]	valid_0&#39;s l1: 500517
-[74]	valid_0&#39;s l1: 500198
-[75]	valid_0&#39;s l1: 499998
-[76]	valid_0&#39;s l1: 499722
-[77]	valid_0&#39;s l1: 499607
-[78]	valid_0&#39;s l1: 499422
-[79]	valid_0&#39;s l1: 499236
-[80]	valid_0&#39;s l1: 498633
-[81]	valid_0&#39;s l1: 498487
-[82]	valid_0&#39;s l1: 498445
-[83]	valid_0&#39;s l1: 497981
-[84]	valid_0&#39;s l1: 497789
-[85]	valid_0&#39;s l1: 497594
-[86]	valid_0&#39;s l1: 497559
-[87]	valid_0&#39;s l1: 497421
-[88]	valid_0&#39;s l1: 497028
-[89]	valid_0&#39;s l1: 496538
-[90]	valid_0&#39;s l1: 496485
-[91]	valid_0&#39;s l1: 496069
-[92]	valid_0&#39;s l1: 495725
-[93]	valid_0&#39;s l1: 495528
-[94]	valid_0&#39;s l1: 495557
-[95]	valid_0&#39;s l1: 495412
-[96]	valid_0&#39;s l1: 495445
-[97]	valid_0&#39;s l1: 495401
-[98]	valid_0&#39;s l1: 495076
-[99]	valid_0&#39;s l1: 494966
-[100]	valid_0&#39;s l1: 494870
-[101]	valid_0&#39;s l1: 494593
-[102]	valid_0&#39;s l1: 494376
-[103]	valid_0&#39;s l1: 494162
-[104]	valid_0&#39;s l1: 494031
-[105]	valid_0&#39;s l1: 493891
-[106]	valid_0&#39;s l1: 493769
-[107]	valid_0&#39;s l1: 493658
-[108]	valid_0&#39;s l1: 493565
-[109]	valid_0&#39;s l1: 493350
-[110]	valid_0&#39;s l1: 493275
-[111]	valid_0&#39;s l1: 493148
-[112]	valid_0&#39;s l1: 493036
-[113]	valid_0&#39;s l1: 492813
-[114]	valid_0&#39;s l1: 492603
-[115]	valid_0&#39;s l1: 492260
-[116]	valid_0&#39;s l1: 492195
-[117]	valid_0&#39;s l1: 491962
-[118]	valid_0&#39;s l1: 491970
-[119]	valid_0&#39;s l1: 491774
-[120]	valid_0&#39;s l1: 491595
-[121]	valid_0&#39;s l1: 491523
-[122]	valid_0&#39;s l1: 491453
-[123]	valid_0&#39;s l1: 491399
-[124]	valid_0&#39;s l1: 491453
-[125]	valid_0&#39;s l1: 491516
-[126]	valid_0&#39;s l1: 491425
-[127]	valid_0&#39;s l1: 491408
-[128]	valid_0&#39;s l1: 491352
-[129]	valid_0&#39;s l1: 491156
-[130]	valid_0&#39;s l1: 490983
-[131]	valid_0&#39;s l1: 490904
-[132]	valid_0&#39;s l1: 490843
-[133]	valid_0&#39;s l1: 490568
-[134]	valid_0&#39;s l1: 490229
-[135]	valid_0&#39;s l1: 490066
-[136]	valid_0&#39;s l1: 490047
-[137]	valid_0&#39;s l1: 490117
-[138]	valid_0&#39;s l1: 490095
-[139]	valid_0&#39;s l1: 489981
-[140]	valid_0&#39;s l1: 490045
-[141]	valid_0&#39;s l1: 489873
-[142]	valid_0&#39;s l1: 489758
-[143]	valid_0&#39;s l1: 489471
-[144]	valid_0&#39;s l1: 489353
-[145]	valid_0&#39;s l1: 489426
-[146]	valid_0&#39;s l1: 489513
-[147]	valid_0&#39;s l1: 489415
-[148]	valid_0&#39;s l1: 489331
-[149]	valid_0&#39;s l1: 489242
-[150]	valid_0&#39;s l1: 489182
-[151]	valid_0&#39;s l1: 489133
-[152]	valid_0&#39;s l1: 489072
-[153]	valid_0&#39;s l1: 489103
-[154]	valid_0&#39;s l1: 489138
-[155]	valid_0&#39;s l1: 489080
-[156]	valid_0&#39;s l1: 489035
-[157]	valid_0&#39;s l1: 488872
-[158]	valid_0&#39;s l1: 488736
-[159]	valid_0&#39;s l1: 488839
-[160]	valid_0&#39;s l1: 488733
-[161]	valid_0&#39;s l1: 488684
-[162]	valid_0&#39;s l1: 488728
-[163]	valid_0&#39;s l1: 488631
-[164]	valid_0&#39;s l1: 488508
-[165]	valid_0&#39;s l1: 488239
-[166]	valid_0&#39;s l1: 488103
-[167]	valid_0&#39;s l1: 487906
-[168]	valid_0&#39;s l1: 487899
-[169]	valid_0&#39;s l1: 487739
-[170]	valid_0&#39;s l1: 487752
-[171]	valid_0&#39;s l1: 487871
-[172]	valid_0&#39;s l1: 487681
-[173]	valid_0&#39;s l1: 487657
-[174]	valid_0&#39;s l1: 487539
-[175]	valid_0&#39;s l1: 487616
-[176]	valid_0&#39;s l1: 487645
-[177]	valid_0&#39;s l1: 487520
-[178]	valid_0&#39;s l1: 487560
-[179]	valid_0&#39;s l1: 487633
-[180]	valid_0&#39;s l1: 487534
-[181]	valid_0&#39;s l1: 487453
-[182]	valid_0&#39;s l1: 487458
-[183]	valid_0&#39;s l1: 487262
-[184]	valid_0&#39;s l1: 487120
-[185]	valid_0&#39;s l1: 487258
-[186]	valid_0&#39;s l1: 487163
-[187]	valid_0&#39;s l1: 487229
-[188]	valid_0&#39;s l1: 487197
-[189]	valid_0&#39;s l1: 487076
-[190]	valid_0&#39;s l1: 487052
-[191]	valid_0&#39;s l1: 486995
-[192]	valid_0&#39;s l1: 486931
-[193]	valid_0&#39;s l1: 486787
-[194]	valid_0&#39;s l1: 486738
-[195]	valid_0&#39;s l1: 486703
-[196]	valid_0&#39;s l1: 486694
-[197]	valid_0&#39;s l1: 486676
-[198]	valid_0&#39;s l1: 486671
-[199]	valid_0&#39;s l1: 486569
-[200]	valid_0&#39;s l1: 486558
-[201]	valid_0&#39;s l1: 486487
-[202]	valid_0&#39;s l1: 486311
-[203]	valid_0&#39;s l1: 486313
-[204]	valid_0&#39;s l1: 486324
-[205]	valid_0&#39;s l1: 486300
-[206]	valid_0&#39;s l1: 486203
-[207]	valid_0&#39;s l1: 486073
-[208]	valid_0&#39;s l1: 486065
-[209]	valid_0&#39;s l1: 486167
-[210]	valid_0&#39;s l1: 486172
-[211]	valid_0&#39;s l1: 486111
-[212]	valid_0&#39;s l1: 486156
-[213]	valid_0&#39;s l1: 486134
-[214]	valid_0&#39;s l1: 486142
-[215]	valid_0&#39;s l1: 486045
-[216]	valid_0&#39;s l1: 485865
-[217]	valid_0&#39;s l1: 485825
-[218]	valid_0&#39;s l1: 485961
-[219]	valid_0&#39;s l1: 485948
-[220]	valid_0&#39;s l1: 485986
-[221]	valid_0&#39;s l1: 485873
-[222]	valid_0&#39;s l1: 485941
-[223]	valid_0&#39;s l1: 485826
-[224]	valid_0&#39;s l1: 485925
-[225]	valid_0&#39;s l1: 485904
-[226]	valid_0&#39;s l1: 485786
-[227]	valid_0&#39;s l1: 485743
-[228]	valid_0&#39;s l1: 485713
-[229]	valid_0&#39;s l1: 485737
-[230]	valid_0&#39;s l1: 485688
-[231]	valid_0&#39;s l1: 485581
-[232]	valid_0&#39;s l1: 485531
-[233]	valid_0&#39;s l1: 485469
-[234]	valid_0&#39;s l1: 485404
-[235]	valid_0&#39;s l1: 485423
-[236]	valid_0&#39;s l1: 485313
-[237]	valid_0&#39;s l1: 485246
-[238]	valid_0&#39;s l1: 485211
-[239]	valid_0&#39;s l1: 485078
-[240]	valid_0&#39;s l1: 484985
-[241]	valid_0&#39;s l1: 485034
-[242]	valid_0&#39;s l1: 485062
-[243]	valid_0&#39;s l1: 484937
-[244]	valid_0&#39;s l1: 484880
-[245]	valid_0&#39;s l1: 484796
-[246]	valid_0&#39;s l1: 484789
-[247]	valid_0&#39;s l1: 484772
-[248]	valid_0&#39;s l1: 484801
-[249]	valid_0&#39;s l1: 484820
-[250]	valid_0&#39;s l1: 484703
-[251]	valid_0&#39;s l1: 484745
-[252]	valid_0&#39;s l1: 484773
-[253]	valid_0&#39;s l1: 484727
-[254]	valid_0&#39;s l1: 484701
-[255]	valid_0&#39;s l1: 484668
-[256]	valid_0&#39;s l1: 484725
-[257]	valid_0&#39;s l1: 484641
-[258]	valid_0&#39;s l1: 484622
-[259]	valid_0&#39;s l1: 484490
-[260]	valid_0&#39;s l1: 484517
-[261]	valid_0&#39;s l1: 484490
-[262]	valid_0&#39;s l1: 484462
-[263]	valid_0&#39;s l1: 484353
-[264]	valid_0&#39;s l1: 484271
-[265]	valid_0&#39;s l1: 484270
-[266]	valid_0&#39;s l1: 484168
-[267]	valid_0&#39;s l1: 484074
-[268]	valid_0&#39;s l1: 483958
-[269]	valid_0&#39;s l1: 483855
-[270]	valid_0&#39;s l1: 483810
-[271]	valid_0&#39;s l1: 483800
-[272]	valid_0&#39;s l1: 483772
-[273]	valid_0&#39;s l1: 483760
-[274]	valid_0&#39;s l1: 483647
-[275]	valid_0&#39;s l1: 483651
-[276]	valid_0&#39;s l1: 483666
-[277]	valid_0&#39;s l1: 483702
-[278]	valid_0&#39;s l1: 483736
-[279]	valid_0&#39;s l1: 483614
-[280]	valid_0&#39;s l1: 483677
-[281]	valid_0&#39;s l1: 483708
-[282]	valid_0&#39;s l1: 483625
-[283]	valid_0&#39;s l1: 483474
-[284]	valid_0&#39;s l1: 483502
-[285]	valid_0&#39;s l1: 483408
-[286]	valid_0&#39;s l1: 483359
-[287]	valid_0&#39;s l1: 483342
-[288]	valid_0&#39;s l1: 483434
-[289]	valid_0&#39;s l1: 483339
-[290]	valid_0&#39;s l1: 483422
-[291]	valid_0&#39;s l1: 483307
-[292]	valid_0&#39;s l1: 483216
-[293]	valid_0&#39;s l1: 483155
-[294]	valid_0&#39;s l1: 483208
-[295]	valid_0&#39;s l1: 483244
-[296]	valid_0&#39;s l1: 483222
-[297]	valid_0&#39;s l1: 483268
-[298]	valid_0&#39;s l1: 483239
-[299]	valid_0&#39;s l1: 483080
-[300]	valid_0&#39;s l1: 483021
-[301]	valid_0&#39;s l1: 482995
-[302]	valid_0&#39;s l1: 482884
-[303]	valid_0&#39;s l1: 482906
-[304]	valid_0&#39;s l1: 482867
-[305]	valid_0&#39;s l1: 482894
-[306]	valid_0&#39;s l1: 482919
-[307]	valid_0&#39;s l1: 482888
-[308]	valid_0&#39;s l1: 482896
-[309]	valid_0&#39;s l1: 482841
-[310]	valid_0&#39;s l1: 482808
-[311]	valid_0&#39;s l1: 482741
-[312]	valid_0&#39;s l1: 482645
-[313]	valid_0&#39;s l1: 482639
-[314]	valid_0&#39;s l1: 482579
-[315]	valid_0&#39;s l1: 482515
-[316]	valid_0&#39;s l1: 482555
-[317]	valid_0&#39;s l1: 482502
-[318]	valid_0&#39;s l1: 482547
-[319]	valid_0&#39;s l1: 482429
-[320]	valid_0&#39;s l1: 482493
-[321]	valid_0&#39;s l1: 482469
-[322]	valid_0&#39;s l1: 482425
-[323]	valid_0&#39;s l1: 482397
-[324]	valid_0&#39;s l1: 482356
-[325]	valid_0&#39;s l1: 482310
-[326]	valid_0&#39;s l1: 482338
-[327]	valid_0&#39;s l1: 482303
-[328]	valid_0&#39;s l1: 482267
-[329]	valid_0&#39;s l1: 482270
-[330]	valid_0&#39;s l1: 482280
-[331]	valid_0&#39;s l1: 482193
-[332]	valid_0&#39;s l1: 482170
-[333]	valid_0&#39;s l1: 482159
-[334]	valid_0&#39;s l1: 482142
-[335]	valid_0&#39;s l1: 482058
-[336]	valid_0&#39;s l1: 482061
-[337]	valid_0&#39;s l1: 482005
-[338]	valid_0&#39;s l1: 481992
-[339]	valid_0&#39;s l1: 481967
-[340]	valid_0&#39;s l1: 482023
-[341]	valid_0&#39;s l1: 481942
-[342]	valid_0&#39;s l1: 481897
-[343]	valid_0&#39;s l1: 481934
-[344]	valid_0&#39;s l1: 481933
-[345]	valid_0&#39;s l1: 481891
-[346]	valid_0&#39;s l1: 481691
-[347]	valid_0&#39;s l1: 481724
-[348]	valid_0&#39;s l1: 481718
-[349]	valid_0&#39;s l1: 481643
-[350]	valid_0&#39;s l1: 481561
-[351]	valid_0&#39;s l1: 481528
-[352]	valid_0&#39;s l1: 481511
-[353]	valid_0&#39;s l1: 481396
-[354]	valid_0&#39;s l1: 481439
-[355]	valid_0&#39;s l1: 481449
-[356]	valid_0&#39;s l1: 481438
-[357]	valid_0&#39;s l1: 481450
-[358]	valid_0&#39;s l1: 481463
-[359]	valid_0&#39;s l1: 481350
-[360]	valid_0&#39;s l1: 481442
-[361]	valid_0&#39;s l1: 481475
-[362]	valid_0&#39;s l1: 481516
-[363]	valid_0&#39;s l1: 481606
-[364]	valid_0&#39;s l1: 481603
-[365]	valid_0&#39;s l1: 481561
-[366]	valid_0&#39;s l1: 481526
-[367]	valid_0&#39;s l1: 481492
-[368]	valid_0&#39;s l1: 481441
-[369]	valid_0&#39;s l1: 481437
-[370]	valid_0&#39;s l1: 481376
-[371]	valid_0&#39;s l1: 481353
-[372]	valid_0&#39;s l1: 481317
-[373]	valid_0&#39;s l1: 481286
-[374]	valid_0&#39;s l1: 481228
-[375]	valid_0&#39;s l1: 481271
-[376]	valid_0&#39;s l1: 481307
-[377]	valid_0&#39;s l1: 481288
-[378]	valid_0&#39;s l1: 481222
-[379]	valid_0&#39;s l1: 481146
-[380]	valid_0&#39;s l1: 481194
-[381]	valid_0&#39;s l1: 481155
-[382]	valid_0&#39;s l1: 481144
-[383]	valid_0&#39;s l1: 481134
-[384]	valid_0&#39;s l1: 481096
-[385]	valid_0&#39;s l1: 481085
-[386]	valid_0&#39;s l1: 481032
-[387]	valid_0&#39;s l1: 481008
-[388]	valid_0&#39;s l1: 481053
-[389]	valid_0&#39;s l1: 481055
-[390]	valid_0&#39;s l1: 480947
-[391]	valid_0&#39;s l1: 480869
-[392]	valid_0&#39;s l1: 480829
-[393]	valid_0&#39;s l1: 480852
-[394]	valid_0&#39;s l1: 480815
-[395]	valid_0&#39;s l1: 480844
-[396]	valid_0&#39;s l1: 480829
-[397]	valid_0&#39;s l1: 480856
-[398]	valid_0&#39;s l1: 480912
-[399]	valid_0&#39;s l1: 480810
-[400]	valid_0&#39;s l1: 480776
-[401]	valid_0&#39;s l1: 480749
-[402]	valid_0&#39;s l1: 480751
-[403]	valid_0&#39;s l1: 480651
-[404]	valid_0&#39;s l1: 480649
-[405]	valid_0&#39;s l1: 480595
-[406]	valid_0&#39;s l1: 480598
-[407]	valid_0&#39;s l1: 480625
-[408]	valid_0&#39;s l1: 480575
-[409]	valid_0&#39;s l1: 480551
-[410]	valid_0&#39;s l1: 480524
-[411]	valid_0&#39;s l1: 480481
-[412]	valid_0&#39;s l1: 480425
-[413]	valid_0&#39;s l1: 480356
-[414]	valid_0&#39;s l1: 480339
-[415]	valid_0&#39;s l1: 480334
-[416]	valid_0&#39;s l1: 480306
-[417]	valid_0&#39;s l1: 480243
-[418]	valid_0&#39;s l1: 480246
-[419]	valid_0&#39;s l1: 480321
-[420]	valid_0&#39;s l1: 480312
-[421]	valid_0&#39;s l1: 480274
-[422]	valid_0&#39;s l1: 480263
-[423]	valid_0&#39;s l1: 480259
-[424]	valid_0&#39;s l1: 480251
-[425]	valid_0&#39;s l1: 480193
-[426]	valid_0&#39;s l1: 480078
-[427]	valid_0&#39;s l1: 480048
-[428]	valid_0&#39;s l1: 479953
-[429]	valid_0&#39;s l1: 479876
-[430]	valid_0&#39;s l1: 479927
-[431]	valid_0&#39;s l1: 479898
-[432]	valid_0&#39;s l1: 479916
-[433]	valid_0&#39;s l1: 479910
-[434]	valid_0&#39;s l1: 479898
-[435]	valid_0&#39;s l1: 479947
-[436]	valid_0&#39;s l1: 479856
-[437]	valid_0&#39;s l1: 479814
-[438]	valid_0&#39;s l1: 479768
-[439]	valid_0&#39;s l1: 479757
-[440]	valid_0&#39;s l1: 479678
-[441]	valid_0&#39;s l1: 479718
-[442]	valid_0&#39;s l1: 479752
-[443]	valid_0&#39;s l1: 479773
-[444]	valid_0&#39;s l1: 479768
-[445]	valid_0&#39;s l1: 479813
-[446]	valid_0&#39;s l1: 479798
-[447]	valid_0&#39;s l1: 479811
-[448]	valid_0&#39;s l1: 479733
-[449]	valid_0&#39;s l1: 479754
-[450]	valid_0&#39;s l1: 479778
-[451]	valid_0&#39;s l1: 479854
-[452]	valid_0&#39;s l1: 479892
-[453]	valid_0&#39;s l1: 479840
-[454]	valid_0&#39;s l1: 479868
-[455]	valid_0&#39;s l1: 479864
-[456]	valid_0&#39;s l1: 479893
-[457]	valid_0&#39;s l1: 479826
-[458]	valid_0&#39;s l1: 479766
-[459]	valid_0&#39;s l1: 479744
-[460]	valid_0&#39;s l1: 479740
-[461]	valid_0&#39;s l1: 479802
-[462]	valid_0&#39;s l1: 479787
-[463]	valid_0&#39;s l1: 479744
-[464]	valid_0&#39;s l1: 479824
-[465]	valid_0&#39;s l1: 479867
+[2]	valid_0&#39;s l1: 1.06468e+06
+[3]	valid_0&#39;s l1: 903398
+[4]	valid_0&#39;s l1: 789748
+[5]	valid_0&#39;s l1: 710062
+[6]	valid_0&#39;s l1: 657266
+[7]	valid_0&#39;s l1: 618314
+[8]	valid_0&#39;s l1: 590586
+[9]	valid_0&#39;s l1: 571711
+[10]	valid_0&#39;s l1: 556410
+[11]	valid_0&#39;s l1: 546239
+[12]	valid_0&#39;s l1: 538157
+[13]	valid_0&#39;s l1: 532931
+[14]	valid_0&#39;s l1: 527923
+[15]	valid_0&#39;s l1: 523782
+[16]	valid_0&#39;s l1: 521059
+[17]	valid_0&#39;s l1: 518513
+[18]	valid_0&#39;s l1: 517192
+[19]	valid_0&#39;s l1: 516256
+[20]	valid_0&#39;s l1: 514928
+[21]	valid_0&#39;s l1: 512975
+[22]	valid_0&#39;s l1: 511133
+[23]	valid_0&#39;s l1: 510316
+[24]	valid_0&#39;s l1: 509268
+[25]	valid_0&#39;s l1: 508071
+[26]	valid_0&#39;s l1: 507592
+[27]	valid_0&#39;s l1: 506514
+[28]	valid_0&#39;s l1: 505536
+[29]	valid_0&#39;s l1: 505214
+[30]	valid_0&#39;s l1: 504538
+[31]	valid_0&#39;s l1: 503719
+[32]	valid_0&#39;s l1: 503026
+[33]	valid_0&#39;s l1: 502637
+[34]	valid_0&#39;s l1: 502074
+[35]	valid_0&#39;s l1: 500807
+[36]	valid_0&#39;s l1: 500021
+[37]	valid_0&#39;s l1: 499625
+[38]	valid_0&#39;s l1: 499247
+[39]	valid_0&#39;s l1: 499067
+[40]	valid_0&#39;s l1: 498449
+[41]	valid_0&#39;s l1: 497694
+[42]	valid_0&#39;s l1: 497340
+[43]	valid_0&#39;s l1: 497286
+[44]	valid_0&#39;s l1: 496983
+[45]	valid_0&#39;s l1: 496776
+[46]	valid_0&#39;s l1: 496395
+[47]	valid_0&#39;s l1: 496330
+[48]	valid_0&#39;s l1: 495746
+[49]	valid_0&#39;s l1: 495747
+[50]	valid_0&#39;s l1: 495275
+[51]	valid_0&#39;s l1: 495165
+[52]	valid_0&#39;s l1: 495239
+[53]	valid_0&#39;s l1: 495128
+[54]	valid_0&#39;s l1: 494863
+[55]	valid_0&#39;s l1: 494522
+[56]	valid_0&#39;s l1: 494432
+[57]	valid_0&#39;s l1: 494082
+[58]	valid_0&#39;s l1: 494114
+[59]	valid_0&#39;s l1: 493200
+[60]	valid_0&#39;s l1: 492946
+[61]	valid_0&#39;s l1: 492838
+[62]	valid_0&#39;s l1: 493153
+[63]	valid_0&#39;s l1: 492895
+[64]	valid_0&#39;s l1: 493122
+[65]	valid_0&#39;s l1: 493144
+[66]	valid_0&#39;s l1: 493076
+[67]	valid_0&#39;s l1: 493171
+[68]	valid_0&#39;s l1: 493255
+[69]	valid_0&#39;s l1: 493052
+[70]	valid_0&#39;s l1: 492800
+[71]	valid_0&#39;s l1: 492571
+[72]	valid_0&#39;s l1: 492489
+[73]	valid_0&#39;s l1: 492365
+[74]	valid_0&#39;s l1: 492387
+[75]	valid_0&#39;s l1: 492361
+[76]	valid_0&#39;s l1: 492335
+[77]	valid_0&#39;s l1: 492228
+[78]	valid_0&#39;s l1: 492076
+[79]	valid_0&#39;s l1: 491936
+[80]	valid_0&#39;s l1: 492027
+[81]	valid_0&#39;s l1: 491944
+[82]	valid_0&#39;s l1: 492024
+[83]	valid_0&#39;s l1: 491710
+[84]	valid_0&#39;s l1: 491568
+[85]	valid_0&#39;s l1: 491631
+[86]	valid_0&#39;s l1: 491718
+[87]	valid_0&#39;s l1: 491620
+[88]	valid_0&#39;s l1: 491609
+[89]	valid_0&#39;s l1: 491581
+[90]	valid_0&#39;s l1: 491592
+[91]	valid_0&#39;s l1: 491778
+[92]	valid_0&#39;s l1: 491577
+[93]	valid_0&#39;s l1: 491373
+[94]	valid_0&#39;s l1: 491141
+[95]	valid_0&#39;s l1: 491259
+[96]	valid_0&#39;s l1: 491314
+[97]	valid_0&#39;s l1: 491448
+[98]	valid_0&#39;s l1: 491340
+[99]	valid_0&#39;s l1: 491231
+[100]	valid_0&#39;s l1: 491125
+[101]	valid_0&#39;s l1: 491224
+[102]	valid_0&#39;s l1: 491276
+[103]	valid_0&#39;s l1: 491230
+[104]	valid_0&#39;s l1: 491358
+[105]	valid_0&#39;s l1: 491262
+[106]	valid_0&#39;s l1: 491008
+[107]	valid_0&#39;s l1: 490867
+[108]	valid_0&#39;s l1: 490692
+[109]	valid_0&#39;s l1: 491008
+[110]	valid_0&#39;s l1: 491210
+[111]	valid_0&#39;s l1: 491183
+[112]	valid_0&#39;s l1: 491173
+[113]	valid_0&#39;s l1: 491130
+[114]	valid_0&#39;s l1: 490971
+[115]	valid_0&#39;s l1: 490731
+[116]	valid_0&#39;s l1: 490742
+[117]	valid_0&#39;s l1: 490844
+[118]	valid_0&#39;s l1: 490664
+[119]	valid_0&#39;s l1: 490757
+[120]	valid_0&#39;s l1: 490797
+[121]	valid_0&#39;s l1: 490820
+[122]	valid_0&#39;s l1: 490890
+[123]	valid_0&#39;s l1: 490653
+[124]	valid_0&#39;s l1: 490774
+[125]	valid_0&#39;s l1: 490806
+[126]	valid_0&#39;s l1: 490913
+[127]	valid_0&#39;s l1: 490745
+[128]	valid_0&#39;s l1: 490896
+[129]	valid_0&#39;s l1: 490804
+[130]	valid_0&#39;s l1: 490832
+[131]	valid_0&#39;s l1: 490886
+[132]	valid_0&#39;s l1: 490698
+[133]	valid_0&#39;s l1: 490536
+[134]	valid_0&#39;s l1: 490550
+[135]	valid_0&#39;s l1: 490588
+[136]	valid_0&#39;s l1: 490427
+[137]	valid_0&#39;s l1: 490135
+[138]	valid_0&#39;s l1: 490133
+[139]	valid_0&#39;s l1: 490131
+[140]	valid_0&#39;s l1: 490291
+[141]	valid_0&#39;s l1: 490209
+[142]	valid_0&#39;s l1: 490250
+[143]	valid_0&#39;s l1: 490226
+[144]	valid_0&#39;s l1: 490348
+[145]	valid_0&#39;s l1: 490240
+[146]	valid_0&#39;s l1: 490173
+[147]	valid_0&#39;s l1: 490137
+[148]	valid_0&#39;s l1: 490155
+[149]	valid_0&#39;s l1: 489975
+[150]	valid_0&#39;s l1: 490000
+[151]	valid_0&#39;s l1: 489631
+[152]	valid_0&#39;s l1: 489695
+[153]	valid_0&#39;s l1: 489776
+[154]	valid_0&#39;s l1: 489812
+[155]	valid_0&#39;s l1: 489992
+[156]	valid_0&#39;s l1: 490058
+[157]	valid_0&#39;s l1: 490073
+[158]	valid_0&#39;s l1: 490170
+[159]	valid_0&#39;s l1: 490224
+[160]	valid_0&#39;s l1: 490236
+[161]	valid_0&#39;s l1: 490205
+[162]	valid_0&#39;s l1: 490192
+[163]	valid_0&#39;s l1: 490222
+[164]	valid_0&#39;s l1: 490367
+[165]	valid_0&#39;s l1: 490341
+[166]	valid_0&#39;s l1: 490274
+[167]	valid_0&#39;s l1: 490409
+[168]	valid_0&#39;s l1: 490358
+[169]	valid_0&#39;s l1: 490488
+[170]	valid_0&#39;s l1: 490521
+[171]	valid_0&#39;s l1: 490634
+[172]	valid_0&#39;s l1: 490659
+[173]	valid_0&#39;s l1: 490821
+[174]	valid_0&#39;s l1: 491017
+[175]	valid_0&#39;s l1: 491080
+[176]	valid_0&#39;s l1: 491139
 Early stopping, best iteration is:
-[440]	valid_0&#39;s l1: 479678
-MAE LightGBM (train): 327348.02660
-MAE LightGBM (test): 479677.72570
-MAE LightGBM (eval): 519335.94958
+[151]	valid_0&#39;s l1: 489631
+MAE LightGBM (train): 307487.43023
+MAE LightGBM (test): 489631.35655
+MAE LightGBM (eval): 544462.44447
 </pre>
 </div>
 </div>
@@ -14889,20 +15977,15 @@ dtype: bool</pre>
 <span class="c1"># df_test_f[&#39;fecha&#39;] = pd.to_datetime(df_test_f[&#39;fecha&#39;]).astype(int)</span>
 
 
-<span class="n">features</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span>
- <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span>
- <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span>
- <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
- <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
- <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span>
- <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
- <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span>
- <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span>
 
 <span class="c1"># hps = {&#39;bagging_fraction&#39;: 0.806451877022587,</span>
 <span class="c1">#  &#39;bagging_freq&#39;: 62.0,</span>
