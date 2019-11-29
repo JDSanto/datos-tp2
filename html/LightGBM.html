@@ -13105,15 +13105,10 @@ div#notebook {
 <span class="c1"># df_train = utils.dolarizar_df(df_train)</span>
 <span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
 
-<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-
-<span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
-<span class="c1"># df_test = utils.pesificar_df(df_test)</span>
-<span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
 </pre></div>
 
     </div>
