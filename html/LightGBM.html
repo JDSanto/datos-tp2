@@ -13017,6 +13017,45 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
+<style type="text/css">
+    
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+    </style>
 
 
 <style type="text/css">
@@ -13076,7 +13115,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13123,7 +13162,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = df_train.sample(frac=1).reset_index(drop=True)</span>
@@ -13173,7 +13212,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
@@ -13208,17 +13247,17 @@ div#notebook {
     <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbdt&#39;</span><span class="p">],</span>
     <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;regression&#39;</span><span class="p">],</span>
     <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mae&#39;</span><span class="p">],</span> <span class="c1"># Si se deja vacio se toma el ideal para llegar al &#39;objective&#39;</span>
-    <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
-    <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+<span class="c1">#     &#39;bagging_fraction&#39;: [0.1, 0.3, 0.5, 0.7, 0.9],</span>
+<span class="c1">#     &#39;bagging_freq&#39;: [0, 1, 5, 10, 20, 40], </span>
     <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
     <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
-    <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-    <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
-    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.85</span><span class="p">],</span>
-    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
-    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">],</span>
-    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">],</span>
-    <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+    <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+    <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13226,7 +13265,7 @@ div#notebook {
 <span class="n">rs_cv</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">lgb</span><span class="o">.</span><span class="n">LGBMRegressor</span><span class="p">(),</span>
                            <span class="n">param_distributions</span><span class="o">=</span><span class="n">lgb_params</span><span class="p">,</span> 
                            <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
-                           <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                           <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                            <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">)</span>
 
 <span class="n">rs_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13236,511 +13275,26 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting 3 folds for each of 50 candidates, totalling 150 fits
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-492142.518, total=   8.9s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    8.9s remaining:    0.0s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-491026.250, total=   8.0s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3 
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=1)]: Done   2 out of   2 | elapsed:   16.9s remaining:    0.0s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.3, score=-490274.982, total=   8.1s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-491847.641, total=   8.5s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-490011.143, total=   8.4s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-491849.495, total=   8.4s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491912.141, total=   8.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-492365.068, total=   7.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491054.073, total=   7.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-522514.340, total=   4.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-521975.270, total=   4.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.3, score=-520332.246, total=   4.8s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-496531.424, total=   9.7s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-494668.285, total=   7.0s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-494654.649, total=   8.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-493530.100, total=  12.1s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-492663.982, total=   7.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-490556.113, total=  10.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-497782.681, total=   8.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-498089.099, total=   9.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-496223.027, total=  10.2s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-522102.587, total=   4.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-525136.606, total=   4.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-523522.029, total=   9.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-519242.340, total=   4.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-518797.109, total=   7.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.3, score=-521165.820, total=   6.3s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-626503.828, total=   8.1s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-627413.825, total=   4.0s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-622458.774, total=   3.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-493112.505, total=   8.4s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-490945.340, total=   9.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.9, score=-491264.453, total=   9.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-506427.977, total=   5.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-503426.692, total=   5.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.5, score=-505059.553, total=   6.2s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-490015.896, total=   7.2s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489248.878, total=  12.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489378.158, total=  14.1s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-490227.710, total=  13.5s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489773.970, total=  10.9s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489716.116, total=  12.1s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-514445.567, total=   7.6s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-513884.296, total=   5.8s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.5, score=-514775.104, total=   6.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-575009.619, total=   3.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-573640.804, total=   3.7s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-573028.033, total=   4.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-493070.332, total=   8.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-492323.742, total=   7.4s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-490740.244, total=   7.8s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-492914.020, total=   7.3s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-491911.713, total=   7.4s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.9, score=-491400.328, total=   7.3s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-498482.852, total=   6.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-497455.170, total=   6.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-498304.979, total=   6.4s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-492142.518, total=   6.8s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-491026.250, total=   7.9s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.5, score=-490274.982, total=  16.0s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498504.940, total=   9.2s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-499371.396, total=   9.7s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498159.240, total=  11.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-498815.460, total=   8.4s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-499081.886, total=   7.1s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-496736.825, total=   8.3s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-506965.011, total=   5.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-508051.737, total=   6.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-505419.210, total=   7.5s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-503432.277, total=   7.1s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-502586.039, total=   6.9s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.7, score=-504318.654, total=   7.3s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-495625.509, total=   8.5s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-493965.141, total=   9.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-493253.988, total=  13.1s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-495918.406, total=  16.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-493586.361, total=   8.8s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.9, score=-493989.790, total=   7.3s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-521918.426, total=   4.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-523818.879, total=   5.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-525205.970, total=   9.6s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-533313.791, total=   7.5s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-530046.126, total=  10.4s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-529396.381, total=   5.0s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-530152.660, total=   4.7s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-529672.386, total=   5.7s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-529111.483, total=   5.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-490917.784, total=   7.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492107.799, total=  14.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-490493.508, total=   8.9s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-581010.035, total=   4.7s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-580854.555, total=   4.0s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.1, score=-580160.214, total=   4.0s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-563605.807, total=   3.7s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-562411.811, total=   3.5s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.1, score=-562262.972, total=   4.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-533393.784, total=   5.3s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-532308.121, total=   5.4s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.3, score=-534760.300, total=   5.4s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499318.051, total=  12.4s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499860.855, total=   9.7s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-500661.603, total=   8.1s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-499620.536, total=   8.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-496142.146, total=   6.3s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=10, bagging_fraction=0.7, score=-495905.780, total=   5.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489235.328, total=   9.3s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489336.367, total=   7.1s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.7, score=-489482.817, total=   7.1s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501298.752, total=   7.5s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501391.266, total=   7.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-501485.970, total=   7.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-524833.221, total=   5.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-520457.626, total=   7.1s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-522729.820, total=   5.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-524879.342, total=   4.3s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-522202.128, total=   5.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.1, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.3, score=-524719.810, total=   7.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-511854.809, total=   6.0s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-512474.050, total=   7.4s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-511948.213, total=   6.2s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-594375.434, total=   3.3s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-594216.484, total=   4.0s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.1, score=-597221.720, total=   7.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492729.152, total=  11.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-492481.745, total=  10.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.9, score=-489887.958, total=   7.8s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-492408.740, total=  10.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-491047.192, total=  10.4s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.9, score=-490573.357, total=  16.0s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-502904.706, total=   7.9s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-500392.975, total=   6.8s
-[CV] reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7 
-[CV]  reg_lambda=2, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.7, score=-499022.225, total=   7.1s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523638.451, total=   4.6s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523073.840, total=   4.7s
-[CV] reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3 
-[CV]  reg_lambda=6, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=1, bagging_fraction=0.3, score=-523803.933, total=   4.5s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-507659.386, total=   5.7s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-507662.786, total=   6.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=10, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=5, bagging_fraction=0.5, score=-506754.531, total=   5.4s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-502985.998, total=   6.8s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-501990.249, total=  11.3s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.2, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=175, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=20, bagging_fraction=0.7, score=-501290.847, total=   7.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-500105.349, total=   8.2s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-498850.182, total=   6.7s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=40, bagging_fraction=0.7, score=-497917.350, total=   7.5s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-493928.780, total=   8.1s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-490321.607, total=   8.2s
-[CV] reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=0, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0, min_data_in_leaf=40, metric=mae, max_depth=10, max_bin=255, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-491773.607, total=   7.9s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-488723.589, total=   6.6s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489013.106, total=   7.0s
-[CV] reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1 
-[CV]  reg_lambda=10, objective=regression, num_leaves=200, n_jobs=4, min_split_gain=0.05, min_data_in_leaf=20, metric=mae, max_depth=10, max_bin=100, learning_rate=0.25, feature_fraction=0.85, boosting_type=gbdt, bagging_freq=0, bagging_fraction=0.1, score=-489253.822, total=   6.9s
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed: 18.9min finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>RandomizedSearchCV(cv=3, error_score=&#39;raise-deprecating&#39;,
-                   estimator=LGBMRegressor(boosting_type=&#39;gbdt&#39;,
-                                           class_weight=None,
-                                           colsample_bytree=1.0,
-                                           importance_type=&#39;split&#39;,
-                                           learning_rate=0.1, max_depth=-1,
-                                           min_child_samples=20,
-                                           min_child_weight=0.001,
-                                           min_split_gain=0.0, n_estimators=100,
-                                           n_jobs=-1, num_leaves=31,
-                                           objective=None, random_state=None,
-                                           reg_alpha=0.0, reg_...
-                                        &#39;learning_rate&#39;: [0.25],
-                                        &#39;max_bin&#39;: [100, 175, 255],
-                                        &#39;max_depth&#39;: [10], &#39;metric&#39;: [&#39;mae&#39;],
-                                        &#39;min_data_in_leaf&#39;: [10, 20, 40],
-                                        &#39;min_split_gain&#39;: [0, 0.05, 0.1, 0.2],
-                                        &#39;n_jobs&#39;: [4], &#39;num_leaves&#39;: [200],
-                                        &#39;objective&#39;: [&#39;regression&#39;],
-                                        &#39;reg_lambda&#39;: [0, 2, 6, 10]},
-                   pre_dispatch=&#39;2*n_jobs&#39;, random_state=None, refit=True,
-                   return_train_score=False, scoring=&#39;neg_mean_absolute_error&#39;,
-                   verbose=3)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">rs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
 <span class="c1"># Guarda el modelo</span>
-<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">gs_cv</span><span class="p">,</span> <span class="s1">&#39;lightgbm_rscv.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rs_cv</span><span class="p">,</span> <span class="s1">&#39;lightgbm_rscv2.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>{&#39;reg_lambda&#39;: 10,
- &#39;objective&#39;: &#39;regression&#39;,
- &#39;num_leaves&#39;: 200,
- &#39;n_jobs&#39;: 4,
- &#39;min_split_gain&#39;: 0.05,
- &#39;min_data_in_leaf&#39;: 20,
- &#39;metric&#39;: &#39;mae&#39;,
- &#39;max_depth&#39;: 10,
- &#39;max_bin&#39;: 100,
- &#39;learning_rate&#39;: 0.25,
- &#39;feature_fraction&#39;: 0.85,
- &#39;boosting_type&#39;: &#39;gbdt&#39;,
- &#39;bagging_freq&#39;: 0,
- &#39;bagging_fraction&#39;: 0.1}</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
-  warnings.warn(msg, category=DeprecationWarning)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[27]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;lightgbm_rscv.pkl&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rs_cv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
@@ -13753,670 +13307,22 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;param_bagging_fraction&#39;</span><span class="p">,</span>
-<span class="s1">&#39;param_bagging_freq&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[[</span>
+<span class="s1">&#39;param_learning_rate&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_num_leaves&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_max_depth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_max_bin&#39;</span><span class="p">,</span>
+<span class="s1">&#39;param_feature_fraction&#39;</span><span class="p">,</span>
 <span class="s1">&#39;param_min_data_in_leaf&#39;</span><span class="p">,</span>
-<span class="s1">&#39;param_bagging_freq&#39;</span><span class="p">,</span>
 <span class="s1">&#39;param_max_bin&#39;</span><span class="p">,</span>
 <span class="s1">&#39;param_reg_lambda&#39;</span><span class="p">,</span>
 <span class="s1">&#39;param_min_split_gain&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span> <span class="s1">&#39;rank_test_score&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[28]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>param_bagging_fraction</th>
-      <th>param_bagging_freq</th>
-      <th>param_min_data_in_leaf</th>
-      <th>param_bagging_freq</th>
-      <th>param_max_bin</th>
-      <th>param_reg_lambda</th>
-      <th>param_min_split_gain</th>
-      <th>mean_test_score</th>
-      <th>rank_test_score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>49</td>
-      <td>0.1</td>
-      <td>0</td>
-      <td>20</td>
-      <td>0</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-488996.837672</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>35</td>
-      <td>0.7</td>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-489351.503529</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>0.1</td>
-      <td>0</td>
-      <td>40</td>
-      <td>0</td>
-      <td>255</td>
-      <td>6</td>
-      <td>0.1</td>
-      <td>-489547.645885</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>0.7</td>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>255</td>
-      <td>6</td>
-      <td>0</td>
-      <td>-489905.933716</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>0.5</td>
-      <td>0</td>
-      <td>20</td>
-      <td>0</td>
-      <td>100</td>
-      <td>6</td>
-      <td>0</td>
-      <td>-491147.920608</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>0</td>
-      <td>0.3</td>
-      <td>0</td>
-      <td>20</td>
-      <td>0</td>
-      <td>100</td>
-      <td>6</td>
-      <td>0.1</td>
-      <td>-491147.920608</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>29</td>
-      <td>0.9</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>255</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-491173.029298</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0.7</td>
-      <td>0</td>
-      <td>40</td>
-      <td>0</td>
-      <td>100</td>
-      <td>6</td>
-      <td>0.05</td>
-      <td>-491236.095317</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td>42</td>
-      <td>0.9</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.2</td>
-      <td>-491343.100939</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <td>41</td>
-      <td>0.9</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-491699.622921</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>0.9</td>
-      <td>10</td>
-      <td>20</td>
-      <td>10</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-491774.104746</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0.9</td>
-      <td>10</td>
-      <td>20</td>
-      <td>10</td>
-      <td>255</td>
-      <td>10</td>
-      <td>0.2</td>
-      <td>-491777.094600</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <td>48</td>
-      <td>0.1</td>
-      <td>0</td>
-      <td>40</td>
-      <td>0</td>
-      <td>255</td>
-      <td>0</td>
-      <td>0</td>
-      <td>-492008.006193</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td>0.9</td>
-      <td>5</td>
-      <td>40</td>
-      <td>5</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-492044.777028</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>0.9</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>175</td>
-      <td>6</td>
-      <td>0</td>
-      <td>-492075.357088</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>0.9</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.2</td>
-      <td>-492250.070381</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <td>24</td>
-      <td>0.9</td>
-      <td>20</td>
-      <td>10</td>
-      <td>20</td>
-      <td>255</td>
-      <td>2</td>
-      <td>0</td>
-      <td>-494281.551479</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <td>25</td>
-      <td>0.9</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>100</td>
-      <td>2</td>
-      <td>0.2</td>
-      <td>-494498.191549</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>0.9</td>
-      <td>40</td>
-      <td>20</td>
-      <td>40</td>
-      <td>100</td>
-      <td>0</td>
-      <td>0.2</td>
-      <td>-495284.791352</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <td>34</td>
-      <td>0.7</td>
-      <td>10</td>
-      <td>10</td>
-      <td>10</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-497222.830665</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>0.7</td>
-      <td>1</td>
-      <td>40</td>
-      <td>1</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-497364.937354</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>0.7</td>
-      <td>10</td>
-      <td>10</td>
-      <td>10</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-498081.001978</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <td>21</td>
-      <td>0.7</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-498211.392937</td>
-      <td>23</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>0.7</td>
-      <td>40</td>
-      <td>20</td>
-      <td>40</td>
-      <td>255</td>
-      <td>6</td>
-      <td>0.1</td>
-      <td>-498678.524237</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <td>47</td>
-      <td>0.7</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>255</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-498957.631617</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <td>33</td>
-      <td>0.7</td>
-      <td>10</td>
-      <td>40</td>
-      <td>10</td>
-      <td>255</td>
-      <td>0</td>
-      <td>0.05</td>
-      <td>-499946.833461</td>
-      <td>26</td>
-    </tr>
-    <tr>
-      <td>43</td>
-      <td>0.7</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>100</td>
-      <td>2</td>
-      <td>0.2</td>
-      <td>-500773.311204</td>
-      <td>27</td>
-    </tr>
-    <tr>
-      <td>36</td>
-      <td>0.7</td>
-      <td>40</td>
-      <td>10</td>
-      <td>40</td>
-      <td>255</td>
-      <td>2</td>
-      <td>0.2</td>
-      <td>-501391.995747</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <td>46</td>
-      <td>0.7</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>175</td>
-      <td>0</td>
-      <td>0.2</td>
-      <td>-502089.035295</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <td>23</td>
-      <td>0.7</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>255</td>
-      <td>0</td>
-      <td>0.2</td>
-      <td>-503445.656668</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>0.5</td>
-      <td>40</td>
-      <td>20</td>
-      <td>40</td>
-      <td>255</td>
-      <td>10</td>
-      <td>0.2</td>
-      <td>-504971.413564</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>0.5</td>
-      <td>5</td>
-      <td>20</td>
-      <td>5</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-506811.986787</td>
-      <td>32</td>
-    </tr>
-    <tr>
-      <td>45</td>
-      <td>0.5</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-507358.902158</td>
-      <td>33</td>
-    </tr>
-    <tr>
-      <td>39</td>
-      <td>0.5</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>175</td>
-      <td>2</td>
-      <td>0.2</td>
-      <td>-512092.356008</td>
-      <td>34</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>0.5</td>
-      <td>10</td>
-      <td>20</td>
-      <td>10</td>
-      <td>255</td>
-      <td>0</td>
-      <td>0.1</td>
-      <td>-514368.322485</td>
-      <td>35</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>0.3</td>
-      <td>40</td>
-      <td>20</td>
-      <td>40</td>
-      <td>255</td>
-      <td>10</td>
-      <td>0.05</td>
-      <td>-519735.087663</td>
-      <td>36</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>0.3</td>
-      <td>10</td>
-      <td>40</td>
-      <td>10</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-521607.289418</td>
-      <td>37</td>
-    </tr>
-    <tr>
-      <td>37</td>
-      <td>0.3</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0</td>
-      <td>-522673.564734</td>
-      <td>38</td>
-    </tr>
-    <tr>
-      <td>44</td>
-      <td>0.3</td>
-      <td>1</td>
-      <td>40</td>
-      <td>1</td>
-      <td>100</td>
-      <td>6</td>
-      <td>0.05</td>
-      <td>-523505.408140</td>
-      <td>39</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>0.3</td>
-      <td>5</td>
-      <td>40</td>
-      <td>5</td>
-      <td>255</td>
-      <td>6</td>
-      <td>0.2</td>
-      <td>-523587.067723</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <td>26</td>
-      <td>0.3</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>175</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-523647.751131</td>
-      <td>41</td>
-    </tr>
-    <tr>
-      <td>38</td>
-      <td>0.3</td>
-      <td>20</td>
-      <td>40</td>
-      <td>20</td>
-      <td>100</td>
-      <td>6</td>
-      <td>0.1</td>
-      <td>-523933.763844</td>
-      <td>42</td>
-    </tr>
-    <tr>
-      <td>28</td>
-      <td>0.3</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>100</td>
-      <td>2</td>
-      <td>0</td>
-      <td>-529645.511712</td>
-      <td>43</td>
-    </tr>
-    <tr>
-      <td>27</td>
-      <td>0.3</td>
-      <td>1</td>
-      <td>20</td>
-      <td>1</td>
-      <td>255</td>
-      <td>2</td>
-      <td>0</td>
-      <td>-530918.775987</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <td>32</td>
-      <td>0.3</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>100</td>
-      <td>2</td>
-      <td>0.05</td>
-      <td>-533487.401128</td>
-      <td>45</td>
-    </tr>
-    <tr>
-      <td>31</td>
-      <td>0.1</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>255</td>
-      <td>2</td>
-      <td>0.1</td>
-      <td>-562760.200178</td>
-      <td>46</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td>0.1</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>100</td>
-      <td>10</td>
-      <td>0.1</td>
-      <td>-573892.823502</td>
-      <td>47</td>
-    </tr>
-    <tr>
-      <td>30</td>
-      <td>0.1</td>
-      <td>1</td>
-      <td>10</td>
-      <td>1</td>
-      <td>255</td>
-      <td>6</td>
-      <td>0.2</td>
-      <td>-580674.936281</td>
-      <td>48</td>
-    </tr>
-    <tr>
-      <td>40</td>
-      <td>0.1</td>
-      <td>5</td>
-      <td>20</td>
-      <td>5</td>
-      <td>100</td>
-      <td>0</td>
-      <td>0.2</td>
-      <td>-595271.208980</td>
-      <td>49</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>0.1</td>
-      <td>5</td>
-      <td>10</td>
-      <td>5</td>
-      <td>100</td>
-      <td>0</td>
-      <td>0.2</td>
-      <td>-625458.813213</td>
-      <td>50</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -14430,7 +13336,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
@@ -14499,69 +13405,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting 4 folds for each of 30 candidates, totalling 120 fits
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
-[Parallel(n_jobs=1)]: Done 120 out of 120 | elapsed: 15.5min finished
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>GridSearchCV(cv=4, error_score=&#39;raise-deprecating&#39;,
-             estimator=LGBMRegressor(boosting_type=&#39;gbdt&#39;, class_weight=None,
-                                     colsample_bytree=1.0,
-                                     importance_type=&#39;split&#39;, learning_rate=0.1,
-                                     max_depth=-1, min_child_samples=20,
-                                     min_child_weight=0.001, min_split_gain=0.0,
-                                     n_estimators=100, n_jobs=-1, num_leaves=31,
-                                     objective=None, random_state=None,
-                                     reg_alpha=0.0, reg_lambda...
-             param_grid={&#39;bagging_fraction&#39;: [0.1, 0.3, 0.5, 0.7, 0.9],
-                         &#39;bagging_freq&#39;: [0, 1, 5, 10, 20, 40],
-                         &#39;boosting_type&#39;: [&#39;gbdt&#39;], &#39;feature_fraction&#39;: [0.9],
-                         &#39;learning_rate&#39;: [0.25], &#39;max_depth&#39;: [10],
-                         &#39;metric&#39;: [&#39;mae&#39;], &#39;n_jobs&#39;: [2], &#39;num_leaves&#39;: [200],
-                         &#39;objective&#39;: [&#39;regression&#39;]},
-             pre_dispatch=&#39;2*n_jobs&#39;, refit=True, return_train_score=False,
-             scoring=&#39;neg_mean_absolute_error&#39;, verbose=1)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
@@ -14574,63 +13421,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>{&#39;bagging_fraction&#39;: 0.5,
- &#39;boosting_type&#39;: &#39;gbdt&#39;,
- &#39;feature_fraction&#39;: 0.9,
- &#39;learning_rate&#39;: 0.25,
- &#39;max_depth&#39;: 10,
- &#39;metric&#39;: &#39;mae&#39;,
- &#39;n_jobs&#39;: 2,
- &#39;num_leaves&#39;: 200,
- &#39;objective&#39;: &#39;regression&#39;}</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/externals/joblib/__init__.py:15: DeprecationWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
-  warnings.warn(msg, category=DeprecationWarning)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;lightgbm_gscv_3.pkl&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
@@ -14643,36 +13437,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-6382ab97dc24&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>results<span class="ansi-blue-fg">.</span>head<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">NameError</span>: name &#39;results&#39; is not defined</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -14686,7 +13457,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># features = [&#39;habitaciones&#39;, </span>
@@ -14781,643 +13552,6 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Training until validation scores don&#39;t improve for 15 rounds
-Early stopping, best iteration is:                   
-[8]	valid_0&#39;s l1: 595533
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[11]	valid_0&#39;s l1: 630798
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 613727
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[27]	valid_0&#39;s l1: 601160
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[127]	valid_0&#39;s l1: 529664
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                          
-[94]	valid_0&#39;s l1: 589401
-Training until validation scores don&#39;t improve for 15 rounds                
-Early stopping, best iteration is:                                          
-[25]	valid_0&#39;s l1: 609323
-Training until validation scores don&#39;t improve for 15 rounds                
-Did not meet early stopping. Best iteration is:                             
-[149]	valid_0&#39;s l1: 528561
-Training until validation scores don&#39;t improve for 15 rounds                
-Early stopping, best iteration is:                                          
-[74]	valid_0&#39;s l1: 634906
-Training until validation scores don&#39;t improve for 15 rounds                
-Did not meet early stopping. Best iteration is:                             
-[150]	valid_0&#39;s l1: 522684
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[14]	valid_0&#39;s l1: 571063
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[148]	valid_0&#39;s l1: 529818
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[39]	valid_0&#39;s l1: 538720
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[17]	valid_0&#39;s l1: 573556
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[148]	valid_0&#39;s l1: 517574
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[11]	valid_0&#39;s l1: 624307
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[80]	valid_0&#39;s l1: 540564
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 527697
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[18]	valid_0&#39;s l1: 577566
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[81]	valid_0&#39;s l1: 543084
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 549024
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 526981
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[149]	valid_0&#39;s l1: 516266
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 517609
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 509440
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[142]	valid_0&#39;s l1: 525117
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 521874
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[23]	valid_0&#39;s l1: 650670
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 515896
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[125]	valid_0&#39;s l1: 516764
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 514528
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 510899
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                           
-[79]	valid_0&#39;s l1: 539024
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[82]	valid_0&#39;s l1: 547384
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[149]	valid_0&#39;s l1: 708031
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 655983
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 518582
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[77]	valid_0&#39;s l1: 548068
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[33]	valid_0&#39;s l1: 612747
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 534561
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 515289
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 504544
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[145]	valid_0&#39;s l1: 534301
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[75]	valid_0&#39;s l1: 523252
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[61]	valid_0&#39;s l1: 529506
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[149]	valid_0&#39;s l1: 570080
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[98]	valid_0&#39;s l1: 521105
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[39]	valid_0&#39;s l1: 605252
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[68]	valid_0&#39;s l1: 569100
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[16]	valid_0&#39;s l1: 573372
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[55]	valid_0&#39;s l1: 591640
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[30]	valid_0&#39;s l1: 584171
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 491964
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[123]	valid_0&#39;s l1: 505427
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 501048
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[77]	valid_0&#39;s l1: 526481
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 508492
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 508307
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[33]	valid_0&#39;s l1: 552330
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 503949
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 511512
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[20]	valid_0&#39;s l1: 568721
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[23]	valid_0&#39;s l1: 569787
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[25]	valid_0&#39;s l1: 553567
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[61]	valid_0&#39;s l1: 543802
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 504045
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[144]	valid_0&#39;s l1: 505471
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[128]	valid_0&#39;s l1: 514329
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[147]	valid_0&#39;s l1: 503194
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 494298
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 504082
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 502253
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 518036
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[146]	valid_0&#39;s l1: 521763
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 498901
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 511035
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 549994
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 496772
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[133]	valid_0&#39;s l1: 547802
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 510331
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 520024
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[47]	valid_0&#39;s l1: 554491
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[143]	valid_0&#39;s l1: 505416
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[62]	valid_0&#39;s l1: 554581
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[107]	valid_0&#39;s l1: 522057
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 499709
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[20]	valid_0&#39;s l1: 603409
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 499665
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[26]	valid_0&#39;s l1: 589967
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[148]	valid_0&#39;s l1: 578594
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[146]	valid_0&#39;s l1: 533063
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[149]	valid_0&#39;s l1: 542257
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[108]	valid_0&#39;s l1: 527377
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[148]	valid_0&#39;s l1: 503014
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[20]	valid_0&#39;s l1: 571206
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[53]	valid_0&#39;s l1: 538930
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[59]	valid_0&#39;s l1: 585144
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 501407
-Training until validation scores don&#39;t improve for 15 rounds                 
-Did not meet early stopping. Best iteration is:                              
-[150]	valid_0&#39;s l1: 661293
-Training until validation scores don&#39;t improve for 15 rounds                 
-Early stopping, best iteration is:                                           
-[29]	valid_0&#39;s l1: 627565
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[64]	valid_0&#39;s l1: 541485
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[129]	valid_0&#39;s l1: 526958
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 542916
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[148]	valid_0&#39;s l1: 520848
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[148]	valid_0&#39;s l1: 504632
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[38]	valid_0&#39;s l1: 541037
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 503299
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[149]	valid_0&#39;s l1: 522296
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 566116
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 498348
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[54]	valid_0&#39;s l1: 623416
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 515942
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[144]	valid_0&#39;s l1: 521151
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 515019
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[78]	valid_0&#39;s l1: 517654
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[132]	valid_0&#39;s l1: 506887
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[141]	valid_0&#39;s l1: 517604
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[43]	valid_0&#39;s l1: 536933
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 523917
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[149]	valid_0&#39;s l1: 708292
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 511515
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[136]	valid_0&#39;s l1: 517716
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 520168
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[25]	valid_0&#39;s l1: 593885
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 491874
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[35]	valid_0&#39;s l1: 564700
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 549908
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[29]	valid_0&#39;s l1: 549190
-Training until validation scores don&#39;t improve for 15 rounds                  
-Early stopping, best iteration is:                                            
-[26]	valid_0&#39;s l1: 566959
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 592727
-Training until validation scores don&#39;t improve for 15 rounds                  
-Did not meet early stopping. Best iteration is:                               
-[150]	valid_0&#39;s l1: 497758
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[147]	valid_0&#39;s l1: 515992
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[99]	valid_0&#39;s l1: 523588
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[136]	valid_0&#39;s l1: 508031
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[91]	valid_0&#39;s l1: 555244
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 496868
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[149]	valid_0&#39;s l1: 514473
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[147]	valid_0&#39;s l1: 543088
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[13]	valid_0&#39;s l1: 611866
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 619294
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 495249
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 496113
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[33]	valid_0&#39;s l1: 557743
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[77]	valid_0&#39;s l1: 529231
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[38]	valid_0&#39;s l1: 556186
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 504571
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 511385
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 492586
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 502107
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 503236
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[149]	valid_0&#39;s l1: 493538
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 502659
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 488174
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 509323
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[148]	valid_0&#39;s l1: 497434
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 514086
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[36]	valid_0&#39;s l1: 597462
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 505300
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 504235
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[52]	valid_0&#39;s l1: 528031
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 495005
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[147]	valid_0&#39;s l1: 511027
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 509874
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 501169
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 515377
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[86]	valid_0&#39;s l1: 536809
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 529903
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[79]	valid_0&#39;s l1: 542175
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[20]	valid_0&#39;s l1: 581350
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 501652
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 499326
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[93]	valid_0&#39;s l1: 521867
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 504558
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 501990
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 502817
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[146]	valid_0&#39;s l1: 524301
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[134]	valid_0&#39;s l1: 513362
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 558506
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 504990
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 507563
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 502977
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[112]	valid_0&#39;s l1: 522062
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[143]	valid_0&#39;s l1: 515043
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 502585
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[24]	valid_0&#39;s l1: 578036
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 498728
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[120]	valid_0&#39;s l1: 506493
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 510062
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 503072
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 509778
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[33]	valid_0&#39;s l1: 553194
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[92]	valid_0&#39;s l1: 544877
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[144]	valid_0&#39;s l1: 517765
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[12]	valid_0&#39;s l1: 616475
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[84]	valid_0&#39;s l1: 520666
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 535592
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 507791
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[148]	valid_0&#39;s l1: 524661
-Training until validation scores don&#39;t improve for 15 rounds                   
-Did not meet early stopping. Best iteration is:                                
-[150]	valid_0&#39;s l1: 531628
-Training until validation scores don&#39;t improve for 15 rounds                   
-Early stopping, best iteration is:                                             
-[109]	valid_0&#39;s l1: 527369
-100%|██████████| 200/200 [12:32&lt;00:00,  3.62s/it, best loss: 528937.2638700445]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>{&#39;bagging_fraction&#39;: 0.8667885775824707,
- &#39;bagging_freq&#39;: 72.0,
- &#39;feature_fraction&#39;: 0.5369072488159948,
- &#39;learning_rate&#39;: 0.13480325449634387,
- &#39;max_depth&#39;: 15.0,
- &#39;num_leaves&#39;: 174.0,
- &#39;test_size&#39;: 0.1050550407163082}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -15458,13 +13592,18 @@ Early stopping, best iteration is:
                    <span class="p">[</span><span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;tam_ambientes&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">],</span> 
                    <span class="p">[</span><span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">]]</span>
 
-<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.806451877022587</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mf">62.0</span><span class="p">,</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.5379925983440028</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.1363027714646826</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mf">11.0</span><span class="p">,</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mf">113.0</span><span class="p">,</span>
- <span class="s1">&#39;test_size&#39;</span><span class="p">:</span> <span class="mf">0.09575190901892519</span><span class="p">}</span>
+<span class="n">hps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+ <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+ <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+ <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+ <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+ <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+ <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+ <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">}</span>
 
 <span class="n">bagging_fraction</span> <span class="o">=</span> <span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">]</span>
 <span class="n">bagging_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hps</span><span class="p">[</span><span class="s1">&#39;bagging_freq&#39;</span><span class="p">])</span>
@@ -15484,7 +13623,8 @@ Early stopping, best iteration is:
     <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="n">bagging_fraction</span><span class="p">,</span>
     <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="n">bagging_freq</span><span class="p">,</span>
     <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">max_depth</span><span class="p">,</span>
-    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="n">max_bin</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -15545,7 +13685,7 @@ Early stopping, best iteration is:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
@@ -15584,21 +13724,18 @@ Early stopping, best iteration is:
 <span class="c1">#  &#39;num_leaves&#39;: 200,</span>
 <span class="c1">#  &#39;objective&#39;: &#39;regression&#39;}</span>
 
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
- <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>
- <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
- <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
- <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
- <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+ <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
  <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
- <span class="s1">&#39;num_leaves&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
- <span class="s1">&#39;bagging_fraction&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
- <span class="s1">&#39;bagging_freq&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
- <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
- <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
- <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
- <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> 
- <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">}</span>
+ <span class="s1">&#39;min_split_gain&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+ <span class="s1">&#39;min_data_in_leaf&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+ <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+ <span class="s1">&#39;max_bin&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+ <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+ <span class="s1">&#39;feature_fraction&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+ <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">}</span>
 
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -15644,188 +13781,465 @@ Early stopping, best iteration is:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1]	valid_0&#39;s l1: 1.29653e+06
+<pre>[1]	valid_0&#39;s l1: 1.4201e+06
 Training until validation scores don&#39;t improve for 25 rounds
-[2]	valid_0&#39;s l1: 1.06468e+06
-[3]	valid_0&#39;s l1: 903398
-[4]	valid_0&#39;s l1: 789748
-[5]	valid_0&#39;s l1: 710062
-[6]	valid_0&#39;s l1: 657266
-[7]	valid_0&#39;s l1: 618314
-[8]	valid_0&#39;s l1: 590586
-[9]	valid_0&#39;s l1: 571711
-[10]	valid_0&#39;s l1: 556410
-[11]	valid_0&#39;s l1: 546239
-[12]	valid_0&#39;s l1: 538157
-[13]	valid_0&#39;s l1: 532931
-[14]	valid_0&#39;s l1: 527923
-[15]	valid_0&#39;s l1: 523782
-[16]	valid_0&#39;s l1: 521059
-[17]	valid_0&#39;s l1: 518513
-[18]	valid_0&#39;s l1: 517192
-[19]	valid_0&#39;s l1: 516256
-[20]	valid_0&#39;s l1: 514928
-[21]	valid_0&#39;s l1: 512975
-[22]	valid_0&#39;s l1: 511133
-[23]	valid_0&#39;s l1: 510316
-[24]	valid_0&#39;s l1: 509268
-[25]	valid_0&#39;s l1: 508071
-[26]	valid_0&#39;s l1: 507592
-[27]	valid_0&#39;s l1: 506514
-[28]	valid_0&#39;s l1: 505536
-[29]	valid_0&#39;s l1: 505214
-[30]	valid_0&#39;s l1: 504538
-[31]	valid_0&#39;s l1: 503719
-[32]	valid_0&#39;s l1: 503026
-[33]	valid_0&#39;s l1: 502637
-[34]	valid_0&#39;s l1: 502074
-[35]	valid_0&#39;s l1: 500807
-[36]	valid_0&#39;s l1: 500021
-[37]	valid_0&#39;s l1: 499625
-[38]	valid_0&#39;s l1: 499247
-[39]	valid_0&#39;s l1: 499067
-[40]	valid_0&#39;s l1: 498449
-[41]	valid_0&#39;s l1: 497694
-[42]	valid_0&#39;s l1: 497340
-[43]	valid_0&#39;s l1: 497286
-[44]	valid_0&#39;s l1: 496983
-[45]	valid_0&#39;s l1: 496776
-[46]	valid_0&#39;s l1: 496395
-[47]	valid_0&#39;s l1: 496330
-[48]	valid_0&#39;s l1: 495746
-[49]	valid_0&#39;s l1: 495747
-[50]	valid_0&#39;s l1: 495275
-[51]	valid_0&#39;s l1: 495165
-[52]	valid_0&#39;s l1: 495239
-[53]	valid_0&#39;s l1: 495128
-[54]	valid_0&#39;s l1: 494863
-[55]	valid_0&#39;s l1: 494522
-[56]	valid_0&#39;s l1: 494432
-[57]	valid_0&#39;s l1: 494082
-[58]	valid_0&#39;s l1: 494114
-[59]	valid_0&#39;s l1: 493200
-[60]	valid_0&#39;s l1: 492946
-[61]	valid_0&#39;s l1: 492838
-[62]	valid_0&#39;s l1: 493153
-[63]	valid_0&#39;s l1: 492895
-[64]	valid_0&#39;s l1: 493122
-[65]	valid_0&#39;s l1: 493144
-[66]	valid_0&#39;s l1: 493076
-[67]	valid_0&#39;s l1: 493171
-[68]	valid_0&#39;s l1: 493255
-[69]	valid_0&#39;s l1: 493052
-[70]	valid_0&#39;s l1: 492800
-[71]	valid_0&#39;s l1: 492571
-[72]	valid_0&#39;s l1: 492489
-[73]	valid_0&#39;s l1: 492365
-[74]	valid_0&#39;s l1: 492387
-[75]	valid_0&#39;s l1: 492361
-[76]	valid_0&#39;s l1: 492335
-[77]	valid_0&#39;s l1: 492228
-[78]	valid_0&#39;s l1: 492076
-[79]	valid_0&#39;s l1: 491936
-[80]	valid_0&#39;s l1: 492027
-[81]	valid_0&#39;s l1: 491944
-[82]	valid_0&#39;s l1: 492024
-[83]	valid_0&#39;s l1: 491710
-[84]	valid_0&#39;s l1: 491568
-[85]	valid_0&#39;s l1: 491631
-[86]	valid_0&#39;s l1: 491718
-[87]	valid_0&#39;s l1: 491620
-[88]	valid_0&#39;s l1: 491609
-[89]	valid_0&#39;s l1: 491581
-[90]	valid_0&#39;s l1: 491592
-[91]	valid_0&#39;s l1: 491778
-[92]	valid_0&#39;s l1: 491577
-[93]	valid_0&#39;s l1: 491373
-[94]	valid_0&#39;s l1: 491141
-[95]	valid_0&#39;s l1: 491259
-[96]	valid_0&#39;s l1: 491314
-[97]	valid_0&#39;s l1: 491448
-[98]	valid_0&#39;s l1: 491340
-[99]	valid_0&#39;s l1: 491231
-[100]	valid_0&#39;s l1: 491125
-[101]	valid_0&#39;s l1: 491224
-[102]	valid_0&#39;s l1: 491276
-[103]	valid_0&#39;s l1: 491230
-[104]	valid_0&#39;s l1: 491358
-[105]	valid_0&#39;s l1: 491262
-[106]	valid_0&#39;s l1: 491008
-[107]	valid_0&#39;s l1: 490867
-[108]	valid_0&#39;s l1: 490692
-[109]	valid_0&#39;s l1: 491008
-[110]	valid_0&#39;s l1: 491210
-[111]	valid_0&#39;s l1: 491183
-[112]	valid_0&#39;s l1: 491173
-[113]	valid_0&#39;s l1: 491130
-[114]	valid_0&#39;s l1: 490971
-[115]	valid_0&#39;s l1: 490731
-[116]	valid_0&#39;s l1: 490742
-[117]	valid_0&#39;s l1: 490844
-[118]	valid_0&#39;s l1: 490664
-[119]	valid_0&#39;s l1: 490757
-[120]	valid_0&#39;s l1: 490797
-[121]	valid_0&#39;s l1: 490820
-[122]	valid_0&#39;s l1: 490890
-[123]	valid_0&#39;s l1: 490653
-[124]	valid_0&#39;s l1: 490774
-[125]	valid_0&#39;s l1: 490806
-[126]	valid_0&#39;s l1: 490913
-[127]	valid_0&#39;s l1: 490745
-[128]	valid_0&#39;s l1: 490896
-[129]	valid_0&#39;s l1: 490804
-[130]	valid_0&#39;s l1: 490832
-[131]	valid_0&#39;s l1: 490886
-[132]	valid_0&#39;s l1: 490698
-[133]	valid_0&#39;s l1: 490536
-[134]	valid_0&#39;s l1: 490550
-[135]	valid_0&#39;s l1: 490588
-[136]	valid_0&#39;s l1: 490427
-[137]	valid_0&#39;s l1: 490135
-[138]	valid_0&#39;s l1: 490133
-[139]	valid_0&#39;s l1: 490131
-[140]	valid_0&#39;s l1: 490291
-[141]	valid_0&#39;s l1: 490209
-[142]	valid_0&#39;s l1: 490250
-[143]	valid_0&#39;s l1: 490226
-[144]	valid_0&#39;s l1: 490348
-[145]	valid_0&#39;s l1: 490240
-[146]	valid_0&#39;s l1: 490173
-[147]	valid_0&#39;s l1: 490137
-[148]	valid_0&#39;s l1: 490155
-[149]	valid_0&#39;s l1: 489975
-[150]	valid_0&#39;s l1: 490000
-[151]	valid_0&#39;s l1: 489631
-[152]	valid_0&#39;s l1: 489695
-[153]	valid_0&#39;s l1: 489776
-[154]	valid_0&#39;s l1: 489812
-[155]	valid_0&#39;s l1: 489992
-[156]	valid_0&#39;s l1: 490058
-[157]	valid_0&#39;s l1: 490073
-[158]	valid_0&#39;s l1: 490170
-[159]	valid_0&#39;s l1: 490224
-[160]	valid_0&#39;s l1: 490236
-[161]	valid_0&#39;s l1: 490205
-[162]	valid_0&#39;s l1: 490192
-[163]	valid_0&#39;s l1: 490222
-[164]	valid_0&#39;s l1: 490367
-[165]	valid_0&#39;s l1: 490341
-[166]	valid_0&#39;s l1: 490274
-[167]	valid_0&#39;s l1: 490409
-[168]	valid_0&#39;s l1: 490358
-[169]	valid_0&#39;s l1: 490488
-[170]	valid_0&#39;s l1: 490521
-[171]	valid_0&#39;s l1: 490634
-[172]	valid_0&#39;s l1: 490659
-[173]	valid_0&#39;s l1: 490821
-[174]	valid_0&#39;s l1: 491017
-[175]	valid_0&#39;s l1: 491080
-[176]	valid_0&#39;s l1: 491139
+[2]	valid_0&#39;s l1: 1.25706e+06
+[3]	valid_0&#39;s l1: 1.1205e+06
+[4]	valid_0&#39;s l1: 1.00934e+06
+[5]	valid_0&#39;s l1: 918096
+[6]	valid_0&#39;s l1: 845225
+[7]	valid_0&#39;s l1: 782474
+[8]	valid_0&#39;s l1: 733810
+[9]	valid_0&#39;s l1: 692221
+[10]	valid_0&#39;s l1: 659615
+[11]	valid_0&#39;s l1: 633481
+[12]	valid_0&#39;s l1: 611102
+[13]	valid_0&#39;s l1: 592749
+[14]	valid_0&#39;s l1: 576985
+[15]	valid_0&#39;s l1: 564237
+[16]	valid_0&#39;s l1: 554645
+[17]	valid_0&#39;s l1: 546404
+[18]	valid_0&#39;s l1: 538636
+[19]	valid_0&#39;s l1: 533215
+[20]	valid_0&#39;s l1: 527503
+[21]	valid_0&#39;s l1: 523113
+[22]	valid_0&#39;s l1: 519439
+[23]	valid_0&#39;s l1: 516430
+[24]	valid_0&#39;s l1: 513316
+[25]	valid_0&#39;s l1: 511127
+[26]	valid_0&#39;s l1: 509003
+[27]	valid_0&#39;s l1: 506735
+[28]	valid_0&#39;s l1: 504882
+[29]	valid_0&#39;s l1: 503704
+[30]	valid_0&#39;s l1: 502014
+[31]	valid_0&#39;s l1: 500829
+[32]	valid_0&#39;s l1: 499733
+[33]	valid_0&#39;s l1: 498767
+[34]	valid_0&#39;s l1: 497720
+[35]	valid_0&#39;s l1: 496760
+[36]	valid_0&#39;s l1: 495911
+[37]	valid_0&#39;s l1: 495405
+[38]	valid_0&#39;s l1: 493899
+[39]	valid_0&#39;s l1: 493020
+[40]	valid_0&#39;s l1: 492493
+[41]	valid_0&#39;s l1: 492020
+[42]	valid_0&#39;s l1: 491552
+[43]	valid_0&#39;s l1: 491065
+[44]	valid_0&#39;s l1: 490733
+[45]	valid_0&#39;s l1: 489998
+[46]	valid_0&#39;s l1: 489665
+[47]	valid_0&#39;s l1: 489551
+[48]	valid_0&#39;s l1: 489215
+[49]	valid_0&#39;s l1: 488117
+[50]	valid_0&#39;s l1: 487386
+[51]	valid_0&#39;s l1: 487118
+[52]	valid_0&#39;s l1: 486999
+[53]	valid_0&#39;s l1: 486185
+[54]	valid_0&#39;s l1: 485788
+[55]	valid_0&#39;s l1: 485458
+[56]	valid_0&#39;s l1: 485205
+[57]	valid_0&#39;s l1: 484769
+[58]	valid_0&#39;s l1: 484451
+[59]	valid_0&#39;s l1: 484081
+[60]	valid_0&#39;s l1: 483764
+[61]	valid_0&#39;s l1: 483543
+[62]	valid_0&#39;s l1: 483231
+[63]	valid_0&#39;s l1: 482919
+[64]	valid_0&#39;s l1: 483005
+[65]	valid_0&#39;s l1: 482863
+[66]	valid_0&#39;s l1: 482706
+[67]	valid_0&#39;s l1: 482568
+[68]	valid_0&#39;s l1: 482568
+[69]	valid_0&#39;s l1: 482279
+[70]	valid_0&#39;s l1: 482068
+[71]	valid_0&#39;s l1: 481731
+[72]	valid_0&#39;s l1: 481236
+[73]	valid_0&#39;s l1: 481203
+[74]	valid_0&#39;s l1: 480952
+[75]	valid_0&#39;s l1: 480986
+[76]	valid_0&#39;s l1: 480748
+[77]	valid_0&#39;s l1: 480355
+[78]	valid_0&#39;s l1: 480351
+[79]	valid_0&#39;s l1: 479903
+[80]	valid_0&#39;s l1: 479761
+[81]	valid_0&#39;s l1: 479845
+[82]	valid_0&#39;s l1: 479638
+[83]	valid_0&#39;s l1: 479624
+[84]	valid_0&#39;s l1: 479256
+[85]	valid_0&#39;s l1: 478926
+[86]	valid_0&#39;s l1: 478425
+[87]	valid_0&#39;s l1: 478500
+[88]	valid_0&#39;s l1: 478434
+[89]	valid_0&#39;s l1: 478408
+[90]	valid_0&#39;s l1: 477940
+[91]	valid_0&#39;s l1: 477893
+[92]	valid_0&#39;s l1: 477783
+[93]	valid_0&#39;s l1: 477755
+[94]	valid_0&#39;s l1: 477687
+[95]	valid_0&#39;s l1: 477664
+[96]	valid_0&#39;s l1: 477570
+[97]	valid_0&#39;s l1: 477577
+[98]	valid_0&#39;s l1: 477397
+[99]	valid_0&#39;s l1: 477373
+[100]	valid_0&#39;s l1: 477306
+[101]	valid_0&#39;s l1: 477361
+[102]	valid_0&#39;s l1: 477114
+[103]	valid_0&#39;s l1: 477057
+[104]	valid_0&#39;s l1: 476622
+[105]	valid_0&#39;s l1: 476686
+[106]	valid_0&#39;s l1: 476491
+[107]	valid_0&#39;s l1: 476413
+[108]	valid_0&#39;s l1: 476456
+[109]	valid_0&#39;s l1: 476213
+[110]	valid_0&#39;s l1: 476369
+[111]	valid_0&#39;s l1: 476419
+[112]	valid_0&#39;s l1: 476283
+[113]	valid_0&#39;s l1: 476158
+[114]	valid_0&#39;s l1: 476068
+[115]	valid_0&#39;s l1: 476027
+[116]	valid_0&#39;s l1: 476096
+[117]	valid_0&#39;s l1: 475920
+[118]	valid_0&#39;s l1: 476117
+[119]	valid_0&#39;s l1: 475811
+[120]	valid_0&#39;s l1: 475643
+[121]	valid_0&#39;s l1: 475541
+[122]	valid_0&#39;s l1: 475264
+[123]	valid_0&#39;s l1: 475271
+[124]	valid_0&#39;s l1: 475239
+[125]	valid_0&#39;s l1: 474999
+[126]	valid_0&#39;s l1: 474906
+[127]	valid_0&#39;s l1: 474920
+[128]	valid_0&#39;s l1: 475026
+[129]	valid_0&#39;s l1: 475070
+[130]	valid_0&#39;s l1: 475054
+[131]	valid_0&#39;s l1: 475004
+[132]	valid_0&#39;s l1: 475052
+[133]	valid_0&#39;s l1: 474978
+[134]	valid_0&#39;s l1: 475007
+[135]	valid_0&#39;s l1: 475022
+[136]	valid_0&#39;s l1: 474930
+[137]	valid_0&#39;s l1: 475066
+[138]	valid_0&#39;s l1: 475015
+[139]	valid_0&#39;s l1: 475063
+[140]	valid_0&#39;s l1: 475063
+[141]	valid_0&#39;s l1: 475109
+[142]	valid_0&#39;s l1: 475060
+[143]	valid_0&#39;s l1: 475062
+[144]	valid_0&#39;s l1: 474920
+[145]	valid_0&#39;s l1: 474846
+[146]	valid_0&#39;s l1: 474686
+[147]	valid_0&#39;s l1: 474806
+[148]	valid_0&#39;s l1: 474546
+[149]	valid_0&#39;s l1: 474506
+[150]	valid_0&#39;s l1: 474516
+[151]	valid_0&#39;s l1: 474439
+[152]	valid_0&#39;s l1: 474381
+[153]	valid_0&#39;s l1: 474345
+[154]	valid_0&#39;s l1: 474475
+[155]	valid_0&#39;s l1: 474292
+[156]	valid_0&#39;s l1: 474240
+[157]	valid_0&#39;s l1: 474183
+[158]	valid_0&#39;s l1: 474135
+[159]	valid_0&#39;s l1: 473940
+[160]	valid_0&#39;s l1: 473831
+[161]	valid_0&#39;s l1: 473836
+[162]	valid_0&#39;s l1: 473826
+[163]	valid_0&#39;s l1: 473764
+[164]	valid_0&#39;s l1: 473834
+[165]	valid_0&#39;s l1: 473824
+[166]	valid_0&#39;s l1: 473828
+[167]	valid_0&#39;s l1: 473792
+[168]	valid_0&#39;s l1: 473679
+[169]	valid_0&#39;s l1: 473672
+[170]	valid_0&#39;s l1: 473636
+[171]	valid_0&#39;s l1: 473649
+[172]	valid_0&#39;s l1: 473609
+[173]	valid_0&#39;s l1: 473596
+[174]	valid_0&#39;s l1: 473609
+[175]	valid_0&#39;s l1: 473512
+[176]	valid_0&#39;s l1: 473482
+[177]	valid_0&#39;s l1: 473373
+[178]	valid_0&#39;s l1: 473438
+[179]	valid_0&#39;s l1: 473321
+[180]	valid_0&#39;s l1: 473313
+[181]	valid_0&#39;s l1: 473321
+[182]	valid_0&#39;s l1: 473212
+[183]	valid_0&#39;s l1: 473158
+[184]	valid_0&#39;s l1: 473046
+[185]	valid_0&#39;s l1: 472978
+[186]	valid_0&#39;s l1: 472965
+[187]	valid_0&#39;s l1: 472966
+[188]	valid_0&#39;s l1: 472852
+[189]	valid_0&#39;s l1: 472818
+[190]	valid_0&#39;s l1: 472868
+[191]	valid_0&#39;s l1: 472835
+[192]	valid_0&#39;s l1: 472995
+[193]	valid_0&#39;s l1: 473015
+[194]	valid_0&#39;s l1: 473048
+[195]	valid_0&#39;s l1: 473001
+[196]	valid_0&#39;s l1: 472885
+[197]	valid_0&#39;s l1: 472877
+[198]	valid_0&#39;s l1: 472801
+[199]	valid_0&#39;s l1: 472714
+[200]	valid_0&#39;s l1: 472741
+[201]	valid_0&#39;s l1: 472741
+[202]	valid_0&#39;s l1: 472659
+[203]	valid_0&#39;s l1: 472698
+[204]	valid_0&#39;s l1: 472776
+[205]	valid_0&#39;s l1: 472677
+[206]	valid_0&#39;s l1: 472722
+[207]	valid_0&#39;s l1: 472677
+[208]	valid_0&#39;s l1: 472689
+[209]	valid_0&#39;s l1: 472667
+[210]	valid_0&#39;s l1: 472590
+[211]	valid_0&#39;s l1: 472707
+[212]	valid_0&#39;s l1: 472674
+[213]	valid_0&#39;s l1: 472631
+[214]	valid_0&#39;s l1: 472654
+[215]	valid_0&#39;s l1: 472656
+[216]	valid_0&#39;s l1: 472610
+[217]	valid_0&#39;s l1: 472567
+[218]	valid_0&#39;s l1: 472549
+[219]	valid_0&#39;s l1: 472497
+[220]	valid_0&#39;s l1: 472440
+[221]	valid_0&#39;s l1: 472448
+[222]	valid_0&#39;s l1: 472413
+[223]	valid_0&#39;s l1: 472360
+[224]	valid_0&#39;s l1: 472238
+[225]	valid_0&#39;s l1: 472210
+[226]	valid_0&#39;s l1: 472166
+[227]	valid_0&#39;s l1: 472140
+[228]	valid_0&#39;s l1: 472194
+[229]	valid_0&#39;s l1: 472198
+[230]	valid_0&#39;s l1: 472208
+[231]	valid_0&#39;s l1: 472163
+[232]	valid_0&#39;s l1: 472199
+[233]	valid_0&#39;s l1: 472156
+[234]	valid_0&#39;s l1: 472139
+[235]	valid_0&#39;s l1: 471963
+[236]	valid_0&#39;s l1: 471965
+[237]	valid_0&#39;s l1: 471897
+[238]	valid_0&#39;s l1: 471885
+[239]	valid_0&#39;s l1: 471715
+[240]	valid_0&#39;s l1: 471653
+[241]	valid_0&#39;s l1: 471667
+[242]	valid_0&#39;s l1: 471716
+[243]	valid_0&#39;s l1: 471731
+[244]	valid_0&#39;s l1: 471737
+[245]	valid_0&#39;s l1: 471626
+[246]	valid_0&#39;s l1: 471623
+[247]	valid_0&#39;s l1: 471646
+[248]	valid_0&#39;s l1: 471625
+[249]	valid_0&#39;s l1: 471664
+[250]	valid_0&#39;s l1: 471622
+[251]	valid_0&#39;s l1: 471510
+[252]	valid_0&#39;s l1: 471433
+[253]	valid_0&#39;s l1: 471417
+[254]	valid_0&#39;s l1: 471421
+[255]	valid_0&#39;s l1: 471472
+[256]	valid_0&#39;s l1: 471462
+[257]	valid_0&#39;s l1: 471476
+[258]	valid_0&#39;s l1: 471525
+[259]	valid_0&#39;s l1: 471540
+[260]	valid_0&#39;s l1: 471523
+[261]	valid_0&#39;s l1: 471543
+[262]	valid_0&#39;s l1: 471586
+[263]	valid_0&#39;s l1: 471563
+[264]	valid_0&#39;s l1: 471641
+[265]	valid_0&#39;s l1: 471551
+[266]	valid_0&#39;s l1: 471532
+[267]	valid_0&#39;s l1: 471442
+[268]	valid_0&#39;s l1: 471430
+[269]	valid_0&#39;s l1: 471350
+[270]	valid_0&#39;s l1: 471327
+[271]	valid_0&#39;s l1: 471280
+[272]	valid_0&#39;s l1: 471320
+[273]	valid_0&#39;s l1: 471326
+[274]	valid_0&#39;s l1: 471356
+[275]	valid_0&#39;s l1: 471281
+[276]	valid_0&#39;s l1: 471263
+[277]	valid_0&#39;s l1: 471171
+[278]	valid_0&#39;s l1: 471197
+[279]	valid_0&#39;s l1: 471270
+[280]	valid_0&#39;s l1: 471196
+[281]	valid_0&#39;s l1: 471238
+[282]	valid_0&#39;s l1: 471236
+[283]	valid_0&#39;s l1: 471281
+[284]	valid_0&#39;s l1: 471250
+[285]	valid_0&#39;s l1: 471310
+[286]	valid_0&#39;s l1: 471299
+[287]	valid_0&#39;s l1: 471331
+[288]	valid_0&#39;s l1: 471277
+[289]	valid_0&#39;s l1: 471326
+[290]	valid_0&#39;s l1: 471283
+[291]	valid_0&#39;s l1: 471269
+[292]	valid_0&#39;s l1: 471271
+[293]	valid_0&#39;s l1: 471273
+[294]	valid_0&#39;s l1: 471260
+[295]	valid_0&#39;s l1: 471277
+[296]	valid_0&#39;s l1: 471272
+[297]	valid_0&#39;s l1: 471257
+[298]	valid_0&#39;s l1: 471148
+[299]	valid_0&#39;s l1: 471204
+[300]	valid_0&#39;s l1: 471148
+[301]	valid_0&#39;s l1: 471130
+[302]	valid_0&#39;s l1: 471127
+[303]	valid_0&#39;s l1: 471082
+[304]	valid_0&#39;s l1: 471048
+[305]	valid_0&#39;s l1: 471052
+[306]	valid_0&#39;s l1: 471049
+[307]	valid_0&#39;s l1: 471021
+[308]	valid_0&#39;s l1: 471043
+[309]	valid_0&#39;s l1: 471000
+[310]	valid_0&#39;s l1: 471045
+[311]	valid_0&#39;s l1: 471068
+[312]	valid_0&#39;s l1: 471013
+[313]	valid_0&#39;s l1: 470959
+[314]	valid_0&#39;s l1: 470985
+[315]	valid_0&#39;s l1: 470933
+[316]	valid_0&#39;s l1: 470950
+[317]	valid_0&#39;s l1: 470956
+[318]	valid_0&#39;s l1: 470917
+[319]	valid_0&#39;s l1: 470859
+[320]	valid_0&#39;s l1: 470870
+[321]	valid_0&#39;s l1: 470808
+[322]	valid_0&#39;s l1: 470818
+[323]	valid_0&#39;s l1: 470855
+[324]	valid_0&#39;s l1: 470711
+[325]	valid_0&#39;s l1: 470694
+[326]	valid_0&#39;s l1: 470699
+[327]	valid_0&#39;s l1: 470649
+[328]	valid_0&#39;s l1: 470651
+[329]	valid_0&#39;s l1: 470586
+[330]	valid_0&#39;s l1: 470546
+[331]	valid_0&#39;s l1: 470546
+[332]	valid_0&#39;s l1: 470582
+[333]	valid_0&#39;s l1: 470531
+[334]	valid_0&#39;s l1: 470526
+[335]	valid_0&#39;s l1: 470489
+[336]	valid_0&#39;s l1: 470561
+[337]	valid_0&#39;s l1: 470549
+[338]	valid_0&#39;s l1: 470572
+[339]	valid_0&#39;s l1: 470529
+[340]	valid_0&#39;s l1: 470563
+[341]	valid_0&#39;s l1: 470574
+[342]	valid_0&#39;s l1: 470572
+[343]	valid_0&#39;s l1: 470600
+[344]	valid_0&#39;s l1: 470636
+[345]	valid_0&#39;s l1: 470592
+[346]	valid_0&#39;s l1: 470581
+[347]	valid_0&#39;s l1: 470567
+[348]	valid_0&#39;s l1: 470519
+[349]	valid_0&#39;s l1: 470480
+[350]	valid_0&#39;s l1: 470461
+[351]	valid_0&#39;s l1: 470413
+[352]	valid_0&#39;s l1: 470364
+[353]	valid_0&#39;s l1: 470357
+[354]	valid_0&#39;s l1: 470240
+[355]	valid_0&#39;s l1: 470260
+[356]	valid_0&#39;s l1: 470273
+[357]	valid_0&#39;s l1: 470287
+[358]	valid_0&#39;s l1: 470263
+[359]	valid_0&#39;s l1: 470235
+[360]	valid_0&#39;s l1: 470214
+[361]	valid_0&#39;s l1: 470208
+[362]	valid_0&#39;s l1: 470212
+[363]	valid_0&#39;s l1: 470282
+[364]	valid_0&#39;s l1: 470335
+[365]	valid_0&#39;s l1: 470340
+[366]	valid_0&#39;s l1: 470311
+[367]	valid_0&#39;s l1: 470319
+[368]	valid_0&#39;s l1: 470369
+[369]	valid_0&#39;s l1: 470313
+[370]	valid_0&#39;s l1: 470302
+[371]	valid_0&#39;s l1: 470246
+[372]	valid_0&#39;s l1: 470229
+[373]	valid_0&#39;s l1: 470250
+[374]	valid_0&#39;s l1: 470212
+[375]	valid_0&#39;s l1: 470234
+[376]	valid_0&#39;s l1: 470254
+[377]	valid_0&#39;s l1: 470167
+[378]	valid_0&#39;s l1: 470263
+[379]	valid_0&#39;s l1: 470253
+[380]	valid_0&#39;s l1: 470236
+[381]	valid_0&#39;s l1: 470233
+[382]	valid_0&#39;s l1: 470122
+[383]	valid_0&#39;s l1: 470100
+[384]	valid_0&#39;s l1: 470113
+[385]	valid_0&#39;s l1: 470074
+[386]	valid_0&#39;s l1: 470036
+[387]	valid_0&#39;s l1: 470045
+[388]	valid_0&#39;s l1: 470043
+[389]	valid_0&#39;s l1: 470042
+[390]	valid_0&#39;s l1: 470020
+[391]	valid_0&#39;s l1: 469999
+[392]	valid_0&#39;s l1: 469984
+[393]	valid_0&#39;s l1: 470055
+[394]	valid_0&#39;s l1: 470043
+[395]	valid_0&#39;s l1: 470056
+[396]	valid_0&#39;s l1: 469988
+[397]	valid_0&#39;s l1: 469967
+[398]	valid_0&#39;s l1: 470015
+[399]	valid_0&#39;s l1: 470078
+[400]	valid_0&#39;s l1: 470130
+[401]	valid_0&#39;s l1: 470137
+[402]	valid_0&#39;s l1: 470122
+[403]	valid_0&#39;s l1: 470171
+[404]	valid_0&#39;s l1: 470146
+[405]	valid_0&#39;s l1: 470188
+[406]	valid_0&#39;s l1: 470154
+[407]	valid_0&#39;s l1: 470168
+[408]	valid_0&#39;s l1: 470180
+[409]	valid_0&#39;s l1: 470198
+[410]	valid_0&#39;s l1: 470188
+[411]	valid_0&#39;s l1: 470174
+[412]	valid_0&#39;s l1: 470106
+[413]	valid_0&#39;s l1: 470034
+[414]	valid_0&#39;s l1: 470023
+[415]	valid_0&#39;s l1: 469994
+[416]	valid_0&#39;s l1: 469962
+[417]	valid_0&#39;s l1: 469925
+[418]	valid_0&#39;s l1: 469919
+[419]	valid_0&#39;s l1: 469924
+[420]	valid_0&#39;s l1: 469922
+[421]	valid_0&#39;s l1: 469896
+[422]	valid_0&#39;s l1: 469925
+[423]	valid_0&#39;s l1: 469933
+[424]	valid_0&#39;s l1: 469944
+[425]	valid_0&#39;s l1: 469934
+[426]	valid_0&#39;s l1: 469871
+[427]	valid_0&#39;s l1: 469871
+[428]	valid_0&#39;s l1: 469857
+[429]	valid_0&#39;s l1: 469870
+[430]	valid_0&#39;s l1: 469881
+[431]	valid_0&#39;s l1: 469899
+[432]	valid_0&#39;s l1: 469938
+[433]	valid_0&#39;s l1: 469966
+[434]	valid_0&#39;s l1: 469977
+[435]	valid_0&#39;s l1: 469924
+[436]	valid_0&#39;s l1: 469922
+[437]	valid_0&#39;s l1: 469944
+[438]	valid_0&#39;s l1: 469946
+[439]	valid_0&#39;s l1: 469981
+[440]	valid_0&#39;s l1: 470007
+[441]	valid_0&#39;s l1: 470098
+[442]	valid_0&#39;s l1: 470047
+[443]	valid_0&#39;s l1: 470003
+[444]	valid_0&#39;s l1: 470030
+[445]	valid_0&#39;s l1: 469988
+[446]	valid_0&#39;s l1: 470029
+[447]	valid_0&#39;s l1: 469964
+[448]	valid_0&#39;s l1: 469973
+[449]	valid_0&#39;s l1: 470019
+[450]	valid_0&#39;s l1: 469996
+[451]	valid_0&#39;s l1: 470022
+[452]	valid_0&#39;s l1: 469991
+[453]	valid_0&#39;s l1: 469953
 Early stopping, best iteration is:
-[151]	valid_0&#39;s l1: 489631
-MAE LightGBM (train): 307487.43023
-MAE LightGBM (test): 489631.35655
-MAE LightGBM (eval): 544462.44447
+[428]	valid_0&#39;s l1: 469857
+MAE LightGBM (train): 165276.40172
+MAE LightGBM (test): 469856.55756
+MAE LightGBM (eval): 523613.16375
 </pre>
 </div>
 </div>
@@ -15836,57 +14250,13 @@ MAE LightGBM (eval): 544462.44447
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">x_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>antiguedad                                   False
-habitaciones                                 False
-garages                                      False
-banos                                        False
-metroscubiertos                              False
-metrostotales                                False
-usosmultiples                                False
-piscina                                      False
-idf_descripcion                              False
-porcentaje_metros                            False
-prop_frecuente                               False
-top_provincia                                False
-anio                                         False
-meses_desde_datos                            False
-promedio_precio_ciudad                       False
-count_ciudad                                 False
-promedio_id_zona                             False
-count_id_zona                                False
-promedio_precio_tipo_propiedad               False
-promedio_precio_tipo_propiedad_ciudad_gen    False
-count_tipo_propiedad_ciudad                  False
-lat_norm                                     False
-puntaje                                      False
-distancia_ciudad_centrica                    False
-dtype: bool</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 

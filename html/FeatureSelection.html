@@ -13175,48 +13175,12 @@ div#notebook {
 
 <span class="n">df_train_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">)</span>
 <span class="n">df_test_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
+
+<span class="c1"># df_train_f = features.KD_feature(df_train_f)</span>
+<span class="c1"># df_test_f =  features.KD_feature(df_test_f)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
-       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;,
-       ...
-       &#39;provincia_Yucatán&#39;, &#39;provincia_otro&#39;, &#39;zona_Centro&#39;, &#39;zona_Norte &#39;,
-       &#39;zona_Sur&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;, &#39;peso_titulo&#39;,
-       &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
-      dtype=&#39;object&#39;, length=145)</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13224,6 +13188,23 @@ div#notebook {
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_rank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/rankings_train.csv&#39;</span><span class="p">)</span>
+<span class="n">df_test_rank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/rankings_test.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train_rank</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_test_rank</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13462,106 +13443,45 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>id                            False
-titulo                         True
-descripcion                    True
-tipodepropiedad               False
-direccion                      True
-ciudad                        False
-provincia                     False
-antiguedad                    False
-habitaciones                  False
-garages                       False
-banos                         False
-metroscubiertos               False
-metrostotales                 False
-idzona                         True
-lat                           False
-lng                           False
-fecha                         False
-gimnasio                      False
-usosmultiples                 False
-piscina                       False
-escuelascercanas              False
-centroscomercialescercanos    False
-precio                        False
-metrostotales_log             False
-metroscubiertos_log           False
-porcentaje_metros             False
-diferencia_metros             False
-intervalo_metros_totales      False
-intervalo_metros_cubiertos    False
-metroscubiertos_bins_unif     False
-                              ...  
-provincia_Edo. de México      False
-provincia_Guanajuato          False
-provincia_Guerrero            False
-provincia_Hidalgo             False
-provincia_Jalisco             False
-provincia_Michoacán           False
-provincia_Morelos             False
-provincia_Nayarit             False
-provincia_Nuevo León          False
-provincia_Oaxaca              False
-provincia_Puebla              False
-provincia_Querétaro           False
-provincia_Quintana Roo        False
-provincia_San luis Potosí     False
-provincia_Sinaloa             False
-provincia_Sonora              False
-provincia_Tabasco             False
-provincia_Tamaulipas          False
-provincia_Tlaxcala            False
-provincia_Veracruz            False
-provincia_Yucatán             False
-provincia_otro                False
-zona_Centro                   False
-zona_Norte                    False
-zona_Sur                      False
-idf_titulo                    False
-idf_descripcion               False
-peso_titulo                   False
-peso_descripcion              False
-distancia_ciudad_centrica     False
-Length: 145, dtype: bool</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFE</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span><span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> 
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_provincia_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_ciudad_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Edo. de México&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Nuevo León&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Querétaro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_San luis Potosí&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Yucatán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span>
+ <span class="s1">&#39;zona_Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;similares_count&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;ranking_en_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking_en_ciudad&#39;</span><span class="p">,</span><span class="s1">&#39;ranking_en_provincia_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking_en_provincia_tipodepropiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking_en_provincia_intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking_en_provincia_intervalo_metros_cubiertos&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ranking_en_tipodepropiedad_intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="s1">&#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos&#39;</span><span class="p">]</span>
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 
@@ -13587,7 +13507,78 @@ Length: 145, dtype: bool</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting estimator with 69 features.
+<pre>Fitting estimator with 140 features.
+Fitting estimator with 139 features.
+Fitting estimator with 138 features.
+Fitting estimator with 137 features.
+Fitting estimator with 136 features.
+Fitting estimator with 135 features.
+Fitting estimator with 134 features.
+Fitting estimator with 133 features.
+Fitting estimator with 132 features.
+Fitting estimator with 131 features.
+Fitting estimator with 130 features.
+Fitting estimator with 129 features.
+Fitting estimator with 128 features.
+Fitting estimator with 127 features.
+Fitting estimator with 126 features.
+Fitting estimator with 125 features.
+Fitting estimator with 124 features.
+Fitting estimator with 123 features.
+Fitting estimator with 122 features.
+Fitting estimator with 121 features.
+Fitting estimator with 120 features.
+Fitting estimator with 119 features.
+Fitting estimator with 118 features.
+Fitting estimator with 117 features.
+Fitting estimator with 116 features.
+Fitting estimator with 115 features.
+Fitting estimator with 114 features.
+Fitting estimator with 113 features.
+Fitting estimator with 112 features.
+Fitting estimator with 111 features.
+Fitting estimator with 110 features.
+Fitting estimator with 109 features.
+Fitting estimator with 108 features.
+Fitting estimator with 107 features.
+Fitting estimator with 106 features.
+Fitting estimator with 105 features.
+Fitting estimator with 104 features.
+Fitting estimator with 103 features.
+Fitting estimator with 102 features.
+Fitting estimator with 101 features.
+Fitting estimator with 100 features.
+Fitting estimator with 99 features.
+Fitting estimator with 98 features.
+Fitting estimator with 97 features.
+Fitting estimator with 96 features.
+Fitting estimator with 95 features.
+Fitting estimator with 94 features.
+Fitting estimator with 93 features.
+Fitting estimator with 92 features.
+Fitting estimator with 91 features.
+Fitting estimator with 90 features.
+Fitting estimator with 89 features.
+Fitting estimator with 88 features.
+Fitting estimator with 87 features.
+Fitting estimator with 86 features.
+Fitting estimator with 85 features.
+Fitting estimator with 84 features.
+Fitting estimator with 83 features.
+Fitting estimator with 82 features.
+Fitting estimator with 81 features.
+Fitting estimator with 80 features.
+Fitting estimator with 79 features.
+Fitting estimator with 78 features.
+Fitting estimator with 77 features.
+Fitting estimator with 76 features.
+Fitting estimator with 75 features.
+Fitting estimator with 74 features.
+Fitting estimator with 73 features.
+Fitting estimator with 72 features.
+Fitting estimator with 71 features.
+Fitting estimator with 70 features.
+Fitting estimator with 69 features.
 Fitting estimator with 68 features.
 Fitting estimator with 67 features.
 Fitting estimator with 66 features.
@@ -13643,17 +13634,17 @@ Fitting estimator with 26 features.
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;porcentaje_metros&#39;,
+<pre>Index([&#39;antiguedad&#39;, &#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;,
        &#39;promedio_metros_tipo_propiedad&#39;, &#39;dias_desde_datos&#39;, &#39;tam_ambientes&#39;,
-       &#39;promedio_precio_ciudad&#39;, &#39;varianza_precio_ciudad&#39;, &#39;promedio_id_zona&#39;,
-       &#39;promedio_id_zona_gen&#39;, &#39;varianza_id_zona&#39;, &#39;count_id_zona&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;,
-       &#39;count_tipo_propiedad_ciudad&#39;, &#39;varianza_por_mes&#39;,
+       &#39;varianza_precio_ciudad&#39;, &#39;promedio_id_zona&#39;, &#39;promedio_id_zona_gen&#39;,
+       &#39;varianza_id_zona&#39;, &#39;count_id_zona&#39;,
+       &#39;promedio_precio_tipo_propiedad_ciudad&#39;, &#39;promedio_por_mes&#39;,
        &#39;promedio_precio_habitaciones_banos_garages&#39;,
        &#39;promedio_precio_hbg_tipo_propiedad&#39;,
        &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;puntaje&#39;, &#39;idf_titulo&#39;,
-       &#39;idf_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
+       &#39;idf_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;,
+       &#39;distancia_centro_mexico&#39;, &#39;distancia_ciudad_cara&#39;,
+       &#39;ranking_en_provincia_tipodepropiedad&#39;],
       dtype=&#39;object&#39;)</pre>
 </div>
 
@@ -13666,403 +13657,6 @@ Fitting estimator with 26 features.
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">37</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">38</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)[</span><span class="mi">37</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>40</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>22</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>24</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>28</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;metros_cubiertos_normalizados&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recursive-Feature-Elimination-w/-Cross-Validation-(RFECV)">Recursive Feature Elimination w/ Cross Validation (RFECV)<a class="anchor-link" href="#Recursive-Feature-Elimination-w/-Cross-Validation-(RFECV)">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFECV</span>
-
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span><span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> 
-
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-
-<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="n">selector</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/camix/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py:1978: FutureWarning: The default value of cv will change from 3 to 5 in version 0.22. Specify it explicitly to silence this warning.
-  warnings.warn(CV_WARNING, FutureWarning)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;, &#39;metroscubiertos&#39;, &#39;metrostotales&#39;,
-       &#39;lat&#39;, &#39;lng&#39;, &#39;piscina&#39;, &#39;metrostotales_log&#39;, &#39;metroscubiertos_log&#39;,
-       &#39;porcentaje_metros&#39;, &#39;diferencia_metros&#39;, &#39;escomercial&#39;,
-       &#39;promedio_metros_tipo_propiedad&#39;, &#39;promedio_metros_cub_tipo_propiedad&#39;,
-       &#39;top_provincia&#39;, &#39;es_ciudad_centrica&#39;,
-       &#39;promedio_metros_totales_provincia&#39;,
-       &#39;promedio_metros_cubiertos_provincia&#39;, &#39;anio&#39;, &#39;mes&#39;, &#39;dia&#39;,
-       &#39;trimestre&#39;, &#39;dias_desde_datos&#39;, &#39;meses_desde_datos&#39;,
-       &#39;antiguedad_bins_unif&#39;, &#39;antiguedad_bins_perc&#39;, &#39;cantidad_inquilinos&#39;,
-       &#39;tam_ambientes&#39;, &#39;metros_totales_normalizados&#39;,
-       &#39;metros_cubiertos_normalizados&#39;, &#39;promedio_precio_provincia&#39;,
-       &#39;promedio_precio_ciudad&#39;, &#39;promedio_precio_ciudad_gen&#39;,
-       &#39;varianza_precio_ciudad&#39;, &#39;count_ciudad&#39;, &#39;promedio_id_zona&#39;,
-       &#39;promedio_id_zona_log&#39;, &#39;promedio_id_zona_gen&#39;, &#39;varianza_id_zona&#39;,
-       &#39;count_id_zona&#39;, &#39;promedio_precio_tipo_propiedad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;, &#39;count_tipo_propiedad&#39;,
-       &#39;count_tipo_propiedad_ciudad&#39;, &#39;promedio_por_mes&#39;, &#39;varianza_por_mes&#39;,
-       &#39;promedio_precio_habitaciones&#39;,
-       &#39;promedio_precio_habitaciones_banos_garages&#39;,
-       &#39;promedio_precio_banos_garages&#39;, &#39;promedio_precio_hbg_tipo_propiedad&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;lat_norm&#39;, &#39;lng_norm&#39;,
-       &#39;promedio_precio_booleanos&#39;, &#39;puntaje&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;,
-       &#39;peso_titulo&#39;, &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
-      dtype=&#39;object&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -14117,347 +13711,702 @@ Fitting estimator with 63 features.
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>habitaciones</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>1</td>
-      <td>metros_totales_normalizados</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>1</td>
-      <td>metros_cubiertos_normalizados</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>1</td>
-      <td>promedio_precio_provincia</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>1</td>
-      <td>promedio_precio_ciudad</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>1</td>
-      <td>promedio_precio_ciudad_gen</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>1</td>
-      <td>varianza_precio_ciudad</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>1</td>
-      <td>count_ciudad</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>1</td>
-      <td>promedio_id_zona</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>1</td>
-      <td>promedio_id_zona_log</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>1</td>
-      <td>promedio_id_zona_gen</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>1</td>
-      <td>varianza_id_zona</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>1</td>
-      <td>count_id_zona</td>
+      <td>antiguedad</td>
     </tr>
     <tr>
       <th>48</th>
       <td>1</td>
-      <td>promedio_precio_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>1</td>
-      <td>promedio_precio_tipo_propiedad_ciudad</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>1</td>
-      <td>promedio_precio_tipo_propiedad_ciudad_gen</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>1</td>
-      <td>count_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>1</td>
-      <td>count_tipo_propiedad_ciudad</td>
-    </tr>
-    <tr>
-      <th>66</th>
-      <td>1</td>
-      <td>peso_titulo</td>
-    </tr>
-    <tr>
-      <th>65</th>
-      <td>1</td>
-      <td>idf_descripcion</td>
-    </tr>
-    <tr>
-      <th>64</th>
-      <td>1</td>
-      <td>idf_titulo</td>
-    </tr>
-    <tr>
-      <th>63</th>
-      <td>1</td>
-      <td>puntaje</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>1</td>
-      <td>promedio_precio_booleanos</td>
-    </tr>
-    <tr>
-      <th>61</th>
-      <td>1</td>
-      <td>lng_norm</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>1</td>
-      <td>tam_ambientes</td>
-    </tr>
-    <tr>
-      <th>60</th>
-      <td>1</td>
-      <td>lat_norm</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>1</td>
-      <td>promedio_precio_hbg_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>57</th>
-      <td>1</td>
-      <td>promedio_precio_banos_garages</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>1</td>
-      <td>promedio_precio_habitaciones_banos_garages</td>
-    </tr>
-    <tr>
-      <th>55</th>
-      <td>1</td>
-      <td>promedio_precio_habitaciones</td>
-    </tr>
-    <tr>
-      <th>54</th>
-      <td>1</td>
-      <td>varianza_por_mes</td>
-    </tr>
-    <tr>
-      <th>53</th>
-      <td>1</td>
-      <td>promedio_por_mes</td>
-    </tr>
-    <tr>
-      <th>59</th>
-      <td>1</td>
-      <td>promedio_precio_hbg_tipo_propiedad_provincia</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>1</td>
-      <td>peso_descripcion</td>
+      <td>varianza_precio_ciudad</td>
     </tr>
     <tr>
       <th>34</th>
       <td>1</td>
-      <td>cantidad_inquilinos</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>1</td>
-      <td>antiguedad_bins_unif</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>garages</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>banos</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>metroscubiertos</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>metrostotales</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1</td>
-      <td>lat</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>lng</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1</td>
-      <td>piscina</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>metrostotales_log</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>metroscubiertos_log</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>porcentaje_metros</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>diferencia_metros</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>escomercial</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>promedio_metros_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>1</td>
-      <td>antiguedad_bins_perc</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>promedio_metros_cub_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>1</td>
-      <td>mes</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>1</td>
-      <td>meses_desde_datos</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>1</td>
       <td>dias_desde_datos</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>50</th>
       <td>1</td>
-      <td>trimestre</td>
+      <td>promedio_id_zona</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>52</th>
       <td>1</td>
-      <td>dia</td>
+      <td>promedio_id_zona_gen</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>53</th>
       <td>1</td>
-      <td>anio</td>
+      <td>varianza_id_zona</td>
     </tr>
     <tr>
-      <th>68</th>
+      <th>54</th>
       <td>1</td>
-      <td>distancia_ciudad_centrica</td>
+      <td>count_id_zona</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>56</th>
       <td>1</td>
-      <td>promedio_metros_totales_provincia</td>
+      <td>promedio_precio_tipo_propiedad_ciudad</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>60</th>
       <td>1</td>
-      <td>es_ciudad_centrica</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>top_provincia</td>
+      <td>promedio_por_mes</td>
     </tr>
     <tr>
       <th>22</th>
       <td>1</td>
-      <td>promedio_metros_cubiertos_provincia</td>
+      <td>promedio_metros_tipo_propiedad</td>
     </tr>
     <tr>
-      <th>31</th>
+      <th>63</th>
+      <td>1</td>
+      <td>promedio_precio_habitaciones_banos_garages</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>1</td>
+      <td>promedio_precio_hbg_tipo_propiedad_provincia</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>1</td>
+      <td>promedio_precio_hbg_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>1</td>
+      <td>tam_ambientes</td>
+    </tr>
+    <tr>
+      <th>135</th>
+      <td>1</td>
+      <td>ranking_en_provincia_tipodepropiedad</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>1</td>
+      <td>distancia_ciudad_cara</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>1</td>
+      <td>distancia_centro_mexico</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>metroscubiertos</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>1</td>
+      <td>idf_titulo</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>metrostotales</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>lat</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>1</td>
+      <td>idf_descripcion</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>lng</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>1</td>
+      <td>puntaje</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>1</td>
+      <td>distancia_ciudad_centrica</td>
+    </tr>
+    <tr>
+      <th>57</th>
       <td>2</td>
-      <td>es_antigua</td>
+      <td>promedio_precio_tipo_propiedad_ciudad_gen</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>15</th>
       <td>3</td>
-      <td>delincuencia</td>
+      <td>porcentaje_metros</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>4</td>
+      <td>metroscubiertos_log</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>5</td>
+      <td>count_tipo_propiedad_ciudad</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>6</td>
+      <td>promedio_id_zona_log</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>4</td>
-      <td>metroscubiertos_bins_perc</td>
+      <td>7</td>
+      <td>metrostotales_log</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>5</td>
-      <td>turismo</td>
+      <th>138</th>
+      <td>8</td>
+      <td>ranking_en_tipodepropiedad_intervalo_metros_to...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>9</td>
+      <td>dia</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>10</td>
+      <td>varianza_por_mes</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>11</td>
+      <td>peso_descripcion</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>12</td>
+      <td>diferencia_metros</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>13</td>
+      <td>promedio_precio_ciudad</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>14</td>
+      <td>promedio_precio_banos_garages</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>15</td>
+      <td>meses_desde_datos</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>16</td>
+      <td>count_ciudad</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>17</td>
+      <td>ranking_en_tipodepropiedad_intervalo_metros_cu...</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>18</td>
+      <td>ranking_en_provincia_intervalo_metros_totales</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>19</td>
+      <td>mes</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>20</td>
+      <td>lng_norm</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>21</td>
+      <td>promedio_precio_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>22</td>
+      <td>habitaciones</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>23</td>
+      <td>promedio_metros_cubiertos_provincia</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>24</td>
+      <td>garages</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>25</td>
+      <td>metros_cubiertos_normalizados</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>26</td>
+      <td>lat_norm</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>27</td>
+      <td>ranking_en_provincia_intervalo_metros_cubiertos</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>28</td>
+      <td>metros_totales_normalizados</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>29</td>
+      <td>promedio_metros_cub_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>30</td>
+      <td>antiguedad_bins_perc</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>31</td>
+      <td>promedio_metros_totales_provincia</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>32</td>
+      <td>ranking_en_ciudad</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>33</td>
+      <td>promedio_precio_booleanos</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>34</td>
+      <td>cantidad_inquilinos</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>35</td>
+      <td>banos</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>36</td>
+      <td>count_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>37</td>
+      <td>promedio_ciudad_log</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>38</td>
+      <td>ranking_en_provincia_ciudad</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>39</td>
+      <td>promedio_precio_habitaciones</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>40</td>
+      <td>top_provincia</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>6</td>
-      <td>metroscubiertos_bins_unif</td>
+      <td>41</td>
+      <td>centroscomercialescercanos</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>7</td>
-      <td>prop_frecuente</td>
+      <th>132</th>
+      <td>42</td>
+      <td>ranking_en_provincia</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>43</td>
+      <td>anio</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>44</td>
+      <td>peso_titulo</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>45</td>
+      <td>escuelascercanas</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>46</td>
+      <td>trimestre</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>47</td>
+      <td>piscina</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>8</td>
+      <td>48</td>
+      <td>metroscubiertos_bins_unif</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>49</td>
+      <td>promedio_precio_provincia</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>50</td>
+      <td>antiguedad_bins_unif</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>51</td>
+      <td>tipodepropiedad_Terreno</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>52</td>
+      <td>tipodepropiedad_Local Comercial</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>53</td>
+      <td>promedio_precio_ciudad_gen</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>54</td>
+      <td>escomercial</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>55</td>
+      <td>tipodepropiedad_Apartamento</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>56</td>
+      <td>turismo</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>57</td>
+      <td>gimnasio</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>58</td>
+      <td>metroscubiertos_bins_perc</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>59</td>
+      <td>tipodepropiedad_Terreno comercial</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>60</td>
+      <td>provincia_Edo. de México</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>61</td>
+      <td>tipodepropiedad_Casa en condominio</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>62</td>
+      <td>promedio_provincia_log</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>63</td>
+      <td>es_ciudad_centrica</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>64</td>
+      <td>prop_frecuente</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>65</td>
+      <td>es_antigua</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>66</td>
+      <td>usosmultiples</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>67</td>
+      <td>tipodepropiedad_Casa</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>68</td>
       <td>tipo_propiedad_compartida</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>69</td>
+      <td>delincuencia</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>70</td>
+      <td>tipodepropiedad_Edificio</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>71</td>
+      <td>provincia_Yucatán</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>72</td>
+      <td>provincia_Veracruz</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>73</td>
+      <td>provincia_Puebla</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>74</td>
+      <td>provincia_Jalisco</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>75</td>
+      <td>provincia_Guanajuato</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>76</td>
+      <td>provincia_Querétaro</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>77</td>
+      <td>zona_Norte</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>78</td>
+      <td>zona_Sur</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>79</td>
+      <td>provincia_Guerrero</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>80</td>
+      <td>provincia_Nuevo León</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>81</td>
+      <td>provincia_Distrito Federal</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>82</td>
+      <td>provincia_Quintana Roo</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>83</td>
+      <td>tipodepropiedad_Duplex</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>84</td>
+      <td>tipodepropiedad_Quinta Vacacional</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>85</td>
+      <td>provincia_Hidalgo</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>86</td>
+      <td>tipodepropiedad_Bodega comercial</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>87</td>
+      <td>tipodepropiedad_Oficina comercial</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>88</td>
+      <td>provincia_Tabasco</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>89</td>
+      <td>provincia_Chihuahua</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>90</td>
+      <td>tipodepropiedad_Casa uso de suelo</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>91</td>
+      <td>provincia_Aguascalientes</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>92</td>
+      <td>provincia_Nayarit</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>93</td>
+      <td>tipodepropiedad_Inmuebles productivos urbanos</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>94</td>
+      <td>tipodepropiedad_Otros</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>95</td>
+      <td>provincia_Oaxaca</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>96</td>
+      <td>zona_Centro</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>97</td>
+      <td>provincia_Coahuila</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>98</td>
+      <td>provincia_Baja California Norte</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>99</td>
+      <td>tipodepropiedad_Departamento Compartido</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>100</td>
+      <td>provincia_San luis Potosí</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>101</td>
+      <td>tipodepropiedad_otro</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>102</td>
+      <td>tipodepropiedad_Rancho</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>103</td>
+      <td>tipodepropiedad_Local en centro comercial</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>104</td>
+      <td>provincia_Morelos</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>105</td>
+      <td>provincia_Chiapas</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>106</td>
+      <td>provincia_Colima</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>107</td>
+      <td>provincia_Sinaloa</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>108</td>
+      <td>tipodepropiedad_Villa</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>109</td>
+      <td>provincia_Baja California Sur</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>110</td>
+      <td>provincia_Campeche</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>111</td>
+      <td>provincia_Tlaxcala</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>112</td>
+      <td>provincia_otro</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>113</td>
+      <td>provincia_Durango</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>114</td>
+      <td>provincia_Tamaulipas</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>115</td>
+      <td>provincia_Sonora</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>116</td>
+      <td>provincia_Michoacán</td>
     </tr>
   </tbody>
 </table>
@@ -14468,46 +14417,1378 @@ Fitting estimator with 63 features.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;habitaciones&#39;,
- &#39;garages&#39;,
- &#39;banos&#39;,
+<pre>[&#39;antiguedad&#39;,
  &#39;metroscubiertos&#39;,
  &#39;metrostotales&#39;,
  &#39;lat&#39;,
  &#39;lng&#39;,
- &#39;piscina&#39;,
+ &#39;promedio_metros_tipo_propiedad&#39;,
+ &#39;dias_desde_datos&#39;,
+ &#39;tam_ambientes&#39;,
+ &#39;varianza_precio_ciudad&#39;,
+ &#39;promedio_id_zona&#39;,
+ &#39;promedio_id_zona_gen&#39;,
+ &#39;varianza_id_zona&#39;,
+ &#39;count_id_zona&#39;,
+ &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
+ &#39;promedio_por_mes&#39;,
+ &#39;promedio_precio_habitaciones_banos_garages&#39;,
+ &#39;promedio_precio_hbg_tipo_propiedad&#39;,
+ &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;,
+ &#39;puntaje&#39;,
+ &#39;idf_titulo&#39;,
+ &#39;idf_descripcion&#39;,
+ &#39;distancia_ciudad_centrica&#39;,
+ &#39;distancia_centro_mexico&#39;,
+ &#39;distancia_ciudad_cara&#39;,
+ &#39;ranking_en_provincia_tipodepropiedad&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Recursive-Feature-Elimination-w/-Cross-Validation-(RFECV)">Recursive Feature Elimination w/ Cross Validation (RFECV)<a class="anchor-link" href="#Recursive-Feature-Elimination-w/-Cross-Validation-(RFECV)">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFECV</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_provincia_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_ciudad_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Edo. de México&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Nuevo León&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Querétaro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_San luis Potosí&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Yucatán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span>
+ <span class="s1">&#39;zona_Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">selector</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/camix/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py:1978: FutureWarning: The default value of cv will change from 3 to 5 in version 0.22. Specify it explicitly to silence this warning.
+  warnings.warn(CV_WARNING, FutureWarning)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting estimator with 130 features.
+Fitting estimator with 129 features.
+Fitting estimator with 128 features.
+Fitting estimator with 127 features.
+Fitting estimator with 126 features.
+Fitting estimator with 125 features.
+Fitting estimator with 124 features.
+Fitting estimator with 123 features.
+Fitting estimator with 122 features.
+Fitting estimator with 121 features.
+Fitting estimator with 120 features.
+Fitting estimator with 119 features.
+Fitting estimator with 118 features.
+Fitting estimator with 117 features.
+Fitting estimator with 116 features.
+Fitting estimator with 115 features.
+Fitting estimator with 114 features.
+Fitting estimator with 113 features.
+Fitting estimator with 112 features.
+Fitting estimator with 111 features.
+Fitting estimator with 110 features.
+Fitting estimator with 109 features.
+Fitting estimator with 108 features.
+Fitting estimator with 107 features.
+Fitting estimator with 106 features.
+Fitting estimator with 105 features.
+Fitting estimator with 104 features.
+Fitting estimator with 103 features.
+Fitting estimator with 102 features.
+Fitting estimator with 101 features.
+Fitting estimator with 100 features.
+Fitting estimator with 99 features.
+Fitting estimator with 98 features.
+Fitting estimator with 97 features.
+Fitting estimator with 96 features.
+Fitting estimator with 95 features.
+Fitting estimator with 94 features.
+Fitting estimator with 93 features.
+Fitting estimator with 92 features.
+Fitting estimator with 91 features.
+Fitting estimator with 90 features.
+Fitting estimator with 89 features.
+Fitting estimator with 88 features.
+Fitting estimator with 87 features.
+Fitting estimator with 86 features.
+Fitting estimator with 85 features.
+Fitting estimator with 84 features.
+Fitting estimator with 83 features.
+Fitting estimator with 82 features.
+Fitting estimator with 81 features.
+Fitting estimator with 80 features.
+Fitting estimator with 79 features.
+Fitting estimator with 78 features.
+Fitting estimator with 77 features.
+Fitting estimator with 76 features.
+Fitting estimator with 75 features.
+Fitting estimator with 74 features.
+Fitting estimator with 73 features.
+Fitting estimator with 72 features.
+Fitting estimator with 71 features.
+Fitting estimator with 70 features.
+Fitting estimator with 69 features.
+Fitting estimator with 68 features.
+Fitting estimator with 67 features.
+Fitting estimator with 66 features.
+Fitting estimator with 65 features.
+Fitting estimator with 64 features.
+Fitting estimator with 63 features.
+Fitting estimator with 62 features.
+Fitting estimator with 61 features.
+Fitting estimator with 60 features.
+Fitting estimator with 59 features.
+Fitting estimator with 58 features.
+Fitting estimator with 57 features.
+Fitting estimator with 56 features.
+Fitting estimator with 55 features.
+Fitting estimator with 54 features.
+Fitting estimator with 53 features.
+Fitting estimator with 52 features.
+Fitting estimator with 51 features.
+Fitting estimator with 50 features.
+Fitting estimator with 49 features.
+Fitting estimator with 48 features.
+Fitting estimator with 47 features.
+Fitting estimator with 46 features.
+Fitting estimator with 45 features.
+Fitting estimator with 44 features.
+Fitting estimator with 43 features.
+Fitting estimator with 42 features.
+Fitting estimator with 41 features.
+Fitting estimator with 40 features.
+Fitting estimator with 39 features.
+Fitting estimator with 38 features.
+Fitting estimator with 37 features.
+Fitting estimator with 36 features.
+Fitting estimator with 35 features.
+Fitting estimator with 34 features.
+Fitting estimator with 33 features.
+Fitting estimator with 32 features.
+Fitting estimator with 31 features.
+Fitting estimator with 30 features.
+Fitting estimator with 29 features.
+Fitting estimator with 28 features.
+Fitting estimator with 27 features.
+Fitting estimator with 26 features.
+Fitting estimator with 25 features.
+Fitting estimator with 24 features.
+Fitting estimator with 23 features.
+Fitting estimator with 22 features.
+Fitting estimator with 21 features.
+Fitting estimator with 20 features.
+Fitting estimator with 19 features.
+Fitting estimator with 18 features.
+Fitting estimator with 17 features.
+Fitting estimator with 16 features.
+Fitting estimator with 15 features.
+Fitting estimator with 14 features.
+Fitting estimator with 13 features.
+Fitting estimator with 12 features.
+Fitting estimator with 11 features.
+Fitting estimator with 10 features.
+Fitting estimator with 9 features.
+Fitting estimator with 8 features.
+Fitting estimator with 7 features.
+Fitting estimator with 6 features.
+Fitting estimator with 5 features.
+Fitting estimator with 4 features.
+Fitting estimator with 3 features.
+Fitting estimator with 2 features.
+Fitting estimator with 130 features.
+Fitting estimator with 129 features.
+Fitting estimator with 128 features.
+Fitting estimator with 127 features.
+Fitting estimator with 126 features.
+Fitting estimator with 125 features.
+Fitting estimator with 124 features.
+Fitting estimator with 123 features.
+Fitting estimator with 122 features.
+Fitting estimator with 121 features.
+Fitting estimator with 120 features.
+Fitting estimator with 119 features.
+Fitting estimator with 118 features.
+Fitting estimator with 117 features.
+Fitting estimator with 116 features.
+Fitting estimator with 115 features.
+Fitting estimator with 114 features.
+Fitting estimator with 113 features.
+Fitting estimator with 112 features.
+Fitting estimator with 111 features.
+Fitting estimator with 110 features.
+Fitting estimator with 109 features.
+Fitting estimator with 108 features.
+Fitting estimator with 107 features.
+Fitting estimator with 106 features.
+Fitting estimator with 105 features.
+Fitting estimator with 104 features.
+Fitting estimator with 103 features.
+Fitting estimator with 102 features.
+Fitting estimator with 101 features.
+Fitting estimator with 100 features.
+Fitting estimator with 99 features.
+Fitting estimator with 98 features.
+Fitting estimator with 97 features.
+Fitting estimator with 96 features.
+Fitting estimator with 95 features.
+Fitting estimator with 94 features.
+Fitting estimator with 93 features.
+Fitting estimator with 92 features.
+Fitting estimator with 91 features.
+Fitting estimator with 90 features.
+Fitting estimator with 89 features.
+Fitting estimator with 88 features.
+Fitting estimator with 87 features.
+Fitting estimator with 86 features.
+Fitting estimator with 85 features.
+Fitting estimator with 84 features.
+Fitting estimator with 83 features.
+Fitting estimator with 82 features.
+Fitting estimator with 81 features.
+Fitting estimator with 80 features.
+Fitting estimator with 79 features.
+Fitting estimator with 78 features.
+Fitting estimator with 77 features.
+Fitting estimator with 76 features.
+Fitting estimator with 75 features.
+Fitting estimator with 74 features.
+Fitting estimator with 73 features.
+Fitting estimator with 72 features.
+Fitting estimator with 71 features.
+Fitting estimator with 70 features.
+Fitting estimator with 69 features.
+Fitting estimator with 68 features.
+Fitting estimator with 67 features.
+Fitting estimator with 66 features.
+Fitting estimator with 65 features.
+Fitting estimator with 64 features.
+Fitting estimator with 63 features.
+Fitting estimator with 62 features.
+Fitting estimator with 61 features.
+Fitting estimator with 60 features.
+Fitting estimator with 59 features.
+Fitting estimator with 58 features.
+Fitting estimator with 57 features.
+Fitting estimator with 56 features.
+Fitting estimator with 55 features.
+Fitting estimator with 54 features.
+Fitting estimator with 53 features.
+Fitting estimator with 52 features.
+Fitting estimator with 51 features.
+Fitting estimator with 50 features.
+Fitting estimator with 49 features.
+Fitting estimator with 48 features.
+Fitting estimator with 47 features.
+Fitting estimator with 46 features.
+Fitting estimator with 45 features.
+Fitting estimator with 44 features.
+Fitting estimator with 43 features.
+Fitting estimator with 42 features.
+Fitting estimator with 41 features.
+Fitting estimator with 40 features.
+Fitting estimator with 39 features.
+Fitting estimator with 38 features.
+Fitting estimator with 37 features.
+Fitting estimator with 36 features.
+Fitting estimator with 35 features.
+Fitting estimator with 34 features.
+Fitting estimator with 33 features.
+Fitting estimator with 32 features.
+Fitting estimator with 31 features.
+Fitting estimator with 30 features.
+Fitting estimator with 29 features.
+Fitting estimator with 28 features.
+Fitting estimator with 27 features.
+Fitting estimator with 26 features.
+Fitting estimator with 25 features.
+Fitting estimator with 24 features.
+Fitting estimator with 23 features.
+Fitting estimator with 22 features.
+Fitting estimator with 21 features.
+Fitting estimator with 20 features.
+Fitting estimator with 19 features.
+Fitting estimator with 18 features.
+Fitting estimator with 17 features.
+Fitting estimator with 16 features.
+Fitting estimator with 15 features.
+Fitting estimator with 14 features.
+Fitting estimator with 13 features.
+Fitting estimator with 12 features.
+Fitting estimator with 11 features.
+Fitting estimator with 10 features.
+Fitting estimator with 9 features.
+Fitting estimator with 8 features.
+Fitting estimator with 7 features.
+Fitting estimator with 6 features.
+Fitting estimator with 5 features.
+Fitting estimator with 4 features.
+Fitting estimator with 3 features.
+Fitting estimator with 2 features.
+Fitting estimator with 130 features.
+Fitting estimator with 129 features.
+Fitting estimator with 128 features.
+Fitting estimator with 127 features.
+Fitting estimator with 126 features.
+Fitting estimator with 125 features.
+Fitting estimator with 124 features.
+Fitting estimator with 123 features.
+Fitting estimator with 122 features.
+Fitting estimator with 121 features.
+Fitting estimator with 120 features.
+Fitting estimator with 119 features.
+Fitting estimator with 118 features.
+Fitting estimator with 117 features.
+Fitting estimator with 116 features.
+Fitting estimator with 115 features.
+Fitting estimator with 114 features.
+Fitting estimator with 113 features.
+Fitting estimator with 112 features.
+Fitting estimator with 111 features.
+Fitting estimator with 110 features.
+Fitting estimator with 109 features.
+Fitting estimator with 108 features.
+Fitting estimator with 107 features.
+Fitting estimator with 106 features.
+Fitting estimator with 105 features.
+Fitting estimator with 104 features.
+Fitting estimator with 103 features.
+Fitting estimator with 102 features.
+Fitting estimator with 101 features.
+Fitting estimator with 100 features.
+Fitting estimator with 99 features.
+Fitting estimator with 98 features.
+Fitting estimator with 97 features.
+Fitting estimator with 96 features.
+Fitting estimator with 95 features.
+Fitting estimator with 94 features.
+Fitting estimator with 93 features.
+Fitting estimator with 92 features.
+Fitting estimator with 91 features.
+Fitting estimator with 90 features.
+Fitting estimator with 89 features.
+Fitting estimator with 88 features.
+Fitting estimator with 87 features.
+Fitting estimator with 86 features.
+Fitting estimator with 85 features.
+Fitting estimator with 84 features.
+Fitting estimator with 83 features.
+Fitting estimator with 82 features.
+Fitting estimator with 81 features.
+Fitting estimator with 80 features.
+Fitting estimator with 79 features.
+Fitting estimator with 78 features.
+Fitting estimator with 77 features.
+Fitting estimator with 76 features.
+Fitting estimator with 75 features.
+Fitting estimator with 74 features.
+Fitting estimator with 73 features.
+Fitting estimator with 72 features.
+Fitting estimator with 71 features.
+Fitting estimator with 70 features.
+Fitting estimator with 69 features.
+Fitting estimator with 68 features.
+Fitting estimator with 67 features.
+Fitting estimator with 66 features.
+Fitting estimator with 65 features.
+Fitting estimator with 64 features.
+Fitting estimator with 63 features.
+Fitting estimator with 62 features.
+Fitting estimator with 61 features.
+Fitting estimator with 60 features.
+Fitting estimator with 59 features.
+Fitting estimator with 58 features.
+Fitting estimator with 57 features.
+Fitting estimator with 56 features.
+Fitting estimator with 55 features.
+Fitting estimator with 54 features.
+Fitting estimator with 53 features.
+Fitting estimator with 52 features.
+Fitting estimator with 51 features.
+Fitting estimator with 50 features.
+Fitting estimator with 49 features.
+Fitting estimator with 48 features.
+Fitting estimator with 47 features.
+Fitting estimator with 46 features.
+Fitting estimator with 45 features.
+Fitting estimator with 44 features.
+Fitting estimator with 43 features.
+Fitting estimator with 42 features.
+Fitting estimator with 41 features.
+Fitting estimator with 40 features.
+Fitting estimator with 39 features.
+Fitting estimator with 38 features.
+Fitting estimator with 37 features.
+Fitting estimator with 36 features.
+Fitting estimator with 35 features.
+Fitting estimator with 34 features.
+Fitting estimator with 33 features.
+Fitting estimator with 32 features.
+Fitting estimator with 31 features.
+Fitting estimator with 30 features.
+Fitting estimator with 29 features.
+Fitting estimator with 28 features.
+Fitting estimator with 27 features.
+Fitting estimator with 26 features.
+Fitting estimator with 25 features.
+Fitting estimator with 24 features.
+Fitting estimator with 23 features.
+Fitting estimator with 22 features.
+Fitting estimator with 21 features.
+Fitting estimator with 20 features.
+Fitting estimator with 19 features.
+Fitting estimator with 18 features.
+Fitting estimator with 17 features.
+Fitting estimator with 16 features.
+Fitting estimator with 15 features.
+Fitting estimator with 14 features.
+Fitting estimator with 13 features.
+Fitting estimator with 12 features.
+Fitting estimator with 11 features.
+Fitting estimator with 10 features.
+Fitting estimator with 9 features.
+Fitting estimator with 8 features.
+Fitting estimator with 7 features.
+Fitting estimator with 6 features.
+Fitting estimator with 5 features.
+Fitting estimator with 4 features.
+Fitting estimator with 3 features.
+Fitting estimator with 2 features.
+Fitting estimator with 130 features.
+Fitting estimator with 129 features.
+Fitting estimator with 128 features.
+Fitting estimator with 127 features.
+Fitting estimator with 126 features.
+Fitting estimator with 125 features.
+Fitting estimator with 124 features.
+Fitting estimator with 123 features.
+Fitting estimator with 122 features.
+Fitting estimator with 121 features.
+Fitting estimator with 120 features.
+Fitting estimator with 119 features.
+Fitting estimator with 118 features.
+Fitting estimator with 117 features.
+Fitting estimator with 116 features.
+Fitting estimator with 115 features.
+Fitting estimator with 114 features.
+Fitting estimator with 113 features.
+Fitting estimator with 112 features.
+Fitting estimator with 111 features.
+Fitting estimator with 110 features.
+Fitting estimator with 109 features.
+Fitting estimator with 108 features.
+Fitting estimator with 107 features.
+Fitting estimator with 106 features.
+Fitting estimator with 105 features.
+Fitting estimator with 104 features.
+Fitting estimator with 103 features.
+Fitting estimator with 102 features.
+Fitting estimator with 101 features.
+Fitting estimator with 100 features.
+Fitting estimator with 99 features.
+Fitting estimator with 98 features.
+Fitting estimator with 97 features.
+Fitting estimator with 96 features.
+Fitting estimator with 95 features.
+Fitting estimator with 94 features.
+Fitting estimator with 93 features.
+Fitting estimator with 92 features.
+Fitting estimator with 91 features.
+Fitting estimator with 90 features.
+Fitting estimator with 89 features.
+Fitting estimator with 88 features.
+Fitting estimator with 87 features.
+Fitting estimator with 86 features.
+Fitting estimator with 85 features.
+Fitting estimator with 84 features.
+Fitting estimator with 83 features.
+Fitting estimator with 82 features.
+Fitting estimator with 81 features.
+Fitting estimator with 80 features.
+Fitting estimator with 79 features.
+Fitting estimator with 78 features.
+Fitting estimator with 77 features.
+Fitting estimator with 76 features.
+Fitting estimator with 75 features.
+Fitting estimator with 74 features.
+Fitting estimator with 73 features.
+Fitting estimator with 72 features.
+Fitting estimator with 71 features.
+Fitting estimator with 70 features.
+Fitting estimator with 69 features.
+Fitting estimator with 68 features.
+Fitting estimator with 67 features.
+Fitting estimator with 66 features.
+Fitting estimator with 65 features.
+Fitting estimator with 64 features.
+Fitting estimator with 63 features.
+Fitting estimator with 62 features.
+Fitting estimator with 61 features.
+Fitting estimator with 60 features.
+Fitting estimator with 59 features.
+Fitting estimator with 58 features.
+Fitting estimator with 57 features.
+Fitting estimator with 56 features.
+Fitting estimator with 55 features.
+Fitting estimator with 54 features.
+Fitting estimator with 53 features.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;metroscubiertos&#39;,
+       &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;metrostotales_log&#39;,
+       &#39;metroscubiertos_log&#39;, &#39;porcentaje_metros&#39;, &#39;diferencia_metros&#39;,
+       &#39;promedio_metros_tipo_propiedad&#39;, &#39;promedio_metros_cub_tipo_propiedad&#39;,
+       &#39;top_provincia&#39;, &#39;promedio_metros_totales_provincia&#39;,
+       &#39;promedio_metros_cubiertos_provincia&#39;, &#39;mes&#39;, &#39;dia&#39;, &#39;dias_desde_datos&#39;,
+       &#39;meses_desde_datos&#39;, &#39;antiguedad_bins_perc&#39;, &#39;cantidad_inquilinos&#39;,
+       &#39;tam_ambientes&#39;, &#39;metros_totales_normalizados&#39;,
+       &#39;metros_cubiertos_normalizados&#39;, &#39;promedio_precio_ciudad&#39;,
+       &#39;promedio_ciudad_log&#39;, &#39;varianza_precio_ciudad&#39;, &#39;count_ciudad&#39;,
+       &#39;promedio_id_zona&#39;, &#39;promedio_id_zona_log&#39;, &#39;promedio_id_zona_gen&#39;,
+       &#39;varianza_id_zona&#39;, &#39;count_id_zona&#39;, &#39;promedio_precio_tipo_propiedad&#39;,
+       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
+       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;, &#39;count_tipo_propiedad&#39;,
+       &#39;count_tipo_propiedad_ciudad&#39;, &#39;promedio_por_mes&#39;, &#39;varianza_por_mes&#39;,
+       &#39;promedio_precio_habitaciones_banos_garages&#39;,
+       &#39;promedio_precio_banos_garages&#39;, &#39;promedio_precio_hbg_tipo_propiedad&#39;,
+       &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;lat_norm&#39;, &#39;lng_norm&#39;,
+       &#39;puntaje&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;, &#39;peso_descripcion&#39;,
+       &#39;distancia_ciudad_centrica&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> 
+        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        
+<span class="n">df_ranks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;col&#39;</span><span class="p">])</span>
+<span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">full_display</span><span class="p">(</span><span class="n">df_ranks</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">))</span>
+
+<span class="n">df_ranks</span><span class="p">[</span><span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rank</th>
+      <th>col</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>antiguedad</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>1</td>
+      <td>cantidad_inquilinos</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>1</td>
+      <td>tam_ambientes</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>1</td>
+      <td>metros_totales_normalizados</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>1</td>
+      <td>metros_cubiertos_normalizados</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>1</td>
+      <td>promedio_precio_ciudad</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>1</td>
+      <td>promedio_ciudad_log</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>1</td>
+      <td>varianza_precio_ciudad</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>1</td>
+      <td>count_ciudad</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>1</td>
+      <td>promedio_id_zona</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>1</td>
+      <td>promedio_id_zona_log</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>1</td>
+      <td>promedio_id_zona_gen</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>1</td>
+      <td>varianza_id_zona</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>1</td>
+      <td>count_id_zona</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>1</td>
+      <td>promedio_precio_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>1</td>
+      <td>promedio_precio_tipo_propiedad_ciudad</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>1</td>
+      <td>promedio_precio_tipo_propiedad_ciudad_gen</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>1</td>
+      <td>count_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>1</td>
+      <td>count_tipo_propiedad_ciudad</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>1</td>
+      <td>promedio_por_mes</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>1</td>
+      <td>varianza_por_mes</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>1</td>
+      <td>promedio_precio_habitaciones_banos_garages</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>1</td>
+      <td>peso_descripcion</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>1</td>
+      <td>promedio_precio_hbg_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>1</td>
+      <td>promedio_precio_hbg_tipo_propiedad_provincia</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>1</td>
+      <td>lat_norm</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>1</td>
+      <td>lng_norm</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>1</td>
+      <td>puntaje</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>1</td>
+      <td>idf_titulo</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>1</td>
+      <td>idf_descripcion</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>1</td>
+      <td>antiguedad_bins_perc</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>1</td>
+      <td>meses_desde_datos</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>1</td>
+      <td>promedio_precio_banos_garages</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>1</td>
+      <td>distancia_ciudad_centrica</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>metroscubiertos_log</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>metrostotales_log</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1</td>
+      <td>promedio_metros_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>1</td>
+      <td>promedio_metros_cub_tipo_propiedad</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>lng</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>lat</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>1</td>
+      <td>top_provincia</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>metrostotales</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>porcentaje_metros</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>metroscubiertos</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>1</td>
+      <td>promedio_metros_totales_provincia</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>1</td>
+      <td>promedio_metros_cubiertos_provincia</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1</td>
+      <td>mes</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>1</td>
+      <td>dia</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>1</td>
+      <td>dias_desde_datos</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>garages</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>habitaciones</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>diferencia_metros</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>2</td>
+      <td>promedio_precio_provincia</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>3</td>
+      <td>promedio_precio_booleanos</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>4</td>
+      <td>centroscomercialescercanos</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>banos</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>6</td>
+      <td>trimestre</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>7</td>
+      <td>promedio_precio_habitaciones</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>8</td>
+      <td>escuelascercanas</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>9</td>
+      <td>peso_titulo</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>10</td>
+      <td>anio</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>11</td>
+      <td>escomercial</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>12</td>
+      <td>es_ciudad_centrica</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>13</td>
+      <td>piscina</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>14</td>
+      <td>promedio_provincia_log</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>15</td>
+      <td>promedio_precio_ciudad_gen</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>16</td>
+      <td>tipodepropiedad_Terreno</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>17</td>
+      <td>antiguedad_bins_unif</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>metroscubiertos_bins_unif</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>19</td>
+      <td>tipodepropiedad_Local Comercial</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>20</td>
+      <td>prop_frecuente</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>21</td>
+      <td>tipodepropiedad_Apartamento</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>22</td>
+      <td>tipodepropiedad_Terreno comercial</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>23</td>
+      <td>metroscubiertos_bins_perc</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>24</td>
+      <td>provincia_Edo. de México</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>25</td>
+      <td>turismo</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>26</td>
+      <td>delincuencia</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>27</td>
+      <td>provincia_Tabasco</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>28</td>
+      <td>tipo_propiedad_compartida</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>29</td>
+      <td>tipodepropiedad_Casa</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>30</td>
+      <td>es_antigua</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>31</td>
+      <td>gimnasio</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>32</td>
+      <td>tipodepropiedad_Casa en condominio</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>33</td>
+      <td>provincia_Jalisco</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>34</td>
+      <td>tipodepropiedad_Oficina comercial</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>35</td>
+      <td>usosmultiples</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>36</td>
+      <td>provincia_Guanajuato</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>37</td>
+      <td>zona_Sur</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>38</td>
+      <td>provincia_Guerrero</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>39</td>
+      <td>zona_Centro</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>40</td>
+      <td>tipodepropiedad_Edificio</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>41</td>
+      <td>provincia_Nuevo León</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>42</td>
+      <td>provincia_Morelos</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>43</td>
+      <td>tipodepropiedad_Local en centro comercial</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>44</td>
+      <td>provincia_Distrito Federal</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>45</td>
+      <td>provincia_Yucatán</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>46</td>
+      <td>zona_Norte</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>47</td>
+      <td>tipodepropiedad_Duplex</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>48</td>
+      <td>tipodepropiedad_Inmuebles productivos urbanos</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>49</td>
+      <td>provincia_Hidalgo</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>50</td>
+      <td>tipodepropiedad_Bodega comercial</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>51</td>
+      <td>provincia_Puebla</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>52</td>
+      <td>tipodepropiedad_Casa uso de suelo</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>53</td>
+      <td>provincia_Chihuahua</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>54</td>
+      <td>provincia_Nayarit</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>55</td>
+      <td>provincia_Veracruz</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>56</td>
+      <td>provincia_Aguascalientes</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>57</td>
+      <td>provincia_Durango</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>58</td>
+      <td>provincia_Coahuila</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>59</td>
+      <td>tipodepropiedad_Otros</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>60</td>
+      <td>provincia_Chiapas</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>61</td>
+      <td>provincia_Michoacán</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>62</td>
+      <td>tipodepropiedad_Departamento Compartido</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>63</td>
+      <td>tipodepropiedad_Rancho</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>64</td>
+      <td>provincia_Colima</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>65</td>
+      <td>provincia_Campeche</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>66</td>
+      <td>provincia_Tamaulipas</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>67</td>
+      <td>provincia_Baja California Sur</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>68</td>
+      <td>tipodepropiedad_Quinta Vacacional</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>69</td>
+      <td>provincia_otro</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>70</td>
+      <td>provincia_San luis Potosí</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>71</td>
+      <td>tipodepropiedad_otro</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>72</td>
+      <td>provincia_Quintana Roo</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>73</td>
+      <td>tipodepropiedad_Villa</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>74</td>
+      <td>provincia_Baja California Norte</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>75</td>
+      <td>provincia_Sonora</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>76</td>
+      <td>provincia_Querétaro</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>77</td>
+      <td>provincia_Oaxaca</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>78</td>
+      <td>provincia_Sinaloa</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>79</td>
+      <td>provincia_Tlaxcala</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;antiguedad&#39;,
+ &#39;habitaciones&#39;,
+ &#39;garages&#39;,
+ &#39;metroscubiertos&#39;,
+ &#39;metrostotales&#39;,
+ &#39;lat&#39;,
+ &#39;lng&#39;,
  &#39;metrostotales_log&#39;,
  &#39;metroscubiertos_log&#39;,
  &#39;porcentaje_metros&#39;,
  &#39;diferencia_metros&#39;,
- &#39;escomercial&#39;,
  &#39;promedio_metros_tipo_propiedad&#39;,
  &#39;promedio_metros_cub_tipo_propiedad&#39;,
  &#39;top_provincia&#39;,
- &#39;es_ciudad_centrica&#39;,
  &#39;promedio_metros_totales_provincia&#39;,
  &#39;promedio_metros_cubiertos_provincia&#39;,
- &#39;anio&#39;,
  &#39;mes&#39;,
  &#39;dia&#39;,
- &#39;trimestre&#39;,
  &#39;dias_desde_datos&#39;,
  &#39;meses_desde_datos&#39;,
- &#39;antiguedad_bins_unif&#39;,
  &#39;antiguedad_bins_perc&#39;,
  &#39;cantidad_inquilinos&#39;,
  &#39;tam_ambientes&#39;,
  &#39;metros_totales_normalizados&#39;,
  &#39;metros_cubiertos_normalizados&#39;,
- &#39;promedio_precio_provincia&#39;,
  &#39;promedio_precio_ciudad&#39;,
- &#39;promedio_precio_ciudad_gen&#39;,
+ &#39;promedio_ciudad_log&#39;,
  &#39;varianza_precio_ciudad&#39;,
  &#39;count_ciudad&#39;,
  &#39;promedio_id_zona&#39;,
@@ -14522,18 +15803,15 @@ Fitting estimator with 63 features.
  &#39;count_tipo_propiedad_ciudad&#39;,
  &#39;promedio_por_mes&#39;,
  &#39;varianza_por_mes&#39;,
- &#39;promedio_precio_habitaciones&#39;,
  &#39;promedio_precio_habitaciones_banos_garages&#39;,
  &#39;promedio_precio_banos_garages&#39;,
  &#39;promedio_precio_hbg_tipo_propiedad&#39;,
  &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;,
  &#39;lat_norm&#39;,
  &#39;lng_norm&#39;,
- &#39;promedio_precio_booleanos&#39;,
  &#39;puntaje&#39;,
  &#39;idf_titulo&#39;,
  &#39;idf_descripcion&#39;,
- &#39;peso_titulo&#39;,
  &#39;peso_descripcion&#39;,
  &#39;distancia_ciudad_centrica&#39;]</pre>
 </div>
