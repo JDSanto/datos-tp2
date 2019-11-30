@@ -13017,45 +13017,6 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -13115,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
@@ -13146,7 +13107,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13184,46 +13145,20 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="o">.</span><span class="n">columns</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">df_train_f</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
-       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;,
-       ...
-       &#39;provincia_Yucatán&#39;, &#39;provincia_otro&#39;, &#39;zona_Centro&#39;, &#39;zona_Norte &#39;,
-       &#39;zona_Sur&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;, &#39;peso_titulo&#39;,
-       &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
-      dtype=&#39;object&#39;, length=145)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13283,13 +13218,62 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">f_regression</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">mutual_info_regression</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Edo. de Mxico&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacn&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nuevo Len&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quertaro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_San luis Potos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Yucatn&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Sur&#39;</span><span class="p">]</span> 
+<span class="k">def</span> <span class="nf">selectKBest</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">selector_kbest</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">selector_kbest</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">kbest</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector_kbest</span><span class="o">.</span><span class="n">get_support</span><span class="p">()])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cantidad de mejores features (k): &#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kbest</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">kbest</span>
+</pre></div>
 
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Edo. de Mxico&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacn&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Nuevo Len&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quertaro&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_San luis Potos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;provincia_Yucatn&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Sur&#39;</span><span class="p">]</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cantidad de features totales: &#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)))</span>
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 
-<span class="n">selector_kbest</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">selector_kbest</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector_kbest</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+<span class="n">selectKBest</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13320,64 +13304,44 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">SelectFromModel</span>
 
-<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-<span class="n">lgb_m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># Los k Features mas importantes</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+<span class="k">def</span> <span class="nf">selectFromModel</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">lgb_m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;metrostotales_log&#39;,
-       &#39;metroscubiertos_log&#39;, &#39;porcentaje_metros&#39;,
-       &#39;promedio_metros_tipo_propiedad&#39;, &#39;dias_desde_datos&#39;,
-       &#39;antiguedad_bins_perc&#39;, &#39;tam_ambientes&#39;, &#39;varianza_precio_ciudad&#39;,
-       &#39;promedio_id_zona&#39;, &#39;promedio_id_zona_log&#39;, &#39;promedio_id_zona_gen&#39;,
-       &#39;varianza_id_zona&#39;, &#39;count_id_zona&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;,
-       &#39;count_tipo_propiedad_ciudad&#39;, &#39;promedio_por_mes&#39;, &#39;varianza_por_mes&#39;,
-       &#39;promedio_precio_habitaciones_banos_garages&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;puntaje&#39;, &#39;idf_titulo&#39;,
-       &#39;idf_descripcion&#39;],
-      dtype=&#39;object&#39;)</pre>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">selectFromModel</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
 
-</div>
-
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">SelectFromModel</span>
-
-<span class="n">features_sub</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features_sub</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> 
        <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
        <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
        <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span>
@@ -13386,69 +13350,10 @@ div#notebook {
        <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span>  <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
        <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">]</span>
 
-<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-<span class="n">lgb_m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">features_sub</span><span class="p">],</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">x_train</span><span class="p">[</span><span class="n">features_sub</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+<span class="n">selectFromModel</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">features_sub</span><span class="p">],</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-15-196f256e4712&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     11</span> 
-<span class="ansi-green-intense-fg ansi-bold">     12</span> lgb_m <span class="ansi-blue-fg">=</span> LightGBMWrapper<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">**</span>params<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 13</span><span class="ansi-red-fg"> </span>lgb_m<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>x_train<span class="ansi-blue-fg">[</span>features_sub<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> y_train<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     14</span> 
-<span class="ansi-green-intense-fg ansi-bold">     15</span> model <span class="ansi-blue-fg">=</span> SelectFromModel<span class="ansi-blue-fg">(</span>lgb_m<span class="ansi-blue-fg">,</span> prefit<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2932</span>                 key <span class="ansi-blue-fg">=</span> list<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2933</span>             indexer = self.loc._convert_to_indexer(key, axis=1,
-<span class="ansi-green-fg">-&gt; 2934</span><span class="ansi-red-fg">                                                    raise_missing=True)
-</span><span class="ansi-green-intense-fg ansi-bold">   2935</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2936</span>         <span class="ansi-red-fg"># take() does not accept boolean indexers</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_convert_to_indexer</span><span class="ansi-blue-fg">(self, obj, axis, is_setter, raise_missing)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1352</span>                 kwargs = {&#39;raise_missing&#39;: True if is_setter else
-<span class="ansi-green-intense-fg ansi-bold">   1353</span>                           raise_missing}
-<span class="ansi-green-fg">-&gt; 1354</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get_listlike_indexer<span class="ansi-blue-fg">(</span>obj<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">   1355</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1356</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_get_listlike_indexer</span><span class="ansi-blue-fg">(self, key, axis, raise_missing)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1159</span>         self._validate_read_indexer(keyarr, indexer,
-<span class="ansi-green-intense-fg ansi-bold">   1160</span>                                     o<span class="ansi-blue-fg">.</span>_get_axis_number<span class="ansi-blue-fg">(</span>axis<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">-&gt; 1161</span><span class="ansi-red-fg">                                     raise_missing=raise_missing)
-</span><span class="ansi-green-intense-fg ansi-bold">   1162</span>         <span class="ansi-green-fg">return</span> keyarr<span class="ansi-blue-fg">,</span> indexer
-<span class="ansi-green-intense-fg ansi-bold">   1163</span> 
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/pandas/core/indexing.py</span> in <span class="ansi-cyan-fg">_validate_read_indexer</span><span class="ansi-blue-fg">(self, key, indexer, axis, raise_missing)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1250</span>             <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span><span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>name <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;loc&#39;</span> <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> raise_missing<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1251</span>                 not_found <span class="ansi-blue-fg">=</span> list<span class="ansi-blue-fg">(</span>set<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-</span> set<span class="ansi-blue-fg">(</span>ax<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 1252</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;{} not in index&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>not_found<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1253</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1254</span>             <span class="ansi-red-fg"># we skip the warning on Categorical/Interval</span>
-
-<span class="ansi-red-fg">KeyError</span>: &#34;[&#39;antiguedad&#39;] not in index&#34;</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13462,7 +13367,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
@@ -13472,282 +13377,79 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>id                            False
-titulo                         True
-descripcion                    True
-tipodepropiedad               False
-direccion                      True
-ciudad                        False
-provincia                     False
-antiguedad                    False
-habitaciones                  False
-garages                       False
-banos                         False
-metroscubiertos               False
-metrostotales                 False
-idzona                         True
-lat                           False
-lng                           False
-fecha                         False
-gimnasio                      False
-usosmultiples                 False
-piscina                       False
-escuelascercanas              False
-centroscomercialescercanos    False
-precio                        False
-metrostotales_log             False
-metroscubiertos_log           False
-porcentaje_metros             False
-diferencia_metros             False
-intervalo_metros_totales      False
-intervalo_metros_cubiertos    False
-metroscubiertos_bins_unif     False
-                              ...  
-provincia_Edo. de México      False
-provincia_Guanajuato          False
-provincia_Guerrero            False
-provincia_Hidalgo             False
-provincia_Jalisco             False
-provincia_Michoacán           False
-provincia_Morelos             False
-provincia_Nayarit             False
-provincia_Nuevo León          False
-provincia_Oaxaca              False
-provincia_Puebla              False
-provincia_Querétaro           False
-provincia_Quintana Roo        False
-provincia_San luis Potosí     False
-provincia_Sinaloa             False
-provincia_Sonora              False
-provincia_Tabasco             False
-provincia_Tamaulipas          False
-provincia_Tlaxcala            False
-provincia_Veracruz            False
-provincia_Yucatán             False
-provincia_otro                False
-zona_Centro                   False
-zona_Norte                    False
-zona_Sur                      False
-idf_titulo                    False
-idf_descripcion               False
-peso_titulo                   False
-peso_descripcion              False
-distancia_ciudad_centrica     False
-Length: 145, dtype: bool</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFE</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span><span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> 
-
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-
-<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="n">selector</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+<span class="k">def</span> <span class="nf">recursiveFeatureElimination</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;porcentaje_metros&#39;,
-       &#39;promedio_metros_tipo_propiedad&#39;, &#39;dias_desde_datos&#39;, &#39;tam_ambientes&#39;,
-       &#39;promedio_precio_ciudad&#39;, &#39;varianza_precio_ciudad&#39;, &#39;promedio_id_zona&#39;,
-       &#39;promedio_id_zona_gen&#39;, &#39;varianza_id_zona&#39;, &#39;count_id_zona&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;,
-       &#39;count_tipo_propiedad_ciudad&#39;, &#39;varianza_por_mes&#39;,
-       &#39;promedio_precio_habitaciones_banos_garages&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;puntaje&#39;, &#39;idf_titulo&#39;,
-       &#39;idf_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
-      dtype=&#39;object&#39;)</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">37</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">[</span><span class="mi">38</span><span class="p">])</span>
-<span class="n">display</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)[</span><span class="mi">37</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_provincia_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_ciudad_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Edo. de México&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Nuevo León&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Querétaro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_San luis Potosí&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Yucatán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span>
+ <span class="s1">&#39;zona_Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>40</pre>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">recursiveFeatureElimination</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
 
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>22</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>24</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>28</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;metros_cubiertos_normalizados&#39;</pre>
-</div>
-
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -13761,785 +13463,97 @@ Fitting estimator with 26 features.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">RFECV</span>
 
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span><span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span> <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span> <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span><span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> 
+<span class="k">def</span> <span class="nf">recursiveFeatureEliminationCrossValidation</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> 
+            <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df_ranks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;col&#39;</span><span class="p">])</span>
+    <span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-<span class="n">lgb_m</span> <span class="o">=</span> <span class="n">LightGBMWrapper</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="n">selector</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">lgb_m</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Features de rank 1:&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df_ranks</span><span class="p">[</span><span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Todos los ranking:&#39;</span><span class="p">)</span>
+    <span class="n">full_display</span><span class="p">(</span><span class="n">df_ranks</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/camix/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_split.py:1978: FutureWarning: The default value of cv will change from 3 to 5 in version 0.22. Specify it explicitly to silence this warning.
-  warnings.warn(CV_WARNING, FutureWarning)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-Fitting estimator with 62 features.
-Fitting estimator with 61 features.
-Fitting estimator with 60 features.
-Fitting estimator with 59 features.
-Fitting estimator with 58 features.
-Fitting estimator with 57 features.
-Fitting estimator with 56 features.
-Fitting estimator with 55 features.
-Fitting estimator with 54 features.
-Fitting estimator with 53 features.
-Fitting estimator with 52 features.
-Fitting estimator with 51 features.
-Fitting estimator with 50 features.
-Fitting estimator with 49 features.
-Fitting estimator with 48 features.
-Fitting estimator with 47 features.
-Fitting estimator with 46 features.
-Fitting estimator with 45 features.
-Fitting estimator with 44 features.
-Fitting estimator with 43 features.
-Fitting estimator with 42 features.
-Fitting estimator with 41 features.
-Fitting estimator with 40 features.
-Fitting estimator with 39 features.
-Fitting estimator with 38 features.
-Fitting estimator with 37 features.
-Fitting estimator with 36 features.
-Fitting estimator with 35 features.
-Fitting estimator with 34 features.
-Fitting estimator with 33 features.
-Fitting estimator with 32 features.
-Fitting estimator with 31 features.
-Fitting estimator with 30 features.
-Fitting estimator with 29 features.
-Fitting estimator with 28 features.
-Fitting estimator with 27 features.
-Fitting estimator with 26 features.
-Fitting estimator with 25 features.
-Fitting estimator with 24 features.
-Fitting estimator with 23 features.
-Fitting estimator with 22 features.
-Fitting estimator with 21 features.
-Fitting estimator with 20 features.
-Fitting estimator with 19 features.
-Fitting estimator with 18 features.
-Fitting estimator with 17 features.
-Fitting estimator with 16 features.
-Fitting estimator with 15 features.
-Fitting estimator with 14 features.
-Fitting estimator with 13 features.
-Fitting estimator with 12 features.
-Fitting estimator with 11 features.
-Fitting estimator with 10 features.
-Fitting estimator with 9 features.
-Fitting estimator with 8 features.
-Fitting estimator with 7 features.
-Fitting estimator with 6 features.
-Fitting estimator with 5 features.
-Fitting estimator with 4 features.
-Fitting estimator with 3 features.
-Fitting estimator with 2 features.
-Fitting estimator with 69 features.
-Fitting estimator with 68 features.
-Fitting estimator with 67 features.
-Fitting estimator with 66 features.
-Fitting estimator with 65 features.
-Fitting estimator with 64 features.
-Fitting estimator with 63 features.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([&#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;, &#39;metroscubiertos&#39;, &#39;metrostotales&#39;,
-       &#39;lat&#39;, &#39;lng&#39;, &#39;piscina&#39;, &#39;metrostotales_log&#39;, &#39;metroscubiertos_log&#39;,
-       &#39;porcentaje_metros&#39;, &#39;diferencia_metros&#39;, &#39;escomercial&#39;,
-       &#39;promedio_metros_tipo_propiedad&#39;, &#39;promedio_metros_cub_tipo_propiedad&#39;,
-       &#39;top_provincia&#39;, &#39;es_ciudad_centrica&#39;,
-       &#39;promedio_metros_totales_provincia&#39;,
-       &#39;promedio_metros_cubiertos_provincia&#39;, &#39;anio&#39;, &#39;mes&#39;, &#39;dia&#39;,
-       &#39;trimestre&#39;, &#39;dias_desde_datos&#39;, &#39;meses_desde_datos&#39;,
-       &#39;antiguedad_bins_unif&#39;, &#39;antiguedad_bins_perc&#39;, &#39;cantidad_inquilinos&#39;,
-       &#39;tam_ambientes&#39;, &#39;metros_totales_normalizados&#39;,
-       &#39;metros_cubiertos_normalizados&#39;, &#39;promedio_precio_provincia&#39;,
-       &#39;promedio_precio_ciudad&#39;, &#39;promedio_precio_ciudad_gen&#39;,
-       &#39;varianza_precio_ciudad&#39;, &#39;count_ciudad&#39;, &#39;promedio_id_zona&#39;,
-       &#39;promedio_id_zona_log&#39;, &#39;promedio_id_zona_gen&#39;, &#39;varianza_id_zona&#39;,
-       &#39;count_id_zona&#39;, &#39;promedio_precio_tipo_propiedad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
-       &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;, &#39;count_tipo_propiedad&#39;,
-       &#39;count_tipo_propiedad_ciudad&#39;, &#39;promedio_por_mes&#39;, &#39;varianza_por_mes&#39;,
-       &#39;promedio_precio_habitaciones&#39;,
-       &#39;promedio_precio_habitaciones_banos_garages&#39;,
-       &#39;promedio_precio_banos_garages&#39;, &#39;promedio_precio_hbg_tipo_propiedad&#39;,
-       &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;, &#39;lat_norm&#39;, &#39;lng_norm&#39;,
-       &#39;promedio_precio_booleanos&#39;, &#39;puntaje&#39;, &#39;idf_titulo&#39;, &#39;idf_descripcion&#39;,
-       &#39;peso_titulo&#39;, &#39;peso_descripcion&#39;, &#39;distancia_ciudad_centrica&#39;],
-      dtype=&#39;object&#39;)</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> 
-        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-        
-<span class="n">df_ranks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;col&#39;</span><span class="p">])</span>
-<span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_display</span><span class="p">(</span><span class="n">df_ranks</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;metrostotales_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_log&#39;</span><span class="p">,</span> <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metroscubiertos_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;tipo_propiedad_compartida&#39;</span><span class="p">,</span> <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span><span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span><span class="s1">&#39;delincuencia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;turismo&#39;</span><span class="p">,</span> <span class="s1">&#39;es_antigua&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">,</span> <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_provincia_log&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_ciudad_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_log&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Apartamento&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Bodega comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa en condominio&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Casa uso de suelo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Departamento Compartido&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Duplex&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Edificio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Inmuebles productivos urbanos&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Local en centro comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Oficina comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Otros&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Quinta Vacacional&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Rancho&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_Terreno comercial&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tipodepropiedad_Villa&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Aguascalientes&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Baja California Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Baja California Sur&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Campeche&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Chiapas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Chihuahua&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Coahuila&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Colima&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Distrito Federal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Durango&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Edo. de México&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guanajuato&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Guerrero&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Hidalgo&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Michoacán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Nayarit&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Nuevo León&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Oaxaca&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Puebla&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Querétaro&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Quintana Roo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_San luis Potosí&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sinaloa&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Sonora&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Tamaulipas&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;provincia_Tlaxcala&#39;</span><span class="p">,</span><span class="s1">&#39;provincia_Veracruz&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_Yucatán&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia_otro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Centro&#39;</span><span class="p">,</span> <span class="s1">&#39;zona_Norte &#39;</span><span class="p">,</span>
+ <span class="s1">&#39;zona_Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span>
 
-<span class="n">df_ranks</span><span class="p">[</span><span class="n">df_ranks</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">recursiveFeatureEliminationCrossValidation</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>rank</th>
-      <th>col</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>habitaciones</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>1</td>
-      <td>metros_totales_normalizados</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>1</td>
-      <td>metros_cubiertos_normalizados</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>1</td>
-      <td>promedio_precio_provincia</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>1</td>
-      <td>promedio_precio_ciudad</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>1</td>
-      <td>promedio_precio_ciudad_gen</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>1</td>
-      <td>varianza_precio_ciudad</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>1</td>
-      <td>count_ciudad</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>1</td>
-      <td>promedio_id_zona</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>1</td>
-      <td>promedio_id_zona_log</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>1</td>
-      <td>promedio_id_zona_gen</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>1</td>
-      <td>varianza_id_zona</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>1</td>
-      <td>count_id_zona</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>1</td>
-      <td>promedio_precio_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>1</td>
-      <td>promedio_precio_tipo_propiedad_ciudad</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>1</td>
-      <td>promedio_precio_tipo_propiedad_ciudad_gen</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>1</td>
-      <td>count_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>1</td>
-      <td>count_tipo_propiedad_ciudad</td>
-    </tr>
-    <tr>
-      <th>66</th>
-      <td>1</td>
-      <td>peso_titulo</td>
-    </tr>
-    <tr>
-      <th>65</th>
-      <td>1</td>
-      <td>idf_descripcion</td>
-    </tr>
-    <tr>
-      <th>64</th>
-      <td>1</td>
-      <td>idf_titulo</td>
-    </tr>
-    <tr>
-      <th>63</th>
-      <td>1</td>
-      <td>puntaje</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>1</td>
-      <td>promedio_precio_booleanos</td>
-    </tr>
-    <tr>
-      <th>61</th>
-      <td>1</td>
-      <td>lng_norm</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>1</td>
-      <td>tam_ambientes</td>
-    </tr>
-    <tr>
-      <th>60</th>
-      <td>1</td>
-      <td>lat_norm</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>1</td>
-      <td>promedio_precio_hbg_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>57</th>
-      <td>1</td>
-      <td>promedio_precio_banos_garages</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>1</td>
-      <td>promedio_precio_habitaciones_banos_garages</td>
-    </tr>
-    <tr>
-      <th>55</th>
-      <td>1</td>
-      <td>promedio_precio_habitaciones</td>
-    </tr>
-    <tr>
-      <th>54</th>
-      <td>1</td>
-      <td>varianza_por_mes</td>
-    </tr>
-    <tr>
-      <th>53</th>
-      <td>1</td>
-      <td>promedio_por_mes</td>
-    </tr>
-    <tr>
-      <th>59</th>
-      <td>1</td>
-      <td>promedio_precio_hbg_tipo_propiedad_provincia</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>1</td>
-      <td>peso_descripcion</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>1</td>
-      <td>cantidad_inquilinos</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>1</td>
-      <td>antiguedad_bins_unif</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>garages</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>banos</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>metroscubiertos</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>metrostotales</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1</td>
-      <td>lat</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>lng</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1</td>
-      <td>piscina</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>metrostotales_log</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>metroscubiertos_log</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>porcentaje_metros</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>diferencia_metros</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>escomercial</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>promedio_metros_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>1</td>
-      <td>antiguedad_bins_perc</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>promedio_metros_cub_tipo_propiedad</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>1</td>
-      <td>mes</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>1</td>
-      <td>meses_desde_datos</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>1</td>
-      <td>dias_desde_datos</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>1</td>
-      <td>trimestre</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>1</td>
-      <td>dia</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>1</td>
-      <td>anio</td>
-    </tr>
-    <tr>
-      <th>68</th>
-      <td>1</td>
-      <td>distancia_ciudad_centrica</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>1</td>
-      <td>promedio_metros_totales_provincia</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>1</td>
-      <td>es_ciudad_centrica</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>top_provincia</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>1</td>
-      <td>promedio_metros_cubiertos_provincia</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>2</td>
-      <td>es_antigua</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>3</td>
-      <td>delincuencia</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>4</td>
-      <td>metroscubiertos_bins_perc</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>5</td>
-      <td>turismo</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>6</td>
-      <td>metroscubiertos_bins_unif</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>7</td>
-      <td>prop_frecuente</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>8</td>
-      <td>tipo_propiedad_compartida</td>
-    </tr>
-  </tbody>
-</table>
 </div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># def full_display(df):</span>
+<span class="c1">#     with pd.option_context(&#39;display.max_rows&#39;, None, &#39;display.max_columns&#39;, None): </span>
+<span class="c1">#         display(df)</span>
+        
+<span class="c1"># df_ranks = pd.DataFrame(np.array([selector.ranking_, list(x_train.columns)]).T, columns=[&#39;rank&#39;, &#39;col&#39;])</span>
+<span class="c1"># df_ranks[&#39;rank&#39;] = df_ranks[&#39;rank&#39;].astype(int)</span>
+<span class="c1"># full_display(df_ranks.sort_values(&#39;rank&#39;))</span>
 
-</div>
+<span class="c1"># df_ranks[df_ranks[&#39;rank&#39;] == 1][&#39;col&#39;].tolist()</span>
+</pre></div>
 
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;habitaciones&#39;,
- &#39;garages&#39;,
- &#39;banos&#39;,
- &#39;metroscubiertos&#39;,
- &#39;metrostotales&#39;,
- &#39;lat&#39;,
- &#39;lng&#39;,
- &#39;piscina&#39;,
- &#39;metrostotales_log&#39;,
- &#39;metroscubiertos_log&#39;,
- &#39;porcentaje_metros&#39;,
- &#39;diferencia_metros&#39;,
- &#39;escomercial&#39;,
- &#39;promedio_metros_tipo_propiedad&#39;,
- &#39;promedio_metros_cub_tipo_propiedad&#39;,
- &#39;top_provincia&#39;,
- &#39;es_ciudad_centrica&#39;,
- &#39;promedio_metros_totales_provincia&#39;,
- &#39;promedio_metros_cubiertos_provincia&#39;,
- &#39;anio&#39;,
- &#39;mes&#39;,
- &#39;dia&#39;,
- &#39;trimestre&#39;,
- &#39;dias_desde_datos&#39;,
- &#39;meses_desde_datos&#39;,
- &#39;antiguedad_bins_unif&#39;,
- &#39;antiguedad_bins_perc&#39;,
- &#39;cantidad_inquilinos&#39;,
- &#39;tam_ambientes&#39;,
- &#39;metros_totales_normalizados&#39;,
- &#39;metros_cubiertos_normalizados&#39;,
- &#39;promedio_precio_provincia&#39;,
- &#39;promedio_precio_ciudad&#39;,
- &#39;promedio_precio_ciudad_gen&#39;,
- &#39;varianza_precio_ciudad&#39;,
- &#39;count_ciudad&#39;,
- &#39;promedio_id_zona&#39;,
- &#39;promedio_id_zona_log&#39;,
- &#39;promedio_id_zona_gen&#39;,
- &#39;varianza_id_zona&#39;,
- &#39;count_id_zona&#39;,
- &#39;promedio_precio_tipo_propiedad&#39;,
- &#39;promedio_precio_tipo_propiedad_ciudad&#39;,
- &#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;,
- &#39;count_tipo_propiedad&#39;,
- &#39;count_tipo_propiedad_ciudad&#39;,
- &#39;promedio_por_mes&#39;,
- &#39;varianza_por_mes&#39;,
- &#39;promedio_precio_habitaciones&#39;,
- &#39;promedio_precio_habitaciones_banos_garages&#39;,
- &#39;promedio_precio_banos_garages&#39;,
- &#39;promedio_precio_hbg_tipo_propiedad&#39;,
- &#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;,
- &#39;lat_norm&#39;,
- &#39;lng_norm&#39;,
- &#39;promedio_precio_booleanos&#39;,
- &#39;puntaje&#39;,
- &#39;idf_titulo&#39;,
- &#39;idf_descripcion&#39;,
- &#39;peso_titulo&#39;,
- &#39;peso_descripcion&#39;,
- &#39;distancia_ciudad_centrica&#39;]</pre>
-</div>
-
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -14616,19 +13630,6 @@ Fitting estimator with 63 features.
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
