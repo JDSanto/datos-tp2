@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>features-NLTK</title>
+<title>features_complementarias</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13080,49 +13080,10 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features_nltk</span>
 
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
-
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/train.csv&#39;</span><span class="p">)</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/test.csv&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[nltk_data] Downloading package stopwords to /home/tomas/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
-    <span class="n">cant_publicaciones_columna_no_nulo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La cantidad de publicaciones con &#39;</span> <span class="o">+</span> <span class="n">col</span> <span class="o">+</span><span class="s1">&#39; no nulo es:&#39;</span><span class="p">,</span> <span class="n">cant_publicaciones_columna_no_nulo</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La cantidad total de publicaciones es:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># df_train = pd.read_csv(&#39;./data/train.csv&#39;)</span>
+<span class="c1"># df_test = pd.read_csv(&#39;./data/test.csv&#39;)</span>
 </pre></div>
 
     </div>
@@ -13135,19 +13096,23 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_no_queridas</span><span class="p">(</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Retorna un set con las palabras a excluir, arr, es un campo opcional para excluir tambien </span>
-<span class="sd">    las palabras en ese arreglo&#39;&#39;&#39;</span>
-    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;spanish&#39;</span><span class="p">))</span>
-    <span class="n">puntuacion</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="p">,</span> 
-                  <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;br&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;col.&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> 
-                  <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="s1">&#39;ii&#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;col&#39;</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">puntuacion</span><span class="p">:</span>
-        <span class="n">stop_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">arr</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-            <span class="n">stop_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">stop_words</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columna1</span><span class="p">,</span> <span class="n">columna2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Concatena dos columnas categoricas y hace one hot&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Ver referencia columna_a_ohe para los ultimos 3 parametros&#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">limpiar_espacios_blanco</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">texto</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">columna1</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columna1</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">limpiar_espacios_blanco</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">columna2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columna2</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">limpiar_espacios_blanco</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">columna1</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">columna2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columna1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="n">columna2</span><span class="p">]</span>
+    
+    <span class="n">features_nltk</span>
+    <span class="k">return</span> <span class="n">features_nltk</span><span class="o">.</span><span class="n">columna_a_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columna1</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">columna2</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">df_aux</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13157,63 +13122,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Esta funcion recibe un df, y genera la n palabras mas usadas la columna pasada por parametro, </span>
-<span class="sd">    retorna un arreglo ordenado de mas usadas a menos usadas&#39;&#39;&#39;</span>
-    <span class="n">reviews</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-
-    <span class="c1"># Splitea los textos en palabras</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span>
-
-    <span class="c1"># Fuera palabras no necesarias</span>
-    <span class="n">stop_words</span> <span class="o">=</span> <span class="n">generar_palabras_no_queridas</span><span class="p">()</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
-
-    <span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">agrupar_col</span><span class="p">,</span> <span class="n">misma_cantidad_col</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Cantidad de casas con la misma cantidad de banos que la actual&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Por ejemplo, retorna para cada propiedad, cuantas hay mas de su tipo con x banos ej.&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;cantidad_propiedad_misma_cantidad(df, &#39;banos&#39;, &#39;tipodepropiedad&#39;), para cada propiedad, se fija</span>
+<span class="sd">    cuantas mas de su tipo con tantos banos hay&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Retorna el df con la columna agregada&#39;&#39;&#39;</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">agrupar_col</span><span class="p">,</span> <span class="n">misma_cantidad_col</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
     
-    <span class="c1"># Calcula y ordena por frecuencia</span>
-    <span class="n">frequency_dist</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-    <span class="n">mas_usadas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequency_dist</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">frequency_dist</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">mas_usadas</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Retorna el df pasado por parametro con la columna nueva &quot;cant_palabras_mas_frecuentes&quot;, donde dice</span>
-<span class="sd">    el numero de palabras mas frecuentes presentes en la columna pasada por parametro. n es la cantidad </span>
-<span class="sd">    palabras mas frecuentes a usar. Por ejemplo: `feature_cantidad_mas_frecuentes(df, &#39;titulo&#39;, 50)` genera </span>
-<span class="sd">    columna nueva `cant_palabras_mas_frecuentes_titulo`, donde se indica cuantas palabras frecuentes aparecen</span>
-<span class="sd">    en el titulo, siendo las palabras mas frecuentes, la n palabras mas usadas entre todas las columnas </span>
-<span class="sd">    pasadas por parametro&#39;&#39;&#39;</span>
-    
-    <span class="n">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
-    
-    <span class="n">arr_mas_frecuentes</span> <span class="o">=</span> <span class="n">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">set_mas_frecuentes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">arr_mas_frecuentes</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">contador_mas_frecuentes</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
-        <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">palabras_del_df</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras_del_df</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">set_mas_frecuentes</span><span class="p">:</span>
-                <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">contador</span>
-    
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_mas_frecuentes</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    
+    <span class="k">def</span> <span class="nf">get_cantidad</span><span class="p">(</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">):</span>
+        <span class="n">cantidad</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[(</span><span class="n">df_aux</span><span class="p">[</span><span class="n">agrupar_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_aux</span><span class="p">[</span><span class="n">misma_cantidad_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col2</span><span class="p">)][</span><span class="s1">&#39;cantidad&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">cantidad</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cantidad</span><span class="o">.</span><span class="n">values</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+        
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cantidad_&#39;</span> <span class="o">+</span> <span class="n">agrupar_col</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">misma_cantidad_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_cantidad</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">agrupar_col</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">misma_cantidad_col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -13224,13 +13151,287 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Ejemplo de uso de las palabras mas frecuentes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">df_test</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Simil a value_counts. Dada una columna, agrega al df, cuantas propiedades existen con esa misma propiedad&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Se rellena en df_test, con los counts que se hicieron en df&#39;&#39;&#39;</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    
+    <span class="n">prop_cantidad</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="n">df_palabras</span> <span class="o">=</span> <span class="n">feature_cantidad_mas_frecuentes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">df_palabras</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;cant_palabras_mas_frecuentes_titulo&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">get_cantidad</span><span class="p">(</span><span class="n">col1</span><span class="p">):</span>
+        <span class="n">cantidad</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">][</span><span class="s1">&#39;cantidad&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">col1</span> <span class="ow">in</span> <span class="n">prop_cantidad</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">prop_cantidad</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span>
+        <span class="n">cantidad_retornar</span> <span class="o">=</span> <span class="n">cantidad</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cantidad</span><span class="o">.</span><span class="n">values</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">prop_cantidad</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cantidad_retornar</span>
+        <span class="k">return</span> <span class="n">cantidad_retornar</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cantidad_propiedades_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_cantidad</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;cantidad_propiedades_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">prop_cantidad</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="ow">in</span> <span class="n">prop_cantidad</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Cuenta cuantas propiedades hay con los atributos de la columna recibida. Y para cada propiedad,</span>
+<span class="sd">    se fija en que posicion esta del ranking. Por ejemplo, si hay dos propuedades, una con dos banos y otra </span>
+<span class="sd">    con uno solo, el rankin de las que tengan dos banos en 1, y de las propiedades que tengan un solo bano es </span>
+<span class="sd">    dos&#39;&#39;&#39;</span>
+    
+    <span class="sd">&#39;&#39;&#39;Rellena los nulos con &quot;otros&quot; &#39;&#39;&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;otros&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">df_aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;cantidad&#39;</span><span class="p">)</span> 
+    <span class="n">lista_ranking</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">contador</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_ranking</span><span class="p">:</span>
+        <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador</span>
+        <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">col1</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">aplicar_features</span><span class="p">(</span><span class="n">df_recibido</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_recibido</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>    
+    <span class="c1"># -- </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="c1"># -- </span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.0&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.1&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.2&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.3&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.4&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.5&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.6&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.7&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.8&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.9&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-1.10&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">)</span>
+    <span class="c1"># --</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.0&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.1&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.2&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.3&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.4&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.5&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.6&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.7&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.8&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.9&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-2.10&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">)</span>    
+    <span class="c1"># --</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.0&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.1&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.2&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.3&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.4&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.5&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.6&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.7&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-3.8&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.0&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.1&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.2&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.3&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.4&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-4.5&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.6&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.7&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.8&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.9&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.10&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;gimnasio&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.11&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-5.12&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cantidad_propiedad_misma_cantidad</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">&#39;Check-6.0&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span>
+<span class="c1"># df = df_test</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">#Ejs:</span>
+<span class="c1"># concatenar_categoricos(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
+<span class="c1"># cantidad_propiedad_misma_cantidad(df, &#39;tipodepropiedad&#39;, &#39;provincia&#39;)</span>
+<span class="c1"># cantidad_atributo(df, &#39;provincia&#39;)</span>
+<span class="c1"># ranking_atributo(df, &#39;provincia&#39;)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">aplicar_features</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="c1"># df.to_csv(&#39;masfeatures_train.csv&#39;, index=False)</span>
+<span class="c1"># df.to_csv(&#39;masfeatures_test.csv&#39;, index=False)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./masfeatures_train.csv&#39;</span><span class="p">)</span>
+<span class="n">df_eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./masfeatures_test.csv&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Correccion csv - strings que deberian ser floats</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">antiguedad</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">antiguedad</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">antiguedad</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">antiguedad</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">antiguedad</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">antiguedad</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;otros&#39;</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Las columnas de tipo object</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span>
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Las columnas de tipo Object:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+
+<span class="n">df_eval</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;masfeatures_train_f.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;masfeatures_test_f.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Las-mismas-features-anteriores,-sin-ohe---train">Las mismas features anteriores, sin ohe - train<a class="anchor-link" href="#Las-mismas-features-anteriores,-sin-ohe---train">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
+<span class="n">df1</span><span class="p">,</span> <span class="n">features1</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">,</span> <span class="n">features2</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">features_borarr</span> <span class="o">=</span> <span class="n">features1</span> <span class="o">+</span> <span class="n">features2</span>
+<span class="n">df_features_sin_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./masfeatures_train_f.csv&#39;</span><span class="p">)</span>
+<span class="n">df_features_sin_ohe</span> <span class="o">=</span> <span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">features_borarr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="p">)</span>
+
+<span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;masfeatures_train_f_no_ohe.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13246,20 +13447,66 @@ div#notebook {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>La cantidad de publicaciones con titulo no nulo es: 234613
-La cantidad total de publicaciones es: 240000
-</pre>
+
+
+<div class="output_text output_subarea ">
+<pre>69</pre>
 </div>
+
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div class="output_text output_subarea ">
+<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
+       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;,
+       &#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;idzona&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;fecha&#39;,
+       &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, &#39;escuelascercanas&#39;,
+       &#39;centroscomercialescercanos&#39;, &#39;precio&#39;, &#39;tipodepropiedad_provincia&#39;,
+       &#39;provincia_ciudad&#39;, &#39;cantidad_propiedades_en_provincia&#39;,
+       &#39;cantidad_propiedades_en_ciudad&#39;, &#39;cantidad_propiedades_en_antiguedad&#39;,
+       &#39;cantidad_propiedades_en_habitaciones&#39;,
+       &#39;cantidad_propiedades_en_garages&#39;, &#39;cantidad_propiedades_en_banos&#39;,
+       &#39;cantidad_propiedades_en_gimnasio&#39;,
+       &#39;cantidad_propiedades_en_usosmultiples&#39;,
+       &#39;cantidad_propiedades_en_escuelascercanas&#39;,
+       &#39;cantidad_propiedades_en_centroscomercialescercanos&#39;,
+       &#39;cantidad_propiedades_en_piscina&#39;, &#39;ranking_en_provincia&#39;,
+       &#39;ranking_en_tipodepropiedad&#39;, &#39;ranking_en_ciudad&#39;,
+       &#39;ranking_en_antiguedad&#39;, &#39;ranking_en_habitaciones&#39;,
+       &#39;ranking_en_garages&#39;, &#39;ranking_en_banos&#39;, &#39;ranking_en_gimnasio&#39;,
+       &#39;ranking_en_usosmultiples&#39;, &#39;ranking_en_escuelascercanas&#39;,
+       &#39;ranking_en_centroscomercialescercanos&#39;,
+       &#39;cantidad_tipodepropiedad_provincia&#39;, &#39;cantidad_tipodepropiedad_ciudad&#39;,
+       &#39;cantidad_tipodepropiedad_antiguedad&#39;,
+       &#39;cantidad_tipodepropiedad_habitaciones&#39;,
+       &#39;cantidad_tipodepropiedad_garages&#39;, &#39;cantidad_tipodepropiedad_banos&#39;,
+       &#39;cantidad_tipodepropiedad_gimnasio&#39;,
+       &#39;cantidad_tipodepropiedad_usosmultiples&#39;,
+       &#39;cantidad_tipodepropiedad_piscina&#39;, &#39;cantidad_ciudad_antiguedad&#39;,
+       &#39;cantidad_ciudad_habitaciones&#39;, &#39;cantidad_ciudad_garages&#39;,
+       &#39;cantidad_ciudad_banos&#39;, &#39;cantidad_ciudad_gimnasio&#39;,
+       &#39;cantidad_ciudad_usosmultiples&#39;, &#39;cantidad_provincia_antiguedad&#39;,
+       &#39;cantidad_provincia_habitaciones&#39;, &#39;cantidad_provincia_garages&#39;,
+       &#39;cantidad_provincia_banos&#39;, &#39;cantidad_provincia_gimnasio&#39;,
+       &#39;cantidad_provincia_usosmultiples&#39;, &#39;cantidad_provincia_piscina&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13280,7 +13527,25 @@ La cantidad total de publicaciones es: 240000
       <th></th>
       <th>id</th>
       <th>titulo</th>
-      <th>cant_palabras_mas_frecuentes_titulo</th>
+      <th>descripcion</th>
+      <th>tipodepropiedad</th>
+      <th>direccion</th>
+      <th>ciudad</th>
+      <th>provincia</th>
+      <th>antiguedad</th>
+      <th>habitaciones</th>
+      <th>garages</th>
+      <th>...</th>
+      <th>cantidad_ciudad_banos</th>
+      <th>cantidad_ciudad_gimnasio</th>
+      <th>cantidad_ciudad_usosmultiples</th>
+      <th>cantidad_provincia_antiguedad</th>
+      <th>cantidad_provincia_habitaciones</th>
+      <th>cantidad_provincia_garages</th>
+      <th>cantidad_provincia_banos</th>
+      <th>cantidad_provincia_gimnasio</th>
+      <th>cantidad_provincia_usosmultiples</th>
+      <th>cantidad_provincia_piscina</th>
     </tr>
   </thead>
   <tbody>
@@ -13288,34 +13553,269 @@ La cantidad total de publicaciones es: 240000
       <th>0</th>
       <td>254099</td>
       <td>depto. tipo a-402</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
+      <td>depto. interior de 80.15m2, consta de sala com...</td>
+      <td>Apartamento</td>
+      <td>Avenida Division del Norte 2005</td>
+      <td>Benito_Juárez</td>
+      <td>Distrito_Federal</td>
+      <td>NaN</td>
       <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>6127</td>
+      <td>10391</td>
+      <td>10392</td>
+      <td>7041</td>
+      <td>21062</td>
+      <td>19214</td>
+      <td>23514</td>
+      <td>54380</td>
+      <td>54746</td>
+      <td>56163</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>53461</td>
+      <td>condominio horizontal en venta</td>
+      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
+      <td>Casa_en_condominio</td>
+      <td>AV. MEXICO</td>
+      <td>La_Magdalena_Contreras</td>
+      <td>Distrito_Federal</td>
+      <td>10.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>607</td>
+      <td>1842</td>
+      <td>1812</td>
+      <td>8904</td>
+      <td>23479</td>
+      <td>18587</td>
+      <td>23514</td>
+      <td>54380</td>
+      <td>54746</td>
+      <td>56163</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>247984</td>
+      <td>casa en venta urbi 3 recamaras tonala</td>
+      <td>descripcion \nla mejor ubicacion residencial e...</td>
+      <td>Casa</td>
+      <td>Urbi Tonala</td>
+      <td>Tonalá</td>
+      <td>Jalisco</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>257</td>
+      <td>783</td>
+      <td>778</td>
+      <td>4256</td>
+      <td>10492</td>
+      <td>9180</td>
+      <td>7527</td>
+      <td>19894</td>
+      <td>19431</td>
+      <td>18756</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>209067</td>
+      <td>casa sola en toluca zinacantepec con credito i...</td>
+      <td>casa en privada con caseta de vigilancia casas...</td>
+      <td>Casa</td>
+      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
+      <td>Zinacantepec</td>
+      <td>Edo._de_México</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>46</td>
+      <td>149</td>
+      <td>148</td>
+      <td>1449</td>
+      <td>9406</td>
+      <td>11689</td>
+      <td>12013</td>
+      <td>38541</td>
+      <td>38547</td>
+      <td>39277</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>185997</td>
+      <td>paseos del sol</td>
+      <td>bonito departamento en excelentes condiciones ...</td>
+      <td>Apartamento</td>
+      <td>PASEOS DEL SOL</td>
+      <td>Zapopan</td>
+      <td>Jalisco</td>
+      <td>10.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1704</td>
+      <td>9634</td>
+      <td>9306</td>
+      <td>2749</td>
+      <td>4188</td>
+      <td>5123</td>
+      <td>4434</td>
+      <td>19894</td>
+      <td>19431</td>
+      <td>18756</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239995</th>
+      <td>119879</td>
+      <td>bonita casas de 2 recamaras a 10 minutos del c...</td>
+      <td>vendo casa en bosques de ica residencial a 10 ...</td>
+      <td>Casa</td>
+      <td>BOSQUES</td>
+      <td>Zinacantepec</td>
+      <td>Edo._de_México</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>46</td>
+      <td>149</td>
+      <td>148</td>
+      <td>5649</td>
+      <td>9406</td>
+      <td>14322</td>
+      <td>12013</td>
+      <td>38541</td>
+      <td>38547</td>
+      <td>39277</td>
+    </tr>
+    <tr>
+      <th>239996</th>
+      <td>259178</td>
+      <td>casa en condominio a 10 min. del centro de toluca</td>
+      <td>casa con un jardin amplio, un cuarto de servic...</td>
+      <td>Casa</td>
+      <td>Filiberto Navas 325</td>
+      <td>Toluca</td>
+      <td>Edo._de_México</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>...</td>
+      <td>227</td>
+      <td>1932</td>
+      <td>1947</td>
+      <td>5649</td>
+      <td>22200</td>
+      <td>5976</td>
+      <td>9335</td>
+      <td>38541</td>
+      <td>38547</td>
+      <td>39277</td>
+    </tr>
+    <tr>
+      <th>239997</th>
+      <td>131932</td>
+      <td>nicolas san juan</td>
+      <td>departamento con excelente ubicación, muy cerc...</td>
+      <td>Apartamento</td>
+      <td>Nicolas San Juan</td>
+      <td>Benito_Juárez</td>
+      <td>Distrito_Federal</td>
+      <td>20.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>6127</td>
+      <td>10391</td>
+      <td>10392</td>
+      <td>9323</td>
+      <td>21062</td>
+      <td>19214</td>
+      <td>23514</td>
+      <td>54380</td>
+      <td>54746</td>
+      <td>56163</td>
+    </tr>
+    <tr>
+      <th>239998</th>
+      <td>146867</td>
+      <td>casa sola. javier rojo gomez.</td>
+      <td>casa sola, dividida en cuatro departamentos de...</td>
+      <td>Casa</td>
+      <td>Javier Rojo Gomez 120</td>
+      <td>Iztapalapa</td>
+      <td>Distrito_Federal</td>
+      <td>20.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>99</td>
+      <td>50</td>
+      <td>3028</td>
+      <td>9323</td>
+      <td>5065</td>
+      <td>8472</td>
+      <td>2926</td>
+      <td>4410</td>
+      <td>54746</td>
+      <td>56163</td>
+    </tr>
+    <tr>
+      <th>239999</th>
+      <td>121958</td>
+      <td>departamento en bosques de las lomas  / av. st...</td>
+      <td>id:19816, muy bonito e iluminado departamento,...</td>
+      <td>Apartamento</td>
+      <td>AVE. STIM</td>
+      <td>Cuajimalpa_de_Morelos</td>
+      <td>Distrito_Federal</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>1244</td>
+      <td>2309</td>
+      <td>2490</td>
+      <td>2411</td>
+      <td>23479</td>
+      <td>18587</td>
+      <td>23514</td>
+      <td>54380</td>
+      <td>54746</td>
+      <td>56163</td>
     </tr>
   </tbody>
 </table>
+<p>240000 rows × 69 columns</p>
 </div>
 </div>
 
@@ -13324,83 +13824,32 @@ La cantidad total de publicaciones es: 240000
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Las-mismas-features-anteriores,-sin-ohe---train">Las mismas features anteriores, sin ohe - train<a class="anchor-link" href="#Las-mismas-features-anteriores,-sin-ohe---train">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Esta funcion recibe un df, y genera la n palabras menos usadas la columna pasada por parametro, </span>
-<span class="sd">    retorna un arreglo ordenado de menos usadas a menos usadas&#39;&#39;&#39;</span>
-    <span class="n">reviews</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
+<span class="n">df1</span><span class="p">,</span> <span class="n">features1</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df2</span><span class="p">,</span> <span class="n">features2</span> <span class="o">=</span> <span class="n">concatenar_categoricos</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1"># Splitea los textos en palabras</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span>
+<span class="n">features_borarr</span> <span class="o">=</span> <span class="n">features1</span> <span class="o">+</span> <span class="n">features2</span>
+<span class="n">df_features_sin_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./masfeatures_test_f.csv&#39;</span><span class="p">)</span>
+<span class="n">df_features_sin_ohe</span> <span class="o">=</span> <span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">features_borarr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># Fuera palabras no necesarias</span>
-    <span class="n">stop_words</span> <span class="o">=</span> <span class="n">generar_palabras_no_queridas</span><span class="p">()</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_features_sin_ohe</span><span class="p">)</span>
 
-    <span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-    
-    <span class="c1"># Calcula y ordena por frecuencia</span>
-    <span class="n">frequency_dist</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-    <span class="n">menos_usadas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequency_dist</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">frequency_dist</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">menos_usadas</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Retorna el df pasado por parametro con la columna nueva &quot;cant_palabras_menos_frecuentes&quot;, donde dice</span>
-<span class="sd">    el numero de palabras menos frecuentes presentes en la columna pasada por parametro. n es la cantidad </span>
-<span class="sd">    palabras menos frecuentes a usar. Por ejemplo: `cant_palabras_menos_frecuentes(df, &#39;titulo&#39;, 50)` genera </span>
-<span class="sd">    columna nueva `cant_palabras_menos_frecuentes_titulo`, donde se indica cuantas palabras menos frecuentes aparecen</span>
-<span class="sd">    en el titulo, siendo las palabras menos frecuentes, la n palabras menos usadas entre todas las columnas </span>
-<span class="sd">    pasadas por parametro&#39;&#39;&#39;</span>
-    
-    <span class="n">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
-    
-    <span class="n">arr_menos_frecuentes</span> <span class="o">=</span> <span class="n">generar_palabras_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">set_menos_frecuentes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">arr_menos_frecuentes</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">contador_menos_frecuentes</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
-        <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">palabras_del_df</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras_del_df</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">set_menos_frecuentes</span><span class="p">:</span>
-                <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">contador</span>
-    
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_menos_frecuentes</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cant_palabras_menos_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Ejemplo de uso de las palabras menos frecuentes</span>
-
-<span class="n">df_palabras</span> <span class="o">=</span> <span class="n">feature_cantidad_menos_frecuentes</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">df_palabras</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;cant_palabras_menos_frecuentes_titulo&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df_features_sin_ohe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;masfeatures_test_f_no_ohe.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13416,20 +13865,66 @@ La cantidad total de publicaciones es: 240000
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>La cantidad de publicaciones con titulo no nulo es: 234613
-La cantidad total de publicaciones es: 240000
-</pre>
+
+
+<div class="output_text output_subarea ">
+<pre>68</pre>
 </div>
+
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div class="output_text output_subarea ">
+<pre>Index([&#39;id&#39;, &#39;titulo&#39;, &#39;descripcion&#39;, &#39;tipodepropiedad&#39;, &#39;direccion&#39;, &#39;ciudad&#39;,
+       &#39;provincia&#39;, &#39;antiguedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, &#39;banos&#39;,
+       &#39;metroscubiertos&#39;, &#39;metrostotales&#39;, &#39;idzona&#39;, &#39;lat&#39;, &#39;lng&#39;, &#39;fecha&#39;,
+       &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, &#39;escuelascercanas&#39;,
+       &#39;centroscomercialescercanos&#39;, &#39;tipodepropiedad_provincia&#39;,
+       &#39;provincia_ciudad&#39;, &#39;cantidad_propiedades_en_provincia&#39;,
+       &#39;cantidad_propiedades_en_ciudad&#39;, &#39;cantidad_propiedades_en_antiguedad&#39;,
+       &#39;cantidad_propiedades_en_habitaciones&#39;,
+       &#39;cantidad_propiedades_en_garages&#39;, &#39;cantidad_propiedades_en_banos&#39;,
+       &#39;cantidad_propiedades_en_gimnasio&#39;,
+       &#39;cantidad_propiedades_en_usosmultiples&#39;,
+       &#39;cantidad_propiedades_en_escuelascercanas&#39;,
+       &#39;cantidad_propiedades_en_centroscomercialescercanos&#39;,
+       &#39;cantidad_propiedades_en_piscina&#39;, &#39;ranking_en_provincia&#39;,
+       &#39;ranking_en_tipodepropiedad&#39;, &#39;ranking_en_ciudad&#39;,
+       &#39;ranking_en_antiguedad&#39;, &#39;ranking_en_habitaciones&#39;,
+       &#39;ranking_en_garages&#39;, &#39;ranking_en_banos&#39;, &#39;ranking_en_gimnasio&#39;,
+       &#39;ranking_en_usosmultiples&#39;, &#39;ranking_en_escuelascercanas&#39;,
+       &#39;ranking_en_centroscomercialescercanos&#39;,
+       &#39;cantidad_tipodepropiedad_provincia&#39;, &#39;cantidad_tipodepropiedad_ciudad&#39;,
+       &#39;cantidad_tipodepropiedad_antiguedad&#39;,
+       &#39;cantidad_tipodepropiedad_habitaciones&#39;,
+       &#39;cantidad_tipodepropiedad_garages&#39;, &#39;cantidad_tipodepropiedad_banos&#39;,
+       &#39;cantidad_tipodepropiedad_gimnasio&#39;,
+       &#39;cantidad_tipodepropiedad_usosmultiples&#39;,
+       &#39;cantidad_tipodepropiedad_piscina&#39;, &#39;cantidad_ciudad_antiguedad&#39;,
+       &#39;cantidad_ciudad_habitaciones&#39;, &#39;cantidad_ciudad_garages&#39;,
+       &#39;cantidad_ciudad_banos&#39;, &#39;cantidad_ciudad_gimnasio&#39;,
+       &#39;cantidad_ciudad_usosmultiples&#39;, &#39;cantidad_provincia_antiguedad&#39;,
+       &#39;cantidad_provincia_habitaciones&#39;, &#39;cantidad_provincia_garages&#39;,
+       &#39;cantidad_provincia_banos&#39;, &#39;cantidad_provincia_gimnasio&#39;,
+       &#39;cantidad_provincia_usosmultiples&#39;, &#39;cantidad_provincia_piscina&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -13450,42 +13945,295 @@ La cantidad total de publicaciones es: 240000
       <th></th>
       <th>id</th>
       <th>titulo</th>
-      <th>cant_palabras_menos_frecuentes_titulo</th>
+      <th>descripcion</th>
+      <th>tipodepropiedad</th>
+      <th>direccion</th>
+      <th>ciudad</th>
+      <th>provincia</th>
+      <th>antiguedad</th>
+      <th>habitaciones</th>
+      <th>garages</th>
+      <th>...</th>
+      <th>cantidad_ciudad_banos</th>
+      <th>cantidad_ciudad_gimnasio</th>
+      <th>cantidad_ciudad_usosmultiples</th>
+      <th>cantidad_provincia_antiguedad</th>
+      <th>cantidad_provincia_habitaciones</th>
+      <th>cantidad_provincia_garages</th>
+      <th>cantidad_provincia_banos</th>
+      <th>cantidad_provincia_gimnasio</th>
+      <th>cantidad_provincia_usosmultiples</th>
+      <th>cantidad_provincia_piscina</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>0.0</td>
+      <td>4941</td>
+      <td>casa en venta en miguel hidalgo, distrito federal</td>
+      <td>&lt;p&gt;excelente casa estilo moderno.&lt;/p&gt;</td>
+      <td>Casa</td>
+      <td>Bosque de Cedros</td>
+      <td>Miguel_Hidalgo</td>
+      <td>Distrito_Federal</td>
+      <td>29.0</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>54</td>
+      <td>1213</td>
+      <td>1255</td>
+      <td>31</td>
+      <td>5828</td>
+      <td>1643</td>
+      <td>710</td>
+      <td>13668</td>
+      <td>13749</td>
+      <td>14136</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>0.0</td>
+      <td>51775</td>
+      <td>departamentos en venta en montebello</td>
+      <td>&lt;p&gt;departamento una recamara:\n&lt;/p&gt;&lt;p&gt;departam...</td>
+      <td>Apartamento</td>
+      <td>NaN</td>
+      <td>Mérida</td>
+      <td>Yucatán</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>252</td>
+      <td>1677</td>
+      <td>1798</td>
+      <td>670</td>
+      <td>47</td>
+      <td>123</td>
+      <td>278</td>
+      <td>1854</td>
+      <td>1980</td>
+      <td>1575</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
+      <td>115253</td>
+      <td>departamento nuevo delegación coyoacán de 87 m...</td>
+      <td>departamento nuevo de 87.06 m2, 1 cajón de est...</td>
+      <td>Apartamento</td>
+      <td>Pueblo de los Reyes, Coyoacán, Mexico D.F.</td>
+      <td>Coyoacán</td>
+      <td>Distrito_Federal</td>
       <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>503</td>
+      <td>1249</td>
+      <td>1249</td>
+      <td>1999</td>
+      <td>5263</td>
+      <td>4724</td>
+      <td>5881</td>
+      <td>13668</td>
+      <td>13749</td>
+      <td>14136</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>0.0</td>
+      <td>299321</td>
+      <td>departamento en venta en acapulco</td>
+      <td>&lt;p&gt;  raíces dv001 precioso departamento tipo k...</td>
+      <td>Apartamento</td>
+      <td>NaN</td>
+      <td>Acapulco_de_Juárez</td>
+      <td>Guerrero</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>230</td>
+      <td>561</td>
+      <td>572</td>
+      <td>26</td>
+      <td>234</td>
+      <td>235</td>
+      <td>251</td>
+      <td>604</td>
+      <td>622</td>
+      <td>310</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
+      <td>173570</td>
+      <td>bonita casa sola equipada de dos niveles en lo...</td>
+      <td>&lt;p&gt;casa sola, bonita de dos rec&amp;aacute;maras u...</td>
+      <td>Casa</td>
+      <td>CEDROS</td>
+      <td>Tultitlán</td>
+      <td>Edo._de_México</td>
+      <td>10.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>153</td>
+      <td>231</td>
+      <td>232</td>
+      <td>1958</td>
+      <td>2219</td>
+      <td>2887</td>
+      <td>2894</td>
+      <td>9454</td>
+      <td>9435</td>
+      <td>9632</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>59995</th>
+      <td>75094</td>
+      <td>oportunidad!! se vende amplia casa en col. moc...</td>
+      <td>oportunidad!! ideal para oficina o casa habita...</td>
+      <td>Casa</td>
+      <td>Oriente 172 # 265</td>
+      <td>Venustiano_Carranza</td>
+      <td>Distrito_Federal</td>
+      <td>20.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>...</td>
+      <td>30</td>
+      <td>393</td>
+      <td>395</td>
+      <td>2287</td>
+      <td>1273</td>
+      <td>1500</td>
+      <td>2516</td>
+      <td>13668</td>
+      <td>13749</td>
+      <td>14136</td>
+    </tr>
+    <tr>
+      <th>59996</th>
+      <td>171847</td>
+      <td>colinas de ecatepec</td>
+      <td>casa, sala comedor, patio de servicio, buenas ...</td>
+      <td>Casa</td>
+      <td>colinas</td>
+      <td>Ecatepec_de_Morelos</td>
+      <td>Edo._de_México</td>
+      <td>10.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>172</td>
+      <td>551</td>
+      <td>551</td>
+      <td>1958</td>
+      <td>5458</td>
+      <td>2887</td>
+      <td>3466</td>
+      <td>9454</td>
+      <td>9435</td>
+      <td>9632</td>
+    </tr>
+    <tr>
+      <th>59997</th>
+      <td>138313</td>
+      <td>estrene hermosa casa en sierra morena</td>
+      <td>hermosa casa lista para habitarse ubicada en f...</td>
+      <td>Casa</td>
+      <td>s/calle</td>
+      <td>Guadalupe</td>
+      <td>Nuevo_León</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>180</td>
+      <td>459</td>
+      <td>487</td>
+      <td>585</td>
+      <td>2136</td>
+      <td>1546</td>
+      <td>1212</td>
+      <td>3698</td>
+      <td>3869</td>
+      <td>3772</td>
+    </tr>
+    <tr>
+      <th>59998</th>
+      <td>271268</td>
+      <td>zen house i venta de linda casa con acabados ...</td>
+      <td>hermosa casa con acabados de lujo en fracciona...</td>
+      <td>Casa</td>
+      <td>Zen House l</td>
+      <td>Querétaro</td>
+      <td>Querétaro</td>
       <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1219</td>
+      <td>3032</td>
+      <td>3011</td>
+      <td>1452</td>
+      <td>568</td>
+      <td>509</td>
+      <td>1733</td>
+      <td>4061</td>
+      <td>4015</td>
+      <td>3766</td>
+    </tr>
+    <tr>
+      <th>59999</th>
+      <td>72612</td>
+      <td>casa en chapalita las fuentes/ cercano al club...</td>
+      <td>&lt;p&gt;hermosa casa bien ubicada. cuenta con:&lt;/p&gt;\...</td>
+      <td>Casa</td>
+      <td>Fuentes de San Agustín 5051</td>
+      <td>Zapopan</td>
+      <td>Jalisco</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>828</td>
+      <td>2396</td>
+      <td>2315</td>
+      <td>1201</td>
+      <td>2660</td>
+      <td>2294</td>
+      <td>1835</td>
+      <td>4979</td>
+      <td>4865</td>
+      <td>4690</td>
     </tr>
   </tbody>
 </table>
+<p>60000 rows × 68 columns</p>
 </div>
 </div>
 
