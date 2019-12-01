@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">catboost</span> <span class="k">import</span> <span class="n">CatBoostRegressor</span>
@@ -13102,7 +13102,7 @@ div#notebook {
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
 <span class="n">df_eval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_eval</span><span class="p">,</span> <span class="n">df_eval_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
 
-<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_df_testeo</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13115,7 +13115,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13251,6 +13251,509 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="GridSearchCV">GridSearchCV<a class="anchor-link" href="#GridSearchCV">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;garages&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">,</span> <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span> <span class="s1">&#39;escuelascercanas&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;centroscomercialescercanos&#39;</span><span class="p">,</span> <span class="s1">&#39;clustering_label&#39;</span><span class="p">,</span> <span class="s1">&#39;idf_titulo&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;idf_descripcion&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_titulo&#39;</span><span class="p">,</span> <span class="s1">&#39;peso_descripcion&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;diferencia_metros&#39;</span><span class="p">,</span> <span class="s1">&#39;metros_totales_normalizados&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;metros_cubiertos_normalizados&#39;</span><span class="p">,</span> <span class="s1">&#39;escomercial&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_tipo_propiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_metros_cub_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ciudad_centrica&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_totales_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_metros_cubiertos_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;mes&#39;</span><span class="p">,</span> <span class="s1">&#39;dia&#39;</span><span class="p">,</span> <span class="s1">&#39;trimestre&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span> <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_provincia&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_precio_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_id_zona&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span> <span class="s1">&#39;count_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_por_mes&#39;</span><span class="p">,</span> <span class="s1">&#39;varianza_por_mes&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_habitaciones_banos_garages&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;promedio_precio_banos_garages&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_booleanos&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span>
+
+<span class="n">cat_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;od_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Iter&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;od_wait&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;border_count&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">512</span><span class="p">],</span>
+    <span class="s1">&#39;l2_leaf_reg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="p">}</span>
+
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">gs_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">CatBoostRegressor</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="p">),</span>
+                           <span class="n">param_grid</span><span class="o">=</span><span class="n">cat_params</span><span class="p">,</span> 
+                           <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                           <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">)</span>
+
+<span class="n">gs_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 3 folds for each of 270 candidates, totalling 810 fits
+[CV] border_count=64, depth=6, l2_leaf_reg=0, learning_rate=0.1, od_type=Iter, od_wait=10 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[CV]  border_count=64, depth=6, l2_leaf_reg=0, learning_rate=0.1, od_type=Iter, od_wait=10, score=-588078.267, total=   2.3s
+[CV] border_count=64, depth=6, l2_leaf_reg=0, learning_rate=0.1, od_type=Iter, od_wait=10 
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    2.3s remaining:    0.0s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-40-7ee96051027f&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     44</span>                            verbose=3, scoring=&#39;neg_mean_absolute_error&#39;)
+<span class="ansi-green-intense-fg ansi-bold">     45</span> 
+<span class="ansi-green-fg">---&gt; 46</span><span class="ansi-red-fg"> </span>gs_cv<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>x_train<span class="ansi-blue-fg">,</span> y_train<span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/model_selection/_search.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, X, y, groups, **fit_params)</span>
+<span class="ansi-green-intense-fg ansi-bold">    686</span>                 <span class="ansi-green-fg">return</span> results
+<span class="ansi-green-intense-fg ansi-bold">    687</span> 
+<span class="ansi-green-fg">--&gt; 688</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_run_search<span class="ansi-blue-fg">(</span>evaluate_candidates<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    689</span> 
+<span class="ansi-green-intense-fg ansi-bold">    690</span>         <span class="ansi-red-fg"># For multi-metric evaluation, store the best_index_, best_params_ and</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/model_selection/_search.py</span> in <span class="ansi-cyan-fg">_run_search</span><span class="ansi-blue-fg">(self, evaluate_candidates)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1147</span>     <span class="ansi-green-fg">def</span> _run_search<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> evaluate_candidates<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1148</span>         <span class="ansi-blue-fg">&#34;&#34;&#34;Search all candidates in param_grid&#34;&#34;&#34;</span>
+<span class="ansi-green-fg">-&gt; 1149</span><span class="ansi-red-fg">         </span>evaluate_candidates<span class="ansi-blue-fg">(</span>ParameterGrid<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>param_grid<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1150</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1151</span> 
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/model_selection/_search.py</span> in <span class="ansi-cyan-fg">evaluate_candidates</span><span class="ansi-blue-fg">(candidate_params)</span>
+<span class="ansi-green-intense-fg ansi-bold">    665</span>                                <span class="ansi-green-fg">for</span> parameters<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">(</span>train<span class="ansi-blue-fg">,</span> test<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    666</span>                                in product(candidate_params,
+<span class="ansi-green-fg">--&gt; 667</span><span class="ansi-red-fg">                                           cv.split(X, y, groups)))
+</span><span class="ansi-green-intense-fg ansi-bold">    668</span> 
+<span class="ansi-green-intense-fg ansi-bold">    669</span>                 <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>out<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/parallel.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, iterable)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1004</span>                 self<span class="ansi-blue-fg">.</span>_iterating <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_original_iterator <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-intense-fg ansi-bold">   1005</span> 
+<span class="ansi-green-fg">-&gt; 1006</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">while</span> self<span class="ansi-blue-fg">.</span>dispatch_one_batch<span class="ansi-blue-fg">(</span>iterator<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1007</span>                 <span class="ansi-green-fg">pass</span>
+<span class="ansi-green-intense-fg ansi-bold">   1008</span> 
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/parallel.py</span> in <span class="ansi-cyan-fg">dispatch_one_batch</span><span class="ansi-blue-fg">(self, iterator)</span>
+<span class="ansi-green-intense-fg ansi-bold">    832</span>                 <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">False</span>
+<span class="ansi-green-intense-fg ansi-bold">    833</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 834</span><span class="ansi-red-fg">                 </span>self<span class="ansi-blue-fg">.</span>_dispatch<span class="ansi-blue-fg">(</span>tasks<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    835</span>                 <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">True</span>
+<span class="ansi-green-intense-fg ansi-bold">    836</span> 
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/parallel.py</span> in <span class="ansi-cyan-fg">_dispatch</span><span class="ansi-blue-fg">(self, batch)</span>
+<span class="ansi-green-intense-fg ansi-bold">    751</span>         <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>_lock<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    752</span>             job_idx <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_jobs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 753</span><span class="ansi-red-fg">             </span>job <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_backend<span class="ansi-blue-fg">.</span>apply_async<span class="ansi-blue-fg">(</span>batch<span class="ansi-blue-fg">,</span> callback<span class="ansi-blue-fg">=</span>cb<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    754</span>             <span class="ansi-red-fg"># A job can complete so quickly than its callback is</span>
+<span class="ansi-green-intense-fg ansi-bold">    755</span>             <span class="ansi-red-fg"># called before we get here, causing self._jobs to</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/_parallel_backends.py</span> in <span class="ansi-cyan-fg">apply_async</span><span class="ansi-blue-fg">(self, func, callback)</span>
+<span class="ansi-green-intense-fg ansi-bold">    199</span>     <span class="ansi-green-fg">def</span> apply_async<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> func<span class="ansi-blue-fg">,</span> callback<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    200</span>         <span class="ansi-blue-fg">&#34;&#34;&#34;Schedule a func to be run&#34;&#34;&#34;</span>
+<span class="ansi-green-fg">--&gt; 201</span><span class="ansi-red-fg">         </span>result <span class="ansi-blue-fg">=</span> ImmediateResult<span class="ansi-blue-fg">(</span>func<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    202</span>         <span class="ansi-green-fg">if</span> callback<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    203</span>             callback<span class="ansi-blue-fg">(</span>result<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/_parallel_backends.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, batch)</span>
+<span class="ansi-green-intense-fg ansi-bold">    580</span>         <span class="ansi-red-fg"># Don&#39;t delay the application, to avoid keeping the input</span>
+<span class="ansi-green-intense-fg ansi-bold">    581</span>         <span class="ansi-red-fg"># arguments in memory</span>
+<span class="ansi-green-fg">--&gt; 582</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>results <span class="ansi-blue-fg">=</span> batch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    583</span> 
+<span class="ansi-green-intense-fg ansi-bold">    584</span>     <span class="ansi-green-fg">def</span> get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/parallel.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    254</span>         <span class="ansi-green-fg">with</span> parallel_backend<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_backend<span class="ansi-blue-fg">,</span> n_jobs<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>_n_jobs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    255</span>             return [func(*args, **kwargs)
+<span class="ansi-green-fg">--&gt; 256</span><span class="ansi-red-fg">                     for func, args, kwargs in self.items]
+</span><span class="ansi-green-intense-fg ansi-bold">    257</span> 
+<span class="ansi-green-intense-fg ansi-bold">    258</span>     <span class="ansi-green-fg">def</span> __len__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/joblib/parallel.py</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">    254</span>         <span class="ansi-green-fg">with</span> parallel_backend<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_backend<span class="ansi-blue-fg">,</span> n_jobs<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>_n_jobs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    255</span>             return [func(*args, **kwargs)
+<span class="ansi-green-fg">--&gt; 256</span><span class="ansi-red-fg">                     for func, args, kwargs in self.items]
+</span><span class="ansi-green-intense-fg ansi-bold">    257</span> 
+<span class="ansi-green-intense-fg ansi-bold">    258</span>     <span class="ansi-green-fg">def</span> __len__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/sklearn/model_selection/_validation.py</span> in <span class="ansi-cyan-fg">_fit_and_score</span><span class="ansi-blue-fg">(estimator, X, y, scorer, train, test, verbose, parameters, fit_params, return_train_score, return_parameters, return_n_test_samples, return_times, return_estimator, error_score)</span>
+<span class="ansi-green-intense-fg ansi-bold">    514</span>             estimator<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>X_train<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>fit_params<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    515</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 516</span><span class="ansi-red-fg">             </span>estimator<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span>X_train<span class="ansi-blue-fg">,</span> y_train<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>fit_params<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    517</span> 
+<span class="ansi-green-intense-fg ansi-bold">    518</span>     <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/catboost/core.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, X, y, cat_features, sample_weight, baseline, use_best_model, eval_set, verbose, logging_level, plot, column_description, verbose_eval, metric_period, silent, early_stopping_rounds, save_snapshot, snapshot_file, snapshot_interval, init_model)</span>
+<span class="ansi-green-intense-fg ansi-bold">   4237</span>                          use_best_model<span class="ansi-blue-fg">,</span> eval_set<span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">,</span> logging_level<span class="ansi-blue-fg">,</span> plot<span class="ansi-blue-fg">,</span> column_description<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   4238</span>                          verbose_eval<span class="ansi-blue-fg">,</span> metric_period<span class="ansi-blue-fg">,</span> silent<span class="ansi-blue-fg">,</span> early_stopping_rounds<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-&gt; 4239</span><span class="ansi-red-fg">                          save_snapshot, snapshot_file, snapshot_interval, init_model)
+</span><span class="ansi-green-intense-fg ansi-bold">   4240</span> 
+<span class="ansi-green-intense-fg ansi-bold">   4241</span>     <span class="ansi-green-fg">def</span> predict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">,</span> ntree_start<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> ntree_end<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> thread_count<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/catboost/core.py</span> in <span class="ansi-cyan-fg">_fit</span><span class="ansi-blue-fg">(self, X, y, cat_features, text_features, pairs, sample_weight, group_id, group_weight, subgroup_id, pairs_weight, baseline, use_best_model, eval_set, verbose, logging_level, plot, column_description, verbose_eval, metric_period, silent, early_stopping_rounds, save_snapshot, snapshot_file, snapshot_interval, init_model)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1688</span>                 params<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1689</span>                 allow_clear_pool<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-&gt; 1690</span><span class="ansi-red-fg">                 </span>train_params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;init_model&#34;</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">   1691</span>             )
+<span class="ansi-green-intense-fg ansi-bold">   1692</span> 
+
+<span class="ansi-green-fg">~/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/catboost/core.py</span> in <span class="ansi-cyan-fg">_train</span><span class="ansi-blue-fg">(self, train_pool, test_pool, params, allow_clear_pool, init_model)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1223</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1224</span>     <span class="ansi-green-fg">def</span> _train<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> train_pool<span class="ansi-blue-fg">,</span> test_pool<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> allow_clear_pool<span class="ansi-blue-fg">,</span> init_model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1225</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_object<span class="ansi-blue-fg">.</span>_train<span class="ansi-blue-fg">(</span>train_pool<span class="ansi-blue-fg">,</span> test_pool<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">,</span> allow_clear_pool<span class="ansi-blue-fg">,</span> init_model<span class="ansi-blue-fg">.</span>_object <span class="ansi-green-fg">if</span> init_model <span class="ansi-green-fg">else</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1226</span>         self<span class="ansi-blue-fg">.</span>_set_trained_model_attributes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1227</span> 
+
+<span class="ansi-green-fg">_catboost.pyx</span> in <span class="ansi-cyan-fg">_catboost._CatBoost._train</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">_catboost.pyx</span> in <span class="ansi-cyan-fg">_catboost._CatBoost._train</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+<span class="c1"># Guarda el modelo</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">gs_cv</span><span class="p">,</span> <span class="s1">&#39;catboost_gscv_1.pkl&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-41-5c7233b82d34&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>display<span class="ansi-blue-fg">(</span>gs_cv<span class="ansi-blue-fg">.</span>best_params_<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>externals <span class="ansi-green-fg">import</span> joblib
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># Guarda el modelo</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> joblib<span class="ansi-blue-fg">.</span>dump<span class="ansi-blue-fg">(</span>gs_cv<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;catboost_gscv_1.pkl&#39;</span><span class="ansi-blue-fg">,</span> compress<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;GridSearchCV&#39; object has no attribute &#39;best_params_&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gs_cv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_border_count</th>
+      <th>param_depth</th>
+      <th>param_learning_rate</th>
+      <th>param_od_type</th>
+      <th>param_od_wait</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>8.576099</td>
+      <td>0.106418</td>
+      <td>0.070244</td>
+      <td>0.001424</td>
+      <td>176</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 176, 'depth': 10, 'learning_r...</td>
+      <td>-522901.423968</td>
+      <td>-516755.495081</td>
+      <td>-523845.330252</td>
+      <td>-521167.423846</td>
+      <td>3143.404016</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>10.185129</td>
+      <td>0.422745</td>
+      <td>0.084392</td>
+      <td>0.017772</td>
+      <td>254</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 254, 'depth': 10, 'learning_r...</td>
+      <td>-523873.207571</td>
+      <td>-518276.230071</td>
+      <td>-523389.825588</td>
+      <td>-521846.429740</td>
+      <td>2532.205577</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>14.124205</td>
+      <td>0.823308</td>
+      <td>0.103913</td>
+      <td>0.026283</td>
+      <td>512</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 512, 'depth': 10, 'learning_r...</td>
+      <td>-521937.793950</td>
+      <td>-518981.591208</td>
+      <td>-525074.683035</td>
+      <td>-521998.022474</td>
+      <td>2487.853555</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>17.916469</td>
+      <td>0.090597</td>
+      <td>0.090569</td>
+      <td>0.020499</td>
+      <td>1024</td>
+      <td>10</td>
+      <td>0.2</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 1024, 'depth': 10, 'learning_...</td>
+      <td>-526593.050238</td>
+      <td>-517174.066062</td>
+      <td>-524810.837206</td>
+      <td>-522859.333796</td>
+      <td>4085.390148</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>8.913061</td>
+      <td>0.323408</td>
+      <td>0.094146</td>
+      <td>0.010926</td>
+      <td>176</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 176, 'depth': 10, 'learning_r...</td>
+      <td>-546804.734074</td>
+      <td>-541006.054069</td>
+      <td>-548849.031763</td>
+      <td>-545553.278651</td>
+      <td>3321.910054</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>18.498414</td>
+      <td>0.177010</td>
+      <td>0.088166</td>
+      <td>0.011449</td>
+      <td>1024</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 1024, 'depth': 10, 'learning_...</td>
+      <td>-547501.360051</td>
+      <td>-542267.599251</td>
+      <td>-548381.947624</td>
+      <td>-546050.308511</td>
+      <td>2698.821624</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>13.520705</td>
+      <td>0.305466</td>
+      <td>0.086651</td>
+      <td>0.019741</td>
+      <td>512</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 512, 'depth': 10, 'learning_r...</td>
+      <td>-546785.815175</td>
+      <td>-541653.017266</td>
+      <td>-549736.109103</td>
+      <td>-546058.316958</td>
+      <td>3339.757369</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>9.787646</td>
+      <td>0.086201</td>
+      <td>0.098899</td>
+      <td>0.007683</td>
+      <td>254</td>
+      <td>10</td>
+      <td>0.1</td>
+      <td>Iter</td>
+      <td>10</td>
+      <td>{'border_count': 254, 'depth': 10, 'learning_r...</td>
+      <td>-548210.805464</td>
+      <td>-542117.224838</td>
+      <td>-548040.528286</td>
+      <td>-546122.861788</td>
+      <td>2833.256897</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="RandomizedSearchCV">RandomizedSearchCV<a class="anchor-link" href="#RandomizedSearchCV">&#182;</a></h3>
 </div>
 </div>
@@ -13302,7 +13805,7 @@ div#notebook {
 
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">rs_cv</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">CatBoostRegressor</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="n">rs_cv</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">CatBoostRegressor</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;MAE&#39;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,),</span>
                            <span class="n">param_distributions</span><span class="o">=</span><span class="n">cat_params</span><span class="p">,</span> 
                            <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
                            <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
@@ -18903,6 +19406,432 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+
+<span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> 
+        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">mostrar_top_n</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">full_display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;catboost_rscv_1.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;catboost_rscv_3.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;catboost_rscv_4.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_od_wait</th>
+      <th>param_od_type</th>
+      <th>param_learning_rate</th>
+      <th>param_l2_leaf_reg</th>
+      <th>param_depth</th>
+      <th>param_border_count</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>18</td>
+      <td>83.769393</td>
+      <td>0.954837</td>
+      <td>0.148575</td>
+      <td>0.007521</td>
+      <td>50</td>
+      <td>Iter</td>
+      <td>0.15</td>
+      <td>2</td>
+      <td>12</td>
+      <td>512</td>
+      <td>{'od_wait': 50, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-486613.264977</td>
+      <td>-489856.834218</td>
+      <td>-484378.170427</td>
+      <td>-486949.421771</td>
+      <td>2249.245694</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>45.526786</td>
+      <td>3.245354</td>
+      <td>0.142973</td>
+      <td>0.007042</td>
+      <td>10</td>
+      <td>Iter</td>
+      <td>0.15</td>
+      <td>0</td>
+      <td>12</td>
+      <td>128</td>
+      <td>{'od_wait': 10, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-485809.898265</td>
+      <td>-489625.130829</td>
+      <td>-485440.609652</td>
+      <td>-486958.541339</td>
+      <td>1891.575010</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>40.405838</td>
+      <td>0.147923</td>
+      <td>0.130930</td>
+      <td>0.015106</td>
+      <td>100</td>
+      <td>Iter</td>
+      <td>0.2</td>
+      <td>5</td>
+      <td>12</td>
+      <td>128</td>
+      <td>{'od_wait': 100, 'od_type': 'Iter', 'learning_...</td>
+      <td>-487743.981402</td>
+      <td>-491289.951856</td>
+      <td>-484572.167222</td>
+      <td>-487868.699627</td>
+      <td>2743.935798</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_od_wait</th>
+      <th>param_od_type</th>
+      <th>param_learning_rate</th>
+      <th>param_l2_leaf_reg</th>
+      <th>param_depth</th>
+      <th>param_colsample_bylevel</th>
+      <th>param_border_count</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>41</td>
+      <td>14.792620</td>
+      <td>1.473287</td>
+      <td>0.084046</td>
+      <td>0.005498</td>
+      <td>15</td>
+      <td>Iter</td>
+      <td>0.2</td>
+      <td>5</td>
+      <td>12</td>
+      <td>0.3</td>
+      <td>128</td>
+      <td>{'od_wait': 15, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-487652.354955</td>
+      <td>-499870.302925</td>
+      <td>-491105.705489</td>
+      <td>-492876.121123</td>
+      <td>5142.654424</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>16.612636</td>
+      <td>0.045189</td>
+      <td>0.076298</td>
+      <td>0.000674</td>
+      <td>10</td>
+      <td>Iter</td>
+      <td>0.2</td>
+      <td>1</td>
+      <td>12</td>
+      <td>0.3</td>
+      <td>254</td>
+      <td>{'od_wait': 10, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-486084.162868</td>
+      <td>-502817.259532</td>
+      <td>-493408.253219</td>
+      <td>-494103.225207</td>
+      <td>6848.910889</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>6.678787</td>
+      <td>0.049522</td>
+      <td>0.070998</td>
+      <td>0.002897</td>
+      <td>50</td>
+      <td>Iter</td>
+      <td>0.2</td>
+      <td>3</td>
+      <td>10</td>
+      <td>0.3</td>
+      <td>150</td>
+      <td>{'od_wait': 50, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-489459.721569</td>
+      <td>-500279.563489</td>
+      <td>-493025.514658</td>
+      <td>-494254.933239</td>
+      <td>4501.914210</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_od_wait</th>
+      <th>param_od_type</th>
+      <th>param_learning_rate</th>
+      <th>param_l2_leaf_reg</th>
+      <th>param_depth</th>
+      <th>param_colsample_bylevel</th>
+      <th>param_border_count</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>13</td>
+      <td>30.180768</td>
+      <td>3.101016</td>
+      <td>0.165898</td>
+      <td>0.045915</td>
+      <td>50</td>
+      <td>Iter</td>
+      <td>0.15</td>
+      <td>3</td>
+      <td>12</td>
+      <td>0.5</td>
+      <td>128</td>
+      <td>{'od_wait': 50, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-485117.634679</td>
+      <td>-488495.085370</td>
+      <td>-488472.591262</td>
+      <td>-487361.760844</td>
+      <td>1586.873576</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>44.787257</td>
+      <td>1.987015</td>
+      <td>0.126294</td>
+      <td>0.001162</td>
+      <td>15</td>
+      <td>Iter</td>
+      <td>0.15</td>
+      <td>0</td>
+      <td>12</td>
+      <td>1</td>
+      <td>150</td>
+      <td>{'od_wait': 15, 'od_type': 'Iter', 'learning_r...</td>
+      <td>-485601.058870</td>
+      <td>-488068.303096</td>
+      <td>-488519.190725</td>
+      <td>-487396.176557</td>
+      <td>1282.625256</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>25.476059</td>
+      <td>2.079557</td>
+      <td>0.120610</td>
+      <td>0.002997</td>
+      <td>100</td>
+      <td>Iter</td>
+      <td>0.2</td>
+      <td>3</td>
+      <td>12</td>
+      <td>0.5</td>
+      <td>128</td>
+      <td>{'od_wait': 100, 'od_type': 'Iter', 'learning_...</td>
+      <td>-484631.790760</td>
+      <td>-488319.753783</td>
+      <td>-489606.311245</td>
+      <td>-487519.272920</td>
+      <td>2108.245853</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;catboost_rscv_4.pkl&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>mean_fit_time                                                        30.1808
+std_fit_time                                                         3.10102
+mean_score_time                                                     0.165898
+std_score_time                                                     0.0459146
+param_od_wait                                                             50
+param_od_type                                                           Iter
+param_learning_rate                                                     0.15
+param_l2_leaf_reg                                                          3
+param_depth                                                               12
+param_colsample_bylevel                                                  0.5
+param_border_count                                                       128
+params                     {&#39;od_wait&#39;: 50, &#39;od_type&#39;: &#39;Iter&#39;, &#39;learning_r...
+split0_test_score                                                    -485118
+split1_test_score                                                    -488495
+split2_test_score                                                    -488473
+mean_test_score                                                      -487362
+std_test_score                                                       1586.87
+rank_test_score                                                            1
+Name: 13, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -21091,10 +22020,10 @@ define('catboost_module', modules, function(widgets) {
 
  
  
-<div id="b7dc35c7-164d-48be-9d60-81efa6017f26"></div>
+<div id="d5f76732-40e8-419c-9e53-a6c368f384da"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#b7dc35c7-164d-48be-9d60-81efa6017f26');
+var element = $('#d5f76732-40e8-419c-9e53-a6c368f384da');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "91c5970bc0644299a7766d21d73ac124", "version_major": 2, "version_minor": 0}
