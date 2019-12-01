@@ -319,6 +319,18 @@ Para obtener buenos resultados fue necesario normalizar todos los features previ
 #### MLPRegression
 
 ### Clustering
+Clustering es una técnica de entrenamiento no supervisado, es decir que se va a trabajar con las propiedades del DataFrame, sin tener un tipo de salida esperado. La ídea principal es agrupar aquellos ítems similares dentro del mismo grupo. Particularmente, en este trabajo práctico se realizaron varias asociaciones de datos, teniendo en cuenta distintos conjuntos de features para cada una de ellas. 
+En particular, se utilizó *kmeas* como método de agrupamiento, el cual tiene como principal hiperparámetro la cantidad de clusters entre los cuales se pretende dividir los datos. Como en el resto del trabajo práctico, elegir buenos hiperparámetros es esencial maxificar los resultados de las predicciones, por lo cual se procedio a graficar en cada caso el score vs la cantidad de cluster. A modo de ejemplo, se muestra el esquema correspondiente a los features: *metrostotales*, *metroscubiertos*, *metrostotales_log*, *metroscubiertos_log*, *porcentaje_metros*, *diferencia_metros*, *intervalo_metros_totales*, 
+*intervalo_metros_cubiertos*, *metroscubiertos_bins_unif* y *metroscubiertos_bins_perc*.
+
+![Score vs Cantidad de Features](./images/scorevsclusters.png)
+
+Dado el gráfico se puede observar que a partir de *6* empieza a ser menos relevante lo que se pierde comparado en lo ganado. De está manera se obtuvo el número de clusters con los cuales trabajar para los anteriormente mencionados features. 
+Para obtener una representación visual de como quedaron separadas las propiedades, y a modo de ejemplo, en el siguiente gráfico se muestra la proyección en dos dimensiones de las columnas: *metros totales* y *metros cubiertos*, donde el color de cada punto indica a que cluster pertenece.
+
+![Score vs Cantidad de Features](./images/metrostotalesvsmetroscubiertos.png)
+
+El label asociado a cada cluster es lo que se usará a modo de feature en los algoritmos de regresión.
 
 ## Parameter tuning
 
