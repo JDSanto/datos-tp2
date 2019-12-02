@@ -23,6 +23,7 @@ header-includes:  \usepackage[spanish]{babel}
       - [Rankings](#rankings)
       - [Intervalos](#intervalos)
   - [Clustering](#clustering)
+    - [Clustering](#clustering-1)
     - [Feature Selection](#feature-selection)
       - [SelectKBest](#selectkbest)
       - [SelectFromModel](#selectfrommodel)
@@ -41,6 +42,10 @@ header-includes:  \usepackage[spanish]{babel}
     - [Extra Randomized Tree](#extra-randomized-tree)
     - [Redes neuronales](#redes-neuronales)
       - [Keras](#keras)
+  - [Parameter tuning](#parameter-tuning-1)
+    - [Hyperopt](#hyperopt-1)
+    - [Random Search](#random-search-1)
+    - [Grid Search](#grid-search-1)
   - [Ensambles](#ensambles)
     - [Stacking](#stacking)
     - [Blending](#blending)
@@ -235,14 +240,20 @@ A continuación enumeramos todos los nuevos features que fueron divididos tanto 
  
 ## Clustering
  
-Clustering es una técnica de entrenamiento no supervisado, es decir que se va a trabajar con las propiedades del DataFrame, sin tener un tipo de salida esperado. La idea principal es agrupar aquellos ítems similares dentro del mismo grupo. Específicamente, en este trabajo práctico se realizaron varias asociaciones de datos, teniendo en cuenta distintos conjuntos de features para cada una de ellas. En particular, se utilizó k means como método de agrupamiento, el cual tiene como principal hiper parámetro la cantidad de clusters entre los cuales se pretende dividir la información. Como en el resto del trabajo, elegir buenos hiper parámetros es esencial para maximizar los resultados de las predicciones, no obstante, se procedió a graficar en cada caso el score vs la cantidad de clusters. A modo de ejemplo, a continuación se muestra el esquema correspondiente a los features: metrostotales, metroscubiertos, metrostotales_log, metroscubiertos_log, porcentaje_metros, diferencia_metros, intervalo_metros_totales, intervalo_metros_cubiertos, metroscubiertos_bins_unif y metroscubiertos_bins_perc y su respectivo puntaje variando la cantidad de agrupaciones(Figura V).
- 
-[Score vs Cantidad de Features](./images/scorevsclusters.png)
- 
-Dado el gráfico se puede observar que a partir de 6 clusters empieza a ser menos relevante el score que se pierde comparado con lo ganado previamente. De esta manera se determinó el número de clusters con los cuales trabajar para los mencionados features. Para obtener una representación visual de como quedaron separadas las propiedades, y a modo de ejemplo, en el siguiente gráfico (Figura VI) se muestra la proyección en dos dimensiones de las columnas: metros totales y metros cubiertos, donde el color de cada punto indica a qué cluster pertenece.
- 
-[Metros totales vs metros cubiertos](./images/metrostotalesvsmetroscubiertos.png)
- 
+### Clustering
+
+Clustering es una técnica de entrenamiento no supervisado, es decir que se va a trabajar con las propiedades del DataFrame, sin tener un tipo de salida esperado. La idea principal es agrupar aquellos ítems similares dentro del mismo grupo. Especificamente, en este trabajo práctico se realizaron varias asociaciones de datos, teniendo en cuenta distintos conjuntos de features para cada una de ellas. 
+En particular, se utilizó *kmeas* como método de agrupamiento, el cual tiene como principal hiperparámetro la cantidad de clusters entre los cuales se pretende dividir la información. Como en el resto del trabajo, elegir buenos hiperparámetros es esencial para maximizar los resultados de las predicciones, no obstante, se procedió a graficar en cada caso el score vs la cantidad de clusters. A modo de ejemplo, a continuación se muestra el esquema correspondiente a los features: *metrostotales*, *metroscubiertos*, *metrostotales_log*, *metroscubiertos_log*, *porcentaje_metros*, *diferencia_metros*, *intervalo_metros_totales*, 
+*intervalo_metros_cubiertos*, *metroscubiertos_bins_unif* y *metroscubiertos_bins_perc* y su respectivo puntaje variando la cantidad de agrupaciones.
+
+![Score vs Cantidad de Features](./images/scorevsclusters.png)
+
+Dado el gráfico se puede observar que a partir de *6* clusters empieza a ser menos relevante el score que se pierde comparado con lo ganado previamente. De esta manera se determinó el número de clusters con los cuales trabajar para los mencionados features. 
+Para obtener una representación visual de como quedaron separadas las propiedades, y a modo de ejemplo, en el siguiente gráfico se muestra la proyección en dos dimensiones de las columnas: *metros totales* y *metros cubiertos*, donde el color de cada punto indica a que cluster pertenece.
+
+![Score vs Cantidad de Features](./images/metrostotalesvsmetroscubiertos.png)
+
+El label asociado a cada cluster es lo que se usará a modo de feature en los algoritmos de regresión.
 Como conclusión de los features encontrados se presenta un mapa de correlación con algunos de los features que presentan mayor relación con el precio (Figura VII), es la misma idea presentada en el primer trabajo enlazado con lo aprendido hasta el momento. Como se puede observar, no todos los features cuentan con el mismo _peso_, se podría decir que algunos son más importantes que otros a la hora de predecir los precios de las propiedad. Es por eso que en la siguiente sección nos concentramos en la selección de los mismos con el fin de entrenar los modelos solamente con los mejores. Se excluyen varios features y se separa en 4 gráficos debido a la alta cantidad de features con el fin de facilitar la lectura de los resultados, siempre mostrando una comparación con el precio para poder apreciar principalmente si el feature tiene una fuerte o débil relación con el mismo.
  
 ![Correlación de los features(KD Trees, textos y en relación a los metros totales y cubiertos)](./images/correlacion1.png)
@@ -355,7 +366,29 @@ Los resultados obtenidos con este método, son levemente peores que Random Fores
  
 Se planteó una red neuronal sencilla que define un procedimiento que nos devuelve una red neuronal. Con la instrucción Dense, se añade una capa oculta(hidden layer) de la red, en cada una de las instrucciones se definen la cantidad de nodos, la función de activación para las capas(En las capas ocultas ReLu y para la capa de salida linear).
 Para obtener buenos resultados fue necesario normalizar todos los features previamente al entrenamiento. Con ello obtenemos que el set comprenderá valores de entre 0 y 1. Con esto el entrenamiento suele aportar mejores resultados.
- 
+
+## Parameter tuning
+
+En los primeros modelos corridos fue cuando se empezo a notar lo que ya se sabía: los híper-parámetros son muy importantes y puede marcar la diferencia entre un buen modelo y uno promedio o incluso malo.
+Inicialmente, debido a la gran cantidad de opciones para algunos algoritmos, optamos por utilizar hyperopt, random search y grid search.
+
+### Hyperopt
+
+En primera instancia se utilizo Hyperopt para hallar los mejores hiperparametros de cada uno de los modelos debido a que es una API bastante simple y fácil de utilizar. Se podría describir como una RandomSearch *guiado*, ya que la misma API puede dar cuenta de cuando es necesario modificar los resultados, es decir que, trabaja tomando muestras al azar y logra entender que combinaciones probar y cuales no.
+Este método permite usar distintos y amplios set de opciones(hp.choice, hp.randit, hp.quniform, hp.qloguniform,hp.normal, hp.uniform, hp.lognormal, etc.) lo cual facilita la busqueda automatizada para las distintas combinaciones de hiperparametros.
+Los resultados a partir del uso de Hyperopt fueron en su mayoría buenos, sin embargo el tiempo de ejecución no es de lo mejor.
+
+### Random Search
+
+Este módelo cuenta con varias diferencias importantes con hyperot. La principal ventaja es que usa Cross-Validation, de esta forma se puede asegurar que los hiperparametros no overfiteen el modelo. Es una técnica utilizada para evaluar los resultados de un ánalisis y garantizar que sean independientes de la partición entre datos de entrenamiento y prueba. Consiste en repetir los calculos sobre las diferentes particiones.
+
+En cuanto a las deventajas: por un lado, a diferencia de hyperopt, no permite un rango continuo de valores, es necesario establecer un arreglo con valores discretos. Y aún así, el modelo es más costoso, ya que va a evaluar cada combinación de hiperparametros k veces por cada k fold (con el beneficio de asegurarse que no overfiteen hacia un resultado)
+
+### Grid Search
+
+Se importa GridSearchCV de la librería de sklearn. Es importante tener en cuenta que es extremadamente costoso este método ya que prueba todas las combinaciones posibles para cada una de las opciones que le designamos.
+Para evitar esto, se toman los resultados obtenidos en hyperopt o RandomSearch con el objetivo de acotar los valores y a partir de ellos poder trabajar con Grid Search. No deja de ser un modelo extremadamente costoso pero de esta manera se reduce en un gran porcentaje el tiempo de ejecución y se logra encontrar valores óptimos.
+
 ## Ensambles
  
 Los mejores algoritmos de Machine Learning suelen surgir de la combinación de varios algoritmos. A continuación se detallan diferentes ensambles que se tuvieron en cuenta en el trabajo práctico:
