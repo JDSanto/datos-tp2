@@ -52,7 +52,7 @@ header-includes:  \usepackage[spanish]{babel}
 El objetivo principal del trabajo es determinar, para cada propiedad presentada, cuál es su valor de mercado.
 La puesta en marcha de la actividad se hace con algoritmos de Machine Learning, una disciplina que busca poder generar clasificaciones en base a un entrenamiento previo sobre información pasada, seguida de una validación de las predicciones generadas. En el trabajo práctico se prueban distintos algoritmos, los cuales todos en distinta manera hacen uso de los datos. Es por esto que es muy importante saber qué datos usar, y buscar cómo codificarlos de tal forma que mejor se aprovechen.
 
-El primer paso consistió en realizar una breve investigación sobre lo ya hecho en el anterior trabajo práctico, donde se realizó un análisis exploratorio de datos brindados por Zona Prop. Si bien no son exactamente los mismos datos que los trabajados acá, sí son de la misma índole.
+El primer paso consistió en realizar una breve investigación sobre lo ya hecho en el anterior trabajo práctico, donde se realizó un análisis exploratorio de datos brindados por ZonaProp. Si bien no son exactamente los mismos datos que los trabajados acá, sí son de la misma índole.
 
 ### Nulos
 
@@ -76,11 +76,11 @@ En las Figuras 1-4 se pueden observar los recortes realizados.
 
 ![Búsqueda de outliers con features base sin precio](./images/out_features.png)
 
-Los datos en la figura 1 representa la reducción de dimensiones considerando todas las columnas del set de datos original, excluyendo al precio. Observando los datos de los outliers en las parte superior e inferior, estos tienen mucha diferencia entre los metroscubiertos y los metrostotales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
+Los datos en la figura 1 representa la reducción de dimensiones considerando todas las columnas del set de datos original, excluyendo al precio. Observando los datos de los outliers en las parte superior e inferior, estos tienen mucha diferencia entre los metros cubiertos y los metros totales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
 
 ![Filtrado de outliers con features base sin precio](./images/out_features_recortado.png)
 
-Teniendo en cuenta los precios de las propiedades, los outliers de la Figura 3 tienen un precio muy elevado en relacion a los metroscubiertos y metrostotales. A modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
+Teniendo en cuenta los precios de las propiedades, los outliers de la Figura 3 tienen un precio muy elevado en relación a los metros cubiertos y metros totales. A modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
 ![Ejemplos de propiedades con notoria anomalía](./images/metros.png)
 
 ![Búsqueda de outliers con features base incluyendo precio](./images/out_features_precio.png)
@@ -92,7 +92,7 @@ Nuevamente son filtrados estos casos dejando un set de datos con menos ruido com
 
 ### Dolarizar
 
-En el primer trabajo práctico, con el fin de que el lector tenga una noción más globalizada del precio de las propiedades, se optó por dolarizar dichos valores, teniendo en cuenta la fecha de publicación. Para poder realizar esta tarea, se procedió a usar una API gratuita del Banco Central de Europa [^1]. Está integración permitió obtener la cotización del Dólar en pesos Mexicanos para cada una de las fechas existentes en el set de datos. Como resultado de este proceso, se obtuvo para cada una de las 239732 propiedades, el valor de su precio en dólares, acorde a la ubicación temporal en la que fue publicado. Este proceso se repitiió nuevamete en busca de mejores resultados, pero en general se obtuvo lo mismo o incluso peor. Por ende esta idea fue rápidamente descartada.
+En el primer trabajo práctico, con el fin de que el lector tenga una noción más globalizada del precio de las propiedades, se optó por dolarizar dichos valores, teniendo en cuenta la fecha de publicación. Para poder realizar esta tarea, se procedió a usar una API gratuita del Banco Central de Europa [^1]. Está integración permitió obtener la cotización del Dólar en pesos Mexicanos para cada una de las fechas existentes en el set de datos. Como resultado de este proceso, se obtuvo para cada una de las 239732 propiedades, el valor de su precio en dólares, acorde a la ubicación temporal en la que fue publicado. Este proceso se repitió nuevamente en busca de mejores resultados, pero en general se obtuvo lo mismo o incluso peor. Por ende esta idea fue rápidamente descartada.
 
 ## Features
 
@@ -205,7 +205,7 @@ Primero se separan las features según su dependencia con el precio de la propie
 
 #### One Hot Encoding
 
-Consiste en dividir el atributo en tantas columnas como valores posibles puede tener y usar cada columna como un dato binario indicando si el atributo toma o no dicho valor. Por lo que esta idea se repite para todos los features categóricos: provincia, tipodepropiedad, zona, etc.
+Consiste en dividir el atributo en tantas columnas como valores posibles puede tener y usar cada columna como un dato binario indicando si el atributo toma o no dicho valor. Por lo que esta idea se repite para todos los features categóricos: provincia, tipo de propiedad, zona, etc.
 
 #### KD trees
 
@@ -245,14 +245,14 @@ A continuación se enumeran los nuevos features que fueron divididos tanto por i
 
 #### Clustering
 
-Clustering es una técnica de entrenamiento no supervisado, es decir que se va a trabajar con las propiedades del DataFrame, sin tener un tipo de salida esperado. La idea principal es agrupar aquellos ítems similares dentro del mismo grupo. Especificamente, en este trabajo práctico se realizaron varias asociaciones de datos, teniendo en cuenta distintos conjuntos de features para cada una de ellas. 
-En particular, se utilizó *kmeans* como método de agrupamiento, el cual tiene como principal hiperparámetro la cantidad de clusters entre los cuales se pretende dividir la información. Como en el resto del trabajo, elegir buenos hiperparámetros es esencial para maximizar los resultados de las predicciones, no obstante, se procedió a graficar en cada caso el score vs la cantidad de clusters. A modo de ejemplo, a continuación se muestra el esquema correspondiente a los features: *metrostotales*, *metroscubiertos*, *metrostotales_log*, *metroscubiertos_log*, *porcentaje_metros*, *diferencia_metros*, *intervalo_metros_totales*, 
+Clustering es una técnica de entrenamiento no supervisado, es decir que se va a trabajar con las propiedades del DataFrame, sin tener un tipo de salida esperado. La idea principal es agrupar aquellos ítems similares dentro del mismo grupo. Específicamente, en este trabajo práctico se realizaron varias asociaciones de datos, teniendo en cuenta distintos conjuntos de features para cada una de ellas.
+En particular, se utilizó *kmeans* como método de agrupamiento, el cual tiene como principal hiperparámetro la cantidad de clusters entre los cuales se pretende dividir la información. Como en el resto del trabajo, elegir buenos hiperparámetros es esencial para maximizar los resultados de las predicciones, no obstante, se procedió a graficar en cada caso el score vs la cantidad de clusters. A modo de ejemplo, a continuación se muestra el esquema correspondiente a los features: *metrostotales*, *metroscubiertos*, *metrostotales_log*, *metroscubiertos_log*, *porcentaje_metros*, *diferencia_metros*, *intervalo_metros_totales*,
 *intervalo_metros_cubiertos*, *metroscubiertos_bins_unif* y *metroscubiertos_bins_perc* y su respectivo puntaje variando la cantidad de agrupaciones.
 
 ![Score vs Cantidad de Features](./images/scorevsclusters.png)
 
-Dado el gráfico(Figura 5) se puede observar que a partir de *6* clusters empieza a ser menos relevante el score que se pierde comparado con lo ganado previamente. De esta manera se determinó el número de clusters con los cuales trabajar para los mencionados features. 
-Con fin de obtener una representación visual de como quedaron separadas las propiedades, y a modo de ejemplo, en la Figura 6 se muestra la proyección en dos dimensiones de las columnas: *metros totales* y *metros cubiertos*, donde el color de cada punto indica a que cluster pertenece.
+Dado el gráfico(Figura 5) se puede observar que a partir de *6* clusters empieza a ser menos relevante el score que se pierde comparado con lo ganado previamente. De esta manera se determinó el número de clusters con los cuales trabajar para los mencionados features.
+Con fin de obtener una representación visual de como quedaron separadas las propiedades, y a modo de ejemplo, en la Figura 6 se muestra la proyección en dos dimensiones de las columnas: *metros totales* y *metros cubiertos*, donde el color de cada punto indica a qué cluster pertenece.
 
 ![Score vs Cantidad de Features](./images/metrostotalesvsmetroscubiertos.png)
 
@@ -309,7 +309,7 @@ Los resultados a partir del uso de Hyperopt fueron en su mayoría buenos, sin em
  
 ### Random Search
  
-Este modelo cuenta con varias diferencias importantes con Hyperot. La principal ventaja es que usa Cross-Validation, de esta forma se puede asegurar que los hiper parámetros no overfiteen el modelo. Es una técnica utilizada para evaluar los resultados de un análisis y garantizar que sean independientes de la partición entre datos de entrenamiento y prueba. Consiste en repetir los cálculos sobre las diferentes particiones.
+Este modelo cuenta con varias diferencias importantes con Hyperopt. La principal ventaja es que usa Cross-Validation, de esta forma se puede asegurar que los hiper parámetros no overfiteen el modelo. Es una técnica utilizada para evaluar los resultados de un análisis y garantizar que sean independientes de la partición entre datos de entrenamiento y prueba. Consiste en repetir los cálculos sobre las diferentes particiones.
  
 En cuanto a las desventajas: por un lado, a diferencia de hyperopt, no permite un rango continuo de valores, es necesario establecer un arreglo con valores discretos. Y aún así, el modelo es más costoso, ya que va a evaluar cada combinación de hiper parámetros k veces por cada k fold (con el beneficio de asegurarse que no overfiteen hacia un resultado).
  
@@ -330,7 +330,7 @@ Con el objetivo de evitar el overfiteo fue importante considerar el valor de los
 LightGBM es simplemente el algoritmo que constantemente mejores resultados nos dio. Este algoritmo de gradient boosting sobre árboles se diferencia de XGBoost en que construye los árboles según las hojas, y no los niveles. Es importante que sus hiper parámetros estén bien configurados (por ejemplo, la profundidad máxima de los árboles), ya que rápidamente se encuentran muy buenos saltos de calidad en el modelo. Algunos de los hiper parámetros más importantes buscados que se encargaron de controlar el overfiteo fueron: learning_rate, max_depth, min_data_in_leaf y num_leaves. Por otro lado, también se tuvieron en cuenta hiper parámetros que facilitarán el control de la velocidad del modelo, tales como bagging_fraction o num_iterations.
 Este algoritmo también se destaca por ser rápido y consumir poca memoria. Además, tiene un gran manejo de la  dimensionalidad de los datos, sin cambiar mucho frente a ellos.
  
-En la Figura 12, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de desición es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos clasificar correctamente nuestros datos.
+En la Figura 12, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de decisión es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos clasificar correctamente nuestros datos.
 
 ![Árbol de Decisiones](./images/lightgbm.jpg)
 
@@ -370,7 +370,7 @@ Los mejores algoritmos de Machine Learning suelen surgir de la combinación de v
  
 ### Stacking
  
-Se utilizo una API llamada vecstack para implementar el ensamble, conveniente para la automatización OOF(out of fold), predicción y bagging de cualquier cantidad de modelos. Es decir que es utilizado para combinar diferentes algoritmos de machine learning, con el uso de k-fold validation de esta forma nos aseguramos de que no se overfitee a un resultado agrupando de a k intervalos.
+Se utilizo una API llamada vecstack para implementar el ensamble, conveniente para la automatización OOF (out of fold), predicción y bagging de cualquier cantidad de modelos. Es decir que es utilizado para combinar diferentes algoritmos de machine learning, con el uso de k-fold validation de esta forma nos aseguramos de que no se overfitee a un resultado agrupando de a k intervalos.
 Por cada tipo de algoritmo se realizan k fracciones del dataset, se realizan las predicciones de los modelos y luego se calcula un promedio de los k resultados. Este promedio de las predicciones será una nueva feature del modelo. Este proceso de repite para todos los modelos que serán ensamblados.
 Una vez que se encuentran todos los features nuevos, existen varios caminos para continuar. Por un lado, la idea más sencilla sería realizar simplemente un promedio de todos los valores (average), lo cual generó muy buenos resultados. Por el otro lado , se puede utilizar un modelo para nuevamente realizar predicciones con las nuevas features. Se tomo primero únicamente las nuevas features generadas y se probó con LightGBM, luego se repitió la idea pero esta vez utilizamos todas las features y se añadieron las recientemente generadas.
  
@@ -393,9 +393,12 @@ Luego se pasó por Redes Neuronales, y aquí no se encontraron los resultados es
 Random Forest y Extra Randomized Tree son dos modelos pesados en memoria y relativamente lentos comparado a sus alternativas de gradient boosting. Más allá de su tiempo, devolvió muy  buenos resultados y la búsqueda de hiper parámetros fue simple ya que no cuenta con muchos. Se puede concluir que Random Forest deja mejores resultados que Extra Randomized Tree, lo cual era esperable debido a sus técnicas random que plantea.
 Una vez que se conocieron todos estos modelos, se pasó a la etapa de ensamble. Primero se trabajó con Stacking: Como se mencionó previamente en la sección de este ensamble, el modelo se preocupa porque no overfiteen los resultados. Esto nos permitió encontrar las mejores predicciones. Además cuenta con diferentes variantes, por ende nos permitió encontrar diferentes soluciones interesantes. Por un lado la más básica, simplemente con el cálculo del promedio que generó buenos resultados. Luego una opción un poco más compleja, que sin dudas fue de las mejores soluciones entregadas que fue usando layers de stacking adicionales. Con tan solo usar un nivel de stacking y con sus resultados pasarlos por LightGBM, se obtuvieron los mejores resultados hasta la fecha. Esta resolución incluyó en el ensamble: LightGBM, XGBoost, CatBoost y Random Forest.
 Por último se trabajó con Blending. Los resultados encontrados con el Blending 'costoso', es decir la variante que utilizaba un súper-set que reutiliza las predicciones que calculó previamente, fueron mejores en comparación a la versión más corta y menos costosa de Blending explicada en el apartado de Ensambles. Nuevamente se trabajó con LightGBM, XGBoost, CatBoosting y Random Forest, pero los resultados obtenidos son considerablemente peores que Stacking. Además el modelo es más costoso ya que la suma de entrenar el modelo múltiples veces, se está aumentado el set de entrenamiento en cada paso.
-A modo de conclusión, se pudo comprobar empíricamente que Machine Learning requiere de una serie de trucos. En un primer lugar, se observó que con el agregado de features que a nuestra visión eran irrelevantes para la predicción, el score mejoró notablemente. Un ejemplo de esto es el cálculo de las distancias o lo específico en ubicación relacionado con el idzona. Así mismo, se puede notar que ante mínimos cambios el score empeoraba o mejoraba de forma notable, demostrando el efecto avalancha de esta disciplina. 
+A modo de conclusión, se pudo comprobar empíricamente que Machine Learning requiere de una serie de trucos. En un primer lugar, se observó que con el agregado de features que a nuestra visión eran irrelevantes para la predicción, el score mejoró notablemente. Un ejemplo de esto es el cálculo de las distancias o lo específico en ubicación relacionado con el idzona. Así mismo, se puede notar que ante mínimos cambios el score empeoraba o mejoraba de forma notable, demostrando el efecto avalancha de esta disciplina.
 Por otro lado, consideramos que aún quedarían distintas opciones por probar como por ejemplo, teniendo en cuenta que los modelos de ensambles funcionan mejor cuando las predicciones en los modelos varían considerablemente y también considerando que tres de los cuatro modelos elegidos usan la técnica de Gradient Boosting, es decir que no hay una diferencia importante. Se concluye que para mejorar el modelo, lo ideal sería utilizar modelos variados como por ejemplo Keras, el cual no fue utilizado debido al alto error encontrado. También se podrían haber empleado otros tipos de redes neuronales, ya que tras 'fracasar' con Keras, se continuó con nuevas ramas y no se profundizó sobre el tema.
 
 [^1]: API del Banco Central de Europa: https://exchangeratesapi.io
 
 [^2]: Organización de Datos, Apunte del Curso:  https://piazza.com/class_profile/get_resource/jz8g9vqp3nt2c8/jz8ga327u6p2hn
+
+
+
