@@ -6,78 +6,12 @@ header-includes:  \usepackage[spanish]{babel}
 
 ## Índice
 
-- [Trabajo Práctico 2: Machine Learning](#trabajo-pr%c3%a1ctico-2-machine-learning)
-  - [Índice](#%c3%8dndice)
-  - [Introducción](#introducci%c3%b3n)
-    - [Filtrado](#filtrado)
-    - [PCA](#pca)
-    - [Nulos](#nulos)
-    - [Dolarizar](#dolarizar)
-  - [Features](#features)
-    - [Feature engineering](#feature-engineering)
-      - [Independientes del precio](#independientes-del-precio)
-      - [Dependientes del precio](#dependientes-del-precio)
-      - [En relación a los textos](#en-relaci%c3%b3n-a-los-textos)
-      - [Distancias](#distancias)
-      - [One Hot Encoding](#one-hot-encoding)
-      - [KD trees](#kd-trees)
-      - [Rankings](#rankings)
-      - [Intervalos](#intervalos)
-      - [Clustering](#clustering)
-    - [Feature Selection](#feature-selection)
-      - [SelectKBest](#selectkbest)
-      - [SelectFromModel](#selectfrommodel)
-      - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe)
-      - [Recursive Feature Elimination w/ Cross Validation (RFECV)](#recursive-feature-elimination-w-cross-validation-rfecv)
-      - [Shap](#shap)
-  - [Parameter tuning](#parameter-tuning)
-    - [Hyperopt](#hyperopt)
-    - [Random Search](#random-search)
-    - [Grid Search](#grid-search)
-  - [Modelos](#modelos)
-    - [XGBoost](#xgboost)
-    - [LightGBM](#lightgbm)
-    - [Catboosting](#catboosting)
-    - [Random Forest](#random-forest)
-    - [Extra Randomized Tree](#extra-randomized-tree)
-    - [Redes neuronales](#redes-neuronales)
-      - [Keras](#keras)
-  - [Ensambles](#ensambles)
-    - [Stacking](#stacking)
-    - [Blending](#blending)
-  - [Conclusiones](#conclusiones)
-
 ## Introducción
 
 El objetivo principal del trabajo es determinar, para cada propiedad presentada, cuál es su valor de mercado.
 La puesta en marcha de la actividad se hace con algoritmos de Machine Learning, una disciplina que busca poder generar clasificaciones en base a un entrenamiento previo sobre información pasada, seguida de una validación de las predicciones generadas. En el trabajo práctico se prueban distintos algoritmos, los cuales todos en distinta manera hacen uso de los datos. Es por esto que es muy importante saber qué datos usar, y buscar cómo codificarlos de tal forma que mejor se aprovechen.
 
 El primer paso consistió en realizar una breve investigación sobre lo ya hecho en el anterior trabajo práctico, donde se realizó un análisis exploratorio de datos brindados por Zona Prop. Si bien no son exactamente los mismos datos que los trabajados acá, sí son de la misma índole.
-
-### Filtrado
-
-La detección de anomalías (outliers) implica el reconocimiento y corrección o eliminación de datos erróneos. Un dato anómalo es aquel que tiene valores imposibles para uno, o más, de sus atributos. Por lo que en una primera instancia se decide, filtrar aquellos registros que semánticamente son posible pero no tiene sentido en el contexto de los demás datos, es decir que probablemente se trate de un dato mal ingresado.
-En las Figuras 1-4 se pueden observar los recortes realizados.
-
-![Búsqueda de outliers con features base sin precio](./images/out_features.png)
-
-Como se puede observar en la Figura 1, los outliers tienen mucha diferencia entre los metroscubiertos y los metrostotales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
-
-![Filtrado de outliers con features base sin precio](./images/out_features_recortado.png)
-
-Teniendo en cuenta los precios de las propiedades, se puede notar que los outliers tienen un precio muy elevado en relacion a los metroscubiertos y metrostotales. Esta idea se ve representada en la Figura 3. Además, a modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
-![Ejemplos de propiedades con notoria anomalía](./images/metros.png)
-
-![Búsqueda de outliers con features base incluyendo precio](./images/out_features_precio.png)
-
-Nuevamente son filtrados estos casos dejando un set de datos con menos ruido como se puede observar en la Figura 4.
-
-![Filtrado de outliers con features base incluyendo precio](./images/out_features_precio_recortado.png)
-
-### PCA
-
-Se utilizó PCA en un intento de manipular la dimensionalidad de los datos. La idea de PCA es encontrar las ”direcciones” principales de los datos, es decir, aquellas direcciones sobre las cuales podemos proyectar los datos reteniendo su variabilidad.
-Sin embargo, en el afán de reducir el ruido del set de datos, los resultados no fueron buenos ya que _overfiteaban_.
 
 ### Nulos
 
@@ -89,15 +23,40 @@ Como caso particular, se observó que figuraban propiedades con valor nulo en su
 
 Se completan las latitudes y longitudes faltantes con un promedio de estas features para aquellas propiedades que comparten id_zona, y en su defecto ciudad, y en el caso de no contar con ninguno de estos datos, con el promedio para las propiedades que comparten provincia. Verificando siempre que el promedio se encuentre dentro del mapa.
 
+### PCA
+
+Se utilizó PCA en un intento de manipular la dimensionalidad de los datos. La idea de PCA es encontrar las ”direcciones” principales de los datos, es decir, aquellas direcciones sobre las cuales podemos proyectar los datos reteniendo su variabilidad.
+Sin embargo, en el afán de reducir el ruido del set de datos, los resultados no fueron buenos ya que _overfiteaban_.
+
+### Filtrado
+
+La detección de anomalías (outliers) implica el reconocimiento y corrección o eliminación de datos erróneos. Un dato anómalo es aquel que tiene valores imposibles para uno, o más, de sus atributos. Por lo que en una primera instancia se decide, filtrar aquellos registros que semánticamente son posible pero no tiene sentido en el contexto de los demás datos, es decir que probablemente se trate de un dato mal ingresado. Para encontrarlos con facilidad, utilizamos PCA para reducir las dimensiones y poder graficarlos.
+En las Figuras 1-4 se pueden observar los recortes realizados.
+
+![Búsqueda de outliers con features base sin precio](./images/out_features.png)
+
+Los datos en la figura 1 representan la reducción de dimensiones considerando todas las columnas del set de datos original, excluyendo al precio. Observando los datos de los outliers en las parte superior e inferior, estos tienen mucha diferencia entre los metros cubiertos y los metros totales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
+
+![Filtrado de outliers con features base sin precio](./images/out_features_recortado.png)
+
+Teniendo en cuenta los precios de las propiedades, los outliers de la Figura 3 tienen un precio muy elevado en relación a los metros cubiertos y metros totales. A modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
+![Ejemplos de propiedades con notoria anomalía](./images/metros.png)
+
+![Búsqueda de outliers con features base incluyendo precio](./images/out_features_precio.png)
+
+Nuevamente son filtrados estos casos dejando un set de datos con menos ruido como se puede observar en la Figura 4.
+
+![Filtrado de outliers con features base incluyendo precio](./images/out_features_precio_recortado.png)
+
 ### Dolarizar
 
-En el primer trabajo práctico, con el fin de que el lector tenga una noción más globalizada del precio de las propiedades, se optó por dolarizar dichos valores, teniendo en cuenta la fecha de publicación. Para poder realizar esta tarea, se procedió a usar una API gratuita del Banco Central de Europa [^1]. Está integración permitió obtener la cotización del Dólar en pesos Mexicanos para cada una de las fechas existentes en el set de datos. Como resultado de este proceso, se obtuvo para cada una de las 239732 propiedades, el valor de su precio en dólares, acorde a la ubicación temporal en la que fue publicado. Este proceso se repitiió nuevamete en busca de mejores resultados, pero en general se obtuvo lo mismo o incluso peor. Por ende esta idea fue rápidamente descartada.
+En el primer trabajo práctico, con el fin de que el lector tenga una noción más globalizada del precio de las propiedades, se optó por dolarizar dichos valores, teniendo en cuenta la fecha de publicación. Para poder realizar esta tarea, se procedió a usar una API gratuita del Banco Central de Europa [^1]. Está integración permitió obtener la cotización del Dólar en pesos Mexicanos para cada una de las fechas existentes en el set de datos. Como resultado de este proceso, se obtuvo para cada una de las propiedades, el valor de su precio en dólares, acorde a la ubicación temporal en la que fue publicado. Este proceso se repitió nuevamete en busca de mejores resultados, pero en general se obtuvo lo mismo o incluso peor. Por ende esta idea fue rápidamente descartada.
 
 ## Features
 
 ### Feature engineering
 
-Con lo investigado del trabajo práctico anterior y todos los dataframes generados, se busca todo tipo de atributos de los usuarios, para que luego puedan ser seleccionados y aprovechados por los algoritmos aplicados.
+Con lo investigado del trabajo práctico anterior y todos los dataframes generados, se busca todo tipo de atributos de las propiedades, para que luego puedan ser seleccionados y aprovechados por los algoritmos aplicados.
 
 Primero se separan las features según su dependencia con el precio de la propiedad:
 
@@ -129,13 +88,13 @@ Primero se separan las features según su dependencia con el precio de la propie
 
   - *anio,mes,dia*: Separó del feature fecha en día, mes y año.
   - *trimestre*: Indicó en qué trimestre del año pertenece la propiedad.
-  - *dias_desde_datos, meses_desde_datos*: Distancias entre las diferentes publicaciones.
+  - *dias_desde_datos, meses_desde_datos*: Diferencia entre la primer publicación(1/1/2012) y la fecha de publicación de la propiedad medido en días y meses.
 
 - **Propiedades booleanas**
 
   - *escuelas_centros_cercanos*: Verifica si tiene escuelas cercanas, centros comerciales cercanos, ambos o ninguno.
-  - *delincuencia*: Booleano indicando si es una ciudad con alta tasa de delincuencia.
-  - *turismo*: Booleano indicando si es una ciudad considerada turística.
+  - *delincuencia*: Booleano indicando si es una ciudad con alta tasa de delincuencia, teniendo en cuenta lo investigado en el análisis exploratotio.
+  - *turismo*: Booleano indicando si es una ciudad considerada turística, teniendo en cuenta lo investigado en el análisis exploratotio.
   - *es_lujoso*: Booleano que determina si una propiedad es lujosa o no, esto se verifica si la propiedad cuenta con piscina, usos múltiples y gimnasio.
   - *es_capital*: Booleano que indica si es la capital federal del país o no lo es.
 
@@ -155,17 +114,17 @@ Primero se separan las features según su dependencia con el precio de la propie
 
   - *promedio_precio_provincia, promedio_provincia_log*: Se agrupa por provincia y se calcula el promedio del precio de cada una. Se genera un feature con el promedio normal y otro con una escala logarítmica.
   - *promedio_precio_ciudad, promedio_ciudad_log*: Idem para cada una de las ciudades de México.
-  - *promedio_precio_ciudad_gen*: Se generaliza el feature.
+  - *promedio_precio_ciudad_gen*: Se generaliza el feature, es decir que para aquellas ciudades con pocas propiedades (Por ejemplo con menos de 50 propiedades), se las agrupa a todas bajo el mismo promedio.
   - *varianza_precio_ciudad*: Se agrupa por ciudades y se calcula la varianza del precio.
   - *count_ciudad*: Se agrupa por ciudades y se calcula la cantidad de propiedades que hay en esta.
-  - *promedio_id_zona, promedio_id_zona_log, promedio_id_zona_gen, varianza_id_zona count_id_zona*: Idem provincia y ciudades.
+  - *promedio_id_zona, promedio_id_zona_log, promedio_id_zona_gen, varianza_id_zona count_id_zona*: Idem para cada id_zona.
 
 - **Por tipo de propiedad**
 
   - *promedio_precio_tipo_propiedad*: Se agrupa por tipo de propiedad y se asigna el promedio del precio.
   - *promedio_precio_tipo_propiedad_ciudad, promedio_precio_tipo_pro-*
   *piedad_ciudad_gen*: Se agrupa tanto por el tipo de propiedad como por la ciudad a la que pertenece y se le asigna el precio promedio.
-  - *count_tipo_propiedad*: Se agrupa por tipo de propiedad y se calcula la cantidad de propiedades de ese mismo tipo existen en los datos.
+  - *count_tipo_propiedad*: Se agrupa por tipo de propiedad y se calcula la cantidad de propiedades de ese mismo tipo.
   - *count_tipo_propiedad_ciudad*:  Se agrupa por tipo de propiedad y ciudad, a continuación se calcula la cantidad de propiedades de ese mismo tipo existentes en cada ciudad.
 
 - **Por fecha**
@@ -180,7 +139,7 @@ Primero se separan las features según su dependencia con el precio de la propie
   - *promedio_precio_habitaciones_banos_garages*: Idem pero se agrupa por cantidad de habitaciones, garages y baños.
   - *promedio_precio_hbg_tipo_propiedad*: Idem pero se agrupa también por tipo de propiedad.
   - *promedio_precio_hbg_tipo_propiedad_provincia*: Idem pero también se agrupa por provincia.
-  - *promedio_precio_hbg_tipo_propiedad_provincia_gen*: Se generalizó el último feature.
+  - *promedio_precio_hbg_tipo_propiedad_provincia_gen*: Se generalizó el último feature para las propiedades con poca información.
 
 - **Por propiedades booleanas**
 
@@ -192,7 +151,7 @@ Primero se separan las features según su dependencia con el precio de la propie
 
 #### En relación a los textos
 
-- *idf_titulo, idf_descripcion*: La idea de TF-IDF es darle a cada término un peso que sea inversamente proporcional a su frecuencia. Los términos que aparecen en muchas propiedades serán entonces menos importantes que los términos que solo aparecen en unos pocos. El IDF de un término se calcula de la forma: $IDF(t_i) = log(\frac{N + 1}{f_(t_i))}$ Donde N es la cantidad de documentos y $f_(t_i)$ es la cantidad de registros en los que aparece el término. Mientras que TF es el term frequency. Se calculan tanto para el título, como para la descripción de cada propiedad.
+- *idf_titulo, idf_descripcion*: La idea de TF-IDF es darle a cada término un peso que sea inversamente proporcional a su frecuencia. Los términos que aparecen en muchas propiedades serán entonces menos importantes que los términos que solo aparecen en unos pocos. El IDF de un término se calcula de la forma: $IDF(t_i) = log(\frac{N + 1}{f_(t_i))}$ Donde N es la cantidad de documentos y $f_(t_i)$ es la cantidad de registros en los que aparece el término. Mientras que TF es el term frequency. Se calculan tanto para el título, como para la descripción de cada propiedad, estas cuentas son resultas por TfidfVectorizer.
 - *peso_titulo, peso_descripcion*: Un contador de palabras importantes en el título y la descripción.
 
 #### Distancias
@@ -201,7 +160,7 @@ Primero se separan las features según su dependencia con el precio de la propie
 
 - *distancia_centro_mexico*: Con la distancia Euclidiana se encuentra la distancia entre la propiedad y el centro de México: Distrito Federal.
 
-- *distancia_ciudad_costosa*: A partir de las ciudades con mayores promedios en precio de cada provincia, se calcula la distancia entre cada propiedad y la misma.
+- *distancia_ciudad_costosa*: A partir de las ciudades con mayor promedio en precio de cada provincia, se calcula la distancia entre cada propiedad y la misma.
 
 #### One Hot Encoding
 
@@ -260,6 +219,8 @@ Con fin de obtener una representación visual de como quedaron separadas las pro
 
 El label asociado a cada cluster es lo que se usará a modo de feature en los algoritmos de regresión.
 
+#### Observaciones
+
 Como conclusión de los features encontrados se presenta un mapa de correlación con algunos de los features que presentan mayor relación con el precio (Figuras 7-10), es la misma idea presentada en el primer trabajo enlazado con lo aprendido hasta el momento. Como se puede observar, no todos los features cuentan con el mismo _peso_, se podría decir que algunos son más importantes que otros a la hora de predecir los precios de las propiedades. Es por eso que en la siguiente sección nos concentramos en la selección de los mismos con el fin de entrenar los modelos solamente con los mejores. Se excluyen varios features y se separa en 4 gráficos debido a la alta cantidad de features, y para facilitar la lectura de los resultados, siempre mostrando una comparación con el precio para poder apreciar principalmente si el feature tiene una fuerte o débil relación con el mismo.
  
 ![Correlación de los features(KD Trees, textos y en relación a los metros totales y cubiertos)](./images/correlacion1.png)
@@ -304,11 +265,11 @@ En los primeros modelos corridos fue cuando se empezó a notar lo que ya se sab�
 Inicialmente, debido a la gran cantidad de opciones para algunos algoritmos, optamos por utilizar hyperopt, random search y grid search.
  
 ### Hyperopt
- 
+
 En primera instancia se utilizó Hyperopt para hallar los mejores hiper parámetros de cada uno de los modelos debido a que es una API bastante simple y fácil de utilizar. Se podría describir como una RandomSearch *guiado*, ya que la misma API se puede dar cuenta de cuando es necesario modificar los resultados, es decir que, trabaja tomando muestras al azar y logra entender qué combinaciones probar y cuáles no.
 Este método permite usar distintos y amplios set de opciones(hp.choice, hp.randit, hp.quniform, hp.qloguniform,hp.normal, hp.uniform, hp.lognormal, etc.) lo cual facilita la búsqueda automatizada para las distintas combinaciones de hiper parámetros.
-Los resultados a partir del uso de Hyperopt fueron en su mayoría buenos, sin embargo el tiempo de ejecución no es de lo mejor.
- 
+Los resultados a partir del uso de Hyperopt fueron los mejores considerando su tiempo de ejecución que es muy bueno.
+
 ### Random Search
  
 Este modelo cuenta con varias diferencias importantes con Hyperot. La principal ventaja es que usa Cross-Validation, de esta forma se puede asegurar que los hiper parámetros no overfiteen el modelo. Es una técnica utilizada para evaluar los resultados de un análisis y garantizar que sean independientes de la partición entre datos de entrenamiento y prueba. Consiste en repetir los cálculos sobre las diferentes particiones.
@@ -327,16 +288,16 @@ Para evitar esto, se toman los resultados obtenidos en hyperopt o RandomSearch c
 XGBoost es un algoritmo muy eficiente de gradient boosting en árboles. A diferencia de otros modelos de gradient boosting utilizados, este no puede utilizar features categóricos, solamente acepta numéricos. Por ende fue necesario generar los features de forma manual, ya sea con one hot encoding, mean encoding, etc.
 Con el objetivo de evitar el overfiteo fue importante considerar el valor de los hiper parámetros de learning_rate, max_depth y min_child_weight. Al ser un modelo que tiene un tiempo de ejecución alto, tanto para el entrenamiento como para la predicción, se tomaron en cuenta diferentes hiper parámetros para controlar la velocidad: colsample_bytree, subsample y n_estimators.
 
-En la Figura 12, se muestra la evolución del modelo durante las iteraciones se observa que a partir de la septima iteración el modelo empieza a overfitear y que los valores son casi constantes a partir de la iteración 40.
+En la Figura 12, se muestra la evolución del modelo durante las iteraciones. Además, se observa que a partir de la septima iteración el modelo empieza a overfitear y que los valores son casi constantes a partir de la iteración 40.
 
 ![Caída del MAE en relación a la cantidad de iteraciones](./images/xgboost.png)
 
 ### LightGBM
- 
-LightGBM es simplemente el algoritmo que constantemente mejores resultados nos dio. Este algoritmo de gradient boosting sobre árboles se diferencia de XGBoost en que construye los árboles según las hojas, y no los niveles. Es importante que sus hiper parámetros estén bien configurados (por ejemplo, la profundidad máxima de los árboles), ya que rápidamente se encuentran muy buenos saltos de calidad en el modelo. Algunos de los hiper parámetros más importantes buscados que se encargaron de controlar el overfiteo fueron: learning_rate, max_depth, min_data_in_leaf y num_leaves. Por otro lado, también se tuvieron en cuenta hiper parámetros que facilitarán el control de la velocidad del modelo, tales como bagging_fraction o num_iterations.
+
+LightGBM es el algoritmo que constantemente mejores resultados nos dio. Este algoritmo de gradient boosting sobre árboles se diferencia de XGBoost en que construye los árboles según las hojas, y no los niveles. Es importante que sus hiper parámetros estén bien configurados (por ejemplo, la profundidad máxima de los árboles), ya que rápidamente se encuentran muy buenos saltos de calidad en el modelo. Algunos de los hiper parámetros más importantes buscados que se encargaron de controlar el overfiteo fueron: learning_rate, max_depth, min_data_in_leaf y num_leaves. Por otro lado, también se tuvieron en cuenta hiper parámetros que facilitarán el control de la velocidad del modelo, tales como bagging_fraction o num_iterations.
 Este algoritmo también se destaca por ser rápido y consumir poca memoria. Además, tiene un gran manejo de la  dimensionalidad de los datos, sin cambiar mucho frente a ellos.
  
-En la Figura 13, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de desición es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos clasificar correctamente nuestros datos.
+En la Figura 13, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de desición es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos predecir correctamente nuestros datos.
 
 ![Árbol de Decisiones](./images/lightgbm.jpg)
 
@@ -346,8 +307,7 @@ Como se puede ver en la Figura 14, la mejora a partir de la iteración 30 es des
  
 ### Catboosting
  
-Una propiedad a favor de este modelo es que acepta las variables categóricas. A diferencia de otros modelos como LightGBM que no acepta categóricos, por ende la conversión es manual por parte de los usuarios. Sin embargo cuenta con una gran contra que es que no acepta features del tipo float. Con el objetivo de no dejar de lado los features importantes, se decidió multiplicar por un valor elevado constante y convertir en integer.
-Este modelo de _gradient boosting_, entrena y predice de forma bastante rápida.
+Una propiedad a favor de este modelo es que acepta las variables categóricas. A diferencia de otros modelos como LightGBM que no lo acepta, por ende la conversión es manual por parte de los usuarios. Este modelo de _gradient boosting_, entrena y predice de forma bastante rápida.
 Se buscaron los mejores hiper parámetros para learning_rate, depth y l2-leaf-reg con la idea de evitar el overfiteo. Además se repitió este proceso para iterations para poder controlar el tiempo del mismo.
  
 En la Figura 15 se puede ver como va disminuyendo el error a medida que aumentan las iteraciones tanto para el entrenamiento como para el testeo.
@@ -367,7 +327,7 @@ Los resultados obtenidos con este método, son levemente peores que Random Fores
  
 #### Keras
  
-Se planteó una red neuronal sencilla que define un procedimiento. Con la instrucción Dense, se añade una capa oculta (hidden layer) de la red, en cada una de las instrucciones se definen la cantidad de nodos, la función de activación para las capas(En las capas ocultas ReLu y para la capa de salida linear).
+Se planteó una red neuronal sencilla que define un procedimiento. Con la instrucción Dense, se añade una capa oculta (hidden layer) de la red, en cada una de las instrucciones se definen la cantidad de nodos, la función de activación para las capas(En las capas ocultas ReLu y para la capa de salida linear). Entre cada capa, se agrega una capa intermedia Dropout con el objetivo de regularizar el modelo. La misma elimina un porcentaje de inputs de lo realizado en el paso anterior, con el fin de que el modelo no overfitee.
 Para obtener buenos resultados fue necesario normalizar todos los features previamente al entrenamiento. Con ello obtenemos que el set comprenderá valores de entre 0 y 1. Con esto el entrenamiento suele aportar mejores resultados.
 
 ## Ensambles
@@ -376,14 +336,12 @@ Los mejores algoritmos de Machine Learning suelen surgir de la combinación de v
  
 ### Stacking
  
-Se utilizo una API llamada vecstack para implementar el ensamble, conveniente para la automatización OOF(out of fold), predicción y bagging de cualquier cantidad de modelos. Es decir que es utilizado para combinar diferentes algoritmos de machine learning, con el uso de k-fold validation de esta forma nos aseguramos de que no se overfitee a un resultado agrupando de a k intervalos.
-Por cada tipo de algoritmo se realizan k fracciones del dataset, se realizan las predicciones de los modelos y luego se calcula un promedio de los k resultados. Este promedio de las predicciones será una nueva feature del modelo. Este proceso de repite para todos los modelos que serán ensamblados.
+Se utilizo una API llamada vecstack para implementar el ensamble, conveniente para la automatización OOF(out of fold), predicción y bagging de cualquier cantidad de modelos. Es decir que es utilizado para combinar diferentes algoritmos de machine learning, con el uso de k-fold validation, de esta forma nos aseguramos de que no se overfitee a un resultado agrupando de a k intervalos.
+Por cada tipo de algoritmo se realizan k fracciones del dataset, se realizan las predicciones de los modelos y luego se calcula un promedio de los k resultados. Este promedio de las predicciones será una nueva feature del modelo. Este proceso se repite para todos los modelos que serán ensamblados, esto significa que cada vez que se quiera predecir un valor, hay que utilizar todos los modelos entrenados.
 Una vez que se encuentran todos los features nuevos, existen varios caminos para continuar. Por un lado, la idea más sencilla sería realizar simplemente un promedio de todos los valores (average), lo cual generó muy buenos resultados. Por el otro lado , se puede utilizar un modelo para nuevamente realizar predicciones con las nuevas features. Se tomo primero únicamente las nuevas features generadas y se probó con LightGBM, luego se repitió la idea pero esta vez utilizamos todas las features y se añadieron las recientemente generadas.
- 
-Los resultados obtenidos con este ensambles fueron muy buenos, y esto se debe a la técnica de OOF que asegura que no se overfitee en el resultado final. En contraparte, debido al uso de muchos modelos, el tiempo de ejecución es de los peores. En conclusión es mayor el beneficio que nos trae, que el costo así que es considerado de los mejores modelos.
- 
+
 ### Blending
- 
+
 Otra forma de combinar el resultado de diferentes algoritmos de Machine Learning para obtener un resultado final es el proceso de Blending. Este ensamble se realiza a partir de clasificadores diferentes. La idea es entrenar varios clasificadores y armar un set de datos con sus predicciones para luego entrenar otro clasificador que realice las predicciones finales en base a la combinación de los resultados obtenidos.
 Se siguieron los pasos detallados en el Apunte de la materia[^2], los cuales incluyen el entrenamientos de n modelos cuatro veces con diferentes particiones de datos y el entrenamiento del modelo blender dos veces. Este proceso se realizó de las dos formas establecidas, tanto con el set de entrenamientos conocido y luego nuevamente con el súper-set.
 Una gran ventaja de este algoritmo en comparación con Stacking es que los n modelos finales van a estar entrenados con el set de entrenamiento y el de testeo(esto es posible ya que el set de testeo fue actualizado previamente con una nueva columna con precios que se predijeron). En definitiva, este modelo tendrá muchos más datos, lo cual significa, en consecuencia, más tiempo.
@@ -398,16 +356,17 @@ Luego se trabajó con XGBoost, nuevamente un modelo con la técnica de Gradient 
 
 Por último, en cuanto a técnicas de Gradient boosting se utilizó Catboost. En principio, en comparación con los anteriores, no tiene muchos hiper parámetros, dejando varias ramas que fueron profundizadas previamente bastante abiertas. Este modelo tiene una gran ventaja y es que permite el uso de variables categóricas, sin embargo no fue del todo útil con el dataset que se nos presenta, y esto se debe a que cuenta con muy pocas variables categóricas realmente relevantes y para aquellas que lo son se buscaron formas de encodear(one hot encoding, mean encoding, etc.). De esta manera, no se aprovechó al máximo la principal ventaja y concluyó siendo más lento y más pesado de lo esperado. No se deja de recomendar este algoritmo en el caso de contar con variables categóricas más fuertes, ya que de ser así es una técnica muy precisa, rápida y con uno de los menores overfiteos.
 
-Luego se pasó por Redes Neuronales, y aquí no se encontraron los resultados esperados. En un principio los resultados de Keras fueron malos. Tras normalizar todos los features, se encontraron resultados más amigable. Modificando los diferentes layers de la red neuronal mejoraron incluso un poco más pero no lo suficiente como para considerarlo en el modelo del ensamble final.
+Luego se pasó por Redes Neuronales, y aquí no se encontraron los resultados esperados. En un principio los resultados de Keras fueron malos. Tras normalizar todos los features, se encontraron resultados más amigable. Modificando los diferentes layers y valores de Dropout de la red neuronal mejoraron incluso un poco más pero no lo suficiente como para considerarlo en el modelo del ensamble final.
+
 Random Forest y Extra Randomized Tree son dos modelos pesados en memoria y relativamente lentos comparado a sus alternativas de gradient boosting. Más allá de su tiempo, devolvió muy  buenos resultados y la búsqueda de hiper parámetros fue simple ya que no cuenta con muchos. Se puede concluir que Random Forest deja mejores resultados que Extra Randomized Tree, lo cual era esperable debido a sus técnicas random que plantea.
 
-Una vez que se conocieron todos estos modelos, se pasó a la etapa de ensamble. Primero se trabajó con Stacking: Como se mencionó previamente en la sección de este ensamble, el modelo se preocupa porque no overfiteen los resultados. Esto nos permitió encontrar las mejores predicciones. Además cuenta con diferentes variantes, por ende nos permitió encontrar diferentes soluciones interesantes. Por un lado la más básica, simplemente con el cálculo del promedio que generó buenos resultados. Luego una opción un poco más compleja, que sin dudas fue de las mejores soluciones entregadas que fue usando layers de stacking adicionales. Con tan solo usar un nivel de stacking y con sus resultados pasarlos por LightGBM, se obtuvieron los mejores resultados hasta la fecha. Esta resolución incluyó en el ensamble: LightGBM, XGBoost, CatBoost y Random Forest.
+Una vez que se conocieron todos estos modelos, se pasó a la etapa de ensamble. Primero se trabajó con Stacking: El modelo cuenta con diferentes variantes, por ende nos permitió encontrar diferentes soluciones interesantes. Por un lado la más básica, simplemente con el cálculo del promedio que generó buenos resultados. Luego una opción un poco más compleja, que sin dudas fue de las mejores soluciones entregadas que fue usando layers de stacking adicionales. Con tan solo usar un nivel de stacking y con sus resultados pasarlos por LightGBM, se obtuvieron los mejores resultados hasta la fecha. Esta resolución incluyó en el ensamble: LightGBM, XGBoost, CatBoost y Random Forest. Los resultados obtenidos con este ensambles fueron muy buenos, y esto se debe a la técnica de OOF que asegura que no se overfitee en el resultado final. En contraparte, debido al uso de muchos modelos, el tiempo de ejecución es de los peores. En conclusión es mucho mayor el beneficio que nos trae, que el costo así que es considerado de los mejores modelos.
 
-Por último se trabajó con Blending. Los resultados encontrados con el Blending 'costoso', es decir la variante que utilizaba un súper-set que reutiliza las predicciones que calculó previamente, fueron mejores en comparación a la versión más corta y menos costosa de Blending explicada en el apartado de Ensambles. Nuevamente se trabajó con LightGBM, XGBoost, CatBoosting y Random Forest, pero los resultados obtenidos son considerablemente peores que Stacking. Además el modelo es más costoso ya que la suma de entrenar el modelo múltiples veces, se está aumentado el set de entrenamiento en cada paso.
+Por último se trabajó con Blending. Los resultados encontrados con el Blending 'costoso', es decir la variante que utilizaba un súper-set que reutiliza las predicciones que calculó previamente, fueron mejores en comparación a la versión más corta y menos costosa de Blending explicada en el apartado de Ensambles. Nuevamente se trabajó con LightGBM, XGBoost, CatBoosting y Random Forest, pero los resultados obtenidos son levemente peores que Stacking. Además el modelo es más costoso en cuanto a tiempo ya que debe de entrenar el modelo múltiples veces y en cada paso aumenta el set de entrenamiento.
 
 A modo de conclusión, se pudo comprobar empíricamente que Machine Learning requiere de una serie de trucos. En un primer lugar, se observó que con el agregado de features que a nuestra visión eran irrelevantes para la predicción, el score mejoró notablemente. Un ejemplo de esto es el cálculo de las distancias o lo específico en ubicación relacionado con el idzona. Así mismo, se puede notar que ante mínimos cambios el score empeoraba o mejoraba de forma notable, demostrando el efecto avalancha de esta disciplina. 
 
-Por otro lado, consideramos que aún quedarían distintas opciones por probar como por ejemplo, teniendo en cuenta que los modelos de ensambles funcionan mejor cuando las predicciones en los modelos varían considerablemente y también considerando que tres de los cuatro modelos elegidos usan la técnica de Gradient Boosting, es decir que no hay una diferencia importante. Se concluye que para mejorar el modelo, lo ideal sería utilizar modelos variados como por ejemplo Keras, el cual no fue utilizado debido al alto error encontrado. También se podrían haber empleado otros tipos de redes neuronales, ya que tras 'fracasar' con Keras, se continuó con nuevas ramas y no se profundizó sobre el tema.
+Por otro lado, consideramos que aún quedarían distintas opciones por probar como por ejemplo, teniendo en cuenta que los modelos de ensambles funcionan mejor cuando las predicciones en los modelos varían considerablemente y también considerando que tres de los cuatro modelos elegidos usan la técnica de Gradient Boosting (es decir que no hay una diferencia importante). Se concluye que para mejorar el modelo, lo ideal sería utilizar modelos variados como por ejemplo Keras, el cual no fue utilizado debido al alto error encontrado. También se podrían haber empleado otros tipos de redes neuronales, ya que tras 'fracasar' con Keras, se continuó con nuevas ramas y no se profundizó sobre el tema.
 
 [^1]: API del Banco Central de Europa: https://exchangeratesapi.io
 
