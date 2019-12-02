@@ -13017,45 +13017,6 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -13115,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13223,7 +13184,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Insight</span>
@@ -13265,7 +13226,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">map_values</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -13355,9 +13316,12 @@ div#notebook {
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;delincuencia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_crimenes</span><span class="p">[</span><span class="s1">&#39;peligro&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;turismo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_turismo</span><span class="p">[</span><span class="s1">&#39;turismo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;es_antigua&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_values</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">30</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># Por antiguedad</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
-
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;habitaciones_antiguedad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad&#39;</span><span class="p">]</span>
+    
     <span class="c1"># Habitaciones, garages y banos</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cantidad_inquilinos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_values</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;banos&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">calculo_inquilinos</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tam_ambientes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">])</span>
@@ -13372,7 +13336,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generalizar_feature</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f_nombre</span><span class="p">,</span> <span class="n">f_reemplazante</span><span class="p">,</span> <span class="n">f_count</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
@@ -13505,6 +13469,50 @@ div#notebook {
         
     <span class="c1"># Insight    </span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;puntaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_puntajes</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">features_intervalos</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ditancia_centro_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ditancia_centro_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_id_zona_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;antiguedad_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;antiguedad&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad&#39;</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_hbg_tipo_propiedad_provincia&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tam_ambientes_bins_unif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_unif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tam_ambientes_bins_perc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;tam_ambientes&#39;</span><span class="p">)</span>
+        
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -13552,7 +13560,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">llenar_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hgb_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13612,29 +13620,29 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # Garages</span>
-<span class="c1"># zonaPromedioGarages = df_train.groupby([&#39;tipodepropiedad&#39;, &#39;habitaciones&#39;]).agg({&#39;garages&#39;:&#39;mean&#39;}).reset_index()</span>
-<span class="c1"># df_train[&#39;garages&#39;] = df_train[&#39;garages&#39;].fillna(zonaPromedioGarages[&#39;garages&#39;])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Garages</span>
+<span class="n">zonaPromedioGarages</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;habitaciones&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;garages&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">zonaPromedioGarages</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">])</span>
 
-<span class="c1"># promedioGarages = zonaPromedioGarages[&#39;garages&#39;].mean()</span>
-<span class="c1"># df_train[&#39;garages&#39;] = df_train[&#39;garages&#39;].fillna(promedioGarages)</span>
+<span class="n">promedioGarages</span> <span class="o">=</span> <span class="n">zonaPromedioGarages</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;garages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">promedioGarages</span><span class="p">)</span>
 
-<span class="c1"># # Habitaciones</span>
-<span class="c1"># zonaPromedioHabitaciones = df_train.groupby([&#39;tipodepropiedad&#39;, &#39;provincia&#39;]).agg({&#39;habitaciones&#39;:&#39;mean&#39;}).reset_index()</span>
-<span class="c1"># df_train[&#39;habitaciones&#39;] = df_train[&#39;habitaciones&#39;].fillna(zonaPromedioHabitaciones[&#39;habitaciones&#39;])</span>
+<span class="c1"># Habitaciones</span>
+<span class="n">zonaPromedioHabitaciones</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">zonaPromedioHabitaciones</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">])</span>
 
-<span class="c1"># promedioHabitaciones = zonaPromedioHabitaciones[&#39;habitaciones&#39;].mean()</span>
-<span class="c1"># df_train[&#39;habitaciones&#39;] = df_train[&#39;habitaciones&#39;].fillna(promedioHabitaciones)</span>
+<span class="n">promedioHabitaciones</span> <span class="o">=</span> <span class="n">zonaPromedioHabitaciones</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">promedioHabitaciones</span><span class="p">)</span>
 
-<span class="c1"># # Banos</span>
-<span class="c1"># zonaPromedioBanos = df_train.groupby([&#39;tipodepropiedad&#39;, &#39;provincia&#39;]).agg({&#39;banos&#39;:&#39;mean&#39;}).reset_index()</span>
-<span class="c1"># df_train[&#39;banos&#39;] = df_train[&#39;banos&#39;].fillna(zonaPromedioBanos[&#39;banos&#39;])</span>
+<span class="c1"># Banos</span>
+<span class="n">zonaPromedioBanos</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;banos&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">zonaPromedioBanos</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">])</span>
 
-<span class="c1"># promedioBanos = zonaPromedioBanos[&#39;banos&#39;].mean()</span>
-<span class="c1"># df_train[&#39;banos&#39;] = df_train[&#39;banos&#39;].fillna(promedioBanos)</span>
+<span class="n">promedioBanos</span> <span class="o">=</span> <span class="n">zonaPromedioBanos</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;banos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">promedioBanos</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13644,7 +13652,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">provincias1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Guerrero&#39;</span><span class="p">,</span> <span class="s1">&#39;Tabasco&#39;</span><span class="p">,</span> <span class="s1">&#39;Nueva León&#39;</span><span class="p">,</span> <span class="s1">&#39;Quintana Roo&#39;</span><span class="p">,</span> <span class="s1">&#39;Morelos&#39;</span><span class="p">,</span> <span class="s1">&#39;Jalisco&#39;</span><span class="p">,</span> <span class="s1">&#39;Puebla&#39;</span><span class="p">]</span>
@@ -13718,10 +13726,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># from sklearn.neighbors import KDTree</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import numpy as np</span>
+
+<span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
 </pre></div>
 
     </div>
@@ -13731,25 +13743,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># def KD_feature(df):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_ohe = pd.get_dummies(df_train[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
+<span class="c1">#                    &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;, </span>
+<span class="c1">#                    &#39;escuelascercanas&#39;, &#39;centroscomercialescercanos&#39;]])</span>
 
-<span class="c1">#     df = df.copy()</span>
-    
-<span class="c1">#     df = llenar_nulls(df)</span>
-<span class="c1">#     df_ohe = pd.get_dummies(df[[&#39;provincia&#39;, &#39;tipodepropiedad&#39;, &#39;habitaciones&#39;, &#39;garages&#39;, </span>
-<span class="c1">#                     &#39;banos&#39;, &#39;gimnasio&#39;, &#39;usosmultiples&#39;, &#39;piscina&#39;]])</span>
-<span class="c1">#     tree = KDTree(df_ohe, leaf_size=200)</span>
-<span class="c1">#     dists = tree.query_radius(df_ohe.values, r=0, count_only=True)</span>
-<span class="c1">#     #densidad = tree.kernel_density(df_ohe, h=0.1, kernel=&#39;gaussian&#39;)</span>
-<span class="c1">#     df[&#39;similares_count&#39;] = dists</span>
-<span class="c1">#     #df_ohe[&#39;densidad&#39;] = densidad</span>
-<span class="c1">#     # densidad = tree.kernel_density(df_ohe, h=0.1, kernel=&#39;gaussian&#39;)</span>
-<span class="c1">#     df[&#39;similares_count&#39;] = dists</span>
-<span class="c1">#     # df_ohe[&#39;densidad&#39;] = densidad</span>
-<span class="c1">#     return df</span>
+<span class="c1"># df_ohe.head(10)</span>
 </pre></div>
 
     </div>
@@ -13759,7 +13760,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># hola = KD_feature(df_train)</span>
@@ -13772,7 +13773,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># hola</span>
@@ -13782,1538 +13783,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[41]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>descripcion</th>
-      <th>tipodepropiedad</th>
-      <th>direccion</th>
-      <th>ciudad</th>
-      <th>provincia</th>
-      <th>antiguedad</th>
-      <th>habitaciones</th>
-      <th>garages</th>
-      <th>...</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>fecha</th>
-      <th>gimnasio</th>
-      <th>usosmultiples</th>
-      <th>piscina</th>
-      <th>escuelascercanas</th>
-      <th>centroscomercialescercanos</th>
-      <th>precio</th>
-      <th>similares_count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>depto. interior de 80.15m2, consta de sala com...</td>
-      <td>Apartamento</td>
-      <td>Avenida Division del Norte 2005</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>8.116114</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.365745</td>
-      <td>-99.159964</td>
-      <td>2015-08-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2273000.0</td>
-      <td>3135</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
-      <td>Casa en condominio</td>
-      <td>AV. MEXICO</td>
-      <td>La Magdalena Contreras</td>
-      <td>Distrito Federal</td>
-      <td>10.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.310205</td>
-      <td>-99.227655</td>
-      <td>2013-06-28 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3600000.0</td>
-      <td>715</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>descripcion \nla mejor ubicacion residencial e...</td>
-      <td>Casa</td>
-      <td>Urbi Tonala</td>
-      <td>Tonalá</td>
-      <td>Jalisco</td>
-      <td>5.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.667955</td>
-      <td>-103.212654</td>
-      <td>2015-10-17 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1200000.0</td>
-      <td>2150</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>casa en privada con caseta de vigilancia casas...</td>
-      <td>Casa</td>
-      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>1.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.301890</td>
-      <td>-99.688015</td>
-      <td>2012-03-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>650000.0</td>
-      <td>2929</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>bonito departamento en excelentes condiciones ...</td>
-      <td>Apartamento</td>
-      <td>PASEOS DEL SOL</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>20.638654</td>
-      <td>-103.433251</td>
-      <td>2016-06-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>674</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>126147</td>
-      <td>departamento en venta taxqueña</td>
-      <td>amplio departamento, estancia de sala y comedo...</td>
-      <td>Apartamento</td>
-      <td>Condominio Tlalpan 2B</td>
-      <td>Coyoacán</td>
-      <td>Distrito Federal</td>
-      <td>5.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.300612</td>
-      <td>-99.148475</td>
-      <td>2014-03-18 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1100000.0</td>
-      <td>6151</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>139233</td>
-      <td>de oportunidad casa en san lorenzo</td>
-      <td>ubicada en esquina, pertenece san lorenzo agen...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Oaxaca de Juárez</td>
-      <td>Oaxaca</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>17.143504</td>
-      <td>-96.803504</td>
-      <td>2016-02-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>59</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>5013</td>
-      <td>casa emilia en venta en selvamar playa del carmen</td>
-      <td>casa emilia en venta playa del carmenfracciona...</td>
-      <td>Casa</td>
-      <td>condominio el trebol</td>
-      <td>Playa del Carmen</td>
-      <td>Quintana Roo</td>
-      <td>2.000000</td>
-      <td>4.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.672612</td>
-      <td>-87.037968</td>
-      <td>2016-10-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>4200000.0</td>
-      <td>48</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>44962</td>
-      <td>pre- venta preciosos depas 2 recamaras con sub...</td>
-      <td>&lt;p&gt;pre-venta de preciosos departamento ecologi...</td>
-      <td>Apartamento</td>
-      <td>BUENAVISTA DEPTOS CON SUBSIDIO</td>
-      <td>Villa de Alvarez</td>
-      <td>Colima</td>
-      <td>1.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.272595</td>
-      <td>-103.781425</td>
-      <td>2014-01-06 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>310000.0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>134537</td>
-      <td>terreno</td>
-      <td>terreno de 5.500m2 bardeado, uso de suelo h-20...</td>
-      <td>Terreno</td>
-      <td>Av. Morelos</td>
-      <td>Ixtapaluca</td>
-      <td>Edo. de México</td>
-      <td>8.116114</td>
-      <td>2.500000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>19.316000</td>
-      <td>-98.887000</td>
-      <td>2016-12-22 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>6200000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>51180</td>
-      <td>mi 2° credito</td>
-      <td>&lt;p&gt;mi 2&amp;deg; credito&lt;br /&gt;para todos aquellos ...</td>
-      <td>Casa</td>
-      <td>MI 2° CREDITO</td>
-      <td>San Luis Potosí</td>
-      <td>San luis Potosí</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>22.195878</td>
-      <td>-101.018956</td>
-      <td>2013-01-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>488000.0</td>
-      <td>277</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>103293</td>
-      <td>departamento en venta, san pedro garza garcia,...</td>
-      <td>departamento nuevo ,256 m2 de construccion,un ...</td>
-      <td>Apartamento</td>
-      <td>NaN</td>
-      <td>San Pedro Garza García</td>
-      <td>Nuevo León</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>24.519849</td>
-      <td>-99.820780</td>
-      <td>2014-12-01 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7200000.0</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>47890</td>
-      <td>hermosa casa en zibata queretaro 170m²</td>
-      <td>&lt;p&gt;&lt;strong&gt;casa &lt;/strong&gt;en venta en fracciona...</td>
-      <td>Casa</td>
-      <td>Pitahayas 2 - 58, Zibata</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.682878</td>
-      <td>-100.317503</td>
-      <td>2013-08-12 00:00:00</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1500000.0</td>
-      <td>73</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>130216</td>
-      <td>casa matias romero - sión bancaria</td>
-      <td>flamante casa habitación en condominio horizon...</td>
-      <td>Casa</td>
-      <td>MATIAS ROMERO, COLONIA DEL VALLE</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>20.000000</td>
-      <td>2.571429</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>19.374895</td>
-      <td>-99.149519</td>
-      <td>2015-03-31 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3000000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>181436</td>
-      <td>casa en venta en valle real</td>
-      <td>pre venta de residencia en la toscana con exce...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>8.116114</td>
-      <td>2.373631</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.729601</td>
-      <td>-103.431993</td>
-      <td>2014-11-25 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>5300000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>201923</td>
-      <td>casa en venta lomas verdes naucalpan</td>
-      <td>&lt;p&gt;casa en dos niveles, 3 recámaras la princip...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Naucalpan de Juárez</td>
-      <td>Edo. de México</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.516583</td>
-      <td>-99.256028</td>
-      <td>2015-01-13 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3650000.0</td>
-      <td>189</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>283945</td>
-      <td>preciosa casa en cumbres del lago \t</td>
-      <td>&lt;p&gt;clave: vcln2450 fecha de actualizaci&amp;oacute...</td>
-      <td>Casa</td>
-      <td>CUMBRES DEL LAGO JURIQUILLA, QUERETARO, MEXICO</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.708760</td>
-      <td>-100.459303</td>
-      <td>2013-03-06 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2450000.0</td>
-      <td>1317</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>73348</td>
-      <td>oportunidad, departamento col del valle, 3 rec...</td>
-      <td>magnifico departamento con excelente distribuc...</td>
-      <td>Apartamento</td>
-      <td>Pazaje Santa Cruz</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>5.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.376729</td>
-      <td>-98.852747</td>
-      <td>2016-10-30 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>4750000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>40421</td>
-      <td>últimos terrenos en preventa!! en bukara coto ...</td>
-      <td>terreno ubicado en bukara coto club, el cual s...</td>
-      <td>Terreno</td>
-      <td>Milenio</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>8.116114</td>
-      <td>2.350114</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>20.594297</td>
-      <td>-100.353059</td>
-      <td>2016-12-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>794078.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>87655</td>
-      <td>NaN</td>
-      <td>-- rcv151104-lv-27 --    linda casa con area d...</td>
-      <td>Casa</td>
-      <td>SENDA CELESTIAL 10</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.594297</td>
-      <td>-100.353059</td>
-      <td>2016-01-15 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1850000.0</td>
-      <td>2498</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>90071</td>
-      <td>terreno residencial en venta en cumbres quinta...</td>
-      <td>&lt;p&gt;excelente terreno plano, frente a parque en...</td>
-      <td>Terreno</td>
-      <td>TERRENO RESIDENCIAL EN VENTA EN CUMBRES</td>
-      <td>Monterrey</td>
-      <td>Nuevo León</td>
-      <td>0.000000</td>
-      <td>2.392810</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>25.745256</td>
-      <td>-100.377638</td>
-      <td>2013-12-02 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>490000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>224513</td>
-      <td>casa en venta en querétaro</td>
-      <td>nocnok id: mx15-bk0340. hermosa casa en conjun...</td>
-      <td>Casa en condominio</td>
-      <td>NaN</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.604222</td>
-      <td>-100.134751</td>
-      <td>2016-02-01 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2300000.0</td>
-      <td>71</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>129818</td>
-      <td>comoda casa con recamara en planta baja y ampl...</td>
-      <td>&lt;p&gt;comoda casa con recamara en planta baja y a...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Ciudad Madero</td>
-      <td>Tamaulipas</td>
-      <td>0.000000</td>
-      <td>4.000000</td>
-      <td>1.920894</td>
-      <td>...</td>
-      <td>22.264768</td>
-      <td>-97.841012</td>
-      <td>2013-12-12 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1340000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>146699</td>
-      <td>casa en condominio en venta, benito juarez, ca...</td>
-      <td>casa en venta en cancun en residencial cumbres...</td>
-      <td>Casa en condominio</td>
-      <td>NaN</td>
-      <td>Cancún</td>
-      <td>Quintana Roo</td>
-      <td>4.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>21.113768</td>
-      <td>-86.846323</td>
-      <td>2015-05-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3500000.0</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>235958</td>
-      <td>casa en venta - colinas del cimatario, queréta...</td>
-      <td>&lt;p&gt;propiedad en un nivel, con espacios amplios...</td>
-      <td>Casa</td>
-      <td>Colinas del Cimatario   C721</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>4.000000</td>
-      <td>3.000000</td>
-      <td>1.581749</td>
-      <td>...</td>
-      <td>20.559744</td>
-      <td>-100.367382</td>
-      <td>2013-09-26 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3900000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>97918</td>
-      <td>casa venta santa cecilia</td>
-      <td>hermosa casa en santa cecilia en apodaca, cerc...</td>
-      <td>Casa</td>
-      <td>Lopez Velarde</td>
-      <td>Apodaca</td>
-      <td>Nuevo León</td>
-      <td>8.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>25.770012</td>
-      <td>-100.231712</td>
-      <td>2016-12-31 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>850000.0</td>
-      <td>1191</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>70294</td>
-      <td>casa en venta de un nivel , frac. misiones de ...</td>
-      <td>¡excelente oportunidad!  \n\ncasa de un nivel ...</td>
-      <td>Casa en condominio</td>
-      <td>MISIONES DE SAN FRANCISCO</td>
-      <td>Puebla</td>
-      <td>Puebla</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.046473</td>
-      <td>-98.192339</td>
-      <td>2014-07-22 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>310000.0</td>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>177031</td>
-      <td>NaN</td>
-      <td>hermosa casa remodelada, con acabados de lujo,...</td>
-      <td>Casa en condominio</td>
-      <td>PASEO DE LOS LAURELES</td>
-      <td>Miguel Hidalgo</td>
-      <td>Distrito Federal</td>
-      <td>18.000000</td>
-      <td>3.000000</td>
-      <td>3.000000</td>
-      <td>...</td>
-      <td>19.427432</td>
-      <td>-98.847993</td>
-      <td>2012-03-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>10800000.0</td>
-      <td>452</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>144635</td>
-      <td>casa en venta en santillana i</td>
-      <td>casa en coto 3 recamaras, estudio, sala-comedo...</td>
-      <td>Casa en condominio</td>
-      <td>Coto Santillana I Casa G11</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.714140</td>
-      <td>-103.453808</td>
-      <td>2015-01-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2600000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>146158</td>
-      <td>terreno urbano bardeado zona tesistán</td>
-      <td>en zona de urbanización progresiva, terreno pl...</td>
-      <td>Terreno comercial</td>
-      <td>camino viejo a Tesistan</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>20.000000</td>
-      <td>2.595668</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>20.784515</td>
-      <td>-103.477062</td>
-      <td>2016-12-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>10707900.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>239970</th>
-      <td>123855</td>
-      <td>residencia en las cañadas, gran oportunidad pa...</td>
-      <td>residencia en las cañadas, una gran oportunida...</td>
-      <td>Casa</td>
-      <td>Paseo de los fambruesos 3150</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.000000</td>
-      <td>5.000000</td>
-      <td>3.000000</td>
-      <td>...</td>
-      <td>20.785029</td>
-      <td>-103.357221</td>
-      <td>2016-12-11 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3350000.0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>239971</th>
-      <td>2747</td>
-      <td>departamento exclusivo para tu familia, vive b...</td>
-      <td>www. \n3 recamaras, 2 baños \n2 autos \nentreg...</td>
-      <td>Apartamento</td>
-      <td>TOKIO</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>4.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.367193</td>
-      <td>-99.153030</td>
-      <td>2016-12-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3750000.0</td>
-      <td>2494</td>
-    </tr>
-    <tr>
-      <th>239972</th>
-      <td>130523</td>
-      <td>casa para remodelar, excelente ubicación</td>
-      <td>estado de conservación: para remodelar, área d...</td>
-      <td>Casa</td>
-      <td>Albino Garcia 219</td>
-      <td>Cuauhtémoc</td>
-      <td>Distrito Federal</td>
-      <td>20.000000</td>
-      <td>5.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.402050</td>
-      <td>-99.132807</td>
-      <td>2016-01-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2400000.0</td>
-      <td>73</td>
-    </tr>
-    <tr>
-      <th>239973</th>
-      <td>149503</td>
-      <td>departamento en venta en villa de cortes</td>
-      <td>últimos departamentos en preventa dentro de ex...</td>
-      <td>Apartamento</td>
-      <td>Pérez de León  61</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>1.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.387150</td>
-      <td>-89.222284</td>
-      <td>2013-02-05 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1260000.0</td>
-      <td>3135</td>
-    </tr>
-    <tr>
-      <th>239974</th>
-      <td>156730</td>
-      <td>casa en venta, cuautitlán izcalli, estado de m...</td>
-      <td>casa en venta en lago de guadalupe. excelente ...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Cuautitlán Izcalli</td>
-      <td>Edo. de México</td>
-      <td>4.000000</td>
-      <td>3.000000</td>
-      <td>1.237483</td>
-      <td>...</td>
-      <td>19.632321</td>
-      <td>-99.248815</td>
-      <td>2015-08-05 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3300000.0</td>
-      <td>835</td>
-    </tr>
-    <tr>
-      <th>239975</th>
-      <td>258795</td>
-      <td>casa en uno de los desarrollos con mayor plusv...</td>
-      <td>&lt;p&gt;el desarrollo cuenta con barda perimetral c...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.649712</td>
-      <td>-100.349840</td>
-      <td>2014-04-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1275000.0</td>
-      <td>2498</td>
-    </tr>
-    <tr>
-      <th>239976</th>
-      <td>184779</td>
-      <td>casa en venta en campanario</td>
-      <td>bonita y bien ubicada casa en venta, 3 recamar...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Chihuahua</td>
-      <td>Chihuahua</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>24.118907</td>
-      <td>-89.357848</td>
-      <td>2015-02-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2020000.0</td>
-      <td>56</td>
-    </tr>
-    <tr>
-      <th>239977</th>
-      <td>214176</td>
-      <td>casa tecamac</td>
-      <td>hermosa casa, en excelente mantenimiento y muy...</td>
-      <td>Casa</td>
-      <td>AV RANCHO NUEVO</td>
-      <td>Tecámac</td>
-      <td>Edo. de México</td>
-      <td>5.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.690073</td>
-      <td>-98.993572</td>
-      <td>2015-04-12 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>490000.0</td>
-      <td>182</td>
-    </tr>
-    <tr>
-      <th>239978</th>
-      <td>235796</td>
-      <td>linda casa en venta,cerca del lago de guadalupe</td>
-      <td>buen proyecto, desarrollada en tres plantas, p...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Atizapán de Zaragoza</td>
-      <td>Edo. de México</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.603617</td>
-      <td>-99.248425</td>
-      <td>2016-10-24 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1880000.0</td>
-      <td>2912</td>
-    </tr>
-    <tr>
-      <th>239979</th>
-      <td>103355</td>
-      <td>se vende casa en delegacion miguel hidalgo</td>
-      <td>excelente casa muy bien ubicada en zona tranqu...</td>
-      <td>Casa</td>
-      <td>Rio Parana</td>
-      <td>Miguel Hidalgo</td>
-      <td>Distrito Federal</td>
-      <td>10.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.457797</td>
-      <td>-99.209211</td>
-      <td>2016-03-04 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3300000.0</td>
-      <td>255</td>
-    </tr>
-    <tr>
-      <th>239980</th>
-      <td>267455</td>
-      <td>departamentos en renta torres palmira</td>
-      <td>departamento en venta avenida palmira , san lu...</td>
-      <td>Apartamento</td>
-      <td>NaN</td>
-      <td>San Luis Potosí</td>
-      <td>San luis Potosí</td>
-      <td>1.000000</td>
-      <td>2.000000</td>
-      <td>1.237483</td>
-      <td>...</td>
-      <td>16.754800</td>
-      <td>-93.094700</td>
-      <td>2016-12-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3386400.0</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>239981</th>
-      <td>199041</td>
-      <td>casa en venta en residencial agua caliente</td>
-      <td>se vende bonita casa en el fracc. residencial ...</td>
-      <td>Casa</td>
-      <td>PRIV. VENECIA</td>
-      <td>Tijuana</td>
-      <td>Baja California Norte</td>
-      <td>10.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>32.486000</td>
-      <td>-116.987722</td>
-      <td>2012-11-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>550000.0</td>
-      <td>539</td>
-    </tr>
-    <tr>
-      <th>239982</th>
-      <td>252709</td>
-      <td>casa de 2 recamaras en residencial del bosque ...</td>
-      <td>casa de 2 recámaras en residencial del bosque ...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Tijuana</td>
-      <td>Baja California Norte</td>
-      <td>8.116114</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>32.507828</td>
-      <td>-116.838982</td>
-      <td>2016-02-05 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>357000.0</td>
-      <td>539</td>
-    </tr>
-    <tr>
-      <th>239983</th>
-      <td>194027</td>
-      <td>casa en venta en san luis potosí</td>
-      <td>nocnok id: mx16-bo3390. sin posesión física, p...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>San Luis Potosí</td>
-      <td>San luis Potosí</td>
-      <td>8.116114</td>
-      <td>3.000000</td>
-      <td>1.237483</td>
-      <td>...</td>
-      <td>22.157684</td>
-      <td>-100.973508</td>
-      <td>2016-02-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>684338.0</td>
-      <td>147</td>
-    </tr>
-    <tr>
-      <th>239984</th>
-      <td>262913</td>
-      <td>en venta mitras centro monterrey nuevo leon</td>
-      <td>en excelente ubicación zona mitras centro. am...</td>
-      <td>Casa</td>
-      <td>PROGRESO, MONTERREY</td>
-      <td>Monterrey</td>
-      <td>Nuevo León</td>
-      <td>20.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>25.695872</td>
-      <td>-100.335367</td>
-      <td>2016-07-30 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>505000.0</td>
-      <td>612</td>
-    </tr>
-    <tr>
-      <th>239985</th>
-      <td>64820</td>
-      <td>casa en venta fuentes de satelite, atizapan, e...</td>
-      <td>casa en venta fuentes de satélite, atizapán, e...</td>
-      <td>Casa en condominio</td>
-      <td>FUENTES DE SATÉLITE, ATIZAPÁN, ESTADO DE MÉXICO</td>
-      <td>Atizapán de Zaragoza</td>
-      <td>Edo. de México</td>
-      <td>10.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.522462</td>
-      <td>-99.258544</td>
-      <td>2016-12-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2700000.0</td>
-      <td>695</td>
-    </tr>
-    <tr>
-      <th>239986</th>
-      <td>41090</td>
-      <td>excelete torre de departamentos en lomas 4ta s...</td>
-      <td>&lt;p&gt;exclusiva torre de departamentos en venta e...</td>
-      <td>Apartamento</td>
-      <td>NaN</td>
-      <td>San Luis Potosí</td>
-      <td>San luis Potosí</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>22.145658</td>
-      <td>-101.021077</td>
-      <td>2013-09-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2079000.0</td>
-      <td>435</td>
-    </tr>
-    <tr>
-      <th>239987</th>
-      <td>278167</td>
-      <td>NaN</td>
-      <td>-- rcv347n-287 --    casas nuevas estilo minim...</td>
-      <td>Casa</td>
-      <td>Primero de mayo 5</td>
-      <td>Cuautlancingo</td>
-      <td>Puebla</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.115934</td>
-      <td>-98.244893</td>
-      <td>2015-10-28 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>830000.0</td>
-      <td>206</td>
-    </tr>
-    <tr>
-      <th>239988</th>
-      <td>191335</td>
-      <td>bodega santa maría</td>
-      <td>ideal para inversionista \nideal centro de dis...</td>
-      <td>Bodega comercial</td>
-      <td>SANTA MARIA</td>
-      <td>Guadalajara</td>
-      <td>Jalisco</td>
-      <td>5.000000</td>
-      <td>3.200836</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>20.616413</td>
-      <td>-103.365752</td>
-      <td>2015-11-20 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1990000.0</td>
-      <td>48</td>
-    </tr>
-    <tr>
-      <th>239989</th>
-      <td>175203</td>
-      <td>casa venta renta en rinconada jurica</td>
-      <td>terreno 404m2 \nconst. 347 m2 \n\npreciosa cas...</td>
-      <td>Casa</td>
-      <td>Jurica</td>
-      <td>Querétaro</td>
-      <td>Querétaro</td>
-      <td>2.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.648319</td>
-      <td>-100.433545</td>
-      <td>2016-09-15 00:00:00</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3850000.0</td>
-      <td>83</td>
-    </tr>
-    <tr>
-      <th>239990</th>
-      <td>87498</td>
-      <td>casa en venta: bosques del contry</td>
-      <td>&lt;p&gt;casa en venta, en magníficas condiciones; e...</td>
-      <td>Casa</td>
-      <td>NaN</td>
-      <td>Guadalupe</td>
-      <td>Nuevo León</td>
-      <td>20.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>25.661179</td>
-      <td>-100.250566</td>
-      <td>2014-04-12 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1495000.0</td>
-      <td>288</td>
-    </tr>
-    <tr>
-      <th>239991</th>
-      <td>137337</td>
-      <td>departamento residencial coyuya</td>
-      <td>departamento ubicado en planta baja, con excel...</td>
-      <td>Apartamento</td>
-      <td>Coyuya 200</td>
-      <td>Iztacalco</td>
-      <td>Distrito Federal</td>
-      <td>20.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.403309</td>
-      <td>-99.119023</td>
-      <td>2015-03-14 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1450000.0</td>
-      <td>6151</td>
-    </tr>
-    <tr>
-      <th>239992</th>
-      <td>54886</td>
-      <td>casa en venta</td>
-      <td>bonita casa para remodelar en una calle cerrad...</td>
-      <td>Casa en condominio</td>
-      <td>Cerrada villa Picadilly</td>
-      <td>Huixquilucan</td>
-      <td>Edo. de México</td>
-      <td>10.000000</td>
-      <td>3.000000</td>
-      <td>1.237483</td>
-      <td>...</td>
-      <td>19.674831</td>
-      <td>-97.874519</td>
-      <td>2015-11-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>5500000.0</td>
-      <td>173</td>
-    </tr>
-    <tr>
-      <th>239993</th>
-      <td>207892</td>
-      <td>bugambilias (ciudad)</td>
-      <td>coto privado de tan solo 7 casas donde cada fa...</td>
-      <td>Casa</td>
-      <td>Paseo de la Cañada</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.615574</td>
-      <td>-103.456215</td>
-      <td>2015-03-22 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1650000.0</td>
-      <td>1098</td>
-    </tr>
-    <tr>
-      <th>239994</th>
-      <td>110268</td>
-      <td>hermosa casa en villa de los belenes</td>
-      <td>&lt;p&gt;moderna casa 3 pisos, muro llor&amp;oacute;n , ...</td>
-      <td>Casa</td>
-      <td>MANUEL AMAYA,ENTRE SEBASTIAN ALLENDE Y AMADO A...</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>20.604484</td>
-      <td>-103.450049</td>
-      <td>2013-07-31 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1350000.0</td>
-      <td>191</td>
-    </tr>
-    <tr>
-      <th>239995</th>
-      <td>119879</td>
-      <td>bonita casas de 2 recamaras a 10 minutos del c...</td>
-      <td>vendo casa en bosques de ica residencial a 10 ...</td>
-      <td>Casa</td>
-      <td>BOSQUES</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>0.000000</td>
-      <td>2.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.337865</td>
-      <td>-99.649164</td>
-      <td>2015-02-08 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>650000.0</td>
-      <td>472</td>
-    </tr>
-    <tr>
-      <th>239996</th>
-      <td>259178</td>
-      <td>casa en condominio a 10 min. del centro de toluca</td>
-      <td>casa con un jardin amplio, un cuarto de servic...</td>
-      <td>Casa</td>
-      <td>Filiberto Navas 325</td>
-      <td>Toluca</td>
-      <td>Edo. de México</td>
-      <td>0.000000</td>
-      <td>3.000000</td>
-      <td>3.000000</td>
-      <td>...</td>
-      <td>19.294665</td>
-      <td>-99.692916</td>
-      <td>2014-07-10 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1940000.0</td>
-      <td>975</td>
-    </tr>
-    <tr>
-      <th>239997</th>
-      <td>131932</td>
-      <td>nicolas san juan</td>
-      <td>departamento con excelente ubicación, muy cerc...</td>
-      <td>Apartamento</td>
-      <td>Nicolas San Juan</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>20.000000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>...</td>
-      <td>19.376729</td>
-      <td>-98.852747</td>
-      <td>2015-03-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3400000.0</td>
-      <td>3135</td>
-    </tr>
-    <tr>
-      <th>239998</th>
-      <td>146867</td>
-      <td>casa sola. javier rojo gomez.</td>
-      <td>casa sola, dividida en cuatro departamentos de...</td>
-      <td>Casa</td>
-      <td>Javier Rojo Gomez 120</td>
-      <td>Iztapalapa</td>
-      <td>Distrito Federal</td>
-      <td>20.000000</td>
-      <td>4.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>19.366651</td>
-      <td>-99.082246</td>
-      <td>2014-12-26 00:00:00</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2890000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>239999</th>
-      <td>121958</td>
-      <td>departamento en bosques de las lomas  / av. st...</td>
-      <td>id:19816, muy bonito e iluminado departamento,...</td>
-      <td>Apartamento</td>
-      <td>AVE. STIM</td>
-      <td>Cuajimalpa de Morelos</td>
-      <td>Distrito Federal</td>
-      <td>1.000000</td>
-      <td>3.000000</td>
-      <td>2.000000</td>
-      <td>...</td>
-      <td>19.388850</td>
-      <td>-99.263321</td>
-      <td>2015-06-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3650000.0</td>
-      <td>2494</td>
-    </tr>
-  </tbody>
-</table>
-<p>240000 rows × 24 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#densidad = tree.kernel_density(df_ohe, h=0.1, kernel=&#39;gaussian&#39;)</span>
@@ -15326,7 +13799,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df_test = pd.read_csv(&#39;data/test.csv&#39;)</span>
@@ -15349,7 +13822,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display(df_ohe_test.shape)</span>
@@ -15365,7 +13838,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df_test[&#39;similares_count&#39;] = dists</span>
@@ -15379,7 +13852,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df_ohe = df_ohe.fillna(0)</span>
@@ -15397,7 +13870,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df_train[&#39;similares_count&#39;] = dists</span>
@@ -15411,7 +13884,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test.iloc[1]</span>
@@ -15424,7 +13897,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[(df_train[&#39;gimnasio&#39;] == 0) &amp; (df_train[&#39;usosmultiples&#39;] == 0) &amp; (df_train[&#39;piscina&#39;] == 0)</span>
@@ -15440,7 +13913,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test = features_independientes_precio(df_test)</span>
@@ -15453,7 +13926,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ind_test[[&#39;escomercial&#39;,</span>
@@ -15473,7 +13946,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># # Verifico que no haya nans en los features</span>
@@ -15487,7 +13960,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -15503,7 +13976,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#dep = features_dependientes_precio(df_train, df_train)</span>
@@ -15516,7 +13989,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep[[&#39;precio&#39;,&#39;promedio_precio_ciudad&#39;,</span>
@@ -15534,7 +14007,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test =  features_dependientes_precio(df_test, df_train)</span>
@@ -15547,7 +14020,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dep_test[[&#39;promedio_precio_ciudad&#39;,</span>
@@ -15565,7 +14038,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(df_train.shape)</span>
@@ -15581,7 +14054,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = pd.read_csv(&#39;data/train.csv&#39;)</span>
@@ -15598,7 +14071,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_f.head(10)</span>
@@ -15611,7 +14084,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_f[&#39;promedio_precio_tipo_propiedad&#39;].head(10).value_counts()</span>
@@ -15624,7 +14097,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tipo_de_propiedad_one_hot_encoding</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -15679,7 +14152,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = pd.read_csv(&#39;./data/train.csv&#39;)</span>
@@ -15692,7 +14165,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df, arr = tipo_de_propiedad_one_hot_encoding(df_train)</span>
@@ -15708,7 +14181,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">columna_a_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">devolver_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -15730,7 +14203,7 @@ div#notebook {
     
     <span class="n">df_full_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
     <span class="c1"># Eliminar caracteres utf-8</span>
-    <span class="c1">#df_full_ohe.columns = df_full_ohe.columns.str.encode(&#39;ascii&#39;, &#39;ignore&#39;).str.decode(&#39;ascii&#39;)</span>
+<span class="c1">#    df_full_ohe.columns = df_full_ohe.columns.str.encode(&#39;ascii&#39;, &#39;ignore&#39;).str.decode(&#39;ascii&#39;)</span>
     <span class="n">df_ohe</span> <span class="o">=</span> <span class="n">df_full_ohe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
     
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_ohe</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
@@ -15747,7 +14220,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import pandas as pd</span>
@@ -15762,7 +14235,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_ohe, new_cols_train = columna_a_ohe(df_train, &#39;tipodepropiedad&#39;, 100, df_test, True)</span>
@@ -15775,7 +14248,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_test_ohe, new_cols = columna_a_ohe(df_test, &#39;tipodepropiedad&#39;, 2000, df_train, True)</span>
@@ -15788,7 +14261,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train_ohe[[&#39;tipodepropiedad&#39;] + new_cols_train]</span>
@@ -15801,7 +14274,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Agrega las etiquetas de los cluster al df, y retorna el df</span>
@@ -15817,345 +14290,17 @@ div#notebook {
     
 
     
-<span class="n">agregar_clustering</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># agregar_clustering(df_train, True)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>descripcion</th>
-      <th>tipodepropiedad</th>
-      <th>direccion</th>
-      <th>ciudad</th>
-      <th>provincia</th>
-      <th>antiguedad</th>
-      <th>habitaciones</th>
-      <th>garages</th>
-      <th>...</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>fecha</th>
-      <th>gimnasio</th>
-      <th>usosmultiples</th>
-      <th>piscina</th>
-      <th>escuelascercanas</th>
-      <th>centroscomercialescercanos</th>
-      <th>precio</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>depto. interior de 80.15m2, consta de sala com...</td>
-      <td>Apartamento</td>
-      <td>Avenida Division del Norte 2005</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-08-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2273000.0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
-      <td>Casa en condominio</td>
-      <td>AV. MEXICO</td>
-      <td>La Magdalena Contreras</td>
-      <td>Distrito Federal</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>19.310205</td>
-      <td>-99.227655</td>
-      <td>2013-06-28 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3600000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>descripcion \nla mejor ubicacion residencial e...</td>
-      <td>Casa</td>
-      <td>Urbi Tonala</td>
-      <td>Tonalá</td>
-      <td>Jalisco</td>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-10-17 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1200000.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>casa en privada con caseta de vigilancia casas...</td>
-      <td>Casa</td>
-      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>19.301890</td>
-      <td>-99.688015</td>
-      <td>2012-03-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>650000.0</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>bonito departamento en excelentes condiciones ...</td>
-      <td>Apartamento</td>
-      <td>PASEOS DEL SOL</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2016-06-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>239995</th>
-      <td>119879</td>
-      <td>bonita casas de 2 recamaras a 10 minutos del c...</td>
-      <td>vendo casa en bosques de ica residencial a 10 ...</td>
-      <td>Casa</td>
-      <td>BOSQUES</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>0.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-02-08 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>650000.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>239996</th>
-      <td>259178</td>
-      <td>casa en condominio a 10 min. del centro de toluca</td>
-      <td>casa con un jardin amplio, un cuarto de servic...</td>
-      <td>Casa</td>
-      <td>Filiberto Navas 325</td>
-      <td>Toluca</td>
-      <td>Edo. de México</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>...</td>
-      <td>19.294665</td>
-      <td>-99.692916</td>
-      <td>2014-07-10 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1940000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>239997</th>
-      <td>131932</td>
-      <td>nicolas san juan</td>
-      <td>departamento con excelente ubicación, muy cerc...</td>
-      <td>Apartamento</td>
-      <td>Nicolas San Juan</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>20.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-03-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3400000.0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>239998</th>
-      <td>146867</td>
-      <td>casa sola. javier rojo gomez.</td>
-      <td>casa sola, dividida en cuatro departamentos de...</td>
-      <td>Casa</td>
-      <td>Javier Rojo Gomez 120</td>
-      <td>Iztapalapa</td>
-      <td>Distrito Federal</td>
-      <td>20.0</td>
-      <td>4.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>19.366651</td>
-      <td>-99.082246</td>
-      <td>2014-12-26 00:00:00</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2890000.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>239999</th>
-      <td>121958</td>
-      <td>departamento en bosques de las lomas  / av. st...</td>
-      <td>id:19816, muy bonito e iluminado departamento,...</td>
-      <td>Apartamento</td>
-      <td>AVE. STIM</td>
-      <td>Cuajimalpa de Morelos</td>
-      <td>Distrito Federal</td>
-      <td>1.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-06-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3650000.0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>240000 rows × 24 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ranking_atributo</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -16181,55 +14326,16 @@ div#notebook {
         <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador</span>
         <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
         
-    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">col1</span><span class="p">):</span>
-        <span class="n">item</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">df_aux</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
-    
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Cuenta cuantas propiedades hay con los atributos de la columna recibida. Y para cada propiedad,</span>
-<span class="sd">    se fija en que posicion esta del ranking. Por ejemplo, si hay dos propuedades, una con dos banos y otra </span>
-<span class="sd">    con uno solo, el rankin de las que tengan dos banos en 1, y de las propiedades que tengan un solo bano es </span>
-<span class="sd">    dos&#39;&#39;&#39;</span>
-    
-    <span class="sd">&#39;&#39;&#39;Rellena los nulos con &quot;otros&quot; &#39;&#39;&#39;</span>
-    
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    
-    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">df_aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;cantidad&#39;</span><span class="p">)</span> 
-    <span class="n">df_aux</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
-    <span class="n">lista_ranking</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">rank</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">contador</span> <span class="o">=</span> <span class="mi">1</span>
-    
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_ranking</span><span class="p">:</span>
-        <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador</span>
-        <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">col1</span><span class="p">):</span>
-        <span class="n">item</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">df_aux</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">col1</span><span class="p">][</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="c1">#         item = df_aux[df_aux[col] == col1][col].values[0]</span>
+<span class="c1">#         display(f&#39;{rank[col1]} {col1}&#39;)</span>
+        <span class="k">return</span> <span class="n">vals</span>
     
     
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col1</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;conc&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -16243,22 +14349,111 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rankings</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">statistics</span> <span class="k">import</span> <span class="n">mean</span>
+
+<span class="k">def</span> <span class="nf">get_contador</span><span class="p">(</span><span class="n">df_aux</span><span class="p">,</span> <span class="n">importancia</span><span class="p">):</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">df_aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">importancia</span><span class="p">)</span> 
+    <span class="n">lista_ranking</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">contador</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lista_ranking</span><span class="p">:</span>
+        <span class="n">rank</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">contador</span>
+        <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
+        
+    <span class="k">return</span> <span class="n">rank</span>
+    
+
+
+<span class="k">def</span> <span class="nf">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Cuenta cuantas propiedades hay con los atributos de la columna recibida. Y para cada propiedad,</span>
+<span class="sd">    se fija en que posicion esta del ranking. Por ejemplo, si hay dos propuedades, una con dos banos y otra </span>
+<span class="sd">    con uno solo, el rankin de las que tengan dos banos en 1, y de las propiedades que tengan un solo bano es </span>
+<span class="sd">    dos&#39;&#39;&#39;</span>
+        
+    <span class="k">if</span> <span class="n">df_aux</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;precio&#39;</span><span class="p">:</span> <span class="s1">&#39;precio_promedio&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;cantidad&#39;</span><span class="p">})</span>
+    <span class="n">df_aux</span> <span class="o">=</span> <span class="n">df_aux</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="n">df_aux</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">df_aux</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="n">mean_r</span> <span class="o">=</span>  <span class="n">mean</span><span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">)</span>
+        <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rank</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">mean_r</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">vals</span>
+    
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">get_contador</span><span class="p">(</span><span class="n">df_aux</span><span class="p">,</span> <span class="s1">&#39;precio_promedio&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col1</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col2</span> <span class="o">+</span> <span class="s1">&#39;_precio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">get_contador</span><span class="p">(</span><span class="n">df_aux</span><span class="p">,</span> <span class="s1">&#39;cantidad&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="n">col2</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ranking_en_&#39;</span> <span class="o">+</span> <span class="n">col1</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col2</span> <span class="o">+</span> <span class="s1">&#39;_cantidad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;conc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    
+    
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;conc&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rankings</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_train</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
     <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span> <span class="p">,</span><span class="s1">&#39;provincia&#39;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo</span><span class="p">(</span><span class="n">df</span> <span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">)</span>
     
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_values</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo1&#39;</span> <span class="k">if</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">totales2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo2&#39;</span> <span class="k">if</span> <span class="n">totales2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo3&#39;</span> <span class="k">if</span> <span class="n">totales4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales6</span> <span class="k">else</span><span class="p">(</span><span class="s1">&#39;Grupo4&#39;</span> <span class="k">if</span> <span class="n">totales6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">totales8</span> <span class="k">else</span> <span class="s1">&#39;Grupo5&#39;</span><span class="p">))))</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_values</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;Grupo1&#39;</span> <span class="k">if</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos2</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo2&#39;</span> <span class="k">if</span> <span class="n">cubiertos2</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos4</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;Grupo3&#39;</span> <span class="k">if</span> <span class="n">cubiertos4</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos6</span> <span class="k">else</span><span class="p">(</span><span class="s1">&#39;Grupo4&#39;</span> <span class="k">if</span> <span class="n">cubiertos6</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">cubiertos8</span> <span class="k">else</span> <span class="s1">&#39;Grupo5&#39;</span><span class="p">))))</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
     
+<span class="c1">#     df = trasladar_features(df, df_train, [&#39;provincia&#39;, &#39;tipodepropiedad&#39;], &#39;precio&#39;, &#39;promedio_precio_tipodepropiedad&#39;, &#39;mean&#39;)</span>
+<span class="c1">#     df[&#39;promedio_precio_tipodepropiedad&#39;] = df[&#39;promedio_precio_tipodepropiedad&#39;].fillna(df_train[&#39;promedio_precio_tipodepropiedad&#39;].mean())</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span><span class="s1">&#39;metrostotales&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Grupo_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generar_intervalos_perc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span><span class="s1">&#39;metroscubiertos&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Grupo_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_totales&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">ranking_atributo_dos_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;tipodepropiedad&#39;</span><span class="p">,</span> <span class="s1">&#39;intervalo_metros_cubiertos&#39;</span><span class="p">,</span> <span class="n">df_aux</span><span class="o">=</span><span class="n">df_train</span><span class="p">)</span>
+    
+<span class="c1">#     df[&#39;intervalo_distancia_ciudad_cara&#39;] = generar_intervalos_perc(df, 15,&#39;distancia_ciudad_cara&#39;)</span>
+<span class="c1">#     df[&#39;intervalo_distancia_ciudad_cara&#39;] = &#39;Grupo_&#39; + df[&#39;intervalo_distancia_ciudad_cara&#39;].astype(&#39;str&#39;)</span>
+<span class="c1">#     df = ranking_atributo_dos_features(df, &#39;provincia&#39;, &#39;intervalo_distancia_ciudad_cara&#39;, df_aux=df_train)</span>
+  
     <span class="k">return</span> <span class="n">df</span>    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import ipynb.fs.full.features_distancias as f_distancias</span>
+
+<span class="c1"># df_train = f_distancias.feature_distancias(df_train)</span>
+<span class="c1"># df_test = f_distancias.feature_distancias(df_test, df_train)</span>
 </pre></div>
 
     </div>
@@ -16272,7 +14467,9 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_rankings = llenar_nulls(df_train)</span>
-<span class="c1"># df_rankings = rankings(df_rankings)</span>
+<span class="c1"># df_rankings_f = features_independientes_precio(df_rankings)</span>
+<span class="c1"># df_rankings_f = features_dependientes_precio(df_rankings_f, df_train)</span>
+<span class="c1"># df_rankings = rankings(df_rankings_f, df_rankings_f)</span>
 </pre></div>
 
     </div>
@@ -16282,7 +14479,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_rankings_test = llenar_nulls(df_test)</span>
+<span class="c1"># df_rankings_test_f = features_independientes_precio(df_rankings_test)</span>
+<span class="c1"># df_rankings_test_f = features_dependientes_precio(df_rankings_test_f, df_rankings_f)</span>
+<span class="c1"># df_rankings_test_f = rankings(df_rankings_test_f, df_rankings_f)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_rankings_test = llenar_nulls(df_test, hgb_mean=True, df_fill=df_train)</span>
@@ -16296,77 +14509,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># list(df_rankings.columns)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[80]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;id&#39;,
- &#39;titulo&#39;,
- &#39;descripcion&#39;,
- &#39;tipodepropiedad&#39;,
- &#39;direccion&#39;,
- &#39;ciudad&#39;,
- &#39;provincia&#39;,
- &#39;antiguedad&#39;,
- &#39;habitaciones&#39;,
- &#39;garages&#39;,
- &#39;banos&#39;,
- &#39;metroscubiertos&#39;,
- &#39;metrostotales&#39;,
- &#39;idzona&#39;,
- &#39;lat&#39;,
- &#39;lng&#39;,
- &#39;fecha&#39;,
- &#39;gimnasio&#39;,
- &#39;usosmultiples&#39;,
- &#39;piscina&#39;,
- &#39;escuelascercanas&#39;,
- &#39;centroscomercialescercanos&#39;,
- &#39;precio&#39;,
- &#39;intervalo_metros_totales&#39;,
- &#39;ranking_en_provincia&#39;,
- &#39;ranking_en_ciudad&#39;,
- &#39;conc&#39;,
- &#39;ranking_en_provincia_ciudad&#39;,
- &#39;ranking_en_provincia_tipodepropiedad&#39;,
- &#39;intervalo_metros_cubiertos&#39;,
- &#39;ranking_en_provincia_intervalo_metros_totales&#39;,
- &#39;ranking_en_provincia_intervalo_metros_cubiertos&#39;,
- &#39;ranking_en_tipodepropiedad_intervalo_metros_totales&#39;,
- &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_rankings = df_rankings[[&#39;id&#39;, &#39;ranking_en_provincia&#39;, &#39;ranking_en_ciudad&#39;,  &#39;ranking_en_provincia_ciudad&#39;, &#39;ranking_en_provincia_tipodepropiedad&#39;, &#39;intervalo_metros_cubiertos&#39;, &#39;ranking_en_provincia_intervalo_metros_totales&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_totales&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos&#39;]]</span>
-<span class="c1"># df_rankings_test = df_rankings_test[[&#39;id&#39;, &#39;ranking_en_provincia&#39;, &#39;ranking_en_ciudad&#39;,  &#39;ranking_en_provincia_ciudad&#39;, &#39;ranking_en_provincia_tipodepropiedad&#39;, &#39;intervalo_metros_cubiertos&#39;, &#39;ranking_en_provincia_intervalo_metros_totales&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_totales&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos&#39;]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_rankings = df_rankings[[&#39;id&#39;, &#39;ranking_en_provincia&#39;, &#39;ranking_en_ciudad&#39;, &#39;ranking_en_provincia_ciudad_precio&#39;, &#39;ranking_en_provincia_ciudad_cantidad&#39;, &#39;ranking_en_provincia_intervalo_metros_totales_precio&#39;, &#39;ranking_en_provincia_intervalo_metros_totales_cantidad&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos_precio&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos_cantidad&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_totales_precio&#39;,&#39;ranking_en_tipodepropiedad_intervalo_metros_totales_cantidad&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos_precio&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos_cantidad&#39;, &#39;ranking_en_provincia_intervalo_distancia_ciudad_cara_precio&#39;, &#39;ranking_en_provincia_intervalo_distancia_ciudad_cara_cantidad&#39;]]</span>
+<span class="c1"># df_rankings_test = df_rankings_test[[&#39;id&#39;, &#39;ranking_en_provincia&#39;, &#39;ranking_en_ciudad&#39;, &#39;ranking_en_provincia_ciudad_precio&#39;, &#39;ranking_en_provincia_ciudad_cantidad&#39;, &#39;ranking_en_provincia_intervalo_metros_totales_precio&#39;, &#39;ranking_en_provincia_intervalo_metros_totales_cantidad&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos_precio&#39;, &#39;ranking_en_provincia_intervalo_metros_cubiertos_cantidad&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_totales_precio&#39;,&#39;ranking_en_tipodepropiedad_intervalo_metros_totales_cantidad&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos_precio&#39;, &#39;ranking_en_tipodepropiedad_intervalo_metros_cubiertos_cantidad&#39;, &#39;ranking_en_provincia_intervalo_distancia_ciudad_cara_precio&#39;, &#39;ranking_en_provincia_intervalo_distancia_ciudad_cara_cantidad&#39;]]</span>
 
 
 <span class="c1"># df_rankings.to_csv(&#39;rankings_train.csv&#39;, index=False)</span>
@@ -16380,11 +14527,23 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train[&#39;intervalo_metros_totales&#39;] = generar_intervalos_perc(df_train, 10, &#39;metrostotales&#39;)</span>
-<span class="c1"># df_train[&#39;intervalo_metros_totales&#39;] = df_train[&#39;intervalo_metros_totales&#39;].astype(&#39;category&#39;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train = ranking_atributo_dos_features(df_train, &#39;provincia&#39;, &#39;tipodepropiedad&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df_train.rank(axis=1)</span>
 </pre></div>
 
     </div>
