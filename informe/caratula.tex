@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[left=3cm,right=3cm,bottom=2.5cm,top=3cm]{geometry}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{placeins}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{floatrow}
+\usepackage{enumitem}
+\usepackage{titling}
+
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+
+\newcommand{\thegroup}{Di Santo - Dvorkin - Lofano}
+\newcommand{\thetitle}{Trabajo Práctico 2 - Machine Learning}
+\newcommand{\thedate}{Segundo Cuatrimestre de 2019}
+
+\hypersetup{
+unicode=false,
+pdftoolbar=true,
+pdfmenubar=true,
+pdffitwindow=false,
+pdftitle={\thetitle},
+pdfauthor={\thegroup},
+pdfsubject={},
+pdfkeywords={Datos},
+colorlinks=true,
+linkcolor=black,
+citecolor=black,
+filecolor=magenta,
+urlcolor=cyan
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{TP1 - \thegroup}
+\rhead{Organización de datos}
+\cfoot{\thepage}
+
+\setlength{\headheight}{14.5pt}
+
+% [ Compilar con  -aux-directory= -output-directory= Informe.tex ]
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+
+\includegraphics[scale = 1]{logo_fiuba.png}\\[2.0 cm]
+
+\textsc{\Large 7506: Organización de Datos}\\[0.7 cm]
+
+\rule{0.94\linewidth}{0.2 mm} \\[0.4 cm]
+{\huge \bfseries \thetitle}\\
+\rule{0.94\linewidth}{0.2 mm} \\[1.2 cm]
+
+\begin{tabular}{lll} % Datos del alumno
+    \toprule
+    Padrón & Alumne & Dirección de correo \\
+    \midrule
+    101696 & Javier Mariano Di Santo & javidisanto@gmail.com \\
+    101109 & Camila Dvorkin & camidvorkin@gmail.com \\
+    101721 & Tomás Arián Lofano & tomilofano@gmail.com \\
+    \bottomrule
+\end{tabular}\\
+
+\vspace*{1cm}
+
+\textsc{\thedate \\[0.1 cm] Curso 1}
+
+\end{titlepage}
+
+\end{document}

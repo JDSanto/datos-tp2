@@ -163,7 +163,8 @@ Primero se separan las features según su dependencia con el precio de la propie
 - **Por tipo de propiedad**
 
   - *promedio_precio_tipo_propiedad*: Se agrupa por tipo de propiedad y se asigna el promedio del precio.
-  - *promedio_precio_tipo_propiedad_ciudad,  promedio_precio_tipo_propiedad_ciudad_gen*: Se agrupa tanto por el tipo de propiedad como por la ciudad a la que pertenece y se le asigna el precio promedio.
+  - *promedio_precio_tipo_propiedad_ciudad, promedio_precio_tipo_pro-*
+  *piedad_ciudad_gen*: Se agrupa tanto por el tipo de propiedad como por la ciudad a la que pertenece y se le asigna el precio promedio.
   - *count_tipo_propiedad*: Se agrupa por tipo de propiedad y se calcula la cantidad de propiedades de ese mismo tipo existen en los datos.
   - *count_tipo_propiedad_ciudad*:  Se agrupa por tipo de propiedad y ciudad, a continuación se calcula la cantidad de propiedades de ese mismo tipo existentes en cada ciudad.
 
@@ -217,13 +218,15 @@ Se elige este algoritmo debido a que un enfoque en fuerza bruta cuenta con una c
 Siguiendo la idea del Insight realizada en el Trabajo Práctico I, se realizaron diferentes rankings según las características de la propiedad:
 
 - *ranking_en_provincia, ranking_en_ciudad*: Organiza las provincias dejando como primer puesto a aquella provincia/ciudad con precio más elevado.
-- *ranking_en_provincia_tipodepropiedad_precio,* *ranking_en_provincia_tipodepropiedad_cantidad,*
+- *ranking_en_provincia_tipodepropiedad_precio,ranking_en_provin-*
+*cia_tipodepropiedad_cantidad,*
 *ranking_en_provincia_ciudad_precio,* *ranking_en_provincia_ciudad_cantidad*: El ranking se basa en dos atributos, va a depender de su provincia y del tipo de propiedad, o de la provincia y la ciudad. Además se realizan dos tipos de ranking: uno basado en sus precios y el otro en 'popularidad', es decir la cantidad de propiedades que cuentan con esas características.
-- *ranking_en_provincia_intervalo_metros_totales_precio ,  ranking_en_provincia_intervalo_metros_totales_cantidad ,
-ranking_en_provincia_intervalo_metros_cubiertos_precio ,  ranking_en_provincia_intervalo_metros_cubiertos_cantidad ,  ranking_en_tipodepropiedad_intervalo_metros_totales_precio ,  
-ranking_en_tipodepropiedad_intervalo_metros_totales_cantidad ,
-ranking_en_tipodepropiedad_intervalo_metros_cubiertos_precio,
-ranking_en_tipodepropiedad_intervalo_metros_cubiertos_cantidad*: En una primera instancia se generan intervalos (en cuanto a los percentiles) tanto para los metros totales, como los cubiertos. Una vez separados según su tamaño, estos son agrupados por provincia y por tipo de propiedad, generando un ranking que dependa de ambos atributos.
+- *ranking_en_provincia_intervalo_metros_totales_precio , ranking_en_provin-*
+*cia_intervalo_metros_totales_cantidad ,ranking_en_provincia_intervalo_me-*
+*tros_cubiertos_precio ,  ranking_en_provincia_intervalo_metros_cubiertos_cantidad ,* *ranking_en_tipodepropiedad_intervalo_metros_totales_precio,*
+*ranking_en_tipodepropiedad_intervalo_metros_totales_cantidad ,*
+*ranking_en_tipodepropiedad_intervalo_metros_cubiertos_precio,*
+*ranking_en_tipodepropiedad_intervalo_metros_cubiertos_cantidad*: En una primera instancia se generan intervalos (en cuanto a los percentiles) tanto para los metros totales, como los cubiertos. Una vez separados según su tamaño, estos son agrupados por provincia y por tipo de propiedad, generando un ranking que dependa de ambos atributos.
 - *ranking_en_provincia_intervalo_distancia_ciudad_cara_precio,  ranking_en_provincia_intervalo_distancia_ciudad_cara_cantidad*: Nuevamente es necesario generar intervalos entre todas las distancias encontradas a partir de los percentiles. Se toman esos intervalos y se agrupan junto con la provincia perteneciente a cada uno de las propiedades y con ello generar el ranking.
 
 #### Intervalos
@@ -236,7 +239,7 @@ A continuación se enumeran los nuevos features que fueron divididos tanto por i
 - *distancia_ciudad_cara_bins_unif , distancia_ciudad_cara_bins_perc*
 - *promedio_id_zona_bins_unif, promedio_id_zona_bins_perc*
 - *promedio_precio_hbg_tipo_propiedad_provincia_bins_unif ,  promedio_precio_hbg_tipo_propiedad_provincia_bins_perc*
-- *promedio_precio_tipo_propiedad_ciudad_bins_unif ,  promedio_precio_tipo_propiedad_ciudad_bins_perc*
+- *promedio_precio_tipo_propiedad_ciudad_bins_unif , promedio_pre- cio_tipo_propiedad_ciudad_bins_perc*
 - *promedio_precio_hbg_tipo_propiedad_provincia_bins_unif ,   promedio_precio_hbg_tipo_propiedad_provincia_bins_perc*
 - *tam_ambientes_bins_unif, tam_ambientes_bins_perc*
 - *metrostotales_bins_unif, metrostotales_bins_perc*
@@ -323,17 +326,21 @@ Para evitar esto, se toman los resultados obtenidos en hyperopt o RandomSearch c
  
 XGBoost es un algoritmo muy eficiente de gradient boosting en árboles. A diferencia de otros modelos de gradient boosting utilizados, este no puede utilizar features categóricos, solamente acepta numéricos. Por ende fue necesario generar los features de forma manual, ya sea con one hot encoding, mean encoding, etc.
 Con el objetivo de evitar el overfiteo fue importante considerar el valor de los hiper parámetros de learning_rate, max_depth y min_child_weight. Al ser un modelo que tiene un tiempo de ejecución alto, tanto para el entrenamiento como para la predicción, se tomaron en cuenta diferentes hiper parámetros para controlar la velocidad: colsample_bytree, subsample y n_estimators.
- 
+
+En la Figura 12, se muestra la evolución del modelo durante las iteraciones se observa que a partir de la septima iteración el modelo empieza a overfitear y que los valores son casi constantes a partir de la iteración 40.
+
+![Caída del MAE en relación a la cantidad de iteraciones](./images/xgboost.png)
+
 ### LightGBM
  
 LightGBM es simplemente el algoritmo que constantemente mejores resultados nos dio. Este algoritmo de gradient boosting sobre árboles se diferencia de XGBoost en que construye los árboles según las hojas, y no los niveles. Es importante que sus hiper parámetros estén bien configurados (por ejemplo, la profundidad máxima de los árboles), ya que rápidamente se encuentran muy buenos saltos de calidad en el modelo. Algunos de los hiper parámetros más importantes buscados que se encargaron de controlar el overfiteo fueron: learning_rate, max_depth, min_data_in_leaf y num_leaves. Por otro lado, también se tuvieron en cuenta hiper parámetros que facilitarán el control de la velocidad del modelo, tales como bagging_fraction o num_iterations.
 Este algoritmo también se destaca por ser rápido y consumir poca memoria. Además, tiene un gran manejo de la  dimensionalidad de los datos, sin cambiar mucho frente a ellos.
  
-En la Figura 12, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de desición es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos clasificar correctamente nuestros datos.
+En la Figura 13, se muestra una porción del árbol de decisión tras correr el algoritmo(El árbol de desición es mucho más grande pero se muestra solo una pequeña rama intermedia con el fin de mostrar la idea). El objetivo es llegar a nodos hoja en los cuáles podemos clasificar correctamente nuestros datos.
 
 ![Árbol de Decisiones](./images/lightgbm.jpg)
 
-Como se puede ver en la Figura 13, la mejora a partir de la iteración 30 es despreciable, es decir que el error absoluto medio no baja de lo encontrado.
+Como se puede ver en la Figura 14, la mejora a partir de la iteración 30 es despreciable, es decir que el error absoluto medio no baja de lo encontrado.
  
 ![Iteraciones vs MAE](./images/lightgbmmae.png)
  
@@ -343,7 +350,7 @@ Una propiedad a favor de este modelo es que acepta las variables categóricas. A
 Este modelo de _gradient boosting_, entrena y predice de forma bastante rápida.
 Se buscaron los mejores hiper parámetros para learning_rate, depth y l2-leaf-reg con la idea de evitar el overfiteo. Además se repitió este proceso para iterations para poder controlar el tiempo del mismo.
  
-En la Figura 14 se puede ver como va disminuyendo el error a medida que aumentan las iteraciones tanto para el entrenamiento como para el testeo.
+En la Figura 15 se puede ver como va disminuyendo el error a medida que aumentan las iteraciones tanto para el entrenamiento como para el testeo.
  
 ![Iteraciones vs MAE](./images/catboostplot.jpeg)
  
@@ -386,15 +393,23 @@ Con el objetivo de hacer un entrenamiento más representativo, se trabaja con St
 ## Conclusiones
  
 El primer modelo con el que se trabajo fue LightGBM, este algoritmo fue el más rápido de todos y el más liviano. Se utilizó esto como ventaja a lo largo del trabajo para probar nuevos features o nuevos modelos de ensambles ya que en poco tiempo se puede verificar que funcione y en su mayoría da muy buenos resultados. Se puede concluir que en el caso de contar con un dataframe más grande lo más recomendable es usar este modelo. En contraparte, se noto que es sensible al overfiteo.
+
 Luego se trabajó con XGBoost, nuevamente un modelo con la técnica de Gradient boosting. Se consiguieron los mejores resultados, sin embargo es considerablemente más lento que LightGBM. El beneficio conseguido vale el costo, por ende en cuanto a precisión este modelo es muy recomendado.
+
 Por último, en cuanto a técnicas de Gradient boosting se utilizó Catboost. En principio, en comparación con los anteriores, no tiene muchos hiper parámetros, dejando varias ramas que fueron profundizadas previamente bastante abiertas. Este modelo tiene una gran ventaja y es que permite el uso de variables categóricas, sin embargo no fue del todo útil con el dataset que se nos presenta, y esto se debe a que cuenta con muy pocas variables categóricas realmente relevantes y para aquellas que lo son se buscaron formas de encodear(one hot encoding, mean encoding, etc.). De esta manera, no se aprovechó al máximo la principal ventaja y concluyó siendo más lento y más pesado de lo esperado. No se deja de recomendar este algoritmo en el caso de contar con variables categóricas más fuertes, ya que de ser así es una técnica muy precisa, rápida y con uno de los menores overfiteos.
+
 Luego se pasó por Redes Neuronales, y aquí no se encontraron los resultados esperados. En un principio los resultados de Keras fueron malos. Tras normalizar todos los features, se encontraron resultados más amigable. Modificando los diferentes layers de la red neuronal mejoraron incluso un poco más pero no lo suficiente como para considerarlo en el modelo del ensamble final.
 Random Forest y Extra Randomized Tree son dos modelos pesados en memoria y relativamente lentos comparado a sus alternativas de gradient boosting. Más allá de su tiempo, devolvió muy  buenos resultados y la búsqueda de hiper parámetros fue simple ya que no cuenta con muchos. Se puede concluir que Random Forest deja mejores resultados que Extra Randomized Tree, lo cual era esperable debido a sus técnicas random que plantea.
+
 Una vez que se conocieron todos estos modelos, se pasó a la etapa de ensamble. Primero se trabajó con Stacking: Como se mencionó previamente en la sección de este ensamble, el modelo se preocupa porque no overfiteen los resultados. Esto nos permitió encontrar las mejores predicciones. Además cuenta con diferentes variantes, por ende nos permitió encontrar diferentes soluciones interesantes. Por un lado la más básica, simplemente con el cálculo del promedio que generó buenos resultados. Luego una opción un poco más compleja, que sin dudas fue de las mejores soluciones entregadas que fue usando layers de stacking adicionales. Con tan solo usar un nivel de stacking y con sus resultados pasarlos por LightGBM, se obtuvieron los mejores resultados hasta la fecha. Esta resolución incluyó en el ensamble: LightGBM, XGBoost, CatBoost y Random Forest.
+
 Por último se trabajó con Blending. Los resultados encontrados con el Blending 'costoso', es decir la variante que utilizaba un súper-set que reutiliza las predicciones que calculó previamente, fueron mejores en comparación a la versión más corta y menos costosa de Blending explicada en el apartado de Ensambles. Nuevamente se trabajó con LightGBM, XGBoost, CatBoosting y Random Forest, pero los resultados obtenidos son considerablemente peores que Stacking. Además el modelo es más costoso ya que la suma de entrenar el modelo múltiples veces, se está aumentado el set de entrenamiento en cada paso.
+
 A modo de conclusión, se pudo comprobar empíricamente que Machine Learning requiere de una serie de trucos. En un primer lugar, se observó que con el agregado de features que a nuestra visión eran irrelevantes para la predicción, el score mejoró notablemente. Un ejemplo de esto es el cálculo de las distancias o lo específico en ubicación relacionado con el idzona. Así mismo, se puede notar que ante mínimos cambios el score empeoraba o mejoraba de forma notable, demostrando el efecto avalancha de esta disciplina. 
+
 Por otro lado, consideramos que aún quedarían distintas opciones por probar como por ejemplo, teniendo en cuenta que los modelos de ensambles funcionan mejor cuando las predicciones en los modelos varían considerablemente y también considerando que tres de los cuatro modelos elegidos usan la técnica de Gradient Boosting, es decir que no hay una diferencia importante. Se concluye que para mejorar el modelo, lo ideal sería utilizar modelos variados como por ejemplo Keras, el cual no fue utilizado debido al alto error encontrado. También se podrían haber empleado otros tipos de redes neuronales, ya que tras 'fracasar' con Keras, se continuó con nuevas ramas y no se profundizó sobre el tema.
 
 [^1]: API del Banco Central de Europa: https://exchangeratesapi.io
 
-[^2]: Organización de Datos, Apunte del Curso:  https://piazza.com/class_profile/get_resource/jz8g9vqp3nt2c8/jz8ga327u6p2hn
+[^2]: Organización de Datos, Apunte del Curso:  
+https://piazza.com/class_profile/get_resource/jz8g9vqp3nt2c8/jz8ga327u6p2hn
