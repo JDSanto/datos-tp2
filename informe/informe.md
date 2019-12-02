@@ -9,9 +9,9 @@ header-includes:  \usepackage[spanish]{babel}
 - [Trabajo Práctico 2: Machine Learning](#trabajo-pr%c3%a1ctico-2-machine-learning)
   - [Índice](#%c3%8dndice)
   - [Introducción](#introducci%c3%b3n)
-    - [Filtrado](#filtrado)
-    - [PCA](#pca)
     - [Nulos](#nulos)
+    - [PCA](#pca)
+    - [Filtrado](#filtrado)
     - [Dolarizar](#dolarizar)
   - [Features](#features)
     - [Feature engineering](#feature-engineering)
@@ -54,31 +54,6 @@ La puesta en marcha de la actividad se hace con algoritmos de Machine Learning, 
 
 El primer paso consistió en realizar una breve investigación sobre lo ya hecho en el anterior trabajo práctico, donde se realizó un análisis exploratorio de datos brindados por Zona Prop. Si bien no son exactamente los mismos datos que los trabajados acá, sí son de la misma índole.
 
-### Filtrado
-
-La detección de anomalías (outliers) implica el reconocimiento y corrección o eliminación de datos erróneos. Un dato anómalo es aquel que tiene valores imposibles para uno, o más, de sus atributos. Por lo que en una primera instancia se decide, filtrar aquellos registros que semánticamente son posible pero no tiene sentido en el contexto de los demás datos, es decir que probablemente se trate de un dato mal ingresado.
-En las Figuras 1-4 se pueden observar los recortes realizados.
-
-![Búsqueda de outliers con features base sin precio](./images/out_features.png)
-
-Como se puede observar en la Figura 1, los outliers tienen mucha diferencia entre los metroscubiertos y los metrostotales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
-
-![Filtrado de outliers con features base sin precio](./images/out_features_recortado.png)
-
-Teniendo en cuenta los precios de las propiedades, se puede notar que los outliers tienen un precio muy elevado en relacion a los metroscubiertos y metrostotales. Esta idea se ve representada en la Figura 3. Además, a modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
-![Ejemplos de propiedades con notoria anomalía](./images/metros.png)
-
-![Búsqueda de outliers con features base incluyendo precio](./images/out_features_precio.png)
-
-Nuevamente son filtrados estos casos dejando un set de datos con menos ruido como se puede observar en la Figura 4.
-
-![Filtrado de outliers con features base incluyendo precio](./images/out_features_precio_recortado.png)
-
-### PCA
-
-Se utilizó PCA en un intento de manipular la dimensionalidad de los datos. La idea de PCA es encontrar las ”direcciones” principales de los datos, es decir, aquellas direcciones sobre las cuales podemos proyectar los datos reteniendo su variabilidad.
-Sin embargo, en el afán de reducir el ruido del set de datos, los resultados no fueron buenos ya que _overfiteaban_.
-
 ### Nulos
 
 Algunos algoritmos admiten datos incompletos y otros no. En los casos en los que los datos incompletos no son admisibles, debemos solucionarlos de alguna forma.
@@ -88,6 +63,32 @@ El proceso de imputación de valores faltantes puede hacerse de muchas formas, u
 Como caso particular, se observó que figuraban propiedades con valor nulo en su columna: Metros Totales, pero ninguna de ellas presentaban nulos en Metros cubiertos (o viceversa). Por lo que se decidió completar los nulos con el dato no faltante de este par de columnas. Esta idea surge a partir del análisis realizado en el primer Trabajo práctico, donde se encuentra cierta relación entre los metros según el tipo de propiedad.
 
 Se completan las latitudes y longitudes faltantes con un promedio de estas features para aquellas propiedades que comparten id_zona, y en su defecto ciudad, y en el caso de no contar con ninguno de estos datos, con el promedio para las propiedades que comparten provincia. Verificando siempre que el promedio se encuentre dentro del mapa.
+
+### PCA
+
+Se utilizó PCA en un intento de manipular la dimensionalidad de los datos. La idea de PCA es encontrar las ”direcciones” principales de los datos, es decir, aquellas direcciones sobre las cuales podemos proyectar los datos reteniendo su variabilidad.
+Sin embargo, en el afán de reducir el ruido del set de datos, los resultados no fueron buenos ya que _overfiteaban_.
+
+### Filtrado
+
+La detección de anomalías (outliers) implica el reconocimiento y corrección o eliminación de datos erróneos. Un dato anómalo es aquel que tiene valores imposibles para uno, o más, de sus atributos. Por lo que en una primera instancia se decide, filtrar aquellos registros que semánticamente son posible pero no tiene sentido en el contexto de los demás datos, es decir que probablemente se trate de un dato mal ingresado. Para encontrarlos con facilidad, utilizamos PCA para reducir las dimensiones y poder graficarlos.
+En las Figuras 1-4 se pueden observar los recortes realizados.
+
+![Búsqueda de outliers con features base sin precio](./images/out_features.png)
+
+Los datos en la figura 1 representa la reducción de dimensiones considerando todas las columnas del set de datos original, excluyendo al precio. Observando los datos de los outliers en las parte superior e inferior, estos tienen mucha diferencia entre los metroscubiertos y los metrostotales. Filtrando las 800 propiedades con mayor diferencia entre metros cubiertos y totales se obtiene un nuevo dataset plasmado en la Figura 2.
+
+![Filtrado de outliers con features base sin precio](./images/out_features_recortado.png)
+
+Teniendo en cuenta los precios de las propiedades, los outliers de la Figura 3 tienen un precio muy elevado en relacion a los metroscubiertos y metrostotales. A modo de ejemplo, se muestran cinco casos en donde es notoria la anomalía:
+![Ejemplos de propiedades con notoria anomalía](./images/metros.png)
+
+![Búsqueda de outliers con features base incluyendo precio](./images/out_features_precio.png)
+
+Nuevamente son filtrados estos casos dejando un set de datos con menos ruido como se puede observar en la Figura 4.
+
+![Filtrado de outliers con features base incluyendo precio](./images/out_features_precio_recortado.png)
+
 
 ### Dolarizar
 
