@@ -13083,6 +13083,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">nltk</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
 
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
 
@@ -13116,7 +13117,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13132,7 +13133,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_no_queridas</span><span class="p">(</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13157,7 +13158,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13187,7 +13188,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13237,29 +13238,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>La cantidad de publicaciones con titulo no nulo es: 234613
-La cantidad total de publicaciones es: 240000
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13289,7 +13271,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13342,7 +13324,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">palabras_mas_usadas_en_mas_caros_baratos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">,</span> <span class="n">n_caros_baratos</span><span class="p">,</span> <span class="n">df_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mirar_mas_caros</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -13386,13 +13368,77 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ejemplo</span><span class="p">():</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span>
     <span class="n">df_aut</span> <span class="o">=</span> <span class="n">df_test</span>
     <span class="n">palabras_mas_usadas_en_mas_caros_baratos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">df_aut</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Es mas lenteja</span>
+
+<span class="k">def</span> <span class="nf">mas_frecuentes_caros_baratos_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">,</span> <span class="n">n_caros_baratos</span><span class="p">,</span> <span class="n">df_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mirar_mas_caros</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Busca los n_caros mas caros del df, y verifica las n_palabras mas usadas.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Hace ohe de las palabras mas usadas obtenidas, sobre la columna col&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si se pasa un df_test, hace la cuenta teniendo en cuenta las palabras obtenidas en df&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si mirar_mas_caros es True, va a buscar las palabras mas frecuentos de los mas caros, si fuera False,</span>
+<span class="sd">    buscaria las palabras mas frecuentes de los mas baratos&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">fill_nans</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="n">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">df_busqueda</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">mirar_mas_caros</span> <span class="k">else</span> <span class="n">df</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span>
+    <span class="n">arr_mas_frecuentes</span> <span class="o">=</span> <span class="n">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df_busqueda</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">vocabulary</span><span class="o">=</span><span class="n">arr_mas_frecuentes</span><span class="p">)</span>    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseDataFrame</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">default_fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">fill_nans</span><span class="p">(</span><span class="n">df_merge</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">df_test</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df_merge</span><span class="p">,</span> <span class="n">df_test</span>
+    
+    <span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="n">r_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseDataFrame</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">default_fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">r_test</span> <span class="o">=</span> <span class="n">r_test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r_test</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">fill_nans</span><span class="p">(</span><span class="n">df_merge_aux</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_merge</span><span class="p">,</span> <span class="n">df_merge_aux</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># def ejemplo():</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span>
+<span class="n">df_aut</span> <span class="o">=</span> <span class="n">df_test</span>
+<span class="n">df_merge</span><span class="p">,</span> <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">mas_frecuentes_caros_baratos_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">df_aut</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_merge</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_merge_aux</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13417,323 +13463,61 @@ La cantidad total de publicaciones es: 240000
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[62]:</div>
+    <div class="prompt"></div>
 
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/ipykernel_launcher.py:20: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:257: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>titulo</th>
-      <th>descripcion</th>
-      <th>tipodepropiedad</th>
-      <th>direccion</th>
-      <th>ciudad</th>
-      <th>provincia</th>
-      <th>antiguedad</th>
-      <th>habitaciones</th>
-      <th>garages</th>
-      <th>...</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>fecha</th>
-      <th>gimnasio</th>
-      <th>usosmultiples</th>
-      <th>piscina</th>
-      <th>escuelascercanas</th>
-      <th>centroscomercialescercanos</th>
-      <th>precio</th>
-      <th>palabras_mas_frecuentes_BARATOS_titulo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>254099</td>
-      <td>depto. tipo a-402</td>
-      <td>depto. interior de 80.15m2, consta de sala com...</td>
-      <td>Apartamento</td>
-      <td>Avenida Division del Norte 2005</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>NaN</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-08-23 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>2273000.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53461</td>
-      <td>condominio horizontal en venta</td>
-      <td>&lt;p&gt;entre sonora y guerrero, atr&amp;aacute;s del h...</td>
-      <td>Casa en condominio</td>
-      <td>AV. MEXICO</td>
-      <td>La Magdalena Contreras</td>
-      <td>Distrito Federal</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>19.310205</td>
-      <td>-99.227655</td>
-      <td>2013-06-28 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>3600000.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>247984</td>
-      <td>casa en venta urbi 3 recamaras tonala</td>
-      <td>descripcion \nla mejor ubicacion residencial e...</td>
-      <td>Casa</td>
-      <td>Urbi Tonala</td>
-      <td>Tonalá</td>
-      <td>Jalisco</td>
-      <td>5.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-10-17 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1200000.0</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>209067</td>
-      <td>casa sola en toluca zinacantepec con credito i...</td>
-      <td>casa en privada con caseta de vigilancia casas...</td>
-      <td>Casa</td>
-      <td>IGNACIO MANUEL ALTAMIRANO 128</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>1.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>19.301890</td>
-      <td>-99.688015</td>
-      <td>2012-03-09 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>650000.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>185997</td>
-      <td>paseos del sol</td>
-      <td>bonito departamento en excelentes condiciones ...</td>
-      <td>Apartamento</td>
-      <td>PASEOS DEL SOL</td>
-      <td>Zapopan</td>
-      <td>Jalisco</td>
-      <td>10.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2016-06-07 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1150000.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>239995</th>
-      <td>119879</td>
-      <td>bonita casas de 2 recamaras a 10 minutos del c...</td>
-      <td>vendo casa en bosques de ica residencial a 10 ...</td>
-      <td>Casa</td>
-      <td>BOSQUES</td>
-      <td>Zinacantepec</td>
-      <td>Edo. de México</td>
-      <td>0.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-02-08 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>650000.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>239996</th>
-      <td>259178</td>
-      <td>casa en condominio a 10 min. del centro de toluca</td>
-      <td>casa con un jardin amplio, un cuarto de servic...</td>
-      <td>Casa</td>
-      <td>Filiberto Navas 325</td>
-      <td>Toluca</td>
-      <td>Edo. de México</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>...</td>
-      <td>19.294665</td>
-      <td>-99.692916</td>
-      <td>2014-07-10 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1940000.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>239997</th>
-      <td>131932</td>
-      <td>nicolas san juan</td>
-      <td>departamento con excelente ubicación, muy cerc...</td>
-      <td>Apartamento</td>
-      <td>Nicolas San Juan</td>
-      <td>Benito Juárez</td>
-      <td>Distrito Federal</td>
-      <td>20.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-03-03 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3400000.0</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>239998</th>
-      <td>146867</td>
-      <td>casa sola. javier rojo gomez.</td>
-      <td>casa sola, dividida en cuatro departamentos de...</td>
-      <td>Casa</td>
-      <td>Javier Rojo Gomez 120</td>
-      <td>Iztapalapa</td>
-      <td>Distrito Federal</td>
-      <td>20.0</td>
-      <td>4.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>19.366651</td>
-      <td>-99.082246</td>
-      <td>2014-12-26 00:00:00</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>2890000.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>239999</th>
-      <td>121958</td>
-      <td>departamento en bosques de las lomas  / av. st...</td>
-      <td>id:19816, muy bonito e iluminado departamento,...</td>
-      <td>Apartamento</td>
-      <td>AVE. STIM</td>
-      <td>Cuajimalpa de Morelos</td>
-      <td>Distrito Federal</td>
-      <td>1.0</td>
-      <td>3.0</td>
-      <td>2.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2015-06-19 00:00:00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3650000.0</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>240000 rows × 24 columns</p>
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  sparse_index=BlockIndex(N, blocs, blens),
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:269: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  if column not in sdict
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/generic.py:4583: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return self._constructor(new_data).__finalize__(self)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/generic.py:5997: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return self._constructor(data).__finalize__(self)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/frame.py:3471: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return klass(values, index=self.index, name=items, fastpath=True)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:745: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  default_fill_value=self._default_fill_value,
+</pre>
 </div>
-</div>
-
 </div>
 
 </div>
