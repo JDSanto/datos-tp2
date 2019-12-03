@@ -13076,13 +13076,14 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">nltk</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="k">import</span> <span class="n">CountVectorizer</span>
 
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
 
@@ -13116,7 +13117,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
@@ -13132,7 +13133,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_no_queridas</span><span class="p">(</span><span class="n">arr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13157,7 +13158,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13187,7 +13188,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_mas_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13237,29 +13238,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>La cantidad de publicaciones con titulo no nulo es: 234613
-La cantidad total de publicaciones es: 240000
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generar_palabras_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13289,7 +13271,7 @@ La cantidad total de publicaciones es: 240000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_cantidad_menos_frecuentes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -13336,6 +13318,206 @@ La cantidad total de publicaciones es: 240000
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">palabras_mas_usadas_en_mas_caros_baratos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">,</span> <span class="n">n_caros_baratos</span><span class="p">,</span> <span class="n">df_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mirar_mas_caros</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Busca los n_caros mas caros del df, y verifica las n_palabras mas usadas.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Para cada texto de la columna col, cuenta cuantas de estas palabras contiene&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si se pasa un df_test, hace la cuenta teniendo en cuenta las palabras obtenidas en df&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si mirar_mas_caros es True, va a buscar las palabras mas frecuentos de los mas caros, si fuera False,</span>
+<span class="sd">    buscaria las palabras mas frecuentes de los mas baratos&quot;&quot;&quot;</span>
+    
+    <span class="n">info</span> <span class="o">=</span> <span class="s1">&#39;CAROS&#39;</span> <span class="k">if</span> <span class="n">mirar_mas_caros</span> <span class="k">else</span> <span class="s1">&#39;BARATOS&#39;</span>
+    
+    <span class="n">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">df_busqueda</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">mirar_mas_caros</span> <span class="k">else</span> <span class="n">df</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span>
+    <span class="n">arr_mas_frecuentes</span> <span class="o">=</span> <span class="n">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df_busqueda</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">)</span>
+    <span class="n">set_mas_frecuentes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">arr_mas_frecuentes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">contador_mas_frecuentes</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
+        <span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">palabras_del_df</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">palabras_del_df</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">palabra</span> <span class="ow">in</span> <span class="n">set_mas_frecuentes</span><span class="p">:</span>
+                <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">contador</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_mas_frecuentes</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">df_test</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">df_test</span>
+    
+    <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="o">~</span><span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">contador_mas_frecuentes</span><span class="p">)</span>
+    <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;palabras_mas_frecuentes_&#39;</span> <span class="o">+</span> <span class="n">info</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ejemplo</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span>
+    <span class="n">df_aut</span> <span class="o">=</span> <span class="n">df_test</span>
+    <span class="n">palabras_mas_usadas_en_mas_caros_baratos</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">df_aut</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Es mas lenteja</span>
+
+<span class="k">def</span> <span class="nf">mas_frecuentes_caros_baratos_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">,</span> <span class="n">n_caros_baratos</span><span class="p">,</span> <span class="n">df_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mirar_mas_caros</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Busca los n_caros mas caros del df, y verifica las n_palabras mas usadas.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Hace ohe de las palabras mas usadas obtenidas, sobre la columna col&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si se pasa un df_test, hace la cuenta teniendo en cuenta las palabras obtenidas en df&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Si mirar_mas_caros es True, va a buscar las palabras mas frecuentos de los mas caros, si fuera False,</span>
+<span class="sd">    buscaria las palabras mas frecuentes de los mas baratos&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">fill_nans</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="n">ver_info_a_filtrar</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="n">df_busqueda</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">mirar_mas_caros</span> <span class="k">else</span> <span class="n">df</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="n">n_caros_baratos</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">)</span>
+    <span class="n">arr_mas_frecuentes</span> <span class="o">=</span> <span class="n">generar_palabras_mas_frecuentes</span><span class="p">(</span><span class="n">df_busqueda</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">n_palabras</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">vocabulary</span><span class="o">=</span><span class="n">arr_mas_frecuentes</span><span class="p">)</span>    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseDataFrame</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">default_fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge</span> <span class="o">=</span> <span class="n">fill_nans</span><span class="p">(</span><span class="n">df_merge</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">df_test</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df_merge</span><span class="p">,</span> <span class="n">df_test</span>
+    
+    <span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;vacio&#39;</span><span class="p">)</span>
+    <span class="n">r_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseDataFrame</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">default_fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">r_test</span> <span class="o">=</span> <span class="n">r_test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r_test</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">fill_nans</span><span class="p">(</span><span class="n">df_merge_aux</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_merge</span><span class="p">,</span> <span class="n">df_merge_aux</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ejemplo</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span>
+    <span class="n">df_aut</span> <span class="o">=</span> <span class="n">df_test</span>
+    <span class="n">df_merge</span><span class="p">,</span> <span class="n">df_merge_aux</span> <span class="o">=</span> <span class="n">mas_frecuentes_caros_baratos_ohe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;titulo&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">df_aut</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>La cantidad de publicaciones con titulo no nulo es: 234613
+La cantidad total de publicaciones es: 240000
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/ipykernel_launcher.py:20: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:257: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  sparse_index=BlockIndex(N, blocs, blens),
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:269: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  if column not in sdict
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/generic.py:4583: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return self._constructor(new_data).__finalize__(self)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/generic.py:5997: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return self._constructor(data).__finalize__(self)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/frame.py:3471: FutureWarning: SparseSeries is deprecated and will be removed in a future version.
+Use a Series with sparse values instead.
+
+    &gt;&gt;&gt; series = pd.Series(pd.SparseArray(...))
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  return klass(values, index=self.index, name=items, fastpath=True)
+/home/tomas/Escritorio/kmeans/datos-tp2/.venv/lib/python3.6/site-packages/pandas/core/sparse/frame.py:745: FutureWarning: SparseDataFrame is deprecated and will be removed in a future version.
+Use a regular DataFrame whose columns are SparseArrays instead.
+
+See http://pandas.pydata.org/pandas-docs/stable/user_guide/sparse.html#migrating for more.
+
+  default_fill_value=self._default_fill_value,
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
