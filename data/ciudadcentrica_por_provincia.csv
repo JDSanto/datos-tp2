@@ -1,33 +1,33 @@
-provincia,ciudad,centro
-Aguascalientes,Aguascalientes,True
-Baja California Norte,Tijuana,True
-Baja California Sur,La Paz,True
-Campeche,Campeche,True
-Chiapas,Tuxtla Gutiérrez,True
-Chihuahua,Chihuahua,True
-Coahuila,Saltillo,True
-Colima,Colima,True
-Distrito Federal,Benito Juárez,True
-Durango,Durango,True
-Edo. de México,Naucalpan de Juárez,True
-Guanajuato,León,True
-Guerrero,Acapulco de Juárez,True
-Hidalgo,Pachuca,True
-Jalisco,Zapopan,True
-Michoacán,Morelia,True
-Morelos,Cuernavaca,True
-Nayarit,Tepic,True
-Nuevo León,Monterrey,True
-Oaxaca,Oaxaca de Juárez,True
-Puebla,Puebla,True
-Querétaro,Querétaro,True
-Quintana Roo,Cancún,True
-San luis Potosí,San Luis Potosí,True
-Sinaloa,Culiacán,True
-Sonora,Hermosillo,True
-Tabasco,Villahermosa,True
-Tamaulipas,Tampico,True
-Tlaxcala,Tlaxcala,True
-Veracruz,Boca del Río,True
-Yucatán,Mérida,True
-Zacatecas,Guadalupe,True
+provincia,ciudad,centro,ciudad_costosa
+Aguascalientes,Aguascalientes,True,Aguascalientes
+Baja California Norte,Tijuana,True,Mexicali
+Baja California Sur,La Paz,True,La Paz
+Campeche,Campeche,True,Carmen
+Chiapas,Tuxtla Gutiérrez,True,San Cristóbal de las Casas	
+Chihuahua,Chihuahua,True,Chihuahua
+Coahuila,Saltillo,True,Saltillo
+Colima,Colima,True,Manzanillo
+Distrito Federal,Benito Juárez,True,Cuajimalpa de Morelos
+Durango,Durango,True,Durango
+Edo. de México,Naucalpan de Juárez,True,Huixquilucan
+Guanajuato,León,True,Guanajuato
+Guerrero,Acapulco de Juárez,True,Acapulco de Juárez
+Hidalgo,Pachuca,True,Pachuca
+Jalisco,Zapopan,True,Zapopan
+Michoacán,Morelia,True,Uruapan
+Morelos,Cuernavaca,True,Atlatlahucan
+Nayarit,Tepic,True,Bahía de Banderas	
+Nuevo León,Monterrey,True,San Pedro Garza García
+Oaxaca,Oaxaca de Juárez,True,Oaxaca de Juárez
+Puebla,Puebla,True,San Andrés Cholula
+Querétaro,Querétaro,True,Querétaro
+Quintana Roo,Cancún,True,Cancún
+San luis Potosí,San Luis Potosí,True,San Luis Potosí
+Sinaloa,Culiacán,True,Culiacán
+Sonora,Hermosillo,True,Hermosillo
+Tabasco,Villahermosa,True,Villahermosa
+Tamaulipas,Tampico,True,Tampico
+Tlaxcala,Tlaxcala,True,Apizaco  
+Veracruz,Boca del Río,True,Alvarado
+Yucatán,Mérida,True,Progreso
+Zacatecas,Guadalupe,True,Zacatecas
