@@ -24,3 +24,5 @@ keras
 tensorflow
 lightgbm
 ipynb
+catboost
+

@@ -13017,45 +13017,6 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -13115,19 +13076,19 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gp</span>
-<span class="kn">import</span> <span class="nn">adjustText</span> <span class="k">as</span> <span class="nn">aT</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#import geopandas as gp</span>
+<span class="c1">#import adjustText as aT</span>
+<span class="c1">#import matplotlib.pylab as plt</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">ListedColormap</span>
+<span class="c1">#from matplotlib.colors import ListedColormap</span>
 
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/train_filtrado.csv&#39;</span><span class="p">)</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/test.csv&#39;</span><span class="p">)</span>
+<span class="c1">#df_train = pd.read_csv(&#39;data/train_filtrado.csv&#39;)</span>
+<span class="c1">#df_test = pd.read_csv(&#39;data/test.csv&#39;)</span>
 </pre></div>
 
     </div>
@@ -13137,10 +13098,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maps</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;data/maps/dest_2010gw.shp&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># maps = gp.read_file(&#39;data/maps/dest_2010gw.shp&#39;)</span>
 </pre></div>
 
     </div>
@@ -13150,18 +13111,18 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vals</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[(</span><span class="o">~</span><span class="n">df_train</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">df_train</span><span class="o">.</span><span class="n">lng</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">lat</span> <span class="o">&lt;</span> <span class="mf">32.769750</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">lat</span> <span class="o">&gt;</span> <span class="mi">14</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">lng</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">118</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">lng</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">85</span><span class="p">)]</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">maps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">vals</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;lng&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Precio de propiedad y su ubicación en el mapa - México&#39;</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># vals = df_train[(~df_train.lat.isnull()) &amp; (~df_train.lng.isnull()) &amp; (df_train.lat &lt; 32.769750) &amp; (df_train.lat &gt; 14) &amp; (df_train.lng &gt; -118) &amp; (df_train.lng &lt; -85)]</span>
+<span class="c1"># ax = maps.plot(color=&#39;white&#39;, edgecolor=&#39;black&#39;)</span>
+<span class="c1"># vals.plot.scatter(&#39;lng&#39;, &#39;lat&#39;, ax=ax, c=&#39;precio&#39;, colormap=&#39;jet&#39;, figsize=(30, 15), colorbar=False,</span>
+<span class="c1">#                 title=&#39;Precio de propiedad y su ubicación en el mapa - México&#39;);</span>
 
-<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> 
-                           <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vals</span><span class="o">.</span><span class="n">precio</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
-                                              <span class="n">vmax</span><span class="o">=</span><span class="n">vals</span><span class="o">.</span><span class="n">precio</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;precio&#39;</span><span class="p">);</span>
+<span class="c1"># sm = plt.cm.ScalarMappable(cmap=&#39;jet&#39;, </span>
+<span class="c1">#                            norm=plt.Normalize(vmin=vals.precio.min(),</span>
+<span class="c1">#                                               vmax=vals.precio.max()))</span>
+<span class="c1"># plt.colorbar(sm, label=&#39;precio&#39;);</span>
 </pre></div>
 
     </div>
@@ -13171,10 +13132,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vals</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># vals.shape</span>
 </pre></div>
 
     </div>
@@ -13184,7 +13145,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge_ciudades</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -13192,7 +13153,10 @@ div#notebook {
     <span class="n">df_centro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ciudades_centricas</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;provincia_x&#39;</span><span class="p">:</span> <span class="s1">&#39;provincia&#39;</span><span class="p">})</span>
     <span class="n">df_centro</span><span class="p">[</span><span class="s1">&#39;centro&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df_centro</span><span class="p">[</span><span class="s1">&#39;centro&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">df_centro_promedio</span> <span class="o">=</span> <span class="n">df_centro</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;provincia&#39;</span><span class="p">)[[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;lat_promedio&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="s1">&#39;lng_promedio&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">df_centro_promedio</span>
+    <span class="n">lat_DF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">df_centro_promedio</span><span class="p">[</span><span class="n">df_centro_promedio</span><span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Distrito Federal&#39;</span><span class="p">][</span><span class="s1">&#39;lat_promedio&#39;</span><span class="p">])</span>
+    <span class="n">lng_DF</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">df_centro_promedio</span><span class="p">[</span><span class="n">df_centro_promedio</span><span class="p">[</span><span class="s1">&#39;provincia&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Distrito Federal&#39;</span><span class="p">][</span><span class="s1">&#39;lng_promedio&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">df_centro_promedio</span><span class="p">,</span> <span class="n">lat_DF</span><span class="p">,</span> <span class="n">lng_DF</span>
 </pre></div>
 
     </div>
@@ -13202,7 +13166,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge_ciudades_costosas</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">ciudades_costosas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/ciudad_costosa.csv&#39;</span><span class="p">)</span>
+    <span class="n">df_cara</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ciudades_costosas</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;ciudad&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;provincia_x&#39;</span><span class="p">:</span> <span class="s1">&#39;provincia&#39;</span><span class="p">})</span>
+    <span class="n">df_cara</span><span class="p">[</span><span class="s1">&#39;costosa&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">df_cara</span><span class="p">[</span><span class="s1">&#39;costosa&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">df_costo_promedio</span> <span class="o">=</span> <span class="n">df_cara</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;provincia&#39;</span><span class="p">)[[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;lat_promedio&#39;</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="s1">&#39;lng_promedio&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df_costo_promedio</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Verifico que todo se encuentre en rango:</span>
@@ -13216,7 +13198,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feature_distancias</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_fill</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -13224,12 +13206,36 @@ div#notebook {
         <span class="n">df_fill</span> <span class="o">=</span> <span class="n">df</span>
     
     
-    <span class="n">df_centro_promedio</span> <span class="o">=</span> <span class="n">merge_ciudades</span><span class="p">(</span><span class="n">df_fill</span><span class="p">)</span>
+    <span class="n">df_centro_promedio</span><span class="p">,</span> <span class="n">lat_DF</span><span class="p">,</span> <span class="n">lng_DF</span> <span class="o">=</span> <span class="n">merge_ciudades</span><span class="p">(</span><span class="n">df_fill</span><span class="p">)</span>
+    <span class="n">df_costo_promedio</span> <span class="o">=</span> <span class="n">merge_ciudades_costosas</span><span class="p">(</span><span class="n">df_fill</span><span class="p">)</span>
+    
     <span class="n">df_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">df_centro_promedio</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">df_merge</span><span class="o">.</span><span class="n">lat</span> <span class="o">-</span> <span class="n">df_merge</span><span class="o">.</span><span class="n">lat_promedio</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_merge</span><span class="o">.</span><span class="n">lng</span> <span class="o">-</span><span class="n">df_merge</span><span class="o">.</span><span class="n">lng_promedio</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>    
+    
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">df_merge</span><span class="o">.</span><span class="n">lat</span> <span class="o">-</span> <span class="n">lat_DF</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_merge</span><span class="o">.</span><span class="n">lng</span> <span class="o">-</span> <span class="n">lng_DF</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>    
+    
+    
+    <span class="n">df_merge_costo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">df_costo_promedio</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;provincia&#39;</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span> <span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">df_merge_costo</span><span class="o">.</span><span class="n">lat</span> <span class="o">-</span> <span class="n">df_merge_costo</span><span class="o">.</span><span class="n">lat_promedio</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_merge_costo</span><span class="o">.</span><span class="n">lng</span> <span class="o">-</span><span class="n">df_merge_costo</span><span class="o">.</span><span class="n">lng_promedio</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;distancia_ciudad_cara&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>    
     
     <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>

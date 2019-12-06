@@ -13076,7 +13076,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13087,10 +13087,26 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">ipynb.fs.full.features</span> <span class="k">as</span> <span class="nn">features</span>
 <span class="kn">import</span> <span class="nn">ipynb.fs.full.utils</span> <span class="k">as</span> <span class="nn">utils</span>
 <span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">tpe</span><span class="p">,</span> <span class="n">hp</span>
+<span class="kn">from</span> <span class="nn">hyperopt.pyll.base</span> <span class="k">import</span> <span class="n">scope</span>
+<span class="kn">from</span> <span class="nn">hyperopt</span> <span class="k">import</span> <span class="n">STATUS_OK</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_absolute_error</span>
+<span class="kn">import</span> <span class="nn">ipynb.fs.full.features_distancias</span> <span class="k">as</span> <span class="nn">f_distancias</span>
 
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train.csv&#39;</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_idf.csv&#39;</span><span class="p">)</span>
+<span class="n">df_test_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_idf.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="n">df_train_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/train_idf.csv&#39;</span><span class="p">)</span>
+<span class="n">df_test_idf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/test_idf.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">df_train_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">df_test_idf</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
 
 <span class="n">df_train</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
 <span class="n">df_test</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">llenar_nulls</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13110,7 +13126,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_independientes_precio</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
@@ -13129,6 +13145,13 @@ div#notebook {
 
 <span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">f_distancias</span><span class="o">.</span><span class="n">feature_distancias</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
+
+<span class="n">df_train_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">rankings</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
+<span class="n">df_test_f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">rankings</span><span class="p">(</span><span class="n">df_test_f</span><span class="p">,</span> <span class="n">df_train_f</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13185,56 +13208,609 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">xgb_eval</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+
+<span class="k">class</span> <span class="nc">XGBoostWrapper</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">):</span>
     
-    <span class="c1"># Modelo - Ver hiperparametros</span>
-    <span class="n">colsample_bytree</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     
-    <span class="c1"># Preparacion de los datos</span>
-    <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_XGBoost</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+
+<span class="n">gs</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;xgboost_gscv3.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;mean_fit_time&#39;, &#39;std_fit_time&#39;, &#39;mean_score_time&#39;, &#39;std_score_time&#39;,
+       &#39;param_colsample_bytree&#39;, &#39;param_eval_metric&#39;, &#39;param_gamma&#39;,
+       &#39;param_learning_rate&#39;, &#39;param_max_depth&#39;, &#39;param_n_estimators&#39;,
+       &#39;param_n_jobs&#39;, &#39;param_objective&#39;, &#39;param_scale_pos_weight&#39;,
+       &#39;param_subsample&#39;, &#39;param_verbosity&#39;, &#39;params&#39;, &#39;split0_test_score&#39;,
+       &#39;split1_test_score&#39;, &#39;split2_test_score&#39;, &#39;split3_test_score&#39;,
+       &#39;mean_test_score&#39;, &#39;std_test_score&#39;, &#39;rank_test_score&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results</span><span class="p">[[</span><span class="s1">&#39;mean_fit_time&#39;</span><span class="p">,</span> <span class="s1">&#39;param_colsample_bytree&#39;</span><span class="p">,</span> <span class="s1">&#39;param_eval_metric&#39;</span><span class="p">,</span> <span class="s1">&#39;param_gamma&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;param_learning_rate&#39;</span><span class="p">,</span> <span class="s1">&#39;param_max_depth&#39;</span><span class="p">,</span> <span class="s1">&#39;param_n_estimators&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;param_n_jobs&#39;</span><span class="p">,</span> <span class="s1">&#39;param_objective&#39;</span><span class="p">,</span> <span class="s1">&#39;param_scale_pos_weight&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;param_subsample&#39;</span><span class="p">,</span> <span class="s1">&#39;rank_test_score&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>param_colsample_bytree</th>
+      <th>param_eval_metric</th>
+      <th>param_gamma</th>
+      <th>param_learning_rate</th>
+      <th>param_max_depth</th>
+      <th>param_n_estimators</th>
+      <th>param_n_jobs</th>
+      <th>param_objective</th>
+      <th>param_scale_pos_weight</th>
+      <th>param_subsample</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>701</td>
+      <td>37.456315</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>917</td>
+      <td>37.836063</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>914</td>
+      <td>37.720415</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>803</td>
+      <td>37.437682</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>806</td>
+      <td>37.277326</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>911</td>
+      <td>37.435519</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>698</td>
+      <td>37.448860</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>809</td>
+      <td>38.375836</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>695</td>
+      <td>37.220169</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>374</td>
+      <td>31.740836</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>593</td>
+      <td>31.464103</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>479</td>
+      <td>31.891211</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>371</td>
+      <td>31.692840</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>377</td>
+      <td>31.586144</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>485</td>
+      <td>31.800055</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>590</td>
+      <td>31.738012</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>482</td>
+      <td>31.521306</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>587</td>
+      <td>31.404177</td>
+      <td>0.7</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>913</td>
+      <td>38.829525</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>700</td>
+      <td>39.243953</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>916</td>
+      <td>39.121952</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>802</td>
+      <td>39.582647</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>805</td>
+      <td>39.432566</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>697</td>
+      <td>39.060137</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>808</td>
+      <td>39.417169</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>694</td>
+      <td>38.952834</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>910</td>
+      <td>39.531193</td>
+      <td>0.9</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>25.129841</td>
+      <td>0.5</td>
+      <td>mae</td>
+      <td>0.3</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>155</td>
+      <td>25.180674</td>
+      <td>0.5</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>1</td>
+      <td>0.9</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>158</td>
+      <td>25.289952</td>
+      <td>0.5</td>
+      <td>mae</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>10</td>
+      <td>70</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>2</td>
+      <td>0.9</td>
+      <td>28</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="k">import</span> <span class="n">joblib</span>
+
+<span class="k">def</span> <span class="nf">full_display</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> 
+        <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">mostrar_top_n</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">full_display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     
-    <span class="n">x_eval</span> <span class="o">=</span> <span class="n">df_eval</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">y_eval</span> <span class="o">=</span> <span class="n">df_eval</span><span class="p">[</span><span class="s1">&#39;precio&#39;</span><span class="p">]</span>
-    
-    <span class="n">xg_train</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
-    <span class="n">xg_test</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_test</span><span class="p">)</span>
-    <span class="n">dfg_test</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">y_eval</span><span class="p">)</span>
-
-    <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_depth</span><span class="p">)</span>
-    <span class="n">n_estimators</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_estimators</span><span class="p">)</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;objective&#39;</span><span class="p">:</span><span class="s1">&#39;reg:squarederror&#39;</span><span class="p">,</span> 
-        <span class="s1">&#39;colsample_bytree&#39;</span> <span class="p">:</span> <span class="n">colsample_bytree</span> <span class="p">,</span> 
-        <span class="s1">&#39;learning_rate&#39;</span> <span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
-        <span class="s1">&#39;max_depth&#39;</span> <span class="p">:</span> <span class="n">max_depth</span><span class="p">,</span> 
-        <span class="s1">&#39;alpha&#39;</span> <span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
-        <span class="s1">&#39;n_estimators&#39;</span> <span class="p">:</span> <span class="n">n_estimators</span><span class="p">,</span>
-        <span class="s1">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span>
-    <span class="p">}</span>
-
-    <span class="n">watchlist</span> <span class="o">=</span> <span class="p">[(</span><span class="n">xg_train</span><span class="p">,</span> <span class="s1">&#39;train&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">xg_test</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)]</span>
-    <span class="n">num_round</span> <span class="o">=</span> <span class="mi">25</span>
-    
-    <span class="n">xg_reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> 
-                    <span class="n">xg_train</span><span class="p">,</span> 
-                    <span class="n">num_round</span><span class="p">,</span> 
-<span class="c1">#                     watchlist</span>
-                   <span class="p">)</span>
-
-    <span class="n">y_pred_eval</span> <span class="o">=</span> <span class="n">xg_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dfg_test</span><span class="p">)</span>
-    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">xg_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xg_test</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">MAE</span><span class="p">(</span><span class="n">y_eval</span><span class="p">,</span> <span class="n">y_pred_eval</span><span class="p">)</span>
-
-<span class="n">space</span> <span class="o">=</span> <span class="p">[</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;colsample_bytree&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
-         <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s2">&quot;max_depth&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
-        <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s2">&quot;test_size&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)]</span>
-
-<span class="n">hps</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">xgb_eval</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-
-<span class="n">display</span><span class="p">(</span><span class="n">hps</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;xgboost_rscv_1.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;xgboost_rscv_2.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;xgboost_rscv_3.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mostrar_top_n</span><span class="p">(</span><span class="s1">&#39;xgboost_rscv_4.pkl&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13250,1304 +13826,675 @@ div#notebook {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>  2%|▏         | 1/50 [00:31&lt;26:00, 31.84s/it, best loss: 536204.5653767361]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>  4%|▍         | 2/50 [00:35&lt;18:38, 23.29s/it, best loss: 536204.5653767361]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>  6%|▌         | 3/50 [00:43&lt;14:45, 18.85s/it, best loss: 536204.5653767361]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>  8%|▊         | 4/50 [01:02&lt;14:21, 18.73s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 10%|█         | 5/50 [01:08&lt;11:11, 14.92s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 12%|█▏        | 6/50 [01:29&lt;12:25, 16.95s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 14%|█▍        | 7/50 [01:41&lt;10:59, 15.33s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 16%|█▌        | 8/50 [01:48&lt;08:55, 12.74s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 18%|█▊        | 9/50 [02:01&lt;08:48, 12.90s/it, best loss: 534373.3772743056]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 20%|██        | 10/50 [02:17&lt;09:14, 13.85s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 22%|██▏       | 11/50 [02:55&lt;13:42, 21.10s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 24%|██▍       | 12/50 [03:07&lt;11:40, 18.44s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 26%|██▌       | 13/50 [03:20&lt;10:21, 16.81s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 28%|██▊       | 14/50 [03:25&lt;07:56, 13.23s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 30%|███       | 15/50 [03:30&lt;06:18, 10.80s/it, best loss: 532342.4761484375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 32%|███▏      | 16/50 [04:13&lt;11:30, 20.31s/it, best loss: 528302.63565625]  </pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 34%|███▍      | 17/50 [04:24&lt;09:38, 17.54s/it, best loss: 528302.63565625]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 36%|███▌      | 18/50 [04:42&lt;09:24, 17.65s/it, best loss: 495289.55463888886]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 38%|███▊      | 19/50 [04:46&lt;06:58, 13.51s/it, best loss: 495289.55463888886]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 40%|████      | 20/50 [05:44&lt;13:29, 26.97s/it, best loss: 495289.55463888886]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 42%|████▏     | 21/50 [06:01&lt;11:39, 24.12s/it, best loss: 495289.55463888886]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 44%|████▍     | 22/50 [06:17&lt;10:03, 21.54s/it, best loss: 487142.821109375]  </pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 46%|████▌     | 23/50 [06:28&lt;08:17, 18.43s/it, best loss: 487142.821109375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 48%|████▊     | 24/50 [06:46&lt;07:51, 18.15s/it, best loss: 487142.821109375]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 50%|█████     | 25/50 [07:22&lt;09:49, 23.58s/it, best loss: 484432.2250295139]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 52%|█████▏    | 26/50 [07:37&lt;08:23, 21.00s/it, best loss: 484432.2250295139]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 54%|█████▍    | 27/50 [08:18&lt;10:21, 27.03s/it, best loss: 484432.2250295139]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 56%|█████▌    | 28/50 [08:57&lt;11:14, 30.67s/it, best loss: 484432.2250295139]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 58%|█████▊    | 29/50 [09:53&lt;13:23, 38.26s/it, best loss: 484432.2250295139]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 60%|██████    | 30/50 [10:54&lt;15:01, 45.05s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 62%|██████▏   | 31/50 [12:11&lt;17:16, 54.58s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 64%|██████▍   | 32/50 [12:52&lt;15:08, 50.49s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 66%|██████▌   | 33/50 [14:00&lt;15:50, 55.89s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 68%|██████▊   | 34/50 [14:36&lt;13:18, 49.93s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 70%|███████   | 35/50 [15:05&lt;10:51, 43.46s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 72%|███████▏  | 36/50 [15:24&lt;08:25, 36.13s/it, best loss: 481652.43170746526]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 74%|███████▍  | 37/50 [16:17&lt;08:57, 41.35s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 76%|███████▌  | 38/50 [17:10&lt;08:57, 44.79s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 78%|███████▊  | 39/50 [17:44&lt;07:38, 41.66s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 80%|████████  | 40/50 [18:36&lt;07:27, 44.71s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 82%|████████▏ | 41/50 [19:15&lt;06:26, 42.98s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 84%|████████▍ | 42/50 [19:50&lt;05:24, 40.57s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 86%|████████▌ | 43/50 [20:27&lt;04:35, 39.39s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 88%|████████▊ | 44/50 [21:05&lt;03:54, 39.10s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 90%|█████████ | 45/50 [21:28&lt;02:51, 34.21s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 92%|█████████▏| 46/50 [22:10&lt;02:25, 36.44s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 94%|█████████▍| 47/50 [22:18&lt;01:24, 28.15s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 96%|█████████▌| 48/50 [23:03&lt;01:06, 33.02s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> 98%|█████████▊| 49/50 [24:07&lt;00:42, 42.54s/it, best loss: 481494.25492100697]</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:587: FutureWarning: Series.base is deprecated and will be removed in a future version
-  if getattr(data, &#39;base&#39;, None) is not None and \
-
-/home/javier/Documents/FIUBA/Datos/.venv/lib/python3.7/site-packages/xgboost/core.py:588: FutureWarning: Series.base is deprecated and will be removed in a future version
-  data.base is not None and isinstance(data, np.ndarray) \
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>100%|██████████| 50/50 [24:48&lt;00:00, 29.77s/it, best loss: 481494.25492100697]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>{&#39;alpha&#39;: 19.99916025229205,
- &#39;colsample_bytree&#39;: 0.65,
- &#39;learning_rate&#39;: 0.15,
- &#39;max_depth&#39;: 20.0,
- &#39;n_estimators&#39;: 90.0,
- &#39;test_size&#39;: 0.1}</pre>
-</div>
-
-</div>
 
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_verbosity</th>
+      <th>param_subsample</th>
+      <th>param_scale_pos_weight</th>
+      <th>param_reg_lambda</th>
+      <th>param_reg_alpha</th>
+      <th>param_objective</th>
+      <th>param_n_jobs</th>
+      <th>param_n_estimators</th>
+      <th>param_max_depth</th>
+      <th>param_learning_rate</th>
+      <th>param_eval_metric</th>
+      <th>param_colsample_bytree</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8</td>
+      <td>21.572635</td>
+      <td>1.172920</td>
+      <td>0.379922</td>
+      <td>0.002603</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>2</td>
+      <td>1</td>
+      <td>15</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.5</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-494020.155144</td>
+      <td>-490647.328515</td>
+      <td>-488784.157059</td>
+      <td>-493581.164986</td>
+      <td>-491758.206297</td>
+      <td>2151.659827</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>36.550329</td>
+      <td>2.334331</td>
+      <td>0.377513</td>
+      <td>0.022408</td>
+      <td>0</td>
+      <td>0.7</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.9</td>
+      <td>{'verbosity': 0, 'subsample': 0.7, 'scale_pos_...</td>
+      <td>-498969.376332</td>
+      <td>-493435.967544</td>
+      <td>-488194.571405</td>
+      <td>-494670.754896</td>
+      <td>-493817.687731</td>
+      <td>3841.637627</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>21.963166</td>
+      <td>0.990556</td>
+      <td>0.338900</td>
+      <td>0.003660</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>1</td>
+      <td>4</td>
+      <td>30</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.5</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-499064.425287</td>
+      <td>-495483.887533</td>
+      <td>-491708.355276</td>
+      <td>-497733.363091</td>
+      <td>-495997.518602</td>
+      <td>2787.459069</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_verbosity</th>
+      <th>param_subsample</th>
+      <th>param_scale_pos_weight</th>
+      <th>param_reg_alpha</th>
+      <th>param_objective</th>
+      <th>param_n_jobs</th>
+      <th>param_n_estimators</th>
+      <th>param_max_depth</th>
+      <th>param_learning_rate</th>
+      <th>param_eval_metric</th>
+      <th>param_colsample_bytree</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>28.076588</td>
+      <td>1.290356</td>
+      <td>0.408893</td>
+      <td>0.025659</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>1</td>
+      <td>0</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-493530.449709</td>
+      <td>-490071.925847</td>
+      <td>-487218.297118</td>
+      <td>-491538.323837</td>
+      <td>-490589.759381</td>
+      <td>2301.212459</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>34.067499</td>
+      <td>1.368834</td>
+      <td>0.379427</td>
+      <td>0.016048</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>4</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.9</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-494035.905043</td>
+      <td>-490052.292257</td>
+      <td>-487331.509508</td>
+      <td>-492275.687460</td>
+      <td>-490923.858049</td>
+      <td>2508.826315</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>27.331998</td>
+      <td>0.205388</td>
+      <td>0.406695</td>
+      <td>0.036679</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>4</td>
+      <td>15</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-494122.937223</td>
+      <td>-489800.172553</td>
+      <td>-487130.545708</td>
+      <td>-492724.415411</td>
+      <td>-490944.526332</td>
+      <td>2698.436647</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_verbosity</th>
+      <th>param_subsample</th>
+      <th>param_scale_pos_weight</th>
+      <th>param_reg_alpha</th>
+      <th>param_objective</th>
+      <th>param_n_jobs</th>
+      <th>param_n_estimators</th>
+      <th>param_max_depth</th>
+      <th>param_learning_rate</th>
+      <th>param_eval_metric</th>
+      <th>param_colsample_bytree</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>143</td>
+      <td>28.279560</td>
+      <td>1.121788</td>
+      <td>0.376085</td>
+      <td>0.006590</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>2</td>
+      <td>4</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-493933.509453</td>
+      <td>-489965.416247</td>
+      <td>-486540.481780</td>
+      <td>-491802.681901</td>
+      <td>-490560.534101</td>
+      <td>2712.693737</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>28.112561</td>
+      <td>1.346262</td>
+      <td>0.369538</td>
+      <td>0.010110</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>2</td>
+      <td>0</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-493530.449709</td>
+      <td>-490071.925847</td>
+      <td>-487218.297118</td>
+      <td>-491538.323837</td>
+      <td>-490589.759381</td>
+      <td>2301.212459</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>191</td>
+      <td>28.095123</td>
+      <td>1.409538</td>
+      <td>0.377965</td>
+      <td>0.011265</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>1</td>
+      <td>0</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-493530.449709</td>
+      <td>-490071.925847</td>
+      <td>-487218.297118</td>
+      <td>-491538.323837</td>
+      <td>-490589.759381</td>
+      <td>2301.212459</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_verbosity</th>
+      <th>param_subsample</th>
+      <th>param_scale_pos_weight</th>
+      <th>param_reg_lambda</th>
+      <th>param_reg_alpha</th>
+      <th>param_objective</th>
+      <th>param_n_jobs</th>
+      <th>param_n_estimators</th>
+      <th>param_max_depth</th>
+      <th>param_learning_rate</th>
+      <th>param_eval_metric</th>
+      <th>param_colsample_bytree</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>14</td>
+      <td>29.777502</td>
+      <td>0.283654</td>
+      <td>0.458209</td>
+      <td>0.002741</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>4</td>
+      <td>1</td>
+      <td>15</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-491856.050710</td>
+      <td>-499798.953211</td>
+      <td>-497082.894169</td>
+      <td>-498514.774264</td>
+      <td>-496813.160999</td>
+      <td>3018.950351</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>29.925094</td>
+      <td>0.377395</td>
+      <td>0.454253</td>
+      <td>0.002623</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>2</td>
+      <td>1</td>
+      <td>10</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-491952.919066</td>
+      <td>-500663.575709</td>
+      <td>-496882.314728</td>
+      <td>-498281.757936</td>
+      <td>-496945.136290</td>
+      <td>3183.538426</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>107</td>
+      <td>29.991858</td>
+      <td>0.281536</td>
+      <td>0.452808</td>
+      <td>0.003048</td>
+      <td>0</td>
+      <td>0.9</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>reg:squarederror</td>
+      <td>4</td>
+      <td>30</td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>mae</td>
+      <td>0.7</td>
+      <td>{'verbosity': 0, 'subsample': 0.9, 'scale_pos_...</td>
+      <td>-491436.954937</td>
+      <td>-500541.094368</td>
+      <td>-497495.873078</td>
+      <td>-498321.678670</td>
+      <td>-496948.894543</td>
+      <td>3371.544810</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;xgboost_rscv_3.pkl&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank_test_score&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>mean_fit_time                                                       28.2796
+std_fit_time                                                        1.12179
+mean_score_time                                                    0.376085
+std_score_time                                                    0.0065898
+param_verbosity                                                           0
+param_subsample                                                         0.9
+param_scale_pos_weight                                                    2
+param_reg_alpha                                                           4
+param_objective                                            reg:squarederror
+param_n_jobs                                                              4
+param_n_estimators                                                       30
+param_max_depth                                                          15
+param_learning_rate                                                     0.1
+param_eval_metric                                                       mae
+param_colsample_bytree                                                  0.7
+params                    {&#39;verbosity&#39;: 0, &#39;subsample&#39;: 0.9, &#39;scale_pos_...
+split0_test_score                                                   -493934
+split1_test_score                                                   -489965
+split2_test_score                                                   -486540
+split3_test_score                                                   -491803
+mean_test_score                                                     -490561
+std_test_score                                                      2712.69
+rank_test_score                                                           1
+Name: 143, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="hyperopt">hyperopt<a class="anchor-link" href="#hyperopt">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;habitaciones&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;garages&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;banos&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;antiguedad&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;metroscubiertos&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;metrostotales&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;lat_norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lng_norm&#39;</span>
+            <span class="s1">&#39;gimnasio&#39;</span><span class="p">,</span> <span class="s1">&#39;usosmultiples&#39;</span><span class="p">,</span> <span class="s1">&#39;piscina&#39;</span><span class="p">,</span><span class="s1">&#39;prop_frecuente&#39;</span><span class="p">,</span> <span class="s1">&#39;top_provincia&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;anio&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;promedio_precio_tipo_propiedad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;count_id_zona&#39;</span><span class="p">,</span> <span class="s1">&#39;count_ciudad&#39;</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">,</span> 
+                     <span class="s1">&#39;count_tipo_propiedad_ciudad&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;promedio_precio_tipo_propiedad_ciudad_gen&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;count_id_zona&#39;</span>
+                 <span class="s1">&#39;dias_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;meses_desde_datos&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;porcentaje_metros&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;distancia_ciudad_centrica&#39;</span><span class="p">,</span> <span class="s1">&#39;distancia_centro_mexico&#39;</span><span class="p">]</span>
+
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">dividir_dataset</span><span class="p">(</span><span class="n">df_train_f</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">eval_xgboost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">),</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">STATUS_OK</span><span class="p">}</span>
+
+<span class="n">space</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;colsample_bytree&#39;</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">scope</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s1">&#39;scale_pos_weight&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="s1">&#39;scale_pos_weight&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;n_jobs&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;reg_alpha&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="s1">&#39;subsample&#39;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="s1">&#39;subsample&#39;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:squarederror&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+
+<span class="n">hps</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">eval_xgboost</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span> <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span> <span class="n">max_evals</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">hps</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
